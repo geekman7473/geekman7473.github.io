@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://geekman7473.github.io/sitemap.xml

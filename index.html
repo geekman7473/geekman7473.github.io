@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Justin Becker | Systems Engineer & Builder</title>
+    <meta
+      name="description"
+      content="Personal website for Justin Becker — Software Engineer II at Microsoft, builder of LANBucket, and systems-focused engineer working across emulation, performance, and developer tooling."
+    />
+    <meta name="theme-color" content="#08111f" />
+    <meta property="og:title" content="Justin Becker | Systems Engineer & Builder" />
+    <meta
+      property="og:description"
+      content="Systems-minded engineer at Microsoft, author of LANBucket, and builder focused on emulation, performance, and developer tooling."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://geekman7473.github.io/" />
+    <meta property="og:image" content="https://geekman7473.github.io/assets/img/justin-lincoln.webp" />
+    <link rel="canonical" href="https://geekman7473.github.io/" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="script.js"></script>
+  </head>
+  <body>
+    <div class="site-shell">
+      <header class="site-header">
+        <a class="brand" href="#top">Justin Becker</a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Open navigation">
+          <span></span>
+          <span></span>
+        </button>
+        <nav class="site-nav" aria-label="Primary">
+          <a href="#about">About</a>
+          <a href="#work">Work</a>
+          <a href="#projects">Projects</a>
+          <a href="#leadership">Leadership</a>
+          <a href="#contact">Contact</a>
+          <a href="resume.html">Resume</a>
+        </nav>
+      </header>
+
+      <main id="top">
+        <section class="hero section">
+          <div class="hero-copy">
+            <p class="eyebrow">Software Engineer II · Microsoft</p>
+            <h1>Obsessed with building fast systems.</h1>
+            <p class="hero-text">
+              I’m Justin Becker, a systems-minded engineer focused on emulation, performance, and
+                architecture. At my day job, I work on CPU emulation on
+                <a href="https://learn.microsoft.com/en-us/windows/arm/apps-on-arm-x86-emulation" target="_blank" rel="noreferrer">Prism</a>
+              at Microsoft. Outside of work, I have been working on LANBucket, a zero-config local file sharing app for Windows. I’m also a
+              PC gamer, with a particular fondness for Civilization VI and Factorio.
+            </p>
+            <div class="hero-actions">
+              <a class="button primary" href="resume.html">View Resume</a>
+              <a class="button secondary" href="https://github.com/geekman7473" target="_blank" rel="noreferrer">GitHub</a>
+            </div>
+          </div>
+
+          <aside class="hero-card">
+            <img
+              src="assets/img/justin-lincoln.webp"
+              alt="Justin Becker and his fiancée at the Lincoln Memorial"
+              width="960"
+              height="720"
+            />
+            <div class="hero-card-body">
+              <p class="hero-card-title">Seattle-based engineer</p>
+              <p>
+                M.S. in Computer Science at the University of Washington, with a background spanning
+                systems, mobile, web, simulation, and event leadership.
+              </p>
+            </div>
+          </aside>
+        </section>
+
+        <section class="section" id="about">
+          <div class="section-heading">
+            <p class="eyebrow">About</p>
+            <h2>I like hard technical problems and clear user outcomes.</h2>
+          </div>
+          <div class="grid two-up">
+            <article class="panel">
+              <h3>What I work on</h3>
+              <p>
+                My work lives at the intersection of low-level systems and product impact: dynamic
+                recompilation, performance analysis, fuzzing, compatibility, build automation, and
+                debugging across architecture boundaries.
+              </p>
+            </article>
+            <article class="panel">
+              <h3>How I operate</h3>
+              <p>
+                I care about root causes, measurable wins, and thoughtful tooling. I’m comfortable in
+                assembly listings, debuggers, CI pipelines, and the last mile of polishing a user-facing
+                experience.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" id="work">
+          <div class="section-heading">
+            <p class="eyebrow">Experience</p>
+            <h2>Selected work</h2>
+          </div>
+          <div class="timeline">
+            <article class="timeline-item">
+              <div class="timeline-meta">
+                <span>2020 — Present</span>
+                <span>Redmond, WA</span>
+              </div>
+              <div class="timeline-content">
+                <h3>Microsoft · Software Engineer II</h3>
+                <p>
+                  Engineer on the Prism emulator team, enabling dynamic recompilation of x86 and x64
+                  binaries on ARM64 and improving compatibility and performance across Windows.
+                </p>
+                <ul>
+                  <li>Redesigned critical execution paths, including hand-written assembly, with up to 2× speedups in some user scenarios.</li>
+                  <li>Performed deep performance analysis with WPA and improved generated code by up to 40% in targeted benchmarks.</li>
+                  <li>Built a custom fuzzing framework that generated over 100 trillion test cases and uncovered subtle emulator bugs.</li>
+                  <li>Enabled ARM64X “chameleon binary” adoption across Windows, helping unlock roughly 500 additional system DLLs.</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="timeline-item">
+              <div class="timeline-meta">
+                <span>2019</span>
+                <span>Tysons, VA</span>
+              </div>
+              <div class="timeline-content">
+                <h3>MicroStrategy · Software Engineering Intern</h3>
+                <p>
+                  Built native Android and Android TV business intelligence experiences in Java and
+                  Kotlin, including Bluetooth Low Energy presence-based workflows.
+                </p>
+              </div>
+            </article>
+
+            <article class="timeline-item">
+              <div class="timeline-meta">
+                <span>2018 — 2019</span>
+                <span>Columbia, MD</span>
+              </div>
+              <div class="timeline-content">
+                <h3>L3Harris Applied Defense Solutions · Software Engineering Intern</h3>
+                <p>
+                  Worked on aerospace mission planning, simulation, and production data systems using
+                  C#, F#, Java, Kotlin, and InfluxDB-backed monitoring.
+                </p>
+              </div>
+            </article>
+
+            <article class="timeline-item">
+              <div class="timeline-meta">
+                <span>2016 — 2018</span>
+                <span>Moorestown, NJ</span>
+              </div>
+              <div class="timeline-content">
+                <h3>Lockheed Martin · Software Engineering & Web Development Intern</h3>
+                <p>
+                  Contributed to mission-critical Java software and helped modernize legacy web services
+                  with AngularJS, Spring, and MongoDB.
+                </p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" id="projects">
+          <div class="section-heading">
+            <p class="eyebrow">Projects</p>
+            <h2>Things I’ve built</h2>
+          </div>
+          <div class="grid cards">
+            <article class="panel feature-card feature-card-accent">
+              <div class="feature-badge">Featured</div>
+              <h3>LANBucket</h3>
+              <p>
+                A high-performance, zero-configuration local network file sharing app for Windows,
+                built with C++ and WinUI 3.
+              </p>
+              <ul>
+                <li>Distributed transfers for faster sharing across multiple clients</li>
+                <li>Automatic peer discovery and local-network-first privacy</li>
+                <li>Native Windows experience with modern tooling and performance</li>
+              </ul>
+              <a class="text-link" href="https://lanbucket.com" target="_blank" rel="noreferrer">Visit lanbucket.com</a>
+            </article>
+
+            <article class="panel">
+              <h3>Robotics@Maryland</h3>
+              <p>
+                Researched and implemented computer vision classification workflows using OpenCV for a
+                robotics team environment.
+              </p>
+            </article>
+
+            <article class="panel">
+              <h3>Terrapin Rockets</h3>
+              <p>
+                Built real-time control software on Arduino to guide a faux space lander during its mission.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" id="leadership">
+          <div class="section-heading">
+            <p class="eyebrow">Leadership</p>
+            <h2>Organizing at scale</h2>
+          </div>
+          <div class="grid two-up">
+            <article class="panel">
+              <h3>Bitcamp · Executive Director</h3>
+              <p>
+                Led the 75+ person organizing team for Bitcamp, one of the largest college hackathons in
+                the United States, and directly managed directors across technology, logistics,
+                sponsorship, marketing, and experience.
+              </p>
+            </article>
+            <article class="panel">
+              <h3>Bitcamp · Director of Logistics</h3>
+              <p>
+                Managed a 22-person cross-disciplinary team planning power, networking, A/V, travel,
+                volunteers, workshops, and operations for 1,300 participants.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" id="contact">
+          <div class="section-heading">
+            <p class="eyebrow">Contact</p>
+            <h2>Want to talk systems, tools, or games?</h2>
+            <p class="section-text">
+              I’m always happy to connect about low-level performance work, developer tooling,
+              Windows systems, side projects, or why Factorio has a suspicious ability to erase an
+              entire evening.
+            </p>
+          </div>
+          <div class="grid two-up contact-grid">
+            <article class="panel contact-card">
+              <h3>Best way to reach me</h3>
+              <p>
+                Email is the best place to start. If you want to chat about engineering work,
+                interesting systems problems, LANBucket, or something you’re building, reach out.
+              </p>
+              <div class="contact-links">
+                <a class="button primary" href="mailto:justintylerbecker@gmail.com">Email Justin</a>
+                <a class="button secondary" href="https://github.com/geekman7473" target="_blank" rel="noreferrer">GitHub Profile</a>
+              </div>
+            </article>
+            <article class="panel contact-card">
+              <h3>Quick links</h3>
+              <div class="contact-list">
+                <a class="text-link" href="https://lanbucket.com" target="_blank" rel="noreferrer">LANBucket</a>
+                <a class="text-link" href="resume.html">View resume inline</a>
+                <a class="text-link" href="assets/docs/resume.pdf" target="_blank" rel="noreferrer">Open resume PDF</a>
+                <p class="contact-note">Based in Seattle, WA · Software Engineer II at Microsoft</p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="section cta-section">
+          <div class="panel cta-panel">
+            <div>
+              <p class="eyebrow">Resume</p>
+            </div>
+            <div class="cta-actions">
+              <a class="button primary" href="resume.html">Open Resume Page</a>
+              <a class="button secondary" href="assets/docs/resume.pdf" target="_blank" rel="noreferrer">Open PDF</a>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <p>© <span id="year"></span> Justin Becker</p>
+        <div>
+          <a href="https://github.com/geekman7473" target="_blank" rel="noreferrer">GitHub</a>
+          <a href="https://lanbucket.com" target="_blank" rel="noreferrer">LANBucket</a>
+          <a href="mailto:justintylerbecker@gmail.com">Email</a>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
