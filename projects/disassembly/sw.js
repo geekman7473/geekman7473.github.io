@@ -9,10 +9,10 @@
 //      using normal HTTP semantics so the daily puzzle and code updates
 //      land promptly when a new build ships.
 //
-// `2026-04-18T00-31-44-337Z` is replaced at build time (scripts/build.mjs) with
+// `2026-04-18T00-39-22-561Z` is replaced at build time (scripts/build.mjs) with
 // the build's timestamp so the cache name rolls forward on every deploy.
 
-const VERSION = "2026-04-18T00-31-44-337Z";
+const VERSION = "2026-04-18T00-39-22-561Z";
 const VM_CACHE = `disassembly-vm-${VERSION}`;
 const SHELL_CACHE = `disassembly-shell-${VERSION}`;
 
