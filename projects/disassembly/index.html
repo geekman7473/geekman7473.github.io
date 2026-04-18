@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Disassembly — Guess the ARM64 Instruction</title>
+<meta name="description" content="Wordle-style daily puzzle: given a 32-bit ARM64 encoding, type an instruction that assembles to it. Graded by real GNU as running in a Linux VM in your browser." />
+<meta name="theme-color" content="#0e1116" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="icon.svg" />
+<link rel="manifest" href="manifest.webmanifest" />
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Disassembly — Guess the ARM64 Instruction" />
+<meta property="og:description" content="Wordle-style daily puzzle: given a 32-bit ARM64 encoding, type an instruction that assembles to it." />
+<meta property="og:image" content="icon.svg" />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Disassembly — Guess the ARM64 Instruction" />
+<meta name="twitter:description" content="Daily ARM64 disassembly puzzle, graded by real GNU as in a browser-side Linux VM." />
+<meta name="twitter:image" content="icon.svg" />
+
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>Disassembly</h1>
+    <p class="tagline">Given a 32-bit ARM64 encoding, guess an instruction that assembles to it.</p>
+  </header>
+
+  <main>
+    <section id="puzzle">
+      <div id="day-badge" class="day-badge" aria-live="polite"></div>
+      <div class="label">Target encoding</div>
+      <div id="field-ruler" class="field-ruler" hidden></div>
+      <div id="target-bin" class="bits" role="group" aria-label="Target instruction bits">—</div>
+      <div id="target-hex" class="hex">—</div>
+      <div id="status" class="status" role="status" aria-live="polite">Getting ready…</div>
+      <button id="retry-load" class="retry-btn" type="button" hidden>Retry</button>
+      <div id="loading">
+        <div id="loading-bar"><div id="loading-bar-fill"></div></div>
+      </div>
+    </section>
+
+    <section id="hints-section">
+      <div class="hints-header">
+        <h2>Hints</h2>
+        <button id="hint-btn" type="button" disabled>Reveal hint</button>
+      </div>
+      <ol id="hints"></ol>
+      <p id="hints-empty" class="muted">Stuck? Reveal a hint, or make a guess — each incorrect guess also unlocks one.</p>
+    </section>
+
+    <section id="input-section">
+      <form id="guess-form" autocomplete="off">
+        <input
+          id="guess"
+          type="text"
+          spellcheck="false"
+          placeholder="e.g. mov x0, #0"
+          disabled
+        />
+        <button id="submit" type="submit" disabled>Guess</button>
+      </form>
+    </section>
+
+    <section id="history">
+      <h2>Attempts</h2>
+      <ol id="attempts"></ol>
+    </section>
+
+    <section id="controls">
+      <button id="new-puzzle" type="button">Restart</button>
+      <button id="give-up" type="button">Reveal</button>
+    </section>
+
+    <details id="help">
+      <summary>How it works</summary>
+      <ul>
+        <li>Each puzzle shows a 32-bit little-endian ARM64 instruction encoding.</li>
+        <li>Your guess is assembled by the real GNU <code>as</code> — running inside a tiny Linux VM booted in your browser via <a href="https://github.com/copy/v86">v86</a> (an x86 emulator compiled to WebAssembly). The first page load fetches a pre-baked memory snapshot of the booted VM so the assembler is ready in a second or two.</li>
+        <li>If your assembled bytes match the target, you win. Multiple mnemonics may be valid for the same encoding.</li>
+        <li>Per-bit feedback shows which bits of your guess matched the target.</li>
+      </ul>
+    </details>
+  </main>
+
+  <div id="stats-modal" class="modal" hidden role="dialog" aria-modal="true" aria-labelledby="stats-modal-title">
+    <div class="modal-card">
+      <h2 id="stats-modal-title">Solved! 🎉</h2>
+      <p class="modal-subtitle">Here's how today went:</p>
+      <dl class="stats-grid">
+        <div class="stat">
+          <dt>Attempts today</dt>
+          <dd id="stats-attempts">—</dd>
+        </div>
+        <div class="stat">
+          <dt>Current streak</dt>
+          <dd id="stats-streak">0</dd>
+        </div>
+        <div class="stat">
+          <dt>Best streak</dt>
+          <dd id="stats-best">0</dd>
+        </div>
+        <div class="stat">
+          <dt>Avg attempts / solve</dt>
+          <dd id="stats-avg">—</dd>
+        </div>
+        <div class="stat">
+          <dt>Puzzles solved</dt>
+          <dd id="stats-solved">0</dd>
+        </div>
+      </dl>
+      <div class="calendar-section">
+        <div class="calendar-header">
+          <button id="calendar-prev" type="button" aria-label="Previous month">‹</button>
+          <span id="calendar-month-label">—</span>
+          <button id="calendar-next" type="button" aria-label="Next month">›</button>
+        </div>
+        <div id="stats-calendar" class="calendar-grid" aria-label="Puzzle history calendar"></div>
+        <div class="calendar-legend">
+          <span><span class="swatch solved"></span> solved</span>
+          <span><span class="swatch failed"></span> tried</span>
+          <span><span class="swatch missed"></span> missed</span>
+        </div>
+      </div>
+      <button id="stats-modal-close" type="button">Close</button>
+    </div>
+  </div>
+
+  <footer>
+    <p class="footer-tagline">ARM64 · AArch64 · assembled client-side</p>
+
+    <section class="attributions" aria-label="Open source attributions">
+      <h2>Open source attributions</h2>
+      <p>
+        This project is built on the work of many open source communities.
+        Their licenses are reproduced in their respective source distributions.
+      </p>
+      <ul>
+        <li>
+          <strong><a href="https://github.com/copy/v86">v86</a></strong> by Fabian Hemmer and contributors —
+          x86 emulator compiled to WebAssembly, used to boot the in-browser Linux VM
+          (BSD 2-Clause License). Bundled v86 builds also include
+          <a href="https://www.seabios.org/">SeaBIOS</a> (LGPL v3) and
+          <a href="https://www.nongnu.org/vgabios/">VGABIOS</a> (LGPL v2.1+).
+        </li>
+        <li>
+          <strong><a href="https://www.kernel.org/">Linux kernel</a></strong> — GPL v2.
+        </li>
+        <li>
+          <strong><a href="https://www.alpinelinux.org/">Alpine Linux</a></strong> — base userland for the VM image
+          (individual packages under their own licenses, primarily MIT, BSD, and GPL).
+        </li>
+        <li>
+          <strong><a href="https://busybox.net/">BusyBox</a></strong> — GPL v2.
+        </li>
+        <li>
+          <strong><a href="https://www.musl-libc.org/">musl libc</a></strong> — MIT License.
+        </li>
+        <li>
+          <strong><a href="https://www.gnu.org/software/binutils/">GNU Binutils</a></strong>
+          (<code>aarch64</code> cross assembler) — GPL v3.
+        </li>
+        <li>
+          <strong><a href="https://developer.arm.com/Architectures/A-Profile%20Architecture#Software-Download">Arm Architecture Machine Readable Specification</a></strong>
+          (A-profile) — instruction encodings and register data
+          © 2010–2026 Arm Limited or its affiliates, redistributed under the
+          BSD 3-Clause License.
+        </li>
+        <li>
+          <strong><a href="https://esbuild.github.io/">esbuild</a></strong> — MIT License (build-time only).
+        </li>
+      </ul>
+      <p class="trademark-notice">
+        Arm<sup>&reg;</sup>, AArch64<sup>&reg;</sup>, and ARM<sup>&reg;</sup> are
+        registered trademarks or trademarks of Arm Limited (or its subsidiaries
+        or affiliates) in the US and/or elsewhere. All other brands or product
+        names are the property of their respective holders. This project is not
+        affiliated with, endorsed by, or sponsored by Arm Limited.
+      </p>
+    </section>
+  </footer>
+
+  <script defer src="app.js"></script>
+</body>
+</html>

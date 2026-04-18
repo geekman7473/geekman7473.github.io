@@ -1,0 +1,25 @@
+{
+  "name": "Disassembly — guess the ARM64 instruction",
+  "short_name": "Disassembly",
+  "description": "Wordle-style daily puzzle: given a 32-bit ARM64 encoding, type an instruction that assembles to it.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0e1116",
+  "theme_color": "#0e1116",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

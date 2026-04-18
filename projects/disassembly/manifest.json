@@ -1,0 +1,66 @@
+{
+  "builtAt": "2026-04-18T00:31:44.384Z",
+  "totalBytes": 35559932,
+  "files": [
+    {
+      "path": "app.js",
+      "bytes": 17893
+    },
+    {
+      "path": "favicon.svg",
+      "bytes": 555
+    },
+    {
+      "path": "icon.svg",
+      "bytes": 849
+    },
+    {
+      "path": "index.html",
+      "bytes": 8071
+    },
+    {
+      "path": "manifest.webmanifest",
+      "bytes": 622
+    },
+    {
+      "path": "puzzles.bin",
+      "bytes": 5309746
+    },
+    {
+      "path": "styles.css",
+      "bytes": 8316
+    },
+    {
+      "path": "sw.js",
+      "bytes": 3183
+    },
+    {
+      "path": "vm/bzImage",
+      "bytes": 7664128
+    },
+    {
+      "path": "vm/initrd.cpio.gz",
+      "bytes": 2854430
+    },
+    {
+      "path": "vm/libv86.js",
+      "bytes": 338069
+    },
+    {
+      "path": "vm/seabios.bin",
+      "bytes": 131072
+    },
+    {
+      "path": "vm/state.bin.gz",
+      "bytes": 17139552
+    },
+    {
+      "path": "vm/v86.wasm",
+      "bytes": 2047094
+    },
+    {
+      "path": "vm/vgabios.bin",
+      "bytes": 36352
+    }
+  ]
+}
