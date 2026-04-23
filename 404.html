@@ -3,33 +3,40 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Justin Becker | Not Found</title>
+    <title>404 -- Not Found</title>
     <meta name="description" content="Page not found on Justin Becker's site." />
-    <meta name="theme-color" content="#08111f" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
+    <meta name="theme-color" content="#c0c0c0" />
     <link rel="stylesheet" href="styles.css" />
     <script defer src="script.js"></script>
   </head>
-  <body>
-    <div class="site-shell error-page">
-      <main class="panel error-panel">
-        <span class="error-code">404</span>
-        <h1>That page wandered off.</h1>
-        <p class="section-text">
-          The link may be old or mistyped. You can head back home, open the resume,
-          or jump straight to LANBucket.
-        </p>
-        <div class="hero-actions">
-          <a class="button primary" href="index.html">Go Home</a>
-          <a class="button secondary" href="resume.html">View Resume</a>
-          <a class="button ghost" href="https://lanbucket.com" target="_blank" rel="noreferrer">LANBucket</a>
-        </div>
-      </main>
+  <body id="top">
+    <div class="banner">
+      <h1>404 &mdash; Not Found</h1>
+      <p class="meta">The requested URL was not found on this server.</p>
     </div>
+
+    <div class="toolbar">
+      [
+      <a href="index.html">home</a> <span class="sep">|</span>
+      <a href="resume.html">resume</a> <span class="sep">|</span>
+      <a href="https://lanbucket.com">lanbucket</a> <span class="sep">|</span>
+      <a href="https://github.com/geekman7473">github</a>
+      ]
+    </div>
+
+    <main>
+      <div class="titlebar">error</div>
+      <section class="panel">
+        <span class="error-code">404</span>
+        <p>
+          The link may be old or mistyped. Try one of the links above, or
+          head back <a href="index.html">home</a>.
+        </p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>&copy; <span id="year"></span> Justin Becker</p>
+    </footer>
   </body>
 </html>

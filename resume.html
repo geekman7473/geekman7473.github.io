@@ -3,77 +3,75 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Justin Becker | Resume</title>
+    <title>Justin Becker -- Resume</title>
     <meta
       name="description"
-      content="View Justin Becker's resume directly in the browser, with inline PDF preview and quick links."
+      content="View Justin Becker's resume directly in the browser, with inline PDF preview."
     />
-    <meta name="theme-color" content="#08111f" />
-    <meta property="og:title" content="Justin Becker | Resume" />
-    <meta
-      property="og:description"
-      content="Read Justin Becker's resume directly in the browser, with inline PDF preview and quick links."
-    />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://geekman7473.github.io/resume.html" />
+    <meta name="theme-color" content="#c0c0c0" />
     <link rel="canonical" href="https://geekman7473.github.io/resume.html" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
     <link rel="stylesheet" href="styles.css" />
     <script defer src="script.js"></script>
   </head>
-  <body>
-    <div class="site-shell">
-      <header class="site-header">
-        <a class="brand" href="index.html">Justin Becker</a>
-        <button class="nav-toggle" type="button" aria-expanded="false" aria-label="Open navigation">
-          <span></span>
-          <span></span>
-        </button>
-        <nav class="site-nav" aria-label="Primary">
-          <a href="index.html#about">About</a>
-          <a href="index.html#work">Work</a>
-          <a href="index.html#projects">Projects</a>
-          <a href="index.html#leadership">Leadership</a>
-          <a href="index.html#contact">Contact</a>
-          <a href="resume.html" aria-current="page">Resume</a>
-        </nav>
-      </header>
-
-      <main>
-        <section class="section narrow-section">
-          <div class="section-heading">
-            <p class="eyebrow">Resume</p>
-            <h1>Read it right here.</h1>
-          </div>
-          <div class="resume-actions">
-            <a class="button primary" href="assets/docs/resume.pdf" target="_blank" rel="noreferrer">Open in New Tab</a>
-            <a class="button secondary" href="index.html">Back to Home</a>
-          </div>
-          <div class="resume-frame panel">
-            <object data="assets/docs/resume.pdf" type="application/pdf" class="resume-object">
-              <iframe src="assets/docs/resume.pdf" title="Justin Becker Resume" class="resume-object"></iframe>
-              <p>
-                Your browser could not render the PDF inline.
-                <a class="text-link" href="assets/docs/resume.pdf" target="_blank" rel="noreferrer">Open the resume directly</a>.
-              </p>
-            </object>
-          </div>
-        </section>
-      </main>
-
-      <footer class="site-footer">
-        <p>© <span id="year"></span> Justin Becker</p>
-        <div>
-          <a href="https://github.com/geekman7473" target="_blank" rel="noreferrer">GitHub</a>
-          <a href="https://lanbucket.com" target="_blank" rel="noreferrer">LANBucket</a>
-          <a href="mailto:justintylerbecker@gmail.com">Email</a>
-        </div>
-      </footer>
+  <body id="top">
+    <div class="banner">
+      <h1>Justin Becker &mdash; Resume</h1>
+      <p class="meta">
+        Inline PDF below. If your browser can't render it, use the link.
+      </p>
     </div>
+
+    <div class="toolbar">
+      [
+      <a href="index.html">home</a> <span class="sep">|</span>
+      <a href="index.html#work">work</a> <span class="sep">|</span>
+      <a href="index.html#projects">projects</a> <span class="sep">|</span>
+      <a href="index.html#contact">contact</a> <span class="sep">|</span>
+      <a href="resume.html" aria-current="page">resume</a>
+      ]
+    </div>
+
+    <main>
+      <div class="titlebar">resume.pdf</div>
+      <section class="panel">
+        <p class="resume-actions">
+          &raquo;
+          <a href="assets/docs/resume.pdf" target="_blank" rel="noreferrer"
+            >open resume.pdf in a new tab</a
+          >
+          &middot;
+          <a href="index.html">back to home</a>
+        </p>
+        <div class="resume-frame">
+          <object
+            data="assets/docs/resume.pdf"
+            type="application/pdf"
+            class="resume-object"
+          >
+            <iframe
+              src="assets/docs/resume.pdf"
+              title="Justin Becker Resume"
+              class="resume-object"
+            ></iframe>
+            <p>
+              Your browser could not render the PDF inline.
+              <a
+                href="assets/docs/resume.pdf"
+                target="_blank"
+                rel="noreferrer"
+                >Open the resume directly</a
+              >.
+            </p>
+          </object>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>
+        &copy; <span id="year"></span> Justin Becker &middot;
+        <a href="#top">top</a>
+      </p>
+    </footer>
   </body>
 </html>
