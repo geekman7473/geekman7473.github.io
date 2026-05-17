@@ -110,6 +110,20 @@ dl.work dd {
 .project h3 { display: inline; font-size: 16px; }
 .project h3 + .meta { margin-left: 6px; color: #555; }
 
+/* --- Post figures --------------------------------------------------- */
+figure        { margin: 14px 0; }
+figure img    {
+  display: block;
+  width: 100%;
+  height: auto;
+  box-sizing: border-box;
+  border: 2px solid #000;
+  outline: 1px solid #fff;
+  padding: 3px;
+  background: #fff;
+}
+figcaption    { margin-top: 4px; text-align: center; color: #555; }
+
 /* --- Footer --------------------------------------------------------- */
 .site-footer {
   margin-top: 18px;

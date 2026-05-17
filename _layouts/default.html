@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ page.title }} &middot; Justin Becker</title>
+    {% if page.description %}<meta name="description" content="{{ page.description }}" />{% endif %}
+    <meta name="theme-color" content="#c0c0c0" />
+    <link rel="stylesheet" href="{{ '/styles.css' | relative_url }}" />
+    <script defer src="{{ '/script.js' | relative_url }}"></script>
+  </head>
+  <body id="top">
+    {% include banner.html %}
+    <main>
+      {{ content }}
+    </main>
+    {% include footer.html %}
+  </body>
+</html>

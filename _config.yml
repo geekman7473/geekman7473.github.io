@@ -1,0 +1,34 @@
+# Site
+title: Justin Becker
+description: >-
+  Personal site of Justin Becker - Software Engineer II at Microsoft.
+url: "https://geekman7473.github.io"
+author: Justin Becker
+
+# Build
+markdown: kramdown
+highlighter: rouge
+permalink: /blog/:year/:month/:day/:title/
+
+# Don't apply layouts unless a file explicitly opts in via front matter.
+defaults:
+  - scope:
+      path: "_posts"
+      type: posts
+    values:
+      layout: post
+
+# Leave these out of the build output. The disassembly project is
+# self-contained and ships its own assets; no need to re-process it.
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - .bundle
+  - README.md
+  - node_modules
+
+# Speeds up rebuilds during `jekyll serve`. The disassembly VM image is
+# big and never changes during normal editing.
+keep_files:
+  - projects/disassembly/vm

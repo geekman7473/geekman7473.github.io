@@ -1,0 +1,22 @@
+---
+layout: default
+title: Writing
+description: Blog posts by Justin Becker.
+permalink: /blog/
+---
+<div class="titlebar">Writing</div>
+<section class="panel">
+  {% if site.posts.size == 0 %}
+    <p>No posts yet.</p>
+  {% else %}
+    <dl class="work">
+      {% for post in site.posts %}
+        <dt>{{ post.date | date: "%Y-%m-%d" }}</dt>
+        <dd>
+          <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+          {% if post.summary %}<br /><span class="meta">{{ post.summary }}</span>{% endif %}
+        </dd>
+      {% endfor %}
+    </dl>
+  {% endif %}
+</section>

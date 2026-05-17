@@ -1,0 +1,15 @@
+---
+layout: default
+---
+<div class="titlebar">{{ page.title }}</div>
+<section class="panel post">
+  <p class="meta post-meta">
+    {{ page.date | date: "%Y-%m-%d" }}
+    {% if page.tags and page.tags.size > 0 %}
+      &middot; {{ page.tags | join: ", " }}
+    {% endif %}
+  </p>
+  {{ content }}
+  <hr />
+  <p class="meta"><a href="{{ '/blog/' | relative_url }}">&larr; all posts</a></p>
+</section>
