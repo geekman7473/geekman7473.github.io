@@ -11,6 +11,12 @@ summary: ""
   <figcaption class="meta">I'm about ready to rage-quit here, playing <em>CS:S</em>. (December 2012)</figcaption>
 </figure>
 
+## *TL;DR:*
+
+Sharing large files is a major pain point for hosting LAN parties. The existing solutions require configuration ahead of time, or are too slow. LANBucket uses distributed transfers to provide high performance, low friction, file sharing specifically tuned for LAN parties.
+
+## Why I built LANBucket
+
 LAN parties have always been a big part of my life. For the last 15 years or so I've hosted at least one a year, sometimes two. A lot has changed in that time as commodity hardware has gotten dramatically better. I remember distinctly that when we were first throwing these things in my friend's dingy basement, the biggest problem was underpowered laptops. We had to work really hard to find games that everyone's computer could even manage to load, let alone play smoothly. That period gave me a huge appreciation for classic Win32 games: *Command and Conquer: Red Alert 2*, the *Civilization* series, the *Age of Empires* series, and so on. These games, I feel, fundamentally respected the player in a way that modern live service games do not. All these years later, that's still what we play at the LAN parties I host.
 
 <figure>
