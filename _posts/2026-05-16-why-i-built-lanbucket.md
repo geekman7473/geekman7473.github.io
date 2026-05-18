@@ -13,12 +13,12 @@ Sharing large files is a major pain point for hosting LAN parties. The existing 
        alt="Justin at an early LAN party, mid-game"
        width="1600" height="1200"
        loading="eager" />
-  <figcaption class="meta">I'm about ready to rage-quit here, playing <em>CS:S</em>. (December 2012)</figcaption>
+  <figcaption class="meta">I'm actively rage quitting here, playing <em>CS:S</em>. (December 2012)</figcaption>
 </figure>
 
 ## Why I built LANBucket
 
-LAN parties have always been a big part of my life. For the last 15 years or so I've hosted at least one a year, sometimes two. A lot has changed in that time as commodity hardware has gotten dramatically better. I remember distinctly that when we were first throwing these things in my friend's dingy basement, the biggest problem was underpowered laptops. We had to work really hard to find games that everyone's computer could even manage to load, let alone play smoothly. That period gave me a huge appreciation for classic Win32 games: *Command and Conquer: Red Alert 2*, the *Civilization* series, the *Age of Empires* series, and so on. These games, I feel, fundamentally respected the player in a way that modern live service games do not. All these years later, that's still what we play at the LAN parties I host.
+LAN parties have always been a big part of my life. Over the last 15 years I have run atleast 12 of them. A lot has changed in that time as commodity hardware has gotten dramatically better. I remember distinctly that when we were first throwing these things in my friend's dingy basement, the biggest problem was underpowered laptops. We had to work really hard to find games that everyone's computer could even manage to load, let alone play smoothly. That period gave me a huge appreciation for classic Win32 games: *Command and Conquer: Red Alert 2*, the *Civilization* series, the *Age of Empires* series, and so on. These games, I feel, fundamentally respected the player in a way that modern live service games do not. All these years later, that's still what we play at the LAN parties I host.
 
 <figure>
   <img src="{{ '/assets/img/posts/2026-05-16-why-i-built-lanbucket/2013-08-basement-b.jpg' | relative_url }}"
@@ -29,7 +29,7 @@ LAN parties have always been a big part of my life. For the last 15 years or so 
 </figure>
 
 
-The perennial problem, though, is file distribution. Over the last decade I've tried every solution under the sun and none of them work perfectly for my use case. I have heard many suggestions over the years, and they have always had some killer drawback. Many of you reading this are probably thinking of solutions for how to distribute a file to a handful of players at a LAN party right now, but I assure you that if you thought of it in the last 30 seconds, I have thought of it at some point over the last 10 years. My deeper frustration is this: in the brave new world of cloud computing, the most accepted, most frictionless way to move a file between two computers, even when those computers are sitting right next to each other connected over LAN, is to upload it to a data center halfway across the country and have your buddy download it back. I get why these retail cloud storage providers have proliferated. They are easy and they do what it says on the tin. But I find it intellectually dissatisfying that for a byte to travel six feet, it must first travel a thousand miles.
+The perennial problem, though, is file distribution. Over the last decade I've tried every solution under the sun and none of them work perfectly for my use case. I have heard many suggestions over the years, and they have always had some killer drawback. Many of you reading this are probably thinking of solutions right now. I assure you that if you thought of it in the last 30 seconds, I have tried it at some point over the last decade. My deeper frustration is this: in the brave new world of cloud computing, the most accepted, most frictionless way to move a file between two computers, even when those computers are sitting right next to each other connected over LAN, is to upload it to a data center halfway across the country and have your buddy download it back. I get why these retail cloud storage providers have proliferated. They are easy and they do what it says on the tin. But I find it intellectually dissatisfying that for a byte to travel six feet, it must first travel a thousand miles.
 
 ## Solutions I've tried
 
