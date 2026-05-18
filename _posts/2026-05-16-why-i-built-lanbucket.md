@@ -3,6 +3,11 @@ title: "Why I built LANBucket"
 date: 2026-05-16
 summary: ""
 ---
+
+## *TL;DR:*
+
+Sharing large files is a major pain point for hosting LAN parties. The existing solutions require configuration ahead of time, or are too slow. LANBucket uses distributed transfers to provide high performance, low friction, file sharing specifically tuned for LAN parties.
+
 <figure>
   <img src="{{ '/assets/img/posts/2026-05-16-why-i-built-lanbucket/2012-12-early.jpg' | relative_url }}"
        alt="Justin at an early LAN party, mid-game"
@@ -10,10 +15,6 @@ summary: ""
        loading="eager" />
   <figcaption class="meta">I'm about ready to rage-quit here, playing <em>CS:S</em>. (December 2012)</figcaption>
 </figure>
-
-## *TL;DR:*
-
-Sharing large files is a major pain point for hosting LAN parties. The existing solutions require configuration ahead of time, or are too slow. LANBucket uses distributed transfers to provide high performance, low friction, file sharing specifically tuned for LAN parties.
 
 ## Why I built LANBucket
 
