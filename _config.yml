@@ -32,3 +32,18 @@ exclude:
 # big and never changes during normal editing.
 keep_files:
   - projects/disassembly/vm
+
+# Giscus comments (https://giscus.app). Fill in repo_id and category_id from
+# the giscus configurator after enabling Discussions on the repo. The comments
+# section in _layouts/post.html only renders when both IDs are present, so it
+# stays hidden until configured.
+giscus:
+  repo: geekman7473/geekman7473.github.io
+  repo_id: "R_kgDORh06zw"
+  category: Comments    # Discussions category name; create one of type "Announcement"
+  category_id: "DIC_kwDORh06z84C-DAF"
+  mapping: pathname
+  strict: "0"
+  reactions_enabled: "1"
+  input_position: top
+  theme: preferred_color_scheme
