@@ -124,6 +124,36 @@ figure img    {
 }
 figcaption    { margin-top: 4px; text-align: center; color: #555; }
 
+/* --- Post tables (spreadsheet / Excel look) ------------------------- */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 16px 0;
+  background: #ffffff;
+  color: #000;
+  font-family: "Segoe UI", Tahoma, Geneva, Arial, sans-serif;
+  font-size: 13px;
+}
+caption { caption-side: top; text-align: left; }
+th, td {
+  border: 1px solid #808080;
+  padding: 4px 9px;
+  vertical-align: top;
+}
+/* grey, raised column headers like a spreadsheet header row */
+thead th {
+  background: #c0c0c0;
+  border: 2px outset #c0c0c0;
+  font-weight: bold;
+  text-align: center;
+  color: #000;
+  white-space: nowrap;
+}
+/* zebra striping like a formatted Excel table */
+tbody tr:nth-child(odd)  td { background: #ffffff; }
+tbody tr:nth-child(even) td { background: #e9eef5; }
+tbody tr:hover td { background: #fff3b0; }
+
 /* --- Footer --------------------------------------------------------- */
 .site-footer {
   margin-top: 18px;
@@ -163,3 +193,36 @@ figcaption    { margin-top: 4px; text-align: center; color: #555; }
   .me { float: none; width: 120px; margin: 0 0 10px; }
   .toolbar { word-spacing: 4px; }
 }
+
+/* --- Code blocks ---------------------------------------------------- */
+.highlighter-rouge { margin: 0 0 0.8em; }
+pre, pre.highlight {
+  box-sizing: border-box;
+  max-width: 100%;
+  margin: 0;
+  padding: 8px 10px;
+  background: #f4f4f4;
+  border: 2px inset #c0c0c0;
+  overflow-x: auto;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #000;
+}
+pre code, pre.highlight code {
+  font-size: inherit;
+  white-space: pre;
+  background: none;
+}
+
+/* Rouge syntax theme, restrained to match the palette. */
+.highlight .c, .highlight .c1, .highlight .cm, .highlight .cs { color: #707070; font-style: italic; }
+.highlight .k, .highlight .kd, .highlight .kn, .highlight .kp, .highlight .kr { color: #000080; font-weight: bold; }
+.highlight .kt { color: #0a5d8c; font-weight: bold; }
+.highlight .s, .highlight .s1, .highlight .s2, .highlight .dl, .highlight .sc { color: #9e1b1b; }
+.highlight .mi, .highlight .mf, .highlight .mh, .highlight .il { color: #0a7d28; }
+.highlight .nf, .highlight .nc { color: #6a1b9a; }
+.highlight .nb, .highlight .bp { color: #0a5d8c; }
+.highlight .o, .highlight .ow { color: #555; }
+.highlight .nt { color: #000080; }
+.highlight .na { color: #6a1b9a; }

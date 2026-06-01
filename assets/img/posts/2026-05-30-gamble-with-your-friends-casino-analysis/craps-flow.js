@@ -23,18 +23,18 @@
   function N(o){ o.id='n'+(idc++); if(o.expanded===undefined) o.expanded=false; byId[o.id]=o; return o; }
   function rollKids(p,k){
     var w=WAYS[p], nth=30-w;
-    var hit=N({type:'win',title:'Hit '+p,branch:w+'/36 · WIN ×4',p:w/36,mult:4});
-    var sev=N({type:'lose',title:'Seven',branch:'6/36 · LOSE',p:6/36,mult:0});
+    var hit=N({type:'win',title:'Roll '+p,branch:w+'/36 · WIN ×4',p:w/36,mult:4});
+    var sev=N({type:'lose',title:'Roll 7',branch:'6/36 · LOSE',p:6/36,mult:0});
     var nei;
-    if(k<3){ nei=N({type:'neutral',title:'Neither (roll '+k+')',branch:nth+'/36 · roll '+(k+1),p:nth/36,children:rollKids(p,k+1)}); }
-    else { nei=N({type:'refund',title:'Neither ×3',branch:nth+'/36 · REFUND ×1',p:nth/36,mult:1}); }
+    if(k<3){ nei=N({type:'neutral',title:'Roll anything else',branch:nth+'/36 · roll '+(k+1),p:nth/36,children:rollKids(p,k+1)}); }
+    else { nei=N({type:'refund',title:'Roll anything else',branch:nth+'/36 · REFUND ×1',p:nth/36,mult:1}); }
     return [hit,sev,nei];
   }
-  function pointNode(p){ return N({type:'point',title:'Point '+p,branch:'comes up '+WAYS[p]+'/36',p:WAYS[p]/24,children:rollKids(p,1)}); }
+  function pointNode(p){ return N({type:'point',title:'Roll '+p,branch:'comes up '+WAYS[p]+'/36',p:WAYS[p]/24,children:rollKids(p,1)}); }
   var tree=N({type:'root',title:'COME-OUT ROLL',branch:'roll two dice',p:1,expanded:true,children:[
-    N({type:'win',title:'7 or 11',branch:'8/36 · WIN ×2',p:8/36,mult:2}),
-    N({type:'lose',title:'2 / 3 / 12',branch:'4/36 · LOSE',p:4/36,mult:0}),
-    N({type:'point',title:'Point is set',branch:'24/36 of come-outs',p:24/36,children:[4,5,6,8,9,10].map(pointNode)})
+    N({type:'win',title:'Roll 7 or 11',branch:'8/36 · WIN ×2',p:8/36,mult:2}),
+    N({type:'lose',title:'Roll 2 / 3 / 12',branch:'4/36 · LOSE',p:4/36,mult:0}),
+    N({type:'point',title:'Roll anything else',branch:'24/36 of come-outs',p:24/36,children:[4,5,6,8,9,10].map(pointNode)})
   ]});
   function expandable(n){ return n.children && n.children.length>0; }
   function stats(){ (function rec(n,pr){ n._reach=pr*n.p;
