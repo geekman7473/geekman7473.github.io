@@ -1,9 +1,25 @@
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-W1YNVPF1FP"></script>
+{% if jekyll.environment == "production" %}
+<!-- Google tag (gtag.js). Emitted only in production builds, and the runtime
+     guard below keeps it from firing on localhost or a file:// page, so local
+     previews of a production build never pollute analytics. -->
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  (function () {
+    var h = location.hostname;
+    var isLocal =
+      location.protocol === 'file:' ||
+      h === '' || h === 'localhost' || h === '127.0.0.1' || h === '::1' ||
+      /^192\.168\./.test(h) || /^10\./.test(h) || /\.local$/.test(h);
+    if (isLocal) return;
 
-  gtag('config', 'G-W1YNVPF1FP');
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=G-W1YNVPF1FP';
+    document.head.appendChild(s);
+
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-W1YNVPF1FP');
+  })();
 </script>
+{% endif %}

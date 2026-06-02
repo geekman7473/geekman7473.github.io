@@ -73,6 +73,11 @@ code, .meta, nav, dt {
   margin: 18px 0 0;
   letter-spacing: 0;
 }
+.titlebar--post {
+  font-size: 26px;
+  line-height: 1.25;
+  padding: 8px 12px;
+}
 .panel {
   background: #ffffff;
   border: 2px outset #c0c0c0;
@@ -153,6 +158,24 @@ thead th {
 tbody tr:nth-child(odd)  td { background: #ffffff; }
 tbody tr:nth-child(even) td { background: #e9eef5; }
 tbody tr:hover td { background: #fff3b0; }
+
+/* wide tables (many columns): compact so they fit, scroll if still too wide */
+.table-scroll {
+  overflow-x: auto;
+  max-width: 100%;
+  margin: 16px 0;
+}
+.table-scroll table {
+  margin: 0;
+  width: auto;
+  min-width: 100%;
+  font-size: 11px;
+}
+.table-scroll th,
+.table-scroll td {
+  padding: 3px 5px;
+  white-space: nowrap;
+}
 
 /* --- Footer --------------------------------------------------------- */
 .site-footer {

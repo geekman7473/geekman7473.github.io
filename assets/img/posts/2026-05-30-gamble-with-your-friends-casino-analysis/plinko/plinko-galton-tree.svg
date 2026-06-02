@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 894 686" role="img" aria-label="Galton board probability tree for an 11-row Plinko machine; each node is labeled with the binomial probability of a ball reaching it" xmlns="http://www.w3.org/2000/svg" style="background:#f4f4f0;font-family:Tahoma,Geneva,sans-serif">
+  <g stroke="#b8b8b8" stroke-width="1.2">
+    <line x1="447.0" y1="54.0" x2="410.0" y2="108.0" />
+    <line x1="447.0" y1="54.0" x2="484.0" y2="108.0" />
+    <line x1="410.0" y1="108.0" x2="373.0" y2="162.0" />
+    <line x1="410.0" y1="108.0" x2="447.0" y2="162.0" />
+    <line x1="484.0" y1="108.0" x2="447.0" y2="162.0" />
+    <line x1="484.0" y1="108.0" x2="521.0" y2="162.0" />
+    <line x1="373.0" y1="162.0" x2="336.0" y2="216.0" />
+    <line x1="373.0" y1="162.0" x2="410.0" y2="216.0" />
+    <line x1="447.0" y1="162.0" x2="410.0" y2="216.0" />
+    <line x1="447.0" y1="162.0" x2="484.0" y2="216.0" />
+    <line x1="521.0" y1="162.0" x2="484.0" y2="216.0" />
+    <line x1="521.0" y1="162.0" x2="558.0" y2="216.0" />
+    <line x1="336.0" y1="216.0" x2="299.0" y2="270.0" />
+    <line x1="336.0" y1="216.0" x2="373.0" y2="270.0" />
+    <line x1="410.0" y1="216.0" x2="373.0" y2="270.0" />
+    <line x1="410.0" y1="216.0" x2="447.0" y2="270.0" />
+    <line x1="484.0" y1="216.0" x2="447.0" y2="270.0" />
+    <line x1="484.0" y1="216.0" x2="521.0" y2="270.0" />
+    <line x1="558.0" y1="216.0" x2="521.0" y2="270.0" />
+    <line x1="558.0" y1="216.0" x2="595.0" y2="270.0" />
+    <line x1="299.0" y1="270.0" x2="262.0" y2="324.0" />
+    <line x1="299.0" y1="270.0" x2="336.0" y2="324.0" />
+    <line x1="373.0" y1="270.0" x2="336.0" y2="324.0" />
+    <line x1="373.0" y1="270.0" x2="410.0" y2="324.0" />
+    <line x1="447.0" y1="270.0" x2="410.0" y2="324.0" />
+    <line x1="447.0" y1="270.0" x2="484.0" y2="324.0" />
+    <line x1="521.0" y1="270.0" x2="484.0" y2="324.0" />
+    <line x1="521.0" y1="270.0" x2="558.0" y2="324.0" />
+    <line x1="595.0" y1="270.0" x2="558.0" y2="324.0" />
+    <line x1="595.0" y1="270.0" x2="632.0" y2="324.0" />
+    <line x1="262.0" y1="324.0" x2="225.0" y2="378.0" />
+    <line x1="262.0" y1="324.0" x2="299.0" y2="378.0" />
+    <line x1="336.0" y1="324.0" x2="299.0" y2="378.0" />
+    <line x1="336.0" y1="324.0" x2="373.0" y2="378.0" />
+    <line x1="410.0" y1="324.0" x2="373.0" y2="378.0" />
+    <line x1="410.0" y1="324.0" x2="447.0" y2="378.0" />
+    <line x1="484.0" y1="324.0" x2="447.0" y2="378.0" />
+    <line x1="484.0" y1="324.0" x2="521.0" y2="378.0" />
+    <line x1="558.0" y1="324.0" x2="521.0" y2="378.0" />
+    <line x1="558.0" y1="324.0" x2="595.0" y2="378.0" />
+    <line x1="632.0" y1="324.0" x2="595.0" y2="378.0" />
+    <line x1="632.0" y1="324.0" x2="669.0" y2="378.0" />
+    <line x1="225.0" y1="378.0" x2="188.0" y2="432.0" />
+    <line x1="225.0" y1="378.0" x2="262.0" y2="432.0" />
+    <line x1="299.0" y1="378.0" x2="262.0" y2="432.0" />
+    <line x1="299.0" y1="378.0" x2="336.0" y2="432.0" />
+    <line x1="373.0" y1="378.0" x2="336.0" y2="432.0" />
+    <line x1="373.0" y1="378.0" x2="410.0" y2="432.0" />
+    <line x1="447.0" y1="378.0" x2="410.0" y2="432.0" />
+    <line x1="447.0" y1="378.0" x2="484.0" y2="432.0" />
+    <line x1="521.0" y1="378.0" x2="484.0" y2="432.0" />
+    <line x1="521.0" y1="378.0" x2="558.0" y2="432.0" />
+    <line x1="595.0" y1="378.0" x2="558.0" y2="432.0" />
+    <line x1="595.0" y1="378.0" x2="632.0" y2="432.0" />
+    <line x1="669.0" y1="378.0" x2="632.0" y2="432.0" />
+    <line x1="669.0" y1="378.0" x2="706.0" y2="432.0" />
+    <line x1="188.0" y1="432.0" x2="151.0" y2="486.0" />
+    <line x1="188.0" y1="432.0" x2="225.0" y2="486.0" />
+    <line x1="262.0" y1="432.0" x2="225.0" y2="486.0" />
+    <line x1="262.0" y1="432.0" x2="299.0" y2="486.0" />
+    <line x1="336.0" y1="432.0" x2="299.0" y2="486.0" />
+    <line x1="336.0" y1="432.0" x2="373.0" y2="486.0" />
+    <line x1="410.0" y1="432.0" x2="373.0" y2="486.0" />
+    <line x1="410.0" y1="432.0" x2="447.0" y2="486.0" />
+    <line x1="484.0" y1="432.0" x2="447.0" y2="486.0" />
+    <line x1="484.0" y1="432.0" x2="521.0" y2="486.0" />
+    <line x1="558.0" y1="432.0" x2="521.0" y2="486.0" />
+    <line x1="558.0" y1="432.0" x2="595.0" y2="486.0" />
+    <line x1="632.0" y1="432.0" x2="595.0" y2="486.0" />
+    <line x1="632.0" y1="432.0" x2="669.0" y2="486.0" />
+    <line x1="706.0" y1="432.0" x2="669.0" y2="486.0" />
+    <line x1="706.0" y1="432.0" x2="743.0" y2="486.0" />
+    <line x1="151.0" y1="486.0" x2="114.0" y2="540.0" />
+    <line x1="151.0" y1="486.0" x2="188.0" y2="540.0" />
+    <line x1="225.0" y1="486.0" x2="188.0" y2="540.0" />
+    <line x1="225.0" y1="486.0" x2="262.0" y2="540.0" />
+    <line x1="299.0" y1="486.0" x2="262.0" y2="540.0" />
+    <line x1="299.0" y1="486.0" x2="336.0" y2="540.0" />
+    <line x1="373.0" y1="486.0" x2="336.0" y2="540.0" />
+    <line x1="373.0" y1="486.0" x2="410.0" y2="540.0" />
+    <line x1="447.0" y1="486.0" x2="410.0" y2="540.0" />
+    <line x1="447.0" y1="486.0" x2="484.0" y2="540.0" />
+    <line x1="521.0" y1="486.0" x2="484.0" y2="540.0" />
+    <line x1="521.0" y1="486.0" x2="558.0" y2="540.0" />
+    <line x1="595.0" y1="486.0" x2="558.0" y2="540.0" />
+    <line x1="595.0" y1="486.0" x2="632.0" y2="540.0" />
+    <line x1="669.0" y1="486.0" x2="632.0" y2="540.0" />
+    <line x1="669.0" y1="486.0" x2="706.0" y2="540.0" />
+    <line x1="743.0" y1="486.0" x2="706.0" y2="540.0" />
+    <line x1="743.0" y1="486.0" x2="780.0" y2="540.0" />
+    <line x1="114.0" y1="540.0" x2="77.0" y2="594.0" />
+    <line x1="114.0" y1="540.0" x2="151.0" y2="594.0" />
+    <line x1="188.0" y1="540.0" x2="151.0" y2="594.0" />
+    <line x1="188.0" y1="540.0" x2="225.0" y2="594.0" />
+    <line x1="262.0" y1="540.0" x2="225.0" y2="594.0" />
+    <line x1="262.0" y1="540.0" x2="299.0" y2="594.0" />
+    <line x1="336.0" y1="540.0" x2="299.0" y2="594.0" />
+    <line x1="336.0" y1="540.0" x2="373.0" y2="594.0" />
+    <line x1="410.0" y1="540.0" x2="373.0" y2="594.0" />
+    <line x1="410.0" y1="540.0" x2="447.0" y2="594.0" />
+    <line x1="484.0" y1="540.0" x2="447.0" y2="594.0" />
+    <line x1="484.0" y1="540.0" x2="521.0" y2="594.0" />
+    <line x1="558.0" y1="540.0" x2="521.0" y2="594.0" />
+    <line x1="558.0" y1="540.0" x2="595.0" y2="594.0" />
+    <line x1="632.0" y1="540.0" x2="595.0" y2="594.0" />
+    <line x1="632.0" y1="540.0" x2="669.0" y2="594.0" />
+    <line x1="706.0" y1="540.0" x2="669.0" y2="594.0" />
+    <line x1="706.0" y1="540.0" x2="743.0" y2="594.0" />
+    <line x1="780.0" y1="540.0" x2="743.0" y2="594.0" />
+    <line x1="780.0" y1="540.0" x2="817.0" y2="594.0" />
+    <line x1="77.0" y1="594.0" x2="40.0" y2="648.0" />
+    <line x1="77.0" y1="594.0" x2="114.0" y2="648.0" />
+    <line x1="151.0" y1="594.0" x2="114.0" y2="648.0" />
+    <line x1="151.0" y1="594.0" x2="188.0" y2="648.0" />
+    <line x1="225.0" y1="594.0" x2="188.0" y2="648.0" />
+    <line x1="225.0" y1="594.0" x2="262.0" y2="648.0" />
+    <line x1="299.0" y1="594.0" x2="262.0" y2="648.0" />
+    <line x1="299.0" y1="594.0" x2="336.0" y2="648.0" />
+    <line x1="373.0" y1="594.0" x2="336.0" y2="648.0" />
+    <line x1="373.0" y1="594.0" x2="410.0" y2="648.0" />
+    <line x1="447.0" y1="594.0" x2="410.0" y2="648.0" />
+    <line x1="447.0" y1="594.0" x2="484.0" y2="648.0" />
+    <line x1="521.0" y1="594.0" x2="484.0" y2="648.0" />
+    <line x1="521.0" y1="594.0" x2="558.0" y2="648.0" />
+    <line x1="595.0" y1="594.0" x2="558.0" y2="648.0" />
+    <line x1="595.0" y1="594.0" x2="632.0" y2="648.0" />
+    <line x1="669.0" y1="594.0" x2="632.0" y2="648.0" />
+    <line x1="669.0" y1="594.0" x2="706.0" y2="648.0" />
+    <line x1="743.0" y1="594.0" x2="706.0" y2="648.0" />
+    <line x1="743.0" y1="594.0" x2="780.0" y2="648.0" />
+    <line x1="817.0" y1="594.0" x2="780.0" y2="648.0" />
+    <line x1="817.0" y1="594.0" x2="854.0" y2="648.0" />
+  </g>
+  <g>
+    <g>
+      <circle cx="447.0" cy="54.0" r="24.0" fill="#2f4a8a" stroke="#808080" stroke-width="1.5" />
+      <text x="447.0" y="57.5" text-anchor="middle" font-size="10.5" fill="#ffffff">100.0%</text>
+    </g>
+    <g>
+      <circle cx="410.0" cy="108.0" r="24.0" fill="#677bab" stroke="#808080" stroke-width="1.5" />
+      <text x="410.0" y="111.5" text-anchor="middle" font-size="10.5" fill="#ffffff">50.0%</text>
+    </g>
+    <g>
+      <circle cx="484.0" cy="108.0" r="24.0" fill="#677bab" stroke="#808080" stroke-width="1.5" />
+      <text x="484.0" y="111.5" text-anchor="middle" font-size="10.5" fill="#ffffff">50.0%</text>
+    </g>
+    <g>
+      <circle cx="373.0" cy="162.0" r="24.0" fill="#8e9ec2" stroke="#808080" stroke-width="1.5" />
+      <text x="373.0" y="165.5" text-anchor="middle" font-size="10.5" fill="#1a2238">25.0%</text>
+    </g>
+    <g>
+      <circle cx="447.0" cy="162.0" r="24.0" fill="#677bab" stroke="#808080" stroke-width="1.5" />
+      <text x="447.0" y="165.5" text-anchor="middle" font-size="10.5" fill="#ffffff">50.0%</text>
+    </g>
+    <g>
+      <circle cx="521.0" cy="162.0" r="24.0" fill="#8e9ec2" stroke="#808080" stroke-width="1.5" />
+      <text x="521.0" y="165.5" text-anchor="middle" font-size="10.5" fill="#1a2238">25.0%</text>
+    </g>
+    <g>
+      <circle cx="336.0" cy="216.0" r="24.0" fill="#aab7d3" stroke="#808080" stroke-width="1.5" />
+      <text x="336.0" y="219.5" text-anchor="middle" font-size="10.5" fill="#1a2238">12.5%</text>
+    </g>
+    <g>
+      <circle cx="410.0" cy="216.0" r="24.0" fill="#798bb6" stroke="#808080" stroke-width="1.5" />
+      <text x="410.0" y="219.5" text-anchor="middle" font-size="10.5" fill="#ffffff">37.5%</text>
+    </g>
+    <g>
+      <circle cx="484.0" cy="216.0" r="24.0" fill="#798bb6" stroke="#808080" stroke-width="1.5" />
+      <text x="484.0" y="219.5" text-anchor="middle" font-size="10.5" fill="#ffffff">37.5%</text>
+    </g>
+    <g>
+      <circle cx="558.0" cy="216.0" r="24.0" fill="#aab7d3" stroke="#808080" stroke-width="1.5" />
+      <text x="558.0" y="219.5" text-anchor="middle" font-size="10.5" fill="#1a2238">12.5%</text>
+    </g>
+    <g>
+      <circle cx="299.0" cy="270.0" r="24.0" fill="#bec8df" stroke="#808080" stroke-width="1.5" />
+      <text x="299.0" y="273.5" text-anchor="middle" font-size="10.5" fill="#1a2238">6.2%</text>
+    </g>
+    <g>
+      <circle cx="373.0" cy="270.0" r="24.0" fill="#8e9ec2" stroke="#808080" stroke-width="1.5" />
+      <text x="373.0" y="273.5" text-anchor="middle" font-size="10.5" fill="#1a2238">25.0%</text>
+    </g>
+    <g>
+      <circle cx="447.0" cy="270.0" r="24.0" fill="#798bb6" stroke="#808080" stroke-width="1.5" />
+      <text x="447.0" y="273.5" text-anchor="middle" font-size="10.5" fill="#ffffff">37.5%</text>
+    </g>
+    <g>
+      <circle cx="521.0" cy="270.0" r="24.0" fill="#8e9ec2" stroke="#808080" stroke-width="1.5" />
+      <text x="521.0" y="273.5" text-anchor="middle" font-size="10.5" fill="#1a2238">25.0%</text>
+    </g>
+    <g>
+      <circle cx="595.0" cy="270.0" r="24.0" fill="#bec8df" stroke="#808080" stroke-width="1.5" />
+      <text x="595.0" y="273.5" text-anchor="middle" font-size="10.5" fill="#1a2238">6.2%</text>
+    </g>
+    <g>
+      <circle cx="262.0" cy="324.0" r="24.0" fill="#ccd4e7" stroke="#808080" stroke-width="1.5" />
+      <text x="262.0" y="327.5" text-anchor="middle" font-size="10.5" fill="#1a2238">3.1%</text>
+    </g>
+    <g>
+      <circle cx="336.0" cy="324.0" r="24.0" fill="#a3b0ce" stroke="#808080" stroke-width="1.5" />
+      <text x="336.0" y="327.5" text-anchor="middle" font-size="10.5" fill="#1a2238">15.6%</text>
+    </g>
+    <g>
+      <circle cx="410.0" cy="324.0" r="24.0" fill="#8394bc" stroke="#808080" stroke-width="1.5" />
+      <text x="410.0" y="327.5" text-anchor="middle" font-size="10.5" fill="#ffffff">31.2%</text>
+    </g>
+    <g>
+      <circle cx="484.0" cy="324.0" r="24.0" fill="#8394bc" stroke="#808080" stroke-width="1.5" />
+      <text x="484.0" y="327.5" text-anchor="middle" font-size="10.5" fill="#ffffff">31.2%</text>
+    </g>
+    <g>
+      <circle cx="558.0" cy="324.0" r="24.0" fill="#a3b0ce" stroke="#808080" stroke-width="1.5" />
+      <text x="558.0" y="327.5" text-anchor="middle" font-size="10.5" fill="#1a2238">15.6%</text>
+    </g>
+    <g>
+      <circle cx="632.0" cy="324.0" r="24.0" fill="#ccd4e7" stroke="#808080" stroke-width="1.5" />
+      <text x="632.0" y="327.5" text-anchor="middle" font-size="10.5" fill="#1a2238">3.1%</text>
+    </g>
+    <g>
+      <circle cx="225.0" cy="378.0" r="24.0" fill="#d6dded" stroke="#808080" stroke-width="1.5" />
+      <text x="225.0" y="381.5" text-anchor="middle" font-size="10.5" fill="#1a2238">1.6%</text>
+    </g>
+    <g>
+      <circle cx="299.0" cy="378.0" r="24.0" fill="#b4bfd8" stroke="#808080" stroke-width="1.5" />
+      <text x="299.0" y="381.5" text-anchor="middle" font-size="10.5" fill="#1a2238">9.4%</text>
+    </g>
+    <g>
+      <circle cx="373.0" cy="378.0" r="24.0" fill="#92a1c4" stroke="#808080" stroke-width="1.5" />
+      <text x="373.0" y="381.5" text-anchor="middle" font-size="10.5" fill="#1a2238">23.4%</text>
+    </g>
+    <g>
+      <circle cx="447.0" cy="378.0" r="24.0" fill="#8394bc" stroke="#808080" stroke-width="1.5" />
+      <text x="447.0" y="381.5" text-anchor="middle" font-size="10.5" fill="#ffffff">31.2%</text>
+    </g>
+    <g>
+      <circle cx="521.0" cy="378.0" r="24.0" fill="#92a1c4" stroke="#808080" stroke-width="1.5" />
+      <text x="521.0" y="381.5" text-anchor="middle" font-size="10.5" fill="#1a2238">23.4%</text>
+    </g>
+    <g>
+      <circle cx="595.0" cy="378.0" r="24.0" fill="#b4bfd8" stroke="#808080" stroke-width="1.5" />
+      <text x="595.0" y="381.5" text-anchor="middle" font-size="10.5" fill="#1a2238">9.4%</text>
+    </g>
+    <g>
+      <circle cx="669.0" cy="378.0" r="24.0" fill="#d6dded" stroke="#808080" stroke-width="1.5" />
+      <text x="669.0" y="381.5" text-anchor="middle" font-size="10.5" fill="#1a2238">1.6%</text>
+    </g>
+    <g>
+      <circle cx="188.0" cy="432.0" r="24.0" fill="#dde3f1" stroke="#808080" stroke-width="1.5" />
+      <text x="188.0" y="435.5" text-anchor="middle" font-size="10.5" fill="#1a2238">0.78%</text>
+    </g>
+    <g>
+      <circle cx="262.0" cy="432.0" r="24.0" fill="#c1cbe1" stroke="#808080" stroke-width="1.5" />
+      <text x="262.0" y="435.5" text-anchor="middle" font-size="10.5" fill="#1a2238">5.5%</text>
+    </g>
+    <g>
+      <circle cx="336.0" cy="432.0" r="24.0" fill="#a1aecd" stroke="#808080" stroke-width="1.5" />
+      <text x="336.0" y="435.5" text-anchor="middle" font-size="10.5" fill="#1a2238">16.4%</text>
+    </g>
+    <g>
+      <circle cx="410.0" cy="432.0" r="24.0" fill="#8a9ac0" stroke="#808080" stroke-width="1.5" />
+      <text x="410.0" y="435.5" text-anchor="middle" font-size="10.5" fill="#1a2238">27.3%</text>
+    </g>
+    <g>
+      <circle cx="484.0" cy="432.0" r="24.0" fill="#8a9ac0" stroke="#808080" stroke-width="1.5" />
+      <text x="484.0" y="435.5" text-anchor="middle" font-size="10.5" fill="#1a2238">27.3%</text>
+    </g>
+    <g>
+      <circle cx="558.0" cy="432.0" r="24.0" fill="#a1aecd" stroke="#808080" stroke-width="1.5" />
+      <text x="558.0" y="435.5" text-anchor="middle" font-size="10.5" fill="#1a2238">16.4%</text>
+    </g>
+    <g>
+      <circle cx="632.0" cy="432.0" r="24.0" fill="#c1cbe1" stroke="#808080" stroke-width="1.5" />
+      <text x="632.0" y="435.5" text-anchor="middle" font-size="10.5" fill="#1a2238">5.5%</text>
+    </g>
+    <g>
+      <circle cx="706.0" cy="432.0" r="24.0" fill="#dde3f1" stroke="#808080" stroke-width="1.5" />
+      <text x="706.0" y="435.5" text-anchor="middle" font-size="10.5" fill="#1a2238">0.78%</text>
+    </g>
+    <g>
+      <circle cx="151.0" cy="486.0" r="24.0" fill="#e2e8f4" stroke="#808080" stroke-width="1.5" />
+      <text x="151.0" y="489.5" text-anchor="middle" font-size="10.5" fill="#1a2238">0.39%</text>
+    </g>
+    <g>
+      <circle cx="225.0" cy="486.0" r="24.0" fill="#ccd4e7" stroke="#808080" stroke-width="1.5" />
+      <text x="225.0" y="489.5" text-anchor="middle" font-size="10.5" fill="#1a2238">3.1%</text>
+    </g>
+    <g>
+      <circle cx="299.0" cy="486.0" r="24.0" fill="#afbad6" stroke="#808080" stroke-width="1.5" />
+      <text x="299.0" y="489.5" text-anchor="middle" font-size="10.5" fill="#1a2238">10.9%</text>
+    </g>
+    <g>
+      <circle cx="373.0" cy="486.0" r="24.0" fill="#95a3c6" stroke="#808080" stroke-width="1.5" />
+      <text x="373.0" y="489.5" text-anchor="middle" font-size="10.5" fill="#1a2238">21.9%</text>
+    </g>
+    <g>
+      <circle cx="447.0" cy="486.0" r="24.0" fill="#8a9ac0" stroke="#808080" stroke-width="1.5" />
+      <text x="447.0" y="489.5" text-anchor="middle" font-size="10.5" fill="#1a2238">27.3%</text>
+    </g>
+    <g>
+      <circle cx="521.0" cy="486.0" r="24.0" fill="#95a3c6" stroke="#808080" stroke-width="1.5" />
+      <text x="521.0" y="489.5" text-anchor="middle" font-size="10.5" fill="#1a2238">21.9%</text>
+    </g>
+    <g>
+      <circle cx="595.0" cy="486.0" r="24.0" fill="#afbad6" stroke="#808080" stroke-width="1.5" />
+      <text x="595.0" y="489.5" text-anchor="middle" font-size="10.5" fill="#1a2238">10.9%</text>
+    </g>
+    <g>
+      <circle cx="669.0" cy="486.0" r="24.0" fill="#ccd4e7" stroke="#808080" stroke-width="1.5" />
+      <text x="669.0" y="489.5" text-anchor="middle" font-size="10.5" fill="#1a2238">3.1%</text>
+    </g>
+    <g>
+      <circle cx="743.0" cy="486.0" r="24.0" fill="#e2e8f4" stroke="#808080" stroke-width="1.5" />
+      <text x="743.0" y="489.5" text-anchor="middle" font-size="10.5" fill="#1a2238">0.39%</text>
+    </g>
+    <g>
+      <circle cx="114.0" cy="540.0" r="24.0" fill="#e6ebf6" stroke="#808080" stroke-width="1.5" />
+      <text x="114.0" y="543.5" text-anchor="middle" font-size="10.5" fill="#1a2238">0.20%</text>
+    </g>
+    <g>
+      <circle cx="188.0" cy="540.0" r="24.0" fill="#d5dcec" stroke="#808080" stroke-width="1.5" />
+      <text x="188.0" y="543.5" text-anchor="middle" font-size="10.5" fill="#1a2238">1.8%</text>
+    </g>
+    <g>
+      <circle cx="262.0" cy="540.0" r="24.0" fill="#bbc5dd" stroke="#808080" stroke-width="1.5" />
+      <text x="262.0" y="543.5" text-anchor="middle" font-size="10.5" fill="#1a2238">7.0%</text>
+    </g>
+    <g>
+      <circle cx="336.0" cy="540.0" r="24.0" fill="#a1aecd" stroke="#808080" stroke-width="1.5" />
+      <text x="336.0" y="543.5" text-anchor="middle" font-size="10.5" fill="#1a2238">16.4%</text>
+    </g>
+    <g>
+      <circle cx="410.0" cy="540.0" r="24.0" fill="#8f9fc3" stroke="#808080" stroke-width="1.5" />
+      <text x="410.0" y="543.5" text-anchor="middle" font-size="10.5" fill="#1a2238">24.6%</text>
+    </g>
+    <g>
+      <circle cx="484.0" cy="540.0" r="24.0" fill="#8f9fc3" stroke="#808080" stroke-width="1.5" />
+      <text x="484.0" y="543.5" text-anchor="middle" font-size="10.5" fill="#1a2238">24.6%</text>
+    </g>
+    <g>
+      <circle cx="558.0" cy="540.0" r="24.0" fill="#a1aecd" stroke="#808080" stroke-width="1.5" />
+      <text x="558.0" y="543.5" text-anchor="middle" font-size="10.5" fill="#1a2238">16.4%</text>
+    </g>
+    <g>
+      <circle cx="632.0" cy="540.0" r="24.0" fill="#bbc5dd" stroke="#808080" stroke-width="1.5" />
+      <text x="632.0" y="543.5" text-anchor="middle" font-size="10.5" fill="#1a2238">7.0%</text>
+    </g>
+    <g>
+      <circle cx="706.0" cy="540.0" r="24.0" fill="#d5dcec" stroke="#808080" stroke-width="1.5" />
+      <text x="706.0" y="543.5" text-anchor="middle" font-size="10.5" fill="#1a2238">1.8%</text>
+    </g>
+    <g>
+      <circle cx="780.0" cy="540.0" r="24.0" fill="#e6ebf6" stroke="#808080" stroke-width="1.5" />
+      <text x="780.0" y="543.5" text-anchor="middle" font-size="10.5" fill="#1a2238">0.20%</text>
+    </g>
+    <g>
+      <circle cx="77.0" cy="594.0" r="24.0" fill="#e8edf7" stroke="#808080" stroke-width="1.5" />
+      <text x="77.0" y="597.5" text-anchor="middle" font-size="10.5" fill="#1a2238">0.098%</text>
+    </g>
+    <g>
+      <circle cx="151.0" cy="594.0" r="24.0" fill="#dbe1f0" stroke="#808080" stroke-width="1.5" />
+      <text x="151.0" y="597.5" text-anchor="middle" font-size="10.5" fill="#1a2238">0.98%</text>
+    </g>
+    <g>
+      <circle cx="225.0" cy="594.0" r="24.0" fill="#c6cfe3" stroke="#808080" stroke-width="1.5" />
+      <text x="225.0" y="597.5" text-anchor="middle" font-size="10.5" fill="#1a2238">4.4%</text>
+    </g>
+    <g>
+      <circle cx="299.0" cy="594.0" r="24.0" fill="#adb8d4" stroke="#808080" stroke-width="1.5" />
+      <text x="299.0" y="597.5" text-anchor="middle" font-size="10.5" fill="#1a2238">11.7%</text>
+    </g>
+    <g>
+      <circle cx="373.0" cy="594.0" r="24.0" fill="#98a6c8" stroke="#808080" stroke-width="1.5" />
+      <text x="373.0" y="597.5" text-anchor="middle" font-size="10.5" fill="#1a2238">20.5%</text>
+    </g>
+    <g>
+      <circle cx="447.0" cy="594.0" r="24.0" fill="#8f9fc3" stroke="#808080" stroke-width="1.5" />
+      <text x="447.0" y="597.5" text-anchor="middle" font-size="10.5" fill="#1a2238">24.6%</text>
+    </g>
+    <g>
+      <circle cx="521.0" cy="594.0" r="24.0" fill="#98a6c8" stroke="#808080" stroke-width="1.5" />
+      <text x="521.0" y="597.5" text-anchor="middle" font-size="10.5" fill="#1a2238">20.5%</text>
+    </g>
+    <g>
+      <circle cx="595.0" cy="594.0" r="24.0" fill="#adb8d4" stroke="#808080" stroke-width="1.5" />
+      <text x="595.0" y="597.5" text-anchor="middle" font-size="10.5" fill="#1a2238">11.7%</text>
+    </g>
+    <g>
+      <circle cx="669.0" cy="594.0" r="24.0" fill="#c6cfe3" stroke="#808080" stroke-width="1.5" />
+      <text x="669.0" y="597.5" text-anchor="middle" font-size="10.5" fill="#1a2238">4.4%</text>
+    </g>
+    <g>
+      <circle cx="743.0" cy="594.0" r="24.0" fill="#dbe1f0" stroke="#808080" stroke-width="1.5" />
+      <text x="743.0" y="597.5" text-anchor="middle" font-size="10.5" fill="#1a2238">0.98%</text>
+    </g>
+    <g>
+      <circle cx="817.0" cy="594.0" r="24.0" fill="#e8edf7" stroke="#808080" stroke-width="1.5" />
+      <text x="817.0" y="597.5" text-anchor="middle" font-size="10.5" fill="#1a2238">0.098%</text>
+    </g>
+    <g>
+      <circle cx="40.0" cy="648.0" r="24.0" fill="#eaeef9" stroke="#808080" stroke-width="1.5" />
+      <text x="40.0" y="651.5" text-anchor="middle" font-size="10.5" fill="#1a2238">0.049%</text>
+    </g>
+    <g>
+      <circle cx="114.0" cy="648.0" r="24.0" fill="#e0e6f3" stroke="#808080" stroke-width="1.5" />
+      <text x="114.0" y="651.5" text-anchor="middle" font-size="10.5" fill="#1a2238">0.54%</text>
+    </g>
+    <g>
+      <circle cx="188.0" cy="648.0" r="24.0" fill="#cfd6e8" stroke="#808080" stroke-width="1.5" />
+      <text x="188.0" y="651.5" text-anchor="middle" font-size="10.5" fill="#1a2238">2.7%</text>
+    </g>
+    <g>
+      <circle cx="262.0" cy="648.0" r="24.0" fill="#b8c2db" stroke="#808080" stroke-width="1.5" />
+      <text x="262.0" y="651.5" text-anchor="middle" font-size="10.5" fill="#1a2238">8.1%</text>
+    </g>
+    <g>
+      <circle cx="336.0" cy="648.0" r="24.0" fill="#a1afce" stroke="#808080" stroke-width="1.5" />
+      <text x="336.0" y="651.5" text-anchor="middle" font-size="10.5" fill="#1a2238">16.1%</text>
+    </g>
+    <g>
+      <circle cx="410.0" cy="648.0" r="24.0" fill="#93a2c5" stroke="#808080" stroke-width="1.5" />
+      <text x="410.0" y="651.5" text-anchor="middle" font-size="10.5" fill="#1a2238">22.6%</text>
+    </g>
+    <g>
+      <circle cx="484.0" cy="648.0" r="24.0" fill="#93a2c5" stroke="#808080" stroke-width="1.5" />
+      <text x="484.0" y="651.5" text-anchor="middle" font-size="10.5" fill="#1a2238">22.6%</text>
+    </g>
+    <g>
+      <circle cx="558.0" cy="648.0" r="24.0" fill="#a1afce" stroke="#808080" stroke-width="1.5" />
+      <text x="558.0" y="651.5" text-anchor="middle" font-size="10.5" fill="#1a2238">16.1%</text>
+    </g>
+    <g>
+      <circle cx="632.0" cy="648.0" r="24.0" fill="#b8c2db" stroke="#808080" stroke-width="1.5" />
+      <text x="632.0" y="651.5" text-anchor="middle" font-size="10.5" fill="#1a2238">8.1%</text>
+    </g>
+    <g>
+      <circle cx="706.0" cy="648.0" r="24.0" fill="#cfd6e8" stroke="#808080" stroke-width="1.5" />
+      <text x="706.0" y="651.5" text-anchor="middle" font-size="10.5" fill="#1a2238">2.7%</text>
+    </g>
+    <g>
+      <circle cx="780.0" cy="648.0" r="24.0" fill="#e0e6f3" stroke="#808080" stroke-width="1.5" />
+      <text x="780.0" y="651.5" text-anchor="middle" font-size="10.5" fill="#1a2238">0.54%</text>
+    </g>
+    <g>
+      <circle cx="854.0" cy="648.0" r="24.0" fill="#eaeef9" stroke="#808080" stroke-width="1.5" />
+      <text x="854.0" y="651.5" text-anchor="middle" font-size="10.5" fill="#1a2238">0.049%</text>
+    </g>
+  </g>
+</svg>
