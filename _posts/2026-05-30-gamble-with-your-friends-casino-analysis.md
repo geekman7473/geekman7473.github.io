@@ -18,7 +18,7 @@ I decompiled *Gamble With Your Friends* to work out the odds of every minigame i
 | Slots | N/A | ~115.70% | Player |
 | Ducks | Yarl | ~109.50% | Player |
 | Money Wheel | Red | 108.10% | Player |
-| Blackjack | Strategy Table | ~102.70% | Player |
+| Blackjack | Strategy Table | ~102.00% | Player |
 | Coin Flip | Heads / Tails | 100.00% | Fair |
 | Penguins | Any step | 100.00% | Fair |
 | Prize Wheel | Any segment | 100.00% | Fair |
@@ -35,6 +35,30 @@ I decompiled *Gamble With Your Friends* to work out the odds of every minigame i
 | Plinko | Single Ball | 78.50% | House |
 | Money Wheel | Green | 75.70% | House |
 | Ducks | Faruk | ~74.30% | House |
+
+
+# Contents
+
+- [Why I did this](#why-i-did-this)
+  - [Caveats](#caveats)
+  - [AI disclaimer](#ai-disclaimer)
+- [Ducks](#ducks)
+- [Slots](#slots)
+- [Craps](#craps)
+- [Prize wheels](#prize-wheels)
+  - [Wheel of Fortune](#wheel-of-fortune)
+  - [Money Wheel](#money-wheel)
+- [Roulette](#roulette)
+  - [The Martingales](#the-martingales)
+  - [Crash](#crash)
+- [Physics-driven games](#physics-driven-games)
+  - [Coin Flip](#coin-flip)
+  - [Plinko](#plinko)
+- [Card games](#card-games)
+  - [Blackjack](#blackjack)
+  - [Video Poker](#video-poker)
+  - [Baccarat](#baccarat)
+- [Conclusion](#conclusion)
 
 
 # Why I did this
@@ -316,11 +340,6 @@ If you are playing this game, you should ONLY play Red or Orange bets, never Gre
 Roulette is a textbook Casino style Roulette wheel, with a single green square. This game is very similar to the other two wheel games, and as such the ball landing on a square is simply animated towards a predetermined target. For this game we don't even need to do our own math, [Wikipedia has done it for us.](https://en.wikipedia.org/wiki/Roulette#House_edge) Regardless of your bet or betting patterns your RTP will be 97.30%, just like at a real casion.
 
 ## The Martingales
-
-Hi-Lo, Penguins, Minesweeper, Dragon Tower, Keno, and Crash look like six different games, but they are really the same game mathamatically. Each one secretly picks a survival probability $$P$$, lets you climb for a rising multiplier, and pays out exactly $$1/P$$ if you make it to where you stop. In short, the more risk you take on, the higher the payout, but weighted such that the EV is always 1.
-
-$$E[\text{return}] = P \times \frac{1}{P} = 1 \implies \text{RTP} = 100\%$$
-
 <style>
 .game-gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:.5rem}
 .game-gallery img{width:100%;height:auto;display:block;border:2px solid #808080}
@@ -349,13 +368,49 @@ $$E[\text{return}] = P \times \frac{1}{P} = 1 \implies \text{RTP} = 100\%$$
   </div>
 </figure>
 
+Hi-Lo, Penguins, Minesweeper, Dragon Tower, Keno, and Crash look like six different games, but they are really the same game mathamatically. Each one secretly picks a survival probability $$P$$, lets you climb for a rising multiplier, and pays out exactly $$1/P$$ if you make it to where you stop. In short, the more risk you take on, the higher the payout, but weighted such that the EV is always 1.
+
+$$E[\text{return}] = P \times \frac{1}{P} = 1 \implies \text{RTP} = 100\%$$
+
 I think to make this more intuitive, it's helpful to start with Hi-Lo. If you set the slider in Hi-Lo to the 50% position, your odds of winning are exactly 50% regardless of if you pick "Hi" or "Low". Because your odds are 50% or $$1/2$$ the game pays out the reciprocal of your odds, which is 2x. Likewise, if you set the slider to the 90% position and bet "Hi" your odds of winning are $$1/10$$, so the game will payout 10x if you win.
+
+```csharp
+// HiLoGame.cs -- roll is uniform on [0, 1); hiLoSlider.currentValue is the threshold t
+float roll = (float)base.GetSeededRandom(0).NextDouble();
+bool win = this._isOver
+    ? roll >= this.hiLoSlider.currentValue    // "Hi":  win when the roll clears t
+    : roll <= this.hiLoSlider.currentValue;   // "Low": win when the roll is under t
+
+// P(win) is exactly the slider position, and the multiplier is E / P(win)
+double num = this._isOver
+    ? (1.0 - (double)this.hiLoSlider.currentValue)   // P(win) for "Hi"
+    : ((double)this.hiLoSlider.currentValue);        // P(win) for "Low"
+double multiplier = 1 / num;
+```
 
 The other five games follow the same pattern. For example in Minesweeper your payout is calculated based on the number of mines you added to the board, and the number of tiles you have revealed so far. The math looks like this:
 
 $$P(\text{survive } r) = \prod_{i=0}^{r-1} \frac{N - m - i}{N - i}$$
 
 Where $$N$$ is the total tiles, $$m$$ is the number of mines, and $$r$$ is the number of tiles safely revealed.
+
+```csharp
+// Minesweeper.cs
+private double CalculateCurrentMultiplier()
+{
+    if (this._revealedTiles.Count == 0) return 1.0;
+    int count = this.tiles.Count;                 // N: total tiles (25)
+    double num = 1.0;
+    int num2 = count - this._currentMineCount;    // S: safe tiles = N - m
+    for (int i = 0; i < this._revealedTiles.Count; i++)
+    {
+        // (S - i)/(N - i) is P(the i-th reveal is safe), sampling without replacement
+        double num3 = (double)(num2 - i) / (double)(count - i);
+        num *= 1.0 / num3;                         // accumulate 1 / P(survive so far)
+    }
+    return num;
+}
+```
 
 The payout that the game gives you for winning is therefore $$1/P(\text{survive})$$ just like Hi-Lo. It turns out that games of this flavor are called "martingales". I won't pretend to understand all of the math here, but the [optional stopping theorem](https://en.wikipedia.org/wiki/Optional_stopping_theorem) proves that for games like this there is **no cash-out strategy that improves your expected value.** I won't bore you with going through these games one by one, but they all have this flavor to them, and are tuned to be exactly fair in the code with one notable exception.
 
@@ -413,12 +468,10 @@ Let's start with the very first game you are presented with when you start the g
 
 In the Unity scene that drives the coin flip, the coin starts face down. The game then applies a random upward force, and a torque along a random axis to the coin. The coin is simulated with the default Unity physics engine, but the physics constants have been tuned for a more dramatic looking coin flip. For example, normally in Unity gravity if 15 m/s², but the coin only experiences 2 m/s² of gravity.
 
-Now every middle schooler can tell you that a coin flip is roughly 50-50, but even in real life [it is possible for coins to not be fair](https://en.wikipedia.org/wiki/Fair_coin). To this end, we will need to do the same trick we did with the duck game and simulate a couple thousand runs.
+Now every middle schooler can tell you that a coin flip is roughly 50-50, but even in real life [it is possible for coins to not be fair](https://en.wikipedia.org/wiki/Fair_coin). To this end, we will need to do the same trick we did with the duck game and simulate a couple thousand runs by recreating the game code as faithfully as we can in our own Unity scene.
 
-| Run | Flips | Win | Lose | P(win) | RTP |
-|-----|------:|----:|-----:|-------:|----:|
-| seed 12345 | 1,000 | 498 | 502 | 0.4980 | 99.6% |
-| seed 24680 | 10,000 | 4,995 | 5,005 | **0.4995** | **99.9%** |
+| Flips | Win | Lose | P(win) | RTP |
+| 10,000 | 4,995 | 5,005 | **0.4995** | **99.9%** |
 
 This is a pretty good result, and shows that this coin is damn near fair. One fun caveat of these results is that "tails" and "heads" are not the only possibilities. It turns out that the coin is being flipped inside an invisible "cup" to prevent it from flying off screen. In some rare circumstances, it is possible for the coin to come to rest leaning on the walls of this cup. Likewise, under extreme circumstances it is possible for the coin to land precisely on it's edge. These quirks don't influence the outcome of the experiments much, they are just fun.
 
@@ -594,7 +647,7 @@ Even though the center 0.2x bins are way more likely than the math predicted, wh
 
 The card-based games (Blackjack, Video Poker, Baccarat) all deal cards from an RNG seeded shoe containing a single deck. The shoe is not shuffled in-between rounds, until the deck is empty, so these games are all card countable. With that said, we will be treating these games as if you are not counting for simplicity.
 
-### Blackjack
+## Blackjack
 
 <figure>
   <img src="{{ '/assets/img/posts/2026-05-30-gamble-with-your-friends-casino-analysis/blackjack.jpg' | relative_url }}"
@@ -604,23 +657,78 @@ The card-based games (Blackjack, Video Poker, Baccarat) all deal cards from an R
   <figcaption class="meta">Blackjack, with the house rules bent toward the player: blackjack pays 2:1 and always beats the dealer. (May 2026)</figcaption>
 </figure>
 
-Blackjack in this casino bends the rules in the player's favor: natural blackjack pays 2:1 instead of the usual 3:2, a player blackjack always wins (even against a dealer blackjack), and the dealer stands on all 17s. Due to these rule changes, the normal house edge of ~2% is in question. To determine both the house edge, and the optimal play charts, we used 
+Blackjack in this casino bends the rules in the player's favor: natural blackjack pays 2:1 instead of the usual 3:2, a player blackjack always wins (even against a dealer blackjack), and the dealer stands on all 17s. One restriction cuts the other way: you cannot split. The decompiled code actually contains a complete split routine, but it is dead, there is no split button anywhere in the UI, so your only actions are hit, stand, and double. Due to these rule changes, the normal house edge of ~2% is in question. To determine both the house edge and the optimal play charts, we used [Eric Farmer's blackjack analyzer](https://github.com/possibly-wrong/blackjack), an engine that computes the optimal blackjack play for any given rule set.
 
-<!-- TODO: embed the basic-strategy chart computed by tools/farmer_blackjack. -->
+| Result | Return | Net |
+|--------|-------:|----:|
+| Player blackjack | 3x | +2 |
+| Player win | 2x | +1 |
+| Push | 1x (refund) | 0 |
+| Player lose | 0x | -1 |
 
-### Video Poker
+The headline change is the 2:1 blackjack payoff, worth about +2.3% over the same game paying 3:2, which by itself is more than enough to flip the usual house edge into a player edge. A player natural also beating (rather than pushing) a dealer natural nudges it up a touch more.
+
+### Computing the exact RTP
+
+Farmer's engine natively expresses almost every rule this game uses: single deck, dealer stands on soft 17, double on any first two cards, no surrender, no splitting, and a configurable blackjack payoff. We point it at exactly those rules with the payoff set to 2:1 and read the overall expected value straight out of a single run, with no custom settlement math bolted on. Flipping the payoff back to the usual 3:2 is a handy sanity check: the engine lands at -0.333%, right where standard single-deck, no-split basic strategy should be.
+
+| Rules | Blackjack payoff | Overall EV | RTP |
+|-------|:----------------:|-----------:|----:|
+| Single deck, S17, double any two, no split, no surrender | 3:2 | -0.333% | 99.667% |
+| Single deck, S17, double any two, no split, no surrender | 2:1 | +1.991% | 101.991% |
+
+$$\boxed{\textbf{RTP} \approx 102.0\%, \quad \textbf{Player edge} \approx +2.0\%}$$
+
+The 2:1 blackjack payoff is doing all of the work here: on its own it swings the single-deck baseline from -0.333% up to +1.991%, turning a small house edge into a real player edge.
+
+Two of the game's quirks fall outside what the engine can express: the dealer never peeks for blackjack (so a doubled wager is exposed to a dealer natural), and a player natural beats rather than pushes a dealer natural. These pull in opposite directions and are each only a few tenths of a percent, with the player-favorable one slightly larger, so the true edge sits a hair above the engine's +2.0%.
+
+#### Optimal strategy
+
+The analyzer's basic strategy chart is below. It is close to standard single-deck basic strategy, because the 2:1 payoff barely changes any hit, stand, or double decision. Since you cannot split, there are no pair rows: just play any pair as its hard or soft total.
+
+<div class="bj-strategy-chart-embed" data-src="{{ '/assets/img/posts/2026-05-30-gamble-with-your-friends-casino-analysis/bj-strategy-chart.html' | relative_url }}"></div>
+<script>
+(function () {
+  var el = document.querySelector('.bj-strategy-chart-embed');
+  if (!el) { return; }
+  fetch(el.getAttribute('data-src'))
+    .then(function (r) { return r.text(); })
+    .then(function (html) { el.innerHTML = html; })
+    .catch(function () {});
+})();
+</script>
+
+To use the chart, find the row that matches your hand and read across to the column for the dealer's up card. The cell where they meet is the action you should take. Hard totals (no ace, or an ace that can only count as 1) are the "H" rows, and soft totals that contain a flexible ace are the "A," rows. Check the soft rows first: if you hold an ace counted as 11, use the matching soft row; otherwise fall back to the hard total. Because you cannot split, a pair is just read as its total, so a pair of 8s is a hard 16 and a pair of aces is a soft 12.
+
+## Video Poker
 
 <figure>
   <img src="{{ '/assets/img/posts/2026-05-30-gamble-with-your-friends-casino-analysis/video-poker.jpg' | relative_url }}"
        alt="The Video Poker machine in Gamble With Your Friends showing a five-card hand and a Play button"
        width="1600" height="900"
        loading="lazy" />
-  <figcaption class="meta">Video Poker: make the best hand you can. An Ace-low deck and a generous paytable push optimal play to 128.1% RTP. (May 2026)</figcaption>
 </figure>
 
-Video Poker uses an Ace-low deck (no royals) and the paytable is wildly generous: any pair returns your stake, and a straight flush pays 50x. Solved combinatorially with `tools/poker_solver/solve_poker.cpp`, the optimal-strategy RTP is 128.10%. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+Like Blackjack, Poker is also very different from most Casino incarnations of the game. In this game the Ace is always low, and pairs pay. Normal video poker machines will require face card pairs to pay out.
 
-<!-- TODO: paste the discard-decision table from tools/poker_solver/poker_strategy_result.txt. -->
+I'm going to be honest: for this game I surrended entirely to our AI overlords. All of the other analsys was driven by me, with AI doing the boring stuff. In this case I could not find a ready-made tool to simulate the odds of this game, since it uses a custom rule set. "No worries", said the LLM dejure, "I can just spit that out for you". It generated some of the densest C++ code I have ever seen. I tried to understand it, and failed. To that end, take these results with a grain of salt: the poker solver that the AI wrote says that with perfect play this game has an EV of **1.28**.
+
+The solver enumerated all 2,598,960 possible five-card deals. Scan your dealt hand from the top of the table down and take the first action that matches what you are holding. The "avg return" column is the average payout (in multiples of your bet) you can expect from playing that situation optimally.
+
+| Dealt hand | Frequency | Best action | Avg return |
+|------------|----------:|-------------|-----------:|
+| Straight flush | 0.0014% | Keep all five | 50.00x |
+| Four of a kind | 0.0240% | Hold the four, draw 1 | 25.00x |
+| Full house | 0.1441% | Keep all five | 9.00x |
+| Flush | 0.1967% | Keep all five | 6.00x |
+| Three of a kind | 2.1128% | Hold the three, draw 2 | 4.30x |
+| Straight | 0.3532% | Keep all five | 4.00x |
+| Two pair | 4.7539% | Hold both pairs, draw 1 | 2.60x |
+| One pair | 42.26% | Hold the pair, draw 3 | 1.54x |
+| Four to a flush (no pair) | 2.95% | Hold the four suited, draw 1 | 1.47x |
+| Four to a straight (no pair) | 9.20% | Hold any 2 suited, else a high card, draw 3 | 0.75x |
+| Nothing | 38.01% | Hold one high card (or 2-3 suited), draw the rest | 0.68x |
 
 ### Baccarat
 
@@ -629,23 +737,21 @@ Video Poker uses an Ace-low deck (no royals) and the paytable is wildly generous
        alt="The Baccarat table in Gamble With Your Friends with Banker, Tie, and Player bet buttons"
        width="1600" height="900"
        loading="lazy" />
-  <figcaption class="meta">Baccarat: bet Banker, Player, or Tie. The only card game in the building with a real house edge. (May 2026)</figcaption>
 </figure>
 
-Baccarat is the one card game in the building with a real house edge. The Player/Banker bets land at about 90.1% RTP and the Tie bet is much worse at 79.2%. The entire edge is funded by ties being pushed to losses on the main bets. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+Baccarat in GWYF is a stripped-down version of the game: two cards are dealt to each side, the totals are compared mod 10, and the higher one wins. Because a single deck only has 1,624,350 possible two-card-each deals, we can just enumerate all of them and tally the results.
 
-### The card-counting disclaimer
+$$\binom{52}{2}\binom{50}{2} = 1{,}624{,}350$$
 
-Here is the wrinkle. **Every card game above is card-countable**, because the deck is not shuffled between hands. The shoe is dealt down until it runs out, at which point the table resets. That means a player who is tracking the shoe can swing the edge on every one of these games well into player-favorable territory. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 
-```csharp
-// TODO: paste the deck/shoe snippet from decomp/Assembly-CSharp/Blackjack.cs
-// (or wherever the shoe lives) showing that no reshuffle happens between hands
-// and that the shoe is only re-created when it's exhausted.
-```
+| Outcome | Probability | Bet payout | EV |
+|---------|------------:|:----------:|----:|
+| Player wins | 45.05% | 2x | 0.901 |
+| Banker wins | 45.05% | 2x | 0.901 |
+| Tie | 9.90% | 8x | 0.792 |
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+The Player and Banker win counts are identical, so the house edge on those bets is from ties pushing to a loss. If ties were refunded, this game would be perfectly fair.
 
-## On using AI for this
+# Conclusion
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+Thanks for reading this far! Not much else to say other than go buy Gamble With Your Friends if you haven't tried it yet, it's great fun :)

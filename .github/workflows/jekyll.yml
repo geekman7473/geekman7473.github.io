@@ -43,6 +43,9 @@ jobs:
 
   deploy:
     needs: build
+    # Only ever deploy to production from the main branch. A manual
+    # workflow_dispatch run on any other branch will build but never deploy.
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     environment:
       name: github-pages

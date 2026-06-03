@@ -177,6 +177,59 @@ tbody tr:hover td { background: #fff3b0; }
   white-space: nowrap;
 }
 
+/* --- Blackjack basic-strategy chart -------------------------------- */
+.bj-chart,
+.table-scroll table.bj-chart {
+  font-size: 12px;
+  text-align: center;
+  width: auto;
+  min-width: 0;
+  margin: 0 auto;
+}
+.bj-chart th { text-align: center; }
+.bj-chart td {
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+  text-align: center;
+  width: 26px;
+  padding: 3px 0;
+  color: #000;
+}
+.bj-chart tbody th {
+  background: #c0c0c0;
+  border: 2px outset #c0c0c0;
+  white-space: nowrap;
+  text-align: right;
+  width: 1%;
+  padding: 3px 6px;
+}
+/* action colors (kept high-specificity so zebra/hover never override) */
+.bj-chart tbody tr td.bj-h { background: #f3b0b0; }   /* hit    -> red    */
+.bj-chart tbody tr td.bj-s { background: #b7e0b0; }   /* stand  -> green  */
+.bj-chart tbody tr td.bj-d { background: #acc8f0; }   /* double -> blue   */
+.bj-chart tbody tr td.bj-p { background: #f4dd8e; }   /* split  -> yellow */
+.bj-chart tbody tr:hover td { filter: brightness(0.92); }
+
+.bj-legend {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 13px;
+}
+.bj-legend li { display: inline-block; margin: 0 12px 0 0; }
+.bj-legend .sw {
+  display: inline-block;
+  width: 12px; height: 12px;
+  margin-right: 4px;
+  border: 1px solid #808080;
+  vertical-align: -1px;
+}
+.bj-legend .bj-h { background: #f3b0b0; }
+.bj-legend .bj-s { background: #b7e0b0; }
+.bj-legend .bj-d { background: #acc8f0; }
+.bj-legend .bj-p { background: #f4dd8e; }
+
 /* --- Footer --------------------------------------------------------- */
 .site-footer {
   margin-top: 18px;
