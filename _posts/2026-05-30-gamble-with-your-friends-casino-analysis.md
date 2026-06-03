@@ -644,7 +644,7 @@ Blackjack in this casino bends the rules in the player's favor. Blackjack pays 2
 | Push | 1x (refund) | 0 |
 | Player lose | 0x | -1 |
 
-### Computing the exact RTP
+#### Computing the exact RTP
 
 To determine both the house edge and the optimal play charts, we used [Eric Farmer's blackjack analyzer](https://github.com/possibly-wrong/blackjack), an engine that computes the optimal blackjack play for any given rule set.
 
@@ -659,7 +659,7 @@ So EV is **1.02** which means we are just barely positive under perfect play.
 
 One quirk of the game falls outside what the engine can express: the dealer never peeks for blackjack. This rule shouldn't have a big influence on EV, so we are choosing to ignore it here.
 
-### Optimal strategy
+#### Optimal strategy
 
 The analyzer also outputs the optimal strategy chart given our ruleset. This chart is very similar to the canonical chart, so no big surprises here.
 
