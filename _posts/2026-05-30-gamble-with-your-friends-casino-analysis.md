@@ -13,10 +13,10 @@ I decompiled *Gamble With Your Friends* to work out the odds of every minigame i
 |------|-----|----:|:------:|
 | Craps | N/A | 137.75% | Player |
 | Money Wheel | Orange | 135.14% | Player |
-| Ducks | Jabin | ~134.80% | Player |
+| Ducks | Faruk | ~134.80% | Player |
 | Video Poker | Strategy Table | 128.00% | Player |
 | Slots | N/A | ~115.70% | Player |
-| Ducks | Yarl | ~109.60% | Player |
+| Ducks | Erlaf | ~109.60% | Player |
 | Money Wheel | Red | 108.11% | Player |
 | Blackjack | Strategy Table | ~102.00% | Player |
 | Coin Flip | Heads / Tails | 100.00% | Fair |
@@ -29,12 +29,12 @@ I decompiled *Gamble With Your Friends* to work out the odds of every minigame i
 | Roulette | Any bet | 97.30% | House |
 | Baccarat | Player / Banker | 90.10% | House |
 | Crash | Any cashout | 85.00% | House |
-| Ducks | Erlaf | ~81.60% | House |
+| Ducks | Yarl | ~81.60% | House |
 | Money Wheel | Blue | 81.08% | House |
 | Baccarat | Tie | 79.20% | House |
 | Plinko | Single Ball | 78.00% | House |
 | Money Wheel | Green | 75.68% | House |
-| Ducks | Faruk | ~74.40% | House |
+| Ducks | Jabin | ~74.40% | House |
 
 
 # Why I did this
@@ -106,22 +106,22 @@ I have to come clean here, I did not figure out this bug on my own. I was assist
 
 | Duck | Lane | Win % | RTP |
 |------|:------------:|------:|------------------------------:|
-| Jabin | 1 | 33.7% | 135% |
-| Yarl | 2  | 27.4% | 110% |
-| Erlaf | 3  | 20.4% | 81% |
-| Faruk | 4 | 18.6% | 74% |
+| Faruk | 1 | 33.7% | 135% |
+| Erlaf | 2  | 27.4% | 110% |
+| Yarl | 3  | 20.4% | 81% |
+| Jabin | 4 | 18.6% | 74% |
 
-Jabin (lane 1) wins nearly **twice as often** as Faruk (lane 4). The chi-square against a uniform 25% split is 231, where anything above 7.815 already rejects "all ducks equally likely" at the 95% confidence level. This is largely because the track they race on is relatively short. If they were on a longer track, ties would be less likely, and this effect becomes less relevant:
+Faruk (lane 1) wins nearly **twice as often** as Jabin (lane 4). The chi-square against a uniform 25% split is 231, where anything above 7.815 already rejects "all ducks equally likely" at the 95% confidence level. This is largely because the track they race on is relatively short. If they were on a longer track, ties would be less likely, and this effect becomes less relevant:
 
 
-| Track (steps) | Jabin | Yarl | Erlaf | Faruk | Chi-square |
+| Track (steps) | Faruk | Erlaf | Yarl | Jabin | Chi-square |
 |--------------:|-------:|-------:|-------:|-------:|-----------:|
 | ~21 (in game) | 33.7% | 27.4% | 20.4% | 18.6% | 231 |
 | 80 | 30.2% | 26.2% | 23.0% | 20.6% | 84 |
 | 160 | 28.4% | 26.2% | 24.1% | 21.3% | 45 |
 
 
-With this bug, the RTP of betting on Jabin is an eye watering **135%**. I suspect that the developers did not realize the implications of their tie breaking behavior. I hardly blame them, on first glance I also was ready to just write this off as "perfectly fair." Of course the correct way to fix this problem would be to use a fair tie-breaker, instead of biasing to certain ducks.
+With this bug, the RTP of betting on Faruk is an eye watering **135%**. I suspect that the developers did not realize the implications of their tie breaking behavior. I hardly blame them, on first glance I also was ready to just write this off as "perfectly fair." Of course the correct way to fix this problem would be to use a fair tie-breaker, instead of biasing to certain ducks.
 
 One caveat of this result is that while I did simulate the races inside of a toy Unity game, I did not run this same experiment in the original game itself. It is possible that would change the results. Future work here would require writing a GWYF mod to run the experiments in the game directly.
 
@@ -731,3 +731,8 @@ The Player and Banker win counts are identical, so the house edge on those bets 
 # Conclusion
 
 Thanks for reading this far! Not much else to say other than go buy Gamble With Your Friends if you haven't tried it yet. It's great fun :)
+
+# Corrections
+
+- **2026-06-03**: The duck names in the Ducks section were originally listed in reverse order, influencing the recommendation of which duck to bet on.
+
