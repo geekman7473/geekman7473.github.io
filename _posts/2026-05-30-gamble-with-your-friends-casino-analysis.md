@@ -76,9 +76,11 @@ Plinko by shoving baseball bats into the machine to form "ramps" for the balls t
 
 I did all of this analysis based on game build 1.0.11. If the game has updated since then it is possible that the developers have retuned the games to change their RTP entirely. In my analysis I found that there is a single tunable "profitability" slider that the devs can easily change at a later date in response to player feedback. Take these results with a grain of salt.
 
+Just like we are not covering game exploits, we are also not covering the use of items. Their are a number of items that directly effect EV, by negating losses, or increasing profit. These items are very interesting, and a key part of a successfull strategy to actually beat the game. However, discussing them is out of scope for this already very-very-long blog post.
+
 ## AI disclaimer
 
-I used AI assistance to aid in reverse engineering the game and to write various helper script. The analysis itself, and the prose you are reading are 100% human made, however many of the diagrams, charts, and tables in this post were constructed with AI assistance.
+I used AI assistance to aid in reverse engineering the game and to write various helper scripts. The analysis itself, and the prose you are reading are human made, however many of the diagrams, charts, and tables in this post were constructed with AI assistance.
 
 # Ducks
 
@@ -624,7 +626,7 @@ The naive model says **68.3% RTP** which is a good starting point, but is ultima
 
 </div>
 
-The twelve pockets account for 98.92% of drops; the remaining **1.08%** are balls that got stuck on one of the pegs. The game has a 20s timeout, after which the ball is deleted and the player loses. Doing the same math we did above, we get an EV of **0.78**, which is 10 points higher than our theoretical guess. Looking at a histogram of where the balls land, this becomes a bit more obvious:
+The twelve pockets account for 98.92% of drops. Thhe remaining **1.08%** are balls that got stuck on one of the pegs. If the ball gets stuck, game has a 20s timeout, after which the ball is deleted and the player loses their ante. Doing the same math we did above, we get an EV of **0.78**, which is 10 points higher than our theoretical guess. Looking at a histogram of where the balls land, this becomes a bit more obvious:
 
 <figure>
   <img src="{{ '/assets/img/posts/2026-05-30-gamble-with-your-friends-casino-analysis/plinko/plinko-histogram.png' | relative_url }}"
@@ -633,7 +635,7 @@ The twelve pockets account for 98.92% of drops; the remaining **1.08%** are ball
        loading="lazy" />
 </figure>
 
-Even though the center 0.2x bins are way more likely than the math predicted, which should drag our EV down, the 24x buckets on the edge are 10 times more likely than we predicted. These edge buckets account for the almost the entire EV improvement above the theoretical model.
+Even though the center 0.2x bins are way more likely than the math predicted, which should drag our EV down, the 24x buckets on the edges are 10 times more likely than we predicted. These edge buckets account for the almost the entire EV improvement above the theoretical model.
 
 <figure>
   <video class="plinko-balls" muted loop autoplay playsinline preload="metadata"
@@ -645,7 +647,7 @@ Even though the center 0.2x bins are way more likely than the math predicted, wh
 
 # Card games
 
-The card-based games (Blackjack, Video Poker, Baccarat) all deal cards from an RNG seeded shoe containing a single deck. The shoe is not shuffled in-between rounds, until the deck is empty, so these games are all card countable. With that said, we will be treating these games as if you are not counting for simplicity.
+The card-based games (Blackjack, Video Poker, Baccarat) all deal cards from a single shuffled deck. The deck is not shuffled in-between rounds until the deck is empty. This means card counting is trivial. I also think that card counting is way too high effort for most players. With that said, we will be analyzing these games without counting for simplicity. 
 
 ## Blackjack
 
@@ -654,10 +656,9 @@ The card-based games (Blackjack, Video Poker, Baccarat) all deal cards from an R
        alt="A blackjack hand in Gamble With Your Friends with Double, Stand, Hit, and Play buttons"
        width="1600" height="900"
        loading="lazy" />
-  <figcaption class="meta">Blackjack, with the house rules bent toward the player: blackjack pays 2:1 and always beats the dealer. (May 2026)</figcaption>
 </figure>
 
-Blackjack in this casino bends the rules in the player's favor: natural blackjack pays 2:1 instead of the usual 3:2, a player blackjack always wins (even against a dealer blackjack), and the dealer stands on all 17s. One restriction cuts the other way: you cannot split. The decompiled code actually contains a complete split routine, but it is dead, there is no split button anywhere in the UI, so your only actions are hit, stand, and double. Due to these rule changes, the normal house edge of ~2% is in question. To determine both the house edge and the optimal play charts, we used [Eric Farmer's blackjack analyzer](https://github.com/possibly-wrong/blackjack), an engine that computes the optimal blackjack play for any given rule set.
+Blackjack in this casino bends the rules in the player's favor. Blackjack pays 2:1 instead of the usual 3:2, and ties go to the player. Also unlike many casinos you cannot split. The decompiled code actually contains a complete split routine, but their is no button on the Blackjack table to split. Presumably these intended on adding this, but removed it late during development for some reason. Due to these rule changes, the normal house edge of ~2% is in question. 
 
 | Result | Return | Net |
 |--------|-------:|----:|
@@ -666,26 +667,24 @@ Blackjack in this casino bends the rules in the player's favor: natural blackjac
 | Push | 1x (refund) | 0 |
 | Player lose | 0x | -1 |
 
-The headline change is the 2:1 blackjack payoff, worth about +2.3% over the same game paying 3:2, which by itself is more than enough to flip the usual house edge into a player edge. A player natural also beating (rather than pushing) a dealer natural nudges it up a touch more.
-
 ### Computing the exact RTP
 
-Farmer's engine natively expresses almost every rule this game uses: single deck, dealer stands on soft 17, double on any first two cards, no surrender, no splitting, and a configurable blackjack payoff. We point it at exactly those rules with the payoff set to 2:1 and read the overall expected value straight out of a single run, with no custom settlement math bolted on. Flipping the payoff back to the usual 3:2 is a handy sanity check: the engine lands at -0.333%, right where standard single-deck, no-split basic strategy should be.
+To determine both the house edge and the optimal play charts, we used [Eric Farmer's blackjack analyzer](https://github.com/possibly-wrong/blackjack), an engine that computes the optimal blackjack play for any given rule set.
+
+We ran his code two ways: once with the GWYF ruleset and once with the same rules, but with the normal 3:2 payout scheme that casinos normally use as a smoketest.
 
 | Rules | Blackjack payoff | Overall EV | RTP |
 |-------|:----------------:|-----------:|----:|
 | Single deck, S17, double any two, no split, no surrender | 3:2 | -0.333% | 99.667% |
 | Single deck, S17, double any two, no split, no surrender | 2:1 | +1.991% | 101.991% |
 
-$$\boxed{\textbf{RTP} \approx 102.0\%, \quad \textbf{Player edge} \approx +2.0\%}$$
+So EV is **1.02** which means we are just barely positive under perfect play.
 
-The 2:1 blackjack payoff is doing all of the work here: on its own it swings the single-deck baseline from -0.333% up to +1.991%, turning a small house edge into a real player edge.
+Two of the game's quirks fall outside what the engine can express: the dealer never peeks for blackjack, and a player natural beats rather than pushes a dealer natural. These rules shouldn't have a big influence on EV, so we are choosing to ignore them here.
 
-Two of the game's quirks fall outside what the engine can express: the dealer never peeks for blackjack (so a doubled wager is exposed to a dealer natural), and a player natural beats rather than pushes a dealer natural. These pull in opposite directions and are each only a few tenths of a percent, with the player-favorable one slightly larger, so the true edge sits a hair above the engine's +2.0%.
+### Optimal strategy
 
-#### Optimal strategy
-
-The analyzer's basic strategy chart is below. It is close to standard single-deck basic strategy, because the 2:1 payoff barely changes any hit, stand, or double decision. Since you cannot split, there are no pair rows: just play any pair as its hard or soft total.
+The analyzer also outputs the optimal strategy chart given our ruleset. This chart is very similar to the canonical chart, so no big surprises here.
 
 <div class="bj-strategy-chart-embed" data-src="{{ '/assets/img/posts/2026-05-30-gamble-with-your-friends-casino-analysis/bj-strategy-chart.html' | relative_url }}"></div>
 <script>
@@ -699,7 +698,7 @@ The analyzer's basic strategy chart is below. It is close to standard single-dec
 })();
 </script>
 
-To use the chart, find the row that matches your hand and read across to the column for the dealer's up card. The cell where they meet is the action you should take. Hard totals (no ace, or an ace that can only count as 1) are the "H" rows, and soft totals that contain a flexible ace are the "A," rows. Check the soft rows first: if you hold an ace counted as 11, use the matching soft row; otherwise fall back to the hard total. Because you cannot split, a pair is just read as its total, so a pair of 8s is a hard 16 and a pair of aces is a soft 12.
+To use the chart, find the row that matches your hand and read across to the column for the dealer's card. The cell where they meet is the action you should take. Hard totals (no ace, or an ace that can only count as 1) are the "H" rows, and soft totals that contain a flexible ace are the "A," rows. Check the soft rows first. If you hold an ace counted as 11, use the matching soft row; otherwise fall back to the hard total.
 
 ## Video Poker
 
