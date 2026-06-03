@@ -1,5 +1,5 @@
 ---
-title: "Reverse engineering every game in Gamble With Your Friends"
+title: "Reverse engineering every casino game in Gamble With Your Friends"
 date: 2026-05-30
 summary: ""
 math: true
