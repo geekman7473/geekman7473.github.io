@@ -67,7 +67,7 @@ I decompiled *Gamble With Your Friends* to work out the odds of every minigame i
 
 [*Gamble with your Friends*](https://store.steampowered.com/app/3892270/Gamble_With_Your_Friends/) is the latest entry in a sub-genre of indie titles that has become known as [Friendslop](https://en.wikipedia.org/wiki/Friendslop). While I don't agree with how pejorative this name is, I won't deny that it is a product of our current moment. *Gamble with your Friends* (GWYF) pits you, and up to five of your degen friends, against violent loan sharks to whom you owe an immense debt.
 
-We had a lot of fun playing this game, we it made us wonder: are these games fair? While playing we got the distinct feeling that some of the games seemed to favor the player such as the slots and the ducks, while other games seemed unwinnable, like Crash. I was curious if the developers had juiced the odds one way or another. Fortunately, GWYF is a Unity game, and it does not ship itself AOT compiled. In simple terms, that means we can use reverse engineering tools like [dnSpy](https://github.com/dnspy/dnspy) to recover the game logic.
+We had a lot of fun playing this game, and it made us wonder: are these games fair? While playing we got the distinct feeling that some of the games seemed to favor the player, such as the slots and the ducks, while other games seemed unwinnable, like Crash. I was curious if the developers had juiced the odds one way or another. Fortunately, GWYF is a Unity game, and it does not ship itself AOT compiled. In simple terms, that means we can use reverse engineering tools like [dnSpy](https://github.com/dnspy/dnspy) to recover the game logic.
 
 What this document is not intending to do is show you exploits. This post is only about statistics and odds. For example there is a [known exploit](https://steamcommunity.com/sharedfiles/filedetails/?id=3722573782) for Craps by crouching in a specific location before throwing the dice. Likewise, it is possible to [exploit](https://www.reddit.com/r/gamblewithyourfriends/comments/1t7hnwa/so_we_screwed_plinko_over/) 
 Plinko by shoving baseball bats into the machine to form "ramps" for the balls to ride. I'm sure there are more exploits like this that are possible, but we are not interested in them here.
@@ -76,7 +76,7 @@ Plinko by shoving baseball bats into the machine to form "ramps" for the balls t
 
 I did all of this analysis based on game build 1.0.11. If the game has updated since then it is possible that the developers have retuned the games to change their RTP entirely. In my analysis I found that there is a single tunable "profitability" slider that the devs can easily change at a later date in response to player feedback. Take these results with a grain of salt.
 
-Just like we are not covering game exploits, we are also not covering the use of items. Their are a number of items that directly effect EV, by negating losses, or increasing profit. These items are very interesting, and a key part of a successfull strategy to actually beat the game. However, discussing them is out of scope for this already very-very-long blog post.
+Just like we are not covering game exploits, we are also not covering the use of items. There are a number of items that directly affect EV, by negating losses or increasing profit. These items are very interesting, and a key part of a successful strategy to actually beat the game. However, discussing them is out of scope for this already very-very-long blog post.
 
 ## AI disclaimer
 
@@ -91,7 +91,7 @@ I used AI assistance to aid in reverse engineering the game and to write various
        loading="lazy" />
 </figure>
 
-Everyone loves the ducks so let's start there. On first glance, this game appears to be likely fair. When the race starts time starts ticking forward, and on every tick all of the ducks advance forward by uniformly sampled random amount.
+Everyone loves the ducks so let's start there. On first glance, this game appears to be fair. When the race starts, time starts ticking forward, and on every tick all of the ducks advance forward by a uniformly sampled random amount.
 
 ```csharp
 private IEnumerator DuckRaceRoutine(Random rng)
@@ -120,7 +120,7 @@ private IEnumerator DuckRaceRoutine(Random rng)
 }
 ```
 
-At first glance this looks perfectly symmetric. Every duck identical and independently seeded, so you would expect each one to cross first exactly one quarter of the time, paying a fair 4x:
+At first glance this looks perfectly symmetric. Every duck is identical and independently seeded, so you would expect each one to cross first exactly one quarter of the time, paying a fair 4x:
 
 $$E[\text{net}] = \tfrac{1}{4}(+3) + \tfrac{3}{4}(-1) = 0 \implies \text{RTP} = 100\%$$
 
@@ -158,9 +158,9 @@ One caveat of this result is that while I did simulate the races inside of a toy
        loading="lazy" />
 </figure>
 
-In real life, slot machines are tuned to be very close to 100% RTP. Some machines advertise 99% RTP, for example. Since modern digital slots need less maintanence than their mechanical predecesors, nor do they require a dealer, these are the money printers for casinos. At 99% RTP most players will not be able to discern that they are losing money on net, even though they slowly are being drained.
+In real life, slot machines are tuned to be very close to 100% RTP. Some machines advertise 99% RTP, for example. Since modern digital slots need less maintenance than their mechanical predecessors, and don't require a dealer, these are the money printers for casinos. At 99% RTP most players will not be able to discern that they are losing money on net, even though they slowly are being drained.
 
-What we had noticed while playing the game was that playing the slots *felt* like it was slightly positive [EV](https://en.wikipedia.org/wiki/Expected_value). We had managed to rescue more than one run by spamming slot machines. Unlike the duck race above, this game is not very interesting from a technical perpsective. On each cell of the 3x3 grid, there is a "roller" which can display one of four symbols. Looking at the game code, these rollers seem unbiased, so all of the rollers are equally likely. It basically does this:
+What we had noticed while playing the game was that playing the slots *felt* like it was slightly positive [EV](https://en.wikipedia.org/wiki/Expected_value). We had managed to rescue more than one run by spamming slot machines. Unlike the duck race above, this game is not very interesting from a technical perspective. On each cell of the 3x3 grid, there is a "roller" which can display one of four symbols. Looking at the game code, these rollers seem unbiased, so all of the rollers are equally likely. It basically does this:
 
 ```python
 def spinSlotMachine(playfield):
@@ -208,7 +208,7 @@ Since these scaling factors average to 1.0 our EV is still **1.157.**
        loading="lazy" />
 </figure>
 
-As we mentioned before, craps is [exploitable](https://steamcommunity.com/sharedfiles/filedetails/?id=3722573782) but let's focus instead of playing the game correctly. When you toss the dice to scramble it, that action is random, and not weighted. When you throw the dice, they become physics objects and are simulated using Unity's physics engine. While we could in principle simulate these rolls, there is extra randomness introduced by player input since the starting velocity of the die is influenced by the players position and mouse cursor when they roll.
+As we mentioned before, craps is [exploitable](https://steamcommunity.com/sharedfiles/filedetails/?id=3722573782) but let's focus instead on playing the game correctly. When you toss the dice to scramble it, that action is random, and not weighted. When you throw the dice, they become physics objects and are simulated using Unity's physics engine. While we could in principle simulate these rolls, there is extra randomness introduced by player input since the starting velocity of the die is influenced by the players position and mouse cursor when they roll.
 
 Instead, let's just do some classic statistics here. The first, "come-out", roll works like real craps: a 7 or 11 wins immediately paying out 2x. A 2, 3, or 12 loses immediately. Any other roll sets a target score, called a "point", that you need to attempt to roll for. If you hit your point you get paid out 4x, but if you instead roll a 7 you lose. Where this game differs from traditional casino craps is that after 3 attempts to hit your point, you get your ante refunded. In a normal casino you lose at this point, and this difference is why the player has an edge in GWYF's variant.
 
@@ -257,7 +257,7 @@ This diagram makes the math much more intuitive to me, since to calculate the EV
 | 3-roll refund | 24.71% | 1x | 0.2471 |
 | **Total** | **100%** | | **1.3775** |
 
-This result was not intuitive to my group, since we felt like we were *always* losing at Craps, but the overal EV of **1.3775** is one of the best player edges in the casino.
+This result was not intuitive to my group, since we felt like we were *always* losing at Craps, but the overall EV of **1.3775** is one of the best player edges in the casino.
 
 # Prize wheels
 
@@ -292,7 +292,7 @@ public virtual void SpinTheWheel(Random rng)
 }
 ```
 
-Since the segments are all equal width, they are therefore equally likely. By adding up the multipliers on the wheel segments we can straightforwadly get the EV:
+Since the segments are all equal width, they are therefore equally likely. By adding up the multipliers on the wheel segments we can straightforwardly get the EV:
 
 | Payout | Wedges | Probability | EV contribution |
 |---------|:--------------:|------------:|----------------:|
@@ -306,9 +306,9 @@ Since the segments are all equal width, they are therefore equally likely. By ad
 | **Spin Again** | 2 | 10% | 0.100 |
 | **Total** | **20** | **100%** | **1.000** |
 
-The only subtle row is **Spin Again**. Since they spin the wheel for us a second time, they are equivalent to refunding us and us playing again, so we can count is as the same as a 1x payout. Summing the EV contributions we find that means this game has an EV of **1.0**, making it perfectly fair.
+The only subtle row is **Spin Again**. Since they spin the wheel for us a second time, it is equivalent to refunding us and us playing again, so we can count it as the same as a 1x payout. Summing the EV contributions we find that means this game has an EV of **1.0**, making it perfectly fair.
 
-### Money Wheel
+## Money Wheel
 
 <figure>
   <img src="{{ '/assets/img/posts/2026-05-30-gamble-with-your-friends-casino-analysis/money-wheel.jpg' | relative_url }}"
@@ -339,7 +339,7 @@ If you are playing this game, you should ONLY play Red or Orange bets, never Gre
        loading="lazy" />
 </figure>
 
-Roulette is a textbook Casino style Roulette wheel, with a single green square. This game is very similar to the other two wheel games, and as such the ball landing on a square is simply animated towards a predetermined target. For this game we don't even need to do our own math, [Wikipedia has done it for us.](https://en.wikipedia.org/wiki/Roulette#House_edge) Regardless of your bet or betting patterns your RTP will be 97.30%, just like at a real casion.
+Roulette is a textbook casino-style roulette wheel, with a single green square. This game is very similar to the other two wheel games, and as such the ball landing on a square is simply animated towards a predetermined target. For this game we don't even need to do our own math, [Wikipedia has done it for us.](https://en.wikipedia.org/wiki/Roulette#House_edge) Regardless of your bet or betting patterns your RTP will be 97.30%, just like at a real casino.
 
 ## The Martingales
 <style>
@@ -370,7 +370,7 @@ Roulette is a textbook Casino style Roulette wheel, with a single green square. 
   </div>
 </figure>
 
-Hi-Lo, Penguins, Minesweeper, Dragon Tower, Keno, and Crash look like six different games, but they are really the same game mathamatically. Each one secretly picks a survival probability $$P$$, lets you climb for a rising multiplier, and pays out exactly $$1/P$$ if you make it to where you stop. In short, the more risk you take on, the higher the payout, but weighted such that the EV is always 1.
+Hi-Lo, Penguins, Minesweeper, Dragon Tower, Keno, and Crash look like six different games, but they are really the same game mathematically. Each one secretly picks a survival probability $$P$$, lets you climb for a rising multiplier, and pays out exactly $$1/P$$ if you make it to where you stop. In short, the more risk you take on, the higher the payout, but weighted such that the EV is always 1.
 
 $$E[\text{return}] = P \times \frac{1}{P} = 1 \implies \text{RTP} = 100\%$$
 
@@ -443,7 +443,7 @@ private float GetRandomCrashPoint(float r)
 }
 ```
 
-Note the variable "instantCrashChance." Unlike the other games, Crash has a tunable paramater for how likely the player should be to lose instantly. "instantCrashChance" is set to 15% in the shipping version of the game. I presume this is to tune down the likelihood of the potentially enourmous wins that are possible here. It's hard to say exactly why this was done, but nether the less, this caps the EV for this game at **0.85**
+Note the variable "instantCrashChance." Unlike the other games, Crash has a tunable parameter for how likely the player should be to lose instantly. "instantCrashChance" is set to 15% in the shipping version of the game. I presume this is to tune down the likelihood of the potentially enormous wins that are possible here. It's hard to say exactly why this was done, but nonetheless, this caps the EV for this game at **0.85**.
 
 
 # Physics-driven games
@@ -468,14 +468,15 @@ Two of the games in the casino are actually driven by the Unity physics engine. 
 
 Let's start with the very first game you are presented with when you start the game: the Coin Flip. If you aren't familiar with GWYF, if you win the coinflip you are allowed to play the game. If you fail, the game exits and you have to try again. It's a good teaser for the vibe of the rest of the game.
 
-In the Unity scene that drives the coin flip, the coin starts face down. The game then applies a random upward force, and a torque along a random axis to the coin. The coin is simulated with the default Unity physics engine, but the physics constants have been tuned for a more dramatic looking coin flip. For example, normally in Unity gravity if 15 m/s², but the coin only experiences 2 m/s² of gravity.
+In the Unity scene that drives the coin flip, the coin starts face down. The game then applies a random upward force, and a torque along a random axis to the coin. The coin is simulated with the default Unity physics engine, but the physics constants have been tuned for a more dramatic looking coin flip. For example, normally in Unity gravity is 15 m/s², but the coin only experiences 2 m/s² of gravity.
 
 Now every middle schooler can tell you that a coin flip is roughly 50-50, but even in real life [it is possible for coins to not be fair](https://en.wikipedia.org/wiki/Fair_coin). To this end, we will need to do the same trick we did with the duck game and simulate a couple thousand runs by recreating the game code as faithfully as we can in our own Unity scene.
 
 | Flips | Win | Lose | P(win) | RTP |
+|------:|----:|-----:|-------:|----:|
 | 10,000 | 4,995 | 5,005 | **0.4995** | **99.9%** |
 
-This is a pretty good result, and shows that this coin is damn near fair. One fun caveat of these results is that "tails" and "heads" are not the only possibilities. It turns out that the coin is being flipped inside an invisible "cup" to prevent it from flying off screen. In some rare circumstances, it is possible for the coin to come to rest leaning on the walls of this cup. Likewise, under extreme circumstances it is possible for the coin to land precisely on it's edge. These quirks don't influence the outcome of the experiments much, they are just fun.
+This is a pretty good result, and shows that this coin is damn near fair. One fun caveat of these results is that "tails" and "heads" are not the only possibilities. It turns out that the coin is being flipped inside an invisible "cup" to prevent it from flying off screen. In some rare circumstances, it is possible for the coin to come to rest leaning on the walls of this cup. Likewise, under extreme circumstances it is possible for the coin to land precisely on its edge. These quirks don't influence the outcome of the experiments much, they are just fun.
 
 <style>
 .coin-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem;margin:1.2rem 0}
@@ -584,7 +585,7 @@ This is a pretty good result, and shows that this coin is damn near fair. One fu
        loading="lazy" />
 </figure>
 
-Plinko is an interesting case, because on first glance it might appear impossible to model the probability directly. However, the Plinko machine is a straightforward application of the [binomial distribution](https://en.wikipedia.org/wiki/Binomial_distribution). In a simplified view of the Plinko machine, imagine that at each vertical level of the board the ball asks a question "should I go right, or should I go left?" and flips a coin to determine it's path. Assuming that the coin is fair, you should see probabilities like this:
+Plinko is an interesting case, because on first glance it might appear impossible to model the probability directly. However, the Plinko machine is a straightforward application of the [binomial distribution](https://en.wikipedia.org/wiki/Binomial_distribution). In a simplified view of the Plinko machine, imagine that at each vertical level of the board the ball asks a question "should I go right, or should I go left?" and flips a coin to determine its path. Assuming that the coin is fair, you should see probabilities like this:
 
 <figure>
   <img src="{{ '/assets/img/posts/2026-05-30-gamble-with-your-friends-casino-analysis/plinko/plinko-galton-tree.svg' | relative_url }}"
@@ -626,7 +627,7 @@ The naive model says **68.3% RTP** which is a good starting point, but is ultima
 
 </div>
 
-The twelve pockets account for 98.92% of drops. Thhe remaining **1.08%** are balls that got stuck on one of the pegs. If the ball gets stuck, game has a 20s timeout, after which the ball is deleted and the player loses their ante. Doing the same math we did above, we get an EV of **0.78**, which is 10 points higher than our theoretical guess. Looking at a histogram of where the balls land, this becomes a bit more obvious:
+The twelve pockets account for 98.92% of drops. The remaining **1.08%** are balls that got stuck on one of the pegs. If the ball gets stuck, the game has a 20s timeout, after which the ball is deleted and the player loses their ante. Doing the same math we did above, we get an EV of **0.78**, which is 10 points higher than our theoretical guess. Looking at a histogram of where the balls land, this becomes a bit more obvious:
 
 <figure>
   <img src="{{ '/assets/img/posts/2026-05-30-gamble-with-your-friends-casino-analysis/plinko/plinko-histogram.png' | relative_url }}"
@@ -635,14 +636,14 @@ The twelve pockets account for 98.92% of drops. Thhe remaining **1.08%** are bal
        loading="lazy" />
 </figure>
 
-Even though the center 0.2x bins are way more likely than the math predicted, which should drag our EV down, the 24x buckets on the edges are 10 times more likely than we predicted. These edge buckets account for the almost the entire EV improvement above the theoretical model.
+Even though the center 0.2x bins are way more likely than the math predicted, which should drag our EV down, the 24x buckets on the edges are 10 times more likely than we predicted. These edge buckets account for almost the entire EV improvement above the theoretical model.
 
 <figure>
   <video class="plinko-balls" muted loop autoplay playsinline preload="metadata"
          width="640" height="640"
          poster="{{ '/assets/img/posts/2026-05-30-gamble-with-your-friends-casino-analysis/plinko/plinko-balls.jpg' | relative_url }}"
          src="{{ '/assets/img/posts/2026-05-30-gamble-with-your-friends-casino-analysis/plinko/plinko-balls.mp4' | relative_url }}"></video>
-    <figcaption>1,000 indepedent samples superimposed as a sample of the behavior of this system</figcaption>
+    <figcaption>1,000 independent samples superimposed as a sample of the behavior of this system</figcaption>
 </figure>
 
 # Card games
@@ -658,7 +659,7 @@ The card-based games (Blackjack, Video Poker, Baccarat) all deal cards from a si
        loading="lazy" />
 </figure>
 
-Blackjack in this casino bends the rules in the player's favor. Blackjack pays 2:1 instead of the usual 3:2, and ties go to the player. Also unlike many casinos you cannot split. The decompiled code actually contains a complete split routine, but their is no button on the Blackjack table to split. Presumably these intended on adding this, but removed it late during development for some reason. Due to these rule changes, the normal house edge of ~2% is in question. 
+Blackjack in this casino bends the rules in the player's favor. Blackjack pays 2:1 instead of the usual 3:2, and ties go to the player. Also unlike many casinos you cannot split. The decompiled code actually contains a complete split routine, but there is no button on the Blackjack table to split. Presumably they intended on adding this, but removed it late during development for some reason. Due to these rule changes, the normal house edge of ~2% is in question. 
 
 | Result | Return | Net |
 |--------|-------:|----:|
@@ -709,9 +710,9 @@ To use the chart, find the row that matches your hand and read across to the col
        loading="lazy" />
 </figure>
 
-Like Blackjack, Poker is also very different from most Casino incarnations of the game. In this game the Ace is always low, and pairs pay. Normal video poker machines will require face card pairs to pay out.
+Like Blackjack, Poker is also very different from most casino incarnations of the game. In this game the Ace is always low, and pairs pay. Normal video poker machines will require face card pairs to pay out.
 
-I'm going to be honest: for this game I surrended entirely to our AI overlords. All of the other analsys was driven by me, with AI doing the boring stuff. In this case I could not find a ready-made tool to simulate the odds of this game, since it uses a custom rule set. "No worries", said the LLM dejure, "I can just spit that out for you". It generated some of the densest C++ code I have ever seen. I tried to understand it, and failed. To that end, take these results with a grain of salt: the poker solver that the AI wrote says that with perfect play this game has an EV of **1.28**.
+I'm going to be honest: for this game I surrendered entirely to our AI overlords. All of the other analysis was driven by me, with AI doing the boring stuff. In this case I could not find a ready-made tool to simulate the odds of this game, since it uses a custom rule set. "No worries", said the LLM du jour, "I can just spit that out for you". It generated some of the densest C++ code I have ever seen. I tried to understand it, and failed. To that end, take these results with a grain of salt: the poker solver that the AI wrote says that with perfect play this game has an EV of **1.28**.
 
 The solver enumerated all 2,598,960 possible five-card deals. Scan your dealt hand from the top of the table down and take the first action that matches what you are holding. The "avg return" column is the average payout (in multiples of your bet) you can expect from playing that situation optimally.
 
@@ -729,7 +730,7 @@ The solver enumerated all 2,598,960 possible five-card deals. Scan your dealt ha
 | Four to a straight (no pair) | 9.20% | Hold any 2 suited, else a high card, draw 3 | 0.75x |
 | Nothing | 38.01% | Hold one high card (or 2-3 suited), draw the rest | 0.68x |
 
-### Baccarat
+## Baccarat
 
 <figure>
   <img src="{{ '/assets/img/posts/2026-05-30-gamble-with-your-friends-casino-analysis/baccarat.jpg' | relative_url }}"
@@ -753,4 +754,4 @@ The Player and Banker win counts are identical, so the house edge on those bets 
 
 # Conclusion
 
-Thanks for reading this far! Not much else to say other than go buy Gamble With Your Friends if you haven't tried it yet, it's great fun :)
+Thanks for reading this far! Not much else to say other than go buy Gamble With Your Friends if you haven't tried it yet. It's great fun :)

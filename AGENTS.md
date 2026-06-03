@@ -63,5 +63,5 @@ Open <http://127.0.0.1:4000/>.
 
 - Do not strip the `---\n---` front matter from [index.html](index.html). Liquid tags in the page will be served raw if you do.
 - Do not commit `_site/`, `.jekyll-cache/`, or `vendor/` (already in [.gitignore](.gitignore)).
-- Do not use em dashes in blog post prose.
+- Do not use em dashes in prose, including using -- as an em dash replacement in ascii
 - Do not create a markdown file summarizing your changes unless explicitly asked.
