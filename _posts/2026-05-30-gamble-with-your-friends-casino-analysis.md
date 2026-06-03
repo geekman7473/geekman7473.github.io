@@ -11,13 +11,13 @@ I decompiled *Gamble With Your Friends* to work out the odds of every minigame i
 
 | Game | Bet | RTP | Favors |
 |------|-----|----:|:------:|
-| Craps | Pass line | 137.75% | Player |
-| Money Wheel | Orange | 135.10% | Player |
+| Craps | N/A | 137.75% | Player |
+| Money Wheel | Orange | 135.14% | Player |
 | Ducks | Jabin | ~134.80% | Player |
-| Video Poker | Strategy Table | 128.10% | Player |
+| Video Poker | Strategy Table | 128.00% | Player |
 | Slots | N/A | ~115.70% | Player |
-| Ducks | Yarl | ~109.50% | Player |
-| Money Wheel | Red | 108.10% | Player |
+| Ducks | Yarl | ~109.60% | Player |
+| Money Wheel | Red | 108.11% | Player |
 | Blackjack | Strategy Table | ~102.00% | Player |
 | Coin Flip | Heads / Tails | 100.00% | Fair |
 | Penguins | Any step | 100.00% | Fair |
@@ -29,36 +29,12 @@ I decompiled *Gamble With Your Friends* to work out the odds of every minigame i
 | Roulette | Any bet | 97.30% | House |
 | Baccarat | Player / Banker | 90.10% | House |
 | Crash | Any cashout | 85.00% | House |
-| Ducks | Erlaf | ~81.40% | House |
-| Money Wheel | Blue | 81.10% | House |
+| Ducks | Erlaf | ~81.60% | House |
+| Money Wheel | Blue | 81.08% | House |
 | Baccarat | Tie | 79.20% | House |
-| Plinko | Single Ball | 78.50% | House |
-| Money Wheel | Green | 75.70% | House |
-| Ducks | Faruk | ~74.30% | House |
-
-
-# Contents
-
-- [Why I did this](#why-i-did-this)
-  - [Caveats](#caveats)
-  - [AI disclaimer](#ai-disclaimer)
-- [Ducks](#ducks)
-- [Slots](#slots)
-- [Craps](#craps)
-- [Prize wheels](#prize-wheels)
-  - [Wheel of Fortune](#wheel-of-fortune)
-  - [Money Wheel](#money-wheel)
-- [Roulette](#roulette)
-  - [The Martingales](#the-martingales)
-  - [Crash](#crash)
-- [Physics-driven games](#physics-driven-games)
-  - [Coin Flip](#coin-flip)
-  - [Plinko](#plinko)
-- [Card games](#card-games)
-  - [Blackjack](#blackjack)
-  - [Video Poker](#video-poker)
-  - [Baccarat](#baccarat)
-- [Conclusion](#conclusion)
+| Plinko | Single Ball | 78.00% | House |
+| Money Wheel | Green | 75.68% | House |
+| Ducks | Faruk | ~74.40% | House |
 
 
 # Why I did this
@@ -468,7 +444,7 @@ Two of the games in the casino are actually driven by the Unity physics engine. 
 
 Let's start with the very first game you are presented with when you start the game: the Coin Flip. If you aren't familiar with GWYF, if you win the coinflip you are allowed to play the game. If you fail, the game exits and you have to try again. It's a good teaser for the vibe of the rest of the game.
 
-In the Unity scene that drives the coin flip, the coin starts face down. The game then applies a random upward force, and a torque along a random axis to the coin. The coin is simulated with the default Unity physics engine, but the physics constants have been tuned for a more dramatic looking coin flip. For example, normally in Unity gravity is 15 m/s², but the coin only experiences 2 m/s² of gravity.
+In the Unity scene that drives the coin flip, the coin starts face down. The game then applies a random upward force, and a torque along a random axis to the coin. The coin is simulated with the default Unity physics engine, but the physics constants have been tuned for a more dramatic looking coin flip. For example, the rest of the game uses 15 m/s² of gravity, but the coin only experiences 2 m/s² of gravity.
 
 Now every middle schooler can tell you that a coin flip is roughly 50-50, but even in real life [it is possible for coins to not be fair](https://en.wikipedia.org/wiki/Fair_coin). To this end, we will need to do the same trick we did with the duck game and simulate a couple thousand runs by recreating the game code as faithfully as we can in our own Unity scene.
 
@@ -595,7 +571,7 @@ Plinko is an interesting case, because on first glance it might appear impossibl
        style="width:100%;height:auto;border:2px solid #808080" />
 </figure>
 
-This type of model is also called a [Galton board](https://en.wikipedia.org/wiki/Galton_board). Notice on the third row that the probabilities for each node goes, from left to right, 25%, 50%, 25%. That is because there are 2 paths to reach the middle node, but there is only one path to reach the left and right paths. This simple idea, iterated out for all 11 rows, gets us our expected probabilities for each of the bottom nodes. Now reminding ourselves of the $$EV = probability * reward$$ math we can use this table to compute the "theoretical" EV of this game.
+This type of model is also called a [Galton board](https://en.wikipedia.org/wiki/Galton_board). Notice on the third row that the probabilities for each node goes, from left to right, 25%, 50%, 25%. That is because there are 2 paths to reach the middle node, but there is only one path to reach the left and right nodes. This simple idea, iterated out for all 11 rows, gets us our expected probabilities for each of the bottom nodes. Now reminding ourselves of the $$EV = probability * reward$$ math we can use this table to compute the "theoretical" EV of this game.
 
 <div class="table-scroll" markdown="1">
 
@@ -659,7 +635,7 @@ The card-based games (Blackjack, Video Poker, Baccarat) all deal cards from a si
        loading="lazy" />
 </figure>
 
-Blackjack in this casino bends the rules in the player's favor. Blackjack pays 2:1 instead of the usual 3:2, and ties go to the player. Also unlike many casinos you cannot split. The decompiled code actually contains a complete split routine, but there is no button on the Blackjack table to split. Presumably they intended on adding this, but removed it late during development for some reason. Due to these rule changes, the normal house edge of ~2% is in question. 
+Blackjack in this casino bends the rules in the player's favor. Blackjack pays 2:1 instead of the usual 3:2, and a player natural beats a dealer natural instead of pushing. Also unlike many casinos you cannot split. The game actually has splitting implemented in the code, but there is no button for it on the Blackjack table. Presumably they intended on adding this, but removed it late during development for some reason. Due to these rule changes, the normal house edge of ~2% is in question. (NB: that is the rough house edge for tables with 6 decks in shoe, like most real casinos)
 
 | Result | Return | Net |
 |--------|-------:|----:|
@@ -681,7 +657,7 @@ We ran his code two ways: once with the GWYF ruleset and once with the same rule
 
 So EV is **1.02** which means we are just barely positive under perfect play.
 
-Two of the game's quirks fall outside what the engine can express: the dealer never peeks for blackjack, and a player natural beats rather than pushes a dealer natural. These rules shouldn't have a big influence on EV, so we are choosing to ignore them here.
+One quirk of the game falls outside what the engine can express: the dealer never peeks for blackjack. This rule shouldn't have a big influence on EV, so we are choosing to ignore it here.
 
 ### Optimal strategy
 

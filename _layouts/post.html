@@ -1,6 +1,10 @@
 ---
 layout: default
 ---
+<aside id="post-toc" class="post-toc" aria-label="Table of contents" hidden>
+  <div class="post-toc__title">Contents</div>
+  <nav class="post-toc__nav"></nav>
+</aside>
 <div class="titlebar titlebar--post">{{ page.title }}</div>
 <section class="panel post">
   <p class="meta post-meta">
@@ -13,6 +17,7 @@ layout: default
   <hr />
   <p class="meta"><a href="{{ '/blog/' | relative_url }}">&larr; all posts</a></p>
 </section>
+<script src="{{ '/assets/js/post-toc.js' | relative_url }}" defer></script>
 
 {% include comments.html %}
 
