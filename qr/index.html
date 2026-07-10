@@ -63,7 +63,7 @@
 
         <div class="qr-form" data-form="email" hidden>
           <div class="field-row">
-            <label for="qr-email-to">to:</label>
+            <label for="qr-email-to">email address:</label>
             <input
               id="qr-email-to"
               class="input95"
@@ -71,16 +71,6 @@
               size="32"
               placeholder="someone@example.com"
             />
-          </div>
-          <div class="field-row">
-            <label for="qr-email-subject">subject:</label>
-            <input id="qr-email-subject" class="input95" type="text" size="32" />
-          </div>
-          <div class="field-row">
-            <label for="qr-email-body">message:</label>
-          </div>
-          <div class="field-row">
-            <textarea id="qr-email-body" class="input95 qr-result" rows="2"></textarea>
           </div>
         </div>
 
@@ -109,7 +99,6 @@
               placeholder="1600 Pennsylvania Ave NW, Washington, DC 20500"
             ></textarea>
           </div>
-          <p class="meta">Scanning opens the address in a maps app.</p>
         </div>
 
         <div class="qr-form" data-form="wifi" hidden>
@@ -262,13 +251,7 @@
 
             case 'email': {
               var to = v('qr-email-to');
-              if (!to) return '';
-              var params = [];
-              var subject = v('qr-email-subject');
-              var body = v('qr-email-body');
-              if (subject) params.push('subject=' + encodeURIComponent(subject));
-              if (body) params.push('body=' + encodeURIComponent(body));
-              return 'mailto:' + to + (params.length ? '?' + params.join('&') : '');
+              return to ? 'mailto:' + to : '';
             }
 
             case 'phone': {
@@ -276,12 +259,10 @@
               return num ? 'tel:' + num.replace(/[\s().-]/g, '') : '';
             }
 
-            case 'address': {
-              var adr = v('qr-address');
-              return adr
-                ? 'https://maps.google.com/?q=' + encodeURIComponent(adr)
-                : '';
-            }
+            case 'address':
+              // Plain text: scanner apps detect the address and offer
+              // the device's default maps app, unlike a vendor URL.
+              return v('qr-address');
 
             case 'wifi': {
               var ssid = v('qr-wifi-ssid');
