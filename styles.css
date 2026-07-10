@@ -334,6 +334,7 @@ a.tool-card:active { border-style: inset; }
   border: 2px inset #c0c0c0;
   background: #000;
 }
+.qr-video[hidden] { display: none; }
 .qr-status { color: #555; margin: 8px 0 0; }
 .qr-result {
   width: 100%;
