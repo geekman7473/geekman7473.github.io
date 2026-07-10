@@ -15,6 +15,7 @@
     <link rel="canonical" href="https://geekman7473.github.io/tools/" />
     <link rel="stylesheet" href="/styles.css" />
     <script defer src="/script.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/fuse.js@7.1.0/dist/fuse.min.js"></script>
     {% include analytics.html %}
   </head>
   <body id="top">
@@ -50,18 +51,16 @@
         </div>
 
         <div class="tool-grid" id="tool-grid">
-          <a class="tool-card" href="/qr/" data-tags="qr code generator create make encode url text">
+          <a class="tool-card" href="/qr/" data-tags="qr code generator create make build encode barcode url link email phone number address wifi password vcard contact card text png download share">
             <div class="tool-card__title">QR Code Generator</div>
             <div class="tool-card__body">
               <p>
-                Turn any text or URL into a QR code, entirely in your
-                browser. Pick a size and error correction level, then save
-                it as a PNG.
+                Simple QR code generator.
               </p>
             </div>
           </a>
 
-          <a class="tool-card" href="/tools/qr-scanner/" data-tags="qr code scanner reader decode camera paste upload image">
+          <a class="tool-card" href="/tools/qr-scanner/" data-tags="qr code scanner reader scan decode decoder barcode camera webcam paste clipboard upload image photo picture screenshot text">
             <div class="tool-card__title">QR Code Scanner</div>
             <div class="tool-card__body">
               <p>
@@ -76,13 +75,12 @@
             href="https://evanw.github.io/float-toy/"
             target="_blank"
             rel="noreferrer"
-            data-tags="float toy ieee 754 floating point bits binary evan wallace"
+            data-tags="float toy ieee 754 floating point half single double precision bits binary hex exponent mantissa sign fp16 fp32 fp64 number representation rounding math evan wallace"
           >
             <div class="tool-card__title">Float Toy</div>
             <div class="tool-card__body">
               <p>
-                Evan Wallace's interactive IEEE 754 visualizer. Flip the
-                bits of a half, float, or double and watch the value change.
+                Evan Wallace's interactive IEEE 754 visualizer. Useful for diagnosing floating point math issues.
               </p>
             </div>
           </a>
@@ -102,32 +100,76 @@
     </footer>
 
     <script>
-      (function () {
+      window.addEventListener('DOMContentLoaded', function () {
         var search = document.getElementById('tool-search');
-        var cards = Array.prototype.slice.call(
-          document.querySelectorAll('#tool-grid .tool-card')
-        );
         var count = document.getElementById('tool-count');
         var none = document.getElementById('tool-none');
 
+        var items = Array.prototype.slice
+          .call(document.querySelectorAll('#tool-grid .tool-card'))
+          .map(function (card) {
+            return {
+              card: card,
+              name: card.querySelector('.tool-card__title').textContent.trim(),
+              description: card
+                .querySelector('.tool-card__body')
+                .textContent.trim(),
+              keywords: card.dataset.tags || ''
+            };
+          });
+
+        var fuse =
+          typeof Fuse !== 'undefined'
+            ? new Fuse(items, {
+                keys: [
+                  { name: 'name', weight: 0.5 },
+                  { name: 'keywords', weight: 0.3 },
+                  { name: 'description', weight: 0.2 }
+                ],
+                threshold: 0.35,
+                ignoreLocation: true
+              })
+            : null;
+
+        function matches(query) {
+          if (fuse) {
+            return fuse.search(query).map(function (r) {
+              return r.item.card;
+            });
+          }
+          // Fallback if the Fuse.js CDN is unreachable: plain substring.
+          var q = query.toLowerCase();
+          return items
+            .filter(function (item) {
+              return (
+                (item.name + ' ' + item.description + ' ' + item.keywords)
+                  .toLowerCase()
+                  .indexOf(q) !== -1
+              );
+            })
+            .map(function (item) {
+              return item.card;
+            });
+        }
+
         function filter() {
-          var q = search.value.trim().toLowerCase();
-          var shown = 0;
-          cards.forEach(function (card) {
-            var haystack =
-              (card.textContent + ' ' + (card.dataset.tags || '')).toLowerCase();
-            var match = q === '' || haystack.indexOf(q) !== -1;
-            card.hidden = !match;
-            if (match) shown++;
+          var query = search.value.trim();
+          var visible = query
+            ? matches(query)
+            : items.map(function (item) {
+                return item.card;
+              });
+          items.forEach(function (item) {
+            item.card.hidden = visible.indexOf(item.card) === -1;
           });
           count.textContent =
-            shown + (shown === 1 ? ' tool' : ' tools');
-          none.hidden = shown !== 0;
+            visible.length + (visible.length === 1 ? ' tool' : ' tools');
+          none.hidden = visible.length !== 0;
         }
 
         search.addEventListener('input', filter);
         filter();
-      })();
+      });
     </script>
   </body>
 </html>
