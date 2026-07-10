@@ -1,0 +1,153 @@
+---
+# Empty front matter so Jekyll processes this file's Liquid tags.
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tools &middot; Justin Becker</title>
+    <meta
+      name="description"
+      content="A searchable index of handy tools - some built here, some found around the web. QR code generator, QR code scanner, Float Toy, and more."
+    />
+    <meta name="theme-color" content="#c0c0c0" />
+    <link rel="canonical" href="https://geekman7473.github.io/tools/" />
+    <link rel="stylesheet" href="/styles.css" />
+    <script defer src="/script.js"></script>
+    {% include analytics.html %}
+  </head>
+  <body id="top">
+    <div class="banner">
+      <h1>Tools</h1>
+      <p class="meta">
+        Handy utilities &middot; some built here, some found around the web
+      </p>
+    </div>
+
+    <div class="toolbar">
+      [
+      <a href="/">home</a> <span class="sep">|</span>
+      <a href="/blog/">blog</a> <span class="sep">|</span>
+      <a href="/resume.html">resume</a>
+      ]
+    </div>
+
+    <main>
+      <div class="titlebar">Tool index</div>
+      <section class="panel">
+        <div class="field-row">
+          <label for="tool-search">find:</label>
+          <input
+            id="tool-search"
+            class="input95"
+            type="search"
+            size="30"
+            placeholder="search tools..."
+            autocomplete="off"
+          />
+          <span class="meta" id="tool-count"></span>
+        </div>
+
+        <div class="tool-grid" id="tool-grid">
+          <div class="tool-card" data-tags="qr code generator create make encode url text built here">
+            <div class="tool-card__title">
+              <a href="/qr/">QR Code Generator</a>
+              <span class="tool-card__buttons" aria-hidden="true"
+                ><span class="wbtn">_</span><span class="wbtn">&#9633;</span
+                ><span class="wbtn">&times;</span></span
+              >
+            </div>
+            <div class="tool-card__body">
+              <p>
+                Turn any text or URL into a QR code, entirely in your
+                browser. Pick a size and error correction level, then save
+                it as a PNG.
+              </p>
+              <p class="meta tool-card__origin">// built here</p>
+            </div>
+          </div>
+
+          <div class="tool-card" data-tags="qr code scanner reader decode camera paste upload image built here">
+            <div class="tool-card__title">
+              <a href="/tools/qr-scanner/">QR Code Scanner</a>
+              <span class="tool-card__buttons" aria-hidden="true"
+                ><span class="wbtn">_</span><span class="wbtn">&#9633;</span
+                ><span class="wbtn">&times;</span></span
+              >
+            </div>
+            <div class="tool-card__body">
+              <p>
+                Decode a QR code with your camera, or by pasting or
+                uploading an image. Shows the contents as plain text.
+              </p>
+              <p class="meta tool-card__origin">// built here</p>
+            </div>
+          </div>
+
+          <div class="tool-card" data-tags="float toy ieee 754 floating point bits binary evan wallace found online">
+            <div class="tool-card__title">
+              <a
+                href="https://evanw.github.io/float-toy/"
+                target="_blank"
+                rel="noreferrer"
+                >Float Toy</a
+              >
+              <span class="tool-card__buttons" aria-hidden="true"
+                ><span class="wbtn">_</span><span class="wbtn">&#9633;</span
+                ><span class="wbtn">&times;</span></span
+              >
+            </div>
+            <div class="tool-card__body">
+              <p>
+                Evan Wallace's interactive IEEE 754 visualizer. Flip the
+                bits of a half, float, or double and watch the value change.
+              </p>
+              <p class="meta tool-card__origin">// found online</p>
+            </div>
+          </div>
+        </div>
+
+        <p class="meta" id="tool-none" hidden>
+          No tools match that search.
+        </p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>
+        &copy; <span id="year"></span> Justin Becker &middot;
+        <a href="#top">top</a>
+      </p>
+    </footer>
+
+    <script>
+      (function () {
+        var search = document.getElementById('tool-search');
+        var cards = Array.prototype.slice.call(
+          document.querySelectorAll('#tool-grid .tool-card')
+        );
+        var count = document.getElementById('tool-count');
+        var none = document.getElementById('tool-none');
+
+        function filter() {
+          var q = search.value.trim().toLowerCase();
+          var shown = 0;
+          cards.forEach(function (card) {
+            var haystack =
+              (card.textContent + ' ' + (card.dataset.tags || '')).toLowerCase();
+            var match = q === '' || haystack.indexOf(q) !== -1;
+            card.hidden = !match;
+            if (match) shown++;
+          });
+          count.textContent =
+            shown + (shown === 1 ? ' tool' : ' tools');
+          none.hidden = shown !== 0;
+        }
+
+        search.addEventListener('input', filter);
+        filter();
+      })();
+    </script>
+  </body>
+</html>

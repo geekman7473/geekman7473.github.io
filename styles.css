@@ -230,6 +230,119 @@ tbody tr:hover td { background: #fff3b0; }
 .bj-legend .bj-d { background: #acc8f0; }
 .bj-legend .bj-p { background: #f4dd8e; }
 
+/* --- Win95 form controls (tools pages) ------------------------------ */
+.btn95 {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 13px;
+  color: #000;
+  background: #c0c0c0;
+  border: 2px outset #c0c0c0;
+  padding: 3px 12px;
+  cursor: pointer;
+}
+.btn95:active { border-style: inset; }
+.btn95:disabled {
+  color: #808080;
+  text-shadow: 1px 1px 0 #fff;
+  cursor: default;
+  border-style: outset;
+}
+
+.input95 {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 13px;
+  color: #000;
+  background: #fff;
+  border: 2px inset #c0c0c0;
+  padding: 3px 5px;
+}
+textarea.input95 { resize: vertical; }
+
+.field-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 13px;
+  margin: 0 0 10px;
+}
+.field-row:last-child { margin-bottom: 0; }
+
+/* --- Tools index (array of window-cards) ----------------------------- */
+.tool-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+}
+.tool-card {
+  background: #c0c0c0;
+  border: 2px outset #c0c0c0;
+  padding: 3px;
+}
+.tool-card__title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+  background: #000080;
+  color: #fff;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 13px;
+  font-weight: bold;
+  padding: 2px 3px 2px 6px;
+}
+.tool-card__title a { color: #fff; text-decoration: none; }
+.tool-card__title a:hover { background: transparent; color: #fff; text-decoration: underline; }
+.tool-card__buttons { display: flex; gap: 2px; }
+.wbtn {
+  display: inline-block;
+  width: 15px;
+  height: 14px;
+  background: #c0c0c0;
+  color: #000;
+  border: 1px outset #fff;
+  font-size: 10px;
+  line-height: 12px;
+  text-align: center;
+  font-weight: bold;
+}
+.tool-card__body {
+  background: #fff;
+  padding: 8px 10px 9px;
+  min-height: 84px;
+}
+.tool-card__body p { margin: 0 0 6px; }
+.tool-card__body p:last-child { margin-bottom: 0; }
+.tool-card__origin { color: #555; }
+
+/* --- QR pages -------------------------------------------------------- */
+.qr-output {
+  text-align: center;
+  padding: 6px 0 2px;
+}
+.qr-output canvas {
+  display: inline-block;
+  max-width: 100%;
+  height: auto;
+  border: 2px inset #c0c0c0;
+  background: #fff;
+  padding: 4px;
+}
+.qr-video {
+  display: block;
+  width: 100%;
+  max-width: 480px;
+  margin: 8px auto;
+  border: 2px inset #c0c0c0;
+  background: #000;
+}
+.qr-status { color: #555; margin: 8px 0 0; }
+.qr-result {
+  width: 100%;
+  box-sizing: border-box;
+}
+
 /* --- Footer --------------------------------------------------------- */
 .site-footer {
   margin-top: 18px;

@@ -1,0 +1,288 @@
+---
+# Empty front matter so Jekyll processes this file's Liquid tags.
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QR Code Scanner &middot; Justin Becker</title>
+    <meta
+      name="description"
+      content="Free in-browser QR code scanner. Decode a QR code with your camera, or by pasting or uploading an image. Shows the contents as plain text - nothing leaves your browser."
+    />
+    <meta name="theme-color" content="#c0c0c0" />
+    <link rel="canonical" href="https://geekman7473.github.io/tools/qr-scanner/" />
+    <link rel="stylesheet" href="/styles.css" />
+    <script defer src="/script.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
+    {% include analytics.html %}
+  </head>
+  <body id="top">
+    <div class="banner">
+      <h1>QR Code Scanner</h1>
+      <p class="meta">
+        Camera, paste, or upload &middot; decoded entirely in your browser
+      </p>
+    </div>
+
+    <div class="toolbar">
+      [
+      <a href="/">home</a> <span class="sep">|</span>
+      <a href="/tools/">all tools</a> <span class="sep">|</span>
+      <a href="/qr/">qr generator</a>
+      ]
+    </div>
+
+    <main>
+      <div class="titlebar">Source</div>
+      <section class="panel">
+        <div class="field-row">
+          <button id="scan-camera" class="btn95" type="button">
+            Start camera
+          </button>
+          <button id="scan-upload" class="btn95" type="button">
+            Upload image...
+          </button>
+          <button id="scan-paste" class="btn95" type="button">
+            Paste from clipboard
+          </button>
+          <input id="scan-file" type="file" accept="image/*" hidden />
+        </div>
+        <p class="meta">
+          You can also press Ctrl+V anywhere on this page to paste a
+          screenshot or copied image.
+        </p>
+        <video id="scan-video" class="qr-video" playsinline muted hidden></video>
+        <p class="meta qr-status" id="scan-status">
+          Pick a source above to scan a QR code.
+        </p>
+      </section>
+
+      <div class="titlebar">Result</div>
+      <section class="panel">
+        <div class="field-row">
+          <textarea
+            id="scan-result"
+            class="input95 qr-result"
+            rows="4"
+            readonly
+            placeholder="Decoded text will appear here..."
+          ></textarea>
+        </div>
+        <div class="field-row">
+          <button id="scan-copy" class="btn95" type="button" disabled>
+            Copy text
+          </button>
+          <span class="meta" id="scan-copied"></span>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>
+        &copy; <span id="year"></span> Justin Becker &middot;
+        QR decoding by
+        <a
+          href="https://github.com/cozmo/jsQR"
+          target="_blank"
+          rel="noreferrer"
+          >jsQR</a
+        >
+        (Apache-2.0) &middot; <a href="#top">top</a>
+      </p>
+    </footer>
+
+    <script>
+      window.addEventListener('DOMContentLoaded', function () {
+        var cameraBtn = document.getElementById('scan-camera');
+        var uploadBtn = document.getElementById('scan-upload');
+        var pasteBtn = document.getElementById('scan-paste');
+        var fileInput = document.getElementById('scan-file');
+        var video = document.getElementById('scan-video');
+        var status = document.getElementById('scan-status');
+        var result = document.getElementById('scan-result');
+        var copyBtn = document.getElementById('scan-copy');
+        var copied = document.getElementById('scan-copied');
+
+        var buffer = document.createElement('canvas');
+        var ctx = buffer.getContext('2d', { willReadFrequently: true });
+        var stream = null;
+        var rafId = null;
+
+        function setStatus(msg) {
+          status.textContent = msg;
+        }
+
+        function showResult(text) {
+          result.value = text;
+          copyBtn.disabled = false;
+          copied.textContent = '';
+          setStatus('Decoded ' + text.length + ' characters.');
+        }
+
+        function decodeCanvas() {
+          var image = ctx.getImageData(0, 0, buffer.width, buffer.height);
+          return jsQR(image.data, image.width, image.height, {
+            inversionAttempts: 'attemptBoth'
+          });
+        }
+
+        function decodeSource(source, width, height, label) {
+          // Downscale huge images; jsQR gets slow and no more accurate
+          // past ~1000px.
+          var scale = Math.min(1, 1000 / Math.max(width, height));
+          buffer.width = Math.round(width * scale);
+          buffer.height = Math.round(height * scale);
+          ctx.drawImage(source, 0, 0, buffer.width, buffer.height);
+          var code = decodeCanvas();
+          if (code && code.data) {
+            showResult(code.data);
+          } else {
+            setStatus('No QR code found in that ' + label + '.');
+          }
+        }
+
+        function decodeBlob(blob, label) {
+          var url = URL.createObjectURL(blob);
+          var img = new Image();
+          img.onload = function () {
+            URL.revokeObjectURL(url);
+            decodeSource(img, img.naturalWidth, img.naturalHeight, label);
+          };
+          img.onerror = function () {
+            URL.revokeObjectURL(url);
+            setStatus('Could not read that ' + label + ' as an image.');
+          };
+          img.src = url;
+        }
+
+        /* --- Camera -------------------------------------------------- */
+        function stopCamera() {
+          if (rafId !== null) {
+            cancelAnimationFrame(rafId);
+            rafId = null;
+          }
+          if (stream) {
+            stream.getTracks().forEach(function (t) { t.stop(); });
+            stream = null;
+          }
+          video.srcObject = null;
+          video.hidden = true;
+          cameraBtn.textContent = 'Start camera';
+        }
+
+        function tick() {
+          if (video.readyState >= video.HAVE_ENOUGH_DATA) {
+            buffer.width = video.videoWidth;
+            buffer.height = video.videoHeight;
+            ctx.drawImage(video, 0, 0);
+            var code = decodeCanvas();
+            if (code && code.data) {
+              stopCamera();
+              showResult(code.data);
+              return;
+            }
+          }
+          rafId = requestAnimationFrame(tick);
+        }
+
+        cameraBtn.addEventListener('click', function () {
+          if (stream) {
+            stopCamera();
+            setStatus('Camera stopped.');
+            return;
+          }
+          if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+            setStatus('Camera not available in this browser (needs HTTPS).');
+            return;
+          }
+          setStatus('Requesting camera...');
+          navigator.mediaDevices
+            .getUserMedia({ video: { facingMode: 'environment' } })
+            .then(function (s) {
+              stream = s;
+              video.srcObject = s;
+              video.hidden = false;
+              video.play();
+              cameraBtn.textContent = 'Stop camera';
+              setStatus('Point the camera at a QR code...');
+              tick();
+            })
+            .catch(function (err) {
+              setStatus('Camera error: ' + err.message);
+            });
+        });
+
+        /* --- Upload -------------------------------------------------- */
+        uploadBtn.addEventListener('click', function () {
+          fileInput.click();
+        });
+        fileInput.addEventListener('change', function () {
+          if (fileInput.files && fileInput.files[0]) {
+            decodeBlob(fileInput.files[0], 'file');
+            fileInput.value = '';
+          }
+        });
+
+        /* --- Paste --------------------------------------------------- */
+        document.addEventListener('paste', function (e) {
+          var items = (e.clipboardData || {}).items || [];
+          for (var i = 0; i < items.length; i++) {
+            if (items[i].type.indexOf('image/') === 0) {
+              e.preventDefault();
+              decodeBlob(items[i].getAsFile(), 'pasted image');
+              return;
+            }
+          }
+          setStatus('Clipboard has no image. Copy a picture of a QR code first.');
+        });
+
+        pasteBtn.addEventListener('click', function () {
+          if (!navigator.clipboard || !navigator.clipboard.read) {
+            setStatus(
+              'Clipboard access not available here. Press Ctrl+V instead.'
+            );
+            return;
+          }
+          navigator.clipboard
+            .read()
+            .then(function (items) {
+              for (var i = 0; i < items.length; i++) {
+                var type = items[i].types.find(function (t) {
+                  return t.indexOf('image/') === 0;
+                });
+                if (type) {
+                  return items[i].getType(type).then(function (blob) {
+                    decodeBlob(blob, 'pasted image');
+                  });
+                }
+              }
+              setStatus(
+                'Clipboard has no image. Copy a picture of a QR code first.'
+              );
+            })
+            .catch(function () {
+              setStatus(
+                'Could not read the clipboard. Press Ctrl+V instead.'
+              );
+            });
+        });
+
+        /* --- Copy result --------------------------------------------- */
+        copyBtn.addEventListener('click', function () {
+          var done = function () { copied.textContent = 'copied!'; };
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(result.value).then(done);
+          } else {
+            result.select();
+            document.execCommand('copy');
+            done();
+          }
+        });
+
+        window.addEventListener('pagehide', stopCamera);
+      });
+    </script>
+  </body>
+</html>

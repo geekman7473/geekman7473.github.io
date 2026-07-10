@@ -1,0 +1,154 @@
+---
+# Empty front matter so Jekyll processes this file's Liquid tags.
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QR Code Generator &middot; Justin Becker</title>
+    <meta
+      name="description"
+      content="Free in-browser QR code generator. Turn any text or URL into a QR code and save it as a PNG. No server, no tracking of your input - everything runs locally."
+    />
+    <meta name="theme-color" content="#c0c0c0" />
+    <link rel="canonical" href="https://geekman7473.github.io/qr/" />
+    <link rel="stylesheet" href="/styles.css" />
+    <script defer src="/script.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/qrcode@1.4.4/build/qrcode.min.js"></script>
+    {% include analytics.html %}
+  </head>
+  <body id="top">
+    <div class="banner">
+      <h1>QR Code Generator</h1>
+      <p class="meta">
+        Text in, QR code out &middot; runs entirely in your browser
+      </p>
+    </div>
+
+    <div class="toolbar">
+      [
+      <a href="/">home</a> <span class="sep">|</span>
+      <a href="/tools/">all tools</a> <span class="sep">|</span>
+      <a href="/tools/qr-scanner/">qr scanner</a>
+      ]
+    </div>
+
+    <main>
+      <div class="titlebar">Input</div>
+      <section class="panel">
+        <div class="field-row">
+          <label for="qr-text">contents:</label>
+        </div>
+        <div class="field-row">
+          <textarea
+            id="qr-text"
+            class="input95 qr-result"
+            rows="3"
+            placeholder="Type text or paste a URL..."
+          >https://justinbecker.dev/</textarea>
+        </div>
+        <div class="field-row">
+          <label for="qr-ec">error correction:</label>
+          <select id="qr-ec" class="input95">
+            <option value="L">L &ndash; low (7%)</option>
+            <option value="M" selected>M &ndash; medium (15%)</option>
+            <option value="Q">Q &ndash; quartile (25%)</option>
+            <option value="H">H &ndash; high (30%)</option>
+          </select>
+          <label for="qr-size">size:</label>
+          <select id="qr-size" class="input95">
+            <option value="200">200 px</option>
+            <option value="300" selected>300 px</option>
+            <option value="400">400 px</option>
+            <option value="600">600 px</option>
+          </select>
+        </div>
+      </section>
+
+      <div class="titlebar">Output</div>
+      <section class="panel">
+        <div class="qr-output">
+          <canvas id="qr-canvas" width="300" height="300"></canvas>
+        </div>
+        <div class="field-row" style="justify-content: center">
+          <button id="qr-save" class="btn95" type="button">
+            Save as PNG
+          </button>
+        </div>
+        <p class="meta qr-status" id="qr-status"></p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>
+        &copy; <span id="year"></span> Justin Becker &middot;
+        QR rendering by
+        <a
+          href="https://github.com/soldair/node-qrcode"
+          target="_blank"
+          rel="noreferrer"
+          >node-qrcode</a
+        >
+        (MIT) &middot; <a href="#top">top</a>
+      </p>
+    </footer>
+
+    <script>
+      window.addEventListener('DOMContentLoaded', function () {
+        var text = document.getElementById('qr-text');
+        var ec = document.getElementById('qr-ec');
+        var size = document.getElementById('qr-size');
+        var canvas = document.getElementById('qr-canvas');
+        var save = document.getElementById('qr-save');
+        var status = document.getElementById('qr-status');
+
+        function render() {
+          var value = text.value;
+          if (!value) {
+            canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+            save.disabled = true;
+            status.textContent = 'Type something above to generate a code.';
+            return;
+          }
+          QRCode.toCanvas(
+            canvas,
+            value,
+            {
+              errorCorrectionLevel: ec.value,
+              width: parseInt(size.value, 10),
+              margin: 2,
+              color: { dark: '#000000', light: '#ffffff' }
+            },
+            function (err) {
+              if (err) {
+                save.disabled = true;
+                status.textContent =
+                  'Could not generate a code: ' + err.message;
+                return;
+              }
+              save.disabled = false;
+              status.textContent =
+                value.length +
+                ' characters encoded at level ' +
+                ec.value +
+                '. Nothing leaves your browser.';
+            }
+          );
+        }
+
+        save.addEventListener('click', function () {
+          var a = document.createElement('a');
+          a.download = 'qrcode.png';
+          a.href = canvas.toDataURL('image/png');
+          a.click();
+        });
+
+        text.addEventListener('input', render);
+        ec.addEventListener('change', render);
+        size.addEventListener('change', render);
+        render();
+      });
+    </script>
+  </body>
+</html>
