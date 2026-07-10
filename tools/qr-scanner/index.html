@@ -54,6 +54,7 @@
           screenshot or copied image.
         </p>
         <video id="scan-video" class="qr-video" playsinline muted hidden></video>
+        <img id="scan-preview" class="qr-video" alt="Scanned image preview" hidden />
         <p class="meta qr-status" id="scan-status">
           Pick a source above to scan a QR code.
         </p>
@@ -100,6 +101,7 @@
         var pasteBtn = document.getElementById('scan-paste');
         var fileInput = document.getElementById('scan-file');
         var video = document.getElementById('scan-video');
+        var preview = document.getElementById('scan-preview');
         var status = document.getElementById('scan-status');
         var result = document.getElementById('scan-result');
         var copyBtn = document.getElementById('scan-copy');
@@ -143,11 +145,30 @@
           }
         }
 
+        var previewUrl = null;
+
+        function showPreview(url) {
+          if (previewUrl) URL.revokeObjectURL(previewUrl);
+          previewUrl = url;
+          preview.src = url;
+          preview.hidden = false;
+        }
+
+        function hidePreview() {
+          if (previewUrl) {
+            URL.revokeObjectURL(previewUrl);
+            previewUrl = null;
+          }
+          preview.removeAttribute('src');
+          preview.hidden = true;
+        }
+
         function decodeBlob(blob, label) {
+          stopCamera();
           var url = URL.createObjectURL(blob);
           var img = new Image();
           img.onload = function () {
-            URL.revokeObjectURL(url);
+            showPreview(url);
             decodeSource(img, img.naturalWidth, img.naturalHeight, label);
           };
           img.onerror = function () {
@@ -179,6 +200,10 @@
             ctx.drawImage(video, 0, 0);
             var code = decodeCanvas();
             if (code && code.data) {
+              // Freeze the frame that decoded into the preview pane.
+              buffer.toBlob(function (blob) {
+                if (blob) showPreview(URL.createObjectURL(blob));
+              });
               stopCamera();
               showResult(code.data);
               return;
@@ -201,6 +226,7 @@
           navigator.mediaDevices
             .getUserMedia({ video: { facingMode: 'environment' } })
             .then(function (s) {
+              hidePreview();
               stream = s;
               video.srcObject = s;
               video.hidden = false;

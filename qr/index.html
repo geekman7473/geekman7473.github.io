@@ -9,7 +9,7 @@
     <title>QR Code Generator &middot; Justin Becker</title>
     <meta
       name="description"
-      content="Free in-browser QR code generator. Turn any text or URL into a QR code and save it as a PNG. No server, no tracking of your input - everything runs locally."
+      content="Free in-browser QR code generator for links, email, phone numbers, addresses, Wi-Fi passwords, plain text, and contact cards. No server - everything runs locally."
     />
     <meta name="theme-color" content="#c0c0c0" />
     <link rel="canonical" href="https://geekman7473.github.io/qr/" />
@@ -38,24 +38,148 @@
       <div class="titlebar">Input</div>
       <section class="panel">
         <div class="field-row">
-          <label for="qr-text">contents:</label>
+          <button class="btn95 qr-type is-active" type="button" data-type="link">Link</button>
+          <button class="btn95 qr-type" type="button" data-type="email">Email</button>
+          <button class="btn95 qr-type" type="button" data-type="phone">Phone</button>
+          <button class="btn95 qr-type" type="button" data-type="address">Address</button>
+          <button class="btn95 qr-type" type="button" data-type="wifi">Wi-Fi</button>
+          <button class="btn95 qr-type" type="button" data-type="text">Text</button>
+          <button class="btn95 qr-type" type="button" data-type="vcard">Contact</button>
         </div>
-        <div class="field-row">
-          <textarea
-            id="qr-text"
-            class="input95 qr-result"
-            rows="3"
-            placeholder="Type text or paste a URL..."
-          >https://justinbecker.dev/</textarea>
+        <hr />
+
+        <div class="qr-form" data-form="link">
+          <div class="field-row">
+            <label for="qr-link-url">url:</label>
+            <input
+              id="qr-link-url"
+              class="input95"
+              type="url"
+              size="40"
+              value="https://justinbecker.dev/"
+            />
+          </div>
         </div>
+
+        <div class="qr-form" data-form="email" hidden>
+          <div class="field-row">
+            <label for="qr-email-to">to:</label>
+            <input
+              id="qr-email-to"
+              class="input95"
+              type="email"
+              size="32"
+              placeholder="someone@example.com"
+            />
+          </div>
+          <div class="field-row">
+            <label for="qr-email-subject">subject:</label>
+            <input id="qr-email-subject" class="input95" type="text" size="32" />
+          </div>
+          <div class="field-row">
+            <label for="qr-email-body">message:</label>
+          </div>
+          <div class="field-row">
+            <textarea id="qr-email-body" class="input95 qr-result" rows="2"></textarea>
+          </div>
+        </div>
+
+        <div class="qr-form" data-form="phone" hidden>
+          <div class="field-row">
+            <label for="qr-phone">phone number:</label>
+            <input
+              id="qr-phone"
+              class="input95"
+              type="tel"
+              size="20"
+              placeholder="+1 555 867 5309"
+            />
+          </div>
+        </div>
+
+        <div class="qr-form" data-form="address" hidden>
+          <div class="field-row">
+            <label for="qr-address">address:</label>
+          </div>
+          <div class="field-row">
+            <textarea
+              id="qr-address"
+              class="input95 qr-result"
+              rows="2"
+              placeholder="1600 Pennsylvania Ave NW, Washington, DC 20500"
+            ></textarea>
+          </div>
+          <p class="meta">Scanning opens the address in a maps app.</p>
+        </div>
+
+        <div class="qr-form" data-form="wifi" hidden>
+          <div class="field-row">
+            <label for="qr-wifi-ssid">network name:</label>
+            <input id="qr-wifi-ssid" class="input95" type="text" size="24" />
+          </div>
+          <div class="field-row">
+            <label for="qr-wifi-pass">password:</label>
+            <input id="qr-wifi-pass" class="input95" type="text" size="24" />
+          </div>
+          <div class="field-row">
+            <label for="qr-wifi-sec">security:</label>
+            <select id="qr-wifi-sec" class="input95">
+              <option value="WPA" selected>WPA / WPA2 / WPA3</option>
+              <option value="WEP">WEP</option>
+              <option value="nopass">none (open network)</option>
+            </select>
+            <label
+              ><input id="qr-wifi-hidden" type="checkbox" /> hidden
+              network</label
+            >
+          </div>
+        </div>
+
+        <div class="qr-form" data-form="text" hidden>
+          <div class="field-row">
+            <label for="qr-text">text:</label>
+          </div>
+          <div class="field-row">
+            <textarea
+              id="qr-text"
+              class="input95 qr-result"
+              rows="3"
+              placeholder="Any text..."
+            ></textarea>
+          </div>
+        </div>
+
+        <div class="qr-form" data-form="vcard" hidden>
+          <div class="field-row">
+            <label for="qr-vc-name">full name:</label>
+            <input id="qr-vc-name" class="input95" type="text" size="28" />
+          </div>
+          <div class="field-row">
+            <label for="qr-vc-phone">phone:</label>
+            <input id="qr-vc-phone" class="input95" type="tel" size="20" />
+          </div>
+          <div class="field-row">
+            <label for="qr-vc-email">email:</label>
+            <input id="qr-vc-email" class="input95" type="email" size="28" />
+          </div>
+          <div class="field-row">
+            <label for="qr-vc-org">organization:</label>
+            <input id="qr-vc-org" class="input95" type="text" size="24" />
+            <label for="qr-vc-title">title:</label>
+            <input id="qr-vc-title" class="input95" type="text" size="18" />
+          </div>
+          <div class="field-row">
+            <label for="qr-vc-url">website:</label>
+            <input id="qr-vc-url" class="input95" type="url" size="28" />
+          </div>
+          <div class="field-row">
+            <label for="qr-vc-adr">address:</label>
+            <input id="qr-vc-adr" class="input95" type="text" size="36" />
+          </div>
+        </div>
+
+        <hr />
         <div class="field-row">
-          <label for="qr-ec">error correction:</label>
-          <select id="qr-ec" class="input95">
-            <option value="L">L &ndash; low (7%)</option>
-            <option value="M" selected>M &ndash; medium (15%)</option>
-            <option value="Q">Q &ndash; quartile (25%)</option>
-            <option value="H">H &ndash; high (30%)</option>
-          </select>
           <label for="qr-size">size:</label>
           <select id="qr-size" class="input95">
             <option value="200">200 px</option>
@@ -75,6 +199,10 @@
           <button id="qr-save" class="btn95" type="button">
             Save as PNG
           </button>
+          <button id="qr-copy" class="btn95" type="button">
+            Copy image
+          </button>
+          <span class="meta" id="qr-copied"></span>
         </div>
         <p class="meta qr-status" id="qr-status"></p>
       </section>
@@ -96,26 +224,128 @@
 
     <script>
       window.addEventListener('DOMContentLoaded', function () {
-        var text = document.getElementById('qr-text');
-        var ec = document.getElementById('qr-ec');
+        var typeButtons = Array.prototype.slice.call(
+          document.querySelectorAll('.qr-type')
+        );
+        var forms = Array.prototype.slice.call(
+          document.querySelectorAll('.qr-form')
+        );
         var size = document.getElementById('qr-size');
         var canvas = document.getElementById('qr-canvas');
         var save = document.getElementById('qr-save');
+        var copy = document.getElementById('qr-copy');
+        var copied = document.getElementById('qr-copied');
         var status = document.getElementById('qr-status');
+        var currentType = 'link';
+
+        function v(id) {
+          return document.getElementById(id).value.trim();
+        }
+
+        // Escape \ ; , : " for the WIFI: payload format.
+        function escWifi(s) {
+          return s.replace(/([\\;,:"])/g, '\\$1');
+        }
+
+        // Escape vCard 3.0 text values.
+        function escVcard(s) {
+          return s
+            .replace(/\\/g, '\\\\')
+            .replace(/\n/g, '\\n')
+            .replace(/([,;])/g, '\\$1');
+        }
+
+        function buildPayload() {
+          switch (currentType) {
+            case 'link':
+              return v('qr-link-url');
+
+            case 'email': {
+              var to = v('qr-email-to');
+              if (!to) return '';
+              var params = [];
+              var subject = v('qr-email-subject');
+              var body = v('qr-email-body');
+              if (subject) params.push('subject=' + encodeURIComponent(subject));
+              if (body) params.push('body=' + encodeURIComponent(body));
+              return 'mailto:' + to + (params.length ? '?' + params.join('&') : '');
+            }
+
+            case 'phone': {
+              var num = v('qr-phone');
+              return num ? 'tel:' + num.replace(/[\s().-]/g, '') : '';
+            }
+
+            case 'address': {
+              var adr = v('qr-address');
+              return adr
+                ? 'https://maps.google.com/?q=' + encodeURIComponent(adr)
+                : '';
+            }
+
+            case 'wifi': {
+              var ssid = v('qr-wifi-ssid');
+              if (!ssid) return '';
+              var sec = document.getElementById('qr-wifi-sec').value;
+              var pass = v('qr-wifi-pass');
+              if (sec !== 'nopass' && !pass) return '';
+              var out = 'WIFI:T:' + sec + ';S:' + escWifi(ssid) + ';';
+              if (sec !== 'nopass') out += 'P:' + escWifi(pass) + ';';
+              if (document.getElementById('qr-wifi-hidden').checked) {
+                out += 'H:true;';
+              }
+              return out + ';';
+            }
+
+            case 'text':
+              return document.getElementById('qr-text').value;
+
+            case 'vcard': {
+              var name = v('qr-vc-name');
+              if (!name) return '';
+              var parts = name.split(/\s+/);
+              var family = parts.length > 1 ? parts.pop() : '';
+              var given = parts.join(' ');
+              var lines = [
+                'BEGIN:VCARD',
+                'VERSION:3.0',
+                'N:' + escVcard(family) + ';' + escVcard(given) + ';;;',
+                'FN:' + escVcard(name)
+              ];
+              var org = v('qr-vc-org');
+              var title = v('qr-vc-title');
+              var phone = v('qr-vc-phone');
+              var email = v('qr-vc-email');
+              var url = v('qr-vc-url');
+              var vAdr = v('qr-vc-adr');
+              if (org) lines.push('ORG:' + escVcard(org));
+              if (title) lines.push('TITLE:' + escVcard(title));
+              if (phone) lines.push('TEL;TYPE=CELL:' + phone);
+              if (email) lines.push('EMAIL:' + email);
+              if (url) lines.push('URL:' + url);
+              if (vAdr) lines.push('ADR;TYPE=HOME:;;' + escVcard(vAdr) + ';;;;');
+              lines.push('END:VCARD');
+              return lines.join('\n');
+            }
+          }
+          return '';
+        }
 
         function render() {
-          var value = text.value;
+          copied.textContent = '';
+          var value = buildPayload();
           if (!value) {
             canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
             save.disabled = true;
-            status.textContent = 'Type something above to generate a code.';
+            copy.disabled = true;
+            status.textContent = 'Fill in the fields above to generate a code.';
             return;
           }
           QRCode.toCanvas(
             canvas,
             value,
             {
-              errorCorrectionLevel: ec.value,
+              errorCorrectionLevel: 'H',
               width: parseInt(size.value, 10),
               margin: 2,
               color: { dark: '#000000', light: '#ffffff' }
@@ -123,19 +353,40 @@
             function (err) {
               if (err) {
                 save.disabled = true;
+                copy.disabled = true;
                 status.textContent =
                   'Could not generate a code: ' + err.message;
                 return;
               }
               save.disabled = false;
-              status.textContent =
-                value.length +
-                ' characters encoded at level ' +
-                ec.value +
-                '. Nothing leaves your browser.';
+              copy.disabled = false;
+              status.textContent = '';
             }
           );
         }
+
+        typeButtons.forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            currentType = btn.dataset.type;
+            typeButtons.forEach(function (b) {
+              b.classList.toggle('is-active', b === btn);
+            });
+            forms.forEach(function (f) {
+              f.hidden = f.dataset.form !== currentType;
+            });
+            render();
+          });
+        });
+
+        forms.forEach(function (f) {
+          Array.prototype.forEach.call(
+            f.querySelectorAll('input, textarea, select'),
+            function (el) {
+              el.addEventListener('input', render);
+              el.addEventListener('change', render);
+            }
+          );
+        });
 
         save.addEventListener('click', function () {
           var a = document.createElement('a');
@@ -144,8 +395,21 @@
           a.click();
         });
 
-        text.addEventListener('input', render);
-        ec.addEventListener('change', render);
+        copy.addEventListener('click', function () {
+          if (!navigator.clipboard || !window.ClipboardItem) {
+            copied.textContent = 'clipboard not available in this browser';
+            return;
+          }
+          canvas.toBlob(function (blob) {
+            navigator.clipboard
+              .write([new ClipboardItem({ 'image/png': blob })])
+              .then(
+                function () { copied.textContent = 'copied!'; },
+                function () { copied.textContent = 'could not copy'; }
+              );
+          }, 'image/png');
+        });
+
         size.addEventListener('change', render);
         render();
       });

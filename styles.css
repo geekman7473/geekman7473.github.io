@@ -247,6 +247,11 @@ tbody tr:hover td { background: #fff3b0; }
   cursor: default;
   border-style: outset;
 }
+.btn95.is-active {
+  border-style: inset;
+  background: #e8e8e8;
+  font-weight: bold;
+}
 
 .input95 {
   font-family: "Courier New", Courier, monospace;
@@ -275,37 +280,30 @@ textarea.input95 { resize: vertical; }
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 12px;
 }
-.tool-card {
+a.tool-card {
+  display: block;
   background: #c0c0c0;
   border: 2px outset #c0c0c0;
   padding: 3px;
+  color: #000;
+  text-decoration: none;
 }
+a.tool-card:visited { color: #000; }
+a.tool-card:hover,
+a.tool-card:active {
+  background: #c0c0c0;
+  color: #000;
+}
+a.tool-card:hover .tool-card__title { text-decoration: underline; }
+a.tool-card:active { border-style: inset; }
+.tool-card[hidden] { display: none; }
 .tool-card__title {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 6px;
   background: #000080;
   color: #fff;
   font-family: "Courier New", Courier, monospace;
   font-size: 13px;
   font-weight: bold;
-  padding: 2px 3px 2px 6px;
-}
-.tool-card__title a { color: #fff; text-decoration: none; }
-.tool-card__title a:hover { background: transparent; color: #fff; text-decoration: underline; }
-.tool-card__buttons { display: flex; gap: 2px; }
-.wbtn {
-  display: inline-block;
-  width: 15px;
-  height: 14px;
-  background: #c0c0c0;
-  color: #000;
-  border: 1px outset #fff;
-  font-size: 10px;
-  line-height: 12px;
-  text-align: center;
-  font-weight: bold;
+  padding: 2px 6px;
 }
 .tool-card__body {
   background: #fff;
@@ -314,7 +312,6 @@ textarea.input95 { resize: vertical; }
 }
 .tool-card__body p { margin: 0 0 6px; }
 .tool-card__body p:last-child { margin-bottom: 0; }
-.tool-card__origin { color: #555; }
 
 /* --- QR pages -------------------------------------------------------- */
 .qr-output {
