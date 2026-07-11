@@ -341,6 +341,35 @@ a.tool-card:active { border-style: inset; }
   box-sizing: border-box;
 }
 
+/* --- Win95 indeterminate progress bar -------------------------------- */
+.progress95 {
+  border: 2px inset #c0c0c0;
+  background: #fff;
+  height: 18px;
+  position: relative;
+  overflow: hidden;
+  margin: 8px 0;
+}
+.progress95__bar {
+  position: absolute;
+  top: 1px;
+  bottom: 1px;
+  left: 0;
+  width: 40%;
+  background: repeating-linear-gradient(
+    90deg,
+    #000080 0,
+    #000080 12px,
+    #fff 12px,
+    #fff 14px
+  );
+  animation: progress95-slide 1.4s linear infinite;
+}
+@keyframes progress95-slide {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(250%); }
+}
+
 /* --- Footer --------------------------------------------------------- */
 .site-footer {
   margin-top: 18px;

@@ -1,0 +1,280 @@
+---
+# Empty front matter so Jekyll processes this file's Liquid tags.
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Converter &middot; Justin Becker</title>
+    <meta
+      name="description"
+      content="Free in-browser image converter powered by ImageMagick WebAssembly. Convert between JPEG, PNG, WebP, GIF, BMP, TIFF, and ICO with adjustable quality. EXIF preserved, nothing uploaded."
+    />
+    <meta name="theme-color" content="#c0c0c0" />
+    <link rel="canonical" href="https://geekman7473.github.io/tools/image-converter/" />
+    <link rel="stylesheet" href="/styles.css" />
+    <script defer src="/script.js"></script>
+    {% include analytics.html %}
+  </head>
+  <body id="top">
+    <div class="banner">
+      <h1>Image Converter</h1>
+      <p class="meta">
+        ImageMagick in your browser &middot; nothing gets uploaded
+      </p>
+    </div>
+
+    <div class="toolbar">
+      [
+      <a href="/">home</a> <span class="sep">|</span>
+      <a href="/tools/">all tools</a>
+      ]
+    </div>
+
+    <main>
+      <div class="titlebar">Input</div>
+      <section class="panel">
+        <div class="field-row">
+          <button id="ic-choose" class="btn95" type="button">
+            Choose image...
+          </button>
+          <button id="ic-paste" class="btn95" type="button">
+            Paste from clipboard
+          </button>
+          <input id="ic-file" type="file" accept="image/*" hidden />
+        </div>
+        <p class="meta">
+          You can also press Ctrl+V anywhere on this page to paste a copied
+          image.
+        </p>
+        <p class="meta" id="ic-input-info">No image selected.</p>
+      </section>
+
+      <div class="titlebar">Options</div>
+      <section class="panel">
+        <div class="field-row">
+          <label for="ic-format">output format:</label>
+          <select id="ic-format" class="input95">
+            <option value="JPEG" selected>JPEG (.jpg)</option>
+            <option value="PNG">PNG (.png)</option>
+            <option value="WEBP">WebP (.webp)</option>
+            <option value="GIF">GIF (.gif)</option>
+            <option value="BMP">BMP (.bmp)</option>
+            <option value="TIFF">TIFF (.tiff)</option>
+            <option value="ICO">ICO (.ico)</option>
+          </select>
+          <label for="ic-quality">quality:</label>
+          <input
+            id="ic-quality"
+            type="range"
+            min="1"
+            max="100"
+            value="85"
+          />
+          <span class="meta" id="ic-quality-value">85</span>
+        </div>
+        <div class="field-row">
+          <button id="ic-convert" class="btn95" type="button" disabled>
+            Convert
+          </button>
+        </div>
+        <div class="progress95" id="ic-progress" hidden>
+          <div class="progress95__bar"></div>
+        </div>
+        <p class="meta qr-status" id="ic-status">Loading page...</p>
+        <p class="meta">
+          Metadata (EXIF) is carried over when the output format supports
+          it.
+        </p>
+      </section>
+
+      <div class="titlebar">Result</div>
+      <section class="panel">
+        <p class="meta" id="ic-output-info">Nothing converted yet.</p>
+        <div class="field-row">
+          <button id="ic-download" class="btn95" type="button" disabled>
+            Download
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>
+        &copy; <span id="year"></span> Justin Becker &middot;
+        Conversion by
+        <a
+          href="https://github.com/dlemstra/magick-wasm"
+          target="_blank"
+          rel="noreferrer"
+          >magick-wasm</a
+        >
+        (Apache-2.0) &middot; <a href="#top">top</a>
+      </p>
+    </footer>
+
+    <script type="module">
+      const CDN = 'https://cdn.jsdelivr.net/npm/@imagemagick/magick-wasm@0.0.41/dist';
+
+      const chooseBtn = document.getElementById('ic-choose');
+      const pasteBtn = document.getElementById('ic-paste');
+      const fileInput = document.getElementById('ic-file');
+      const inputInfo = document.getElementById('ic-input-info');
+      const format = document.getElementById('ic-format');
+      const quality = document.getElementById('ic-quality');
+      const qualityValue = document.getElementById('ic-quality-value');
+      const convertBtn = document.getElementById('ic-convert');
+      const progress = document.getElementById('ic-progress');
+      const status = document.getElementById('ic-status');
+      const outputInfo = document.getElementById('ic-output-info');
+      const downloadBtn = document.getElementById('ic-download');
+
+      const EXT = {
+        JPEG: 'jpg', PNG: 'png', WEBP: 'webp', GIF: 'gif',
+        BMP: 'bmp', TIFF: 'tiff', ICO: 'ico'
+      };
+      const MIME = {
+        JPEG: 'image/jpeg', PNG: 'image/png', WEBP: 'image/webp',
+        GIF: 'image/gif', BMP: 'image/bmp', TIFF: 'image/tiff',
+        ICO: 'image/x-icon'
+      };
+
+      let ImageMagick = null;
+      let input = null; // { baseName, bytes, size }
+      let output = null; // { blob, name, url }
+
+      function setStatus(msg) {
+        status.textContent = msg;
+      }
+
+      function formatBytes(n) {
+        if (n < 1024) return n + ' B';
+        if (n < 1024 * 1024) return (n / 1024).toFixed(1) + ' KB';
+        return (n / (1024 * 1024)).toFixed(1) + ' MB';
+      }
+
+      function updateConvertButton() {
+        convertBtn.disabled = !(ImageMagick && input);
+      }
+
+      async function setInput(blob, name) {
+        const bytes = new Uint8Array(await blob.arrayBuffer());
+        const baseName = name.replace(/\.[^.]+$/, '') || 'image';
+        input = { baseName, bytes, size: blob.size };
+        inputInfo.textContent =
+          name + ' · ' + formatBytes(blob.size);
+        updateConvertButton();
+        setStatus(ImageMagick ? 'Ready to convert.' : status.textContent);
+      }
+
+      function clearOutput() {
+        if (output) URL.revokeObjectURL(output.url);
+        output = null;
+        outputInfo.textContent = 'Nothing converted yet.';
+        downloadBtn.disabled = true;
+      }
+
+      function convert() {
+        if (!ImageMagick || !input) return;
+        clearOutput();
+        convertBtn.disabled = true;
+        progress.hidden = false;
+        setStatus('Converting...');
+        const fmt = format.value;
+        const q = parseInt(quality.value, 10);
+        // Give the browser a beat to paint the progress bar before the
+        // wasm call blocks the main thread.
+        setTimeout(() => {
+          try {
+            ImageMagick.read(input.bytes, (image) => {
+              image.quality = q;
+              image.write(fmt, (data) => {
+                const blob = new Blob([data], { type: MIME[fmt] });
+                const name = input.baseName + '.' + EXT[fmt];
+                output = { blob, name, url: URL.createObjectURL(blob) };
+              });
+            });
+            outputInfo.textContent =
+              output.name + ' · ' + formatBytes(output.blob.size) +
+              ' (input was ' + formatBytes(input.size) + ')';
+            downloadBtn.disabled = false;
+            setStatus('Done.');
+          } catch (err) {
+            setStatus('Conversion failed: ' + (err.message || err));
+          } finally {
+            progress.hidden = true;
+            updateConvertButton();
+          }
+        }, 60);
+      }
+
+      /* --- Input wiring --------------------------------------------- */
+      chooseBtn.addEventListener('click', () => fileInput.click());
+      fileInput.addEventListener('change', () => {
+        if (fileInput.files && fileInput.files[0]) {
+          const f = fileInput.files[0];
+          setInput(f, f.name);
+          fileInput.value = '';
+        }
+      });
+
+      document.addEventListener('paste', (e) => {
+        const items = (e.clipboardData || {}).items || [];
+        for (const item of items) {
+          if (item.type.indexOf('image/') === 0) {
+            e.preventDefault();
+            const blob = item.getAsFile();
+            setInput(blob, blob.name || 'pasted-image');
+            return;
+          }
+        }
+        setStatus('Clipboard has no image. Copy a picture first.');
+      });
+
+      pasteBtn.addEventListener('click', async () => {
+        if (!navigator.clipboard || !navigator.clipboard.read) {
+          setStatus('Clipboard access not available here. Press Ctrl+V instead.');
+          return;
+        }
+        try {
+          const items = await navigator.clipboard.read();
+          for (const item of items) {
+            const type = item.types.find((t) => t.indexOf('image/') === 0);
+            if (type) {
+              await setInput(await item.getType(type), 'pasted-image');
+              return;
+            }
+          }
+          setStatus('Clipboard has no image. Copy a picture first.');
+        } catch {
+          setStatus('Could not read the clipboard. Press Ctrl+V instead.');
+        }
+      });
+
+      quality.addEventListener('input', () => {
+        qualityValue.textContent = quality.value;
+      });
+      convertBtn.addEventListener('click', convert);
+      downloadBtn.addEventListener('click', () => {
+        if (!output) return;
+        const a = document.createElement('a');
+        a.download = output.name;
+        a.href = output.url;
+        a.click();
+      });
+
+      /* --- Engine load ----------------------------------------------- */
+      try {
+        setStatus('Loading ImageMagick engine (~14 MB, one-time)...');
+        const magick = await import(CDN + '/index.js');
+        await magick.initializeImageMagick(new URL(CDN + '/magick.wasm'));
+        ImageMagick = magick.ImageMagick;
+        setStatus(input ? 'Ready to convert.' : 'Engine ready. Pick an image.');
+        updateConvertButton();
+      } catch (err) {
+        setStatus('Could not load the ImageMagick engine: ' + (err.message || err));
+      }
+    </script>
+  </body>
+</html>
