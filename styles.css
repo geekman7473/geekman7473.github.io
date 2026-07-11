@@ -341,6 +341,52 @@ a.tool-card:active { border-style: inset; }
   box-sizing: border-box;
 }
 
+/* --- Side-by-side image comparison ----------------------------------- */
+.compare95 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+@media (max-width: 520px) {
+  .compare95 { grid-template-columns: 1fr; }
+}
+.compare95 figure { margin: 0; }
+.compare95 figcaption {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+.compare95 img {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  border: 2px inset #c0c0c0;
+  background: #fff;
+  padding: 2px;
+  cursor: zoom-in;
+}
+.compare95 img[hidden] { display: none; }
+
+/* --- Fullscreen lightbox ---------------------------------------------- */
+.lightbox95 {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-out;
+}
+.lightbox95 img {
+  max-width: 96vw;
+  max-height: 96vh;
+  border: 2px outset #c0c0c0;
+  background: #fff;
+  padding: 2px;
+}
+.lightbox95[hidden] { display: none; }
+
 /* --- Win95 indeterminate progress bar -------------------------------- */
 .progress95 {
   border: 2px inset #c0c0c0;

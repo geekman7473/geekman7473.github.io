@@ -98,7 +98,28 @@
           </button>
         </div>
       </section>
+
+      <div class="titlebar">Preview</div>
+      <section class="panel">
+        <div class="compare95">
+          <figure>
+            <figcaption>input</figcaption>
+            <img id="ic-preview-in" alt="Input image" hidden />
+            <p class="meta" id="ic-preview-in-empty">No image selected.</p>
+          </figure>
+          <figure>
+            <figcaption>output</figcaption>
+            <img id="ic-preview-out" alt="Converted image" hidden />
+            <p class="meta" id="ic-preview-out-empty">Nothing converted yet.</p>
+          </figure>
+        </div>
+        <p class="meta">Click an image to view it full screen.</p>
+      </section>
     </main>
+
+    <div class="lightbox95" id="ic-lightbox" hidden>
+      <img id="ic-lightbox-img" alt="Full screen image view" />
+    </div>
 
     <footer class="site-footer">
       <p>
@@ -129,6 +150,12 @@
       const status = document.getElementById('ic-status');
       const outputInfo = document.getElementById('ic-output-info');
       const downloadBtn = document.getElementById('ic-download');
+      const previewIn = document.getElementById('ic-preview-in');
+      const previewInEmpty = document.getElementById('ic-preview-in-empty');
+      const previewOut = document.getElementById('ic-preview-out');
+      const previewOutEmpty = document.getElementById('ic-preview-out-empty');
+      const lightbox = document.getElementById('ic-lightbox');
+      const lightboxImg = document.getElementById('ic-lightbox-img');
 
       const EXT = {
         JPEG: 'jpg', PNG: 'png', WEBP: 'webp', GIF: 'gif',
@@ -141,7 +168,7 @@
       };
 
       let ImageMagick = null;
-      let input = null; // { baseName, bytes, size }
+      let input = null; // { baseName, bytes, size, url }
       let output = null; // { blob, name, url }
 
       function setStatus(msg) {
@@ -158,12 +185,27 @@
         convertBtn.disabled = !(ImageMagick && input);
       }
 
+      function showPreview(img, emptyMsg, url) {
+        img.src = url;
+        img.hidden = false;
+        emptyMsg.hidden = true;
+      }
+
+      function hidePreview(img, emptyMsg, message) {
+        img.removeAttribute('src');
+        img.hidden = true;
+        emptyMsg.textContent = message;
+        emptyMsg.hidden = false;
+      }
+
       async function setInput(blob, name) {
         const bytes = new Uint8Array(await blob.arrayBuffer());
         const baseName = name.replace(/\.[^.]+$/, '') || 'image';
-        input = { baseName, bytes, size: blob.size };
+        if (input) URL.revokeObjectURL(input.url);
+        input = { baseName, bytes, size: blob.size, url: URL.createObjectURL(blob) };
         inputInfo.textContent =
           name + ' · ' + formatBytes(blob.size);
+        showPreview(previewIn, previewInEmpty, input.url);
         updateConvertButton();
         setStatus(ImageMagick ? 'Ready to convert.' : status.textContent);
       }
@@ -173,6 +215,7 @@
         output = null;
         outputInfo.textContent = 'Nothing converted yet.';
         downloadBtn.disabled = true;
+        hidePreview(previewOut, previewOutEmpty, 'Nothing converted yet.');
       }
 
       function convert() {
@@ -199,6 +242,7 @@
               output.name + ' · ' + formatBytes(output.blob.size) +
               ' (input was ' + formatBytes(input.size) + ')';
             downloadBtn.disabled = false;
+            showPreview(previewOut, previewOutEmpty, output.url);
             setStatus('Done.');
           } catch (err) {
             setStatus('Conversion failed: ' + (err.message || err));
@@ -250,6 +294,38 @@
         } catch {
           setStatus('Could not read the clipboard. Press Ctrl+V instead.');
         }
+      });
+
+      /* --- Previews and fullscreen lightbox -------------------------- */
+      // Browsers can't render every output format inline (e.g. TIFF).
+      previewOut.addEventListener('error', () => {
+        hidePreview(
+          previewOut,
+          previewOutEmpty,
+          'No inline preview for this format; the download still works.'
+        );
+      });
+      previewIn.addEventListener('error', () => {
+        hidePreview(
+          previewIn,
+          previewInEmpty,
+          'This image cannot be previewed in the browser.'
+        );
+      });
+
+      function openLightbox(src) {
+        lightboxImg.src = src;
+        lightbox.hidden = false;
+      }
+      function closeLightbox() {
+        lightbox.hidden = true;
+        lightboxImg.removeAttribute('src');
+      }
+      previewIn.addEventListener('click', () => openLightbox(previewIn.src));
+      previewOut.addEventListener('click', () => openLightbox(previewOut.src));
+      lightbox.addEventListener('click', closeLightbox);
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !lightbox.hidden) closeLightbox();
       });
 
       quality.addEventListener('input', () => {
