@@ -10,7 +10,7 @@ Buy a cheap Gigabit switch and connect *all* of your players via ethernet. If po
 
 # Intro
 
-I have been throwing LAN parties, or attending them for over 15 years now. During that time, I have built up some tribal knowledge of what it takes to throw a succesfull LAN party. This guide assumes a couple of things:
+I have been throwing LAN parties, or attending them for over 15 years now. During that time, I have built up some tribal knowledge of what it takes to throw a successful LAN party. This guide assumes a couple of things:
 
 - Your party is somewhere between 5 and 24 guests. Anything smaller is really just "casually hanging with the fellas" and anything larger gets into serious event planning territory.
 - You are predominantly looking to play on PC. While I do like to mix in some console games occasionally, if you are looking for a guide on how to host an Xbox 360 LAN for example, you will need to look elsewhere.
@@ -41,7 +41,7 @@ This is hopefully the easy part: anywhere with space for a couple tables and cha
 </figure>
 
 ## Who
-Personally, I have only been to LANs attended by personal friends and acquiantances. While there are some surviving public LAN parties, I would not reccomend inviting strangers into a personal home. I also recommend keeping the invite list strictly to those "gaming." If you invite people who are going to come just to "hangout" they will take up valuable floor space, and distract your gamers from why you actually invited them. With that said, I still encourage you to get people who are slightly outside of their comfort zone, and not exactly the hardcore gamer stereotype. If you play more casual, lowkey, games you will cast a wider net in terms of who might want to come to your party.
+Personally, I have only been to LANs attended by personal friends and acquaintances. While there are some surviving public LAN parties, I would not recommend inviting strangers into a personal home. I also recommend keeping the invite list strictly to those "gaming." If you invite people who are going to come just to "hangout" they will take up valuable floor space, and distract your gamers from why you actually invited them. With that said, I still encourage you to get people who are slightly outside of their comfort zone, and not exactly the hardcore gamer stereotype. If you play more casual, lowkey, games you will cast a wider net in terms of who might want to come to your party.
 
 <figure>
   <img src="{{ '/assets/img/posts/2026-07-12-how-to-host-a-lanparty-2026/sp-gamer-stereotype.jpg' | relative_url }}"
@@ -53,9 +53,9 @@ Personally, I have only been to LANs attended by personal friends and acquiantan
 
 ## When
 
-This one depends a lot on how old you and your guests are. When I was in highschool our LANs were almost **always** 24 hour events. One trick that I recommend to any teenagers wanting to throw a LAN is to wait for a school halfday that lands on a Friday. This way you can start your party early in the afternoon, finish Saturday morning, and everyone will have all day Sunday to recover before school.
+This one depends a lot on how old you and your guests are. When I was in high school our LANs were almost **always** 24 hour events. One trick that I recommend to any teenagers wanting to throw a LAN is to wait for a school halfday that lands on a Friday. This way you can start your party early in the afternoon, finish Saturday morning, and everyone will have all day Sunday to recover before school.
 
-Now that i'm in my late 20s, by about hour 10 my back hurts too much to want to keep going. We generally start around noon, and play until 11pm or so. Read the room, and see what your players want to do.
+Now that I'm in my late 20s, by about hour 10 my back hurts too much to want to keep going. We generally start around noon, and play until 11pm or so. Read the room, and see what your players want to do.
 
 # How
 
@@ -85,7 +85,7 @@ This setup promotes a more social group dynamic where everyone feels included in
   <figcaption class="meta">The outerlying islands of the LAN empire (March 2025)</figcaption>
 </figure>
 
-In this layout these two players on the "overflow" table felt like they had been exiled from the festivities. I try to avoid this problem when possible. Admittedly, my living space is unusual, and most houses won't have a space big enough for all of your players to be setup linearly like this. An alternative layout is to have a handful of rows spaced out by a couple feet like this:
+In this layout these two players on the "overflow" table felt like they had been exiled from the festivities. I try to avoid this problem when possible. Admittedly, my living space is unusual, and most houses won't have a space big enough for all of your players to be set up linearly like this. An alternative layout is to have a handful of rows spaced out by a couple feet like this:
 
 <figure>
   <img src="{{ '/assets/img/posts/2026-05-16-why-i-built-lanbucket/2023-03-party.jpg' | relative_url }}"
@@ -97,7 +97,7 @@ In this layout these two players on the "overflow" table felt like they had been
 
 This layout works better in rooms of certain shapes, but you end up creating a bunch of islands of socialization. You basically need a seating chart, like at a wedding reception, to figure out who will vibe well with who. It can work, but I don't like it as much.
 
-For the actual seating, I reccomend folding chairs if you are in a larger group. Proper desk chairs are much more comfortable, but they take up a lot more space. They are also cumbersome to move around. Folding chairs are relatively inexpensive. At time of writing, this padded chair is available for ~$23/each at Costco (https://sameday.costco.com/store/costco/products/55609644-maxchief-metal-highback-padded-folding-chair-1-each). If you are on a budget, check Goodwill, or other thrift stores in your area. We have found folding chairs at these stores for $4/each before.
+For the actual seating, I recommend folding chairs if you are in a larger group. Proper desk chairs are much more comfortable, but they take up a lot more space. They are also cumbersome to move around. Folding chairs are relatively inexpensive. At time of writing, this padded chair is available for ~$23/each at Costco (https://sameday.costco.com/store/costco/products/55609644-maxchief-metal-highback-padded-folding-chair-1-each). If you are on a budget, check Goodwill, or other thrift stores in your area. We have found folding chairs at these stores for $4/each before.
 
 I find that at a standard 6 foot folding table, you can comfortably seat four players like so:
 
@@ -114,11 +114,11 @@ Or at an 8 foot folding table, you can seat six players, but only if most of the
   <figcaption class="meta">Six players at an 8-foot folding table</figcaption>
 </figure>
 
-Another advantage of folding tables, which you can see in this renderings above, is that you can route cables between the folding tables by leaving a gap between two adjacent tables. If you were using a larger wooden table you would need to drill holes in the middle of the table to get the same effect.
+Another advantage of folding tables, which you can see in these renderings above, is that you can route cables between the folding tables by leaving a gap between two adjacent tables. If you were using a larger wooden table you would need to drill holes in the middle of the table to get the same effect.
 
 # Networking
 
-This sounds like it should be complicated, but I assure you that it is not. If you are the LAN party type, then you have probably seen videos of extravegent networking setups from the likes of Linus Tech Tips, including multiple servers, expensive fiber optics, caching services, etc. You do not need any of this. All you need is an **unmanaged gigabit ethernet switch** with enough ports for all of your players. This equipment is very cheap these days. I reccomend this model from TRENDNet: [TEG-S17D](https://www.amazon.com/TRENDnet-TEG-S17D-Switching-Enclosure-Protection/dp/B09WGYKFSQ?th=1). At time of writing this costs $58. I cannot stress enough how important it is to buy a **"switch"** and not a **"hub"**. Hubs are cheaper, but also much slower. The best way to think of it is that a hub acts as if all of your players are sharing the speed of one ethernet cable, but a switch allows everyone to run at full speed on their own cable. Also, I highly reccomend buying an unmanaged switch. Managed switches act more like routers in a way, since they will have a management portal (a website or an app), where you can change settings. If you are a beginner to all of this, you will not need the features of a managed switch, and could shoot yourself in the foot. At a LAN party I hosted in highschool I used some managed switches I bought at a yardsale without understanding what I was doing, and a couple hours in the network completely collapsed. Learn from my mistake, save yourself a couple bucks, and just buy an unmanaged switch.
+This sounds like it should be complicated, but I assure you that it is not. If you are the LAN party type, then you have probably seen videos of extravagant networking setups from the likes of Linus Tech Tips, including multiple servers, expensive fiber optics, caching services, etc. You do not need any of this. All you need is an **unmanaged gigabit ethernet switch** with enough ports for all of your players. This equipment is very cheap these days. I recommend this model from TRENDNet: [TEG-S17D](https://www.amazon.com/TRENDnet-TEG-S17D-Switching-Enclosure-Protection/dp/B09WGYKFSQ?th=1). At time of writing this costs $58. I cannot stress enough how important it is to buy a **"switch"** and not a **"hub"**. Hubs are cheaper, but also much slower. The best way to think of it is that a hub acts as if all of your players are sharing the speed of one ethernet cable, but a switch allows everyone to run at full speed on their own cable. Also, I highly recommend buying an unmanaged switch. Managed switches act more like routers in a way, since they will have a management portal (a website or an app), where you can change settings. If you are a beginner to all of this, you will not need the features of a managed switch, and could shoot yourself in the foot. At a LAN party I hosted in high school I used some managed switches I bought at a yard sale without understanding what I was doing, and a couple hours in the network completely collapsed. Learn from my mistake, save yourself a couple bucks, and just buy an unmanaged switch.
 
 In terms of setup, this is super easy. Plug the switch into power. Then plug an ethernet cable into each user's computer. Then plug one ethernet cable into your existing internet router / modem. Really nothing to it.
 
@@ -132,7 +132,7 @@ In terms of setup, this is super easy. Plug the switch into power. Then plug an 
 
 ## Can I daisy chain switches?
 
-Yes, with a caveat. You can daisy chain as many ethernet switches as you want, but [you can NEVER create a loop.](https://en.wikipedia.org/wiki/Switching_loop) Loops are possible with fancy managed switches, but requires expert setup. If you do create a loop, your network will drop out until you unplug the offending ethernet cable.
+Yes, with a caveat. You can daisy chain as many ethernet switches as you want, but [you can NEVER create a loop.](https://en.wikipedia.org/wiki/Switching_loop) Loops are possible with fancy managed switches, but require expert setup. If you do create a loop, your network will drop out until you unplug the offending ethernet cable.
 <figure>
   <img src="{{ '/assets/img/posts/2026-07-12-how-to-host-a-lanparty-2026/switch-loop-diagram.svg' | relative_url }}"
        alt="Two diagrams: on the left, switches arranged as a branching tree, one switch feeding two others with one branch continuing as a chain, marked OK. On the right, three switches wired in a triangle so the cabling forms a loop, crossed out in red and marked NEVER."
@@ -140,7 +140,7 @@ Yes, with a caveat. You can daisy chain as many ethernet switches as you want, b
        loading="lazy" />
 </figure>
 
-While using multiple small cheaper switches might be tempting, the connections between the switches will become bottlenecks. This will matter quite a bit if you are doing lots of file sharing. For that reason I reccomend just using one big switch that everyone can connect to.
+While using multiple small, cheaper switches might be tempting, the connections between the switches will become bottlenecks. This will matter quite a bit if you are doing lots of file sharing. For that reason I recommend just using one big switch that everyone can connect to.
 
 <figure>
   <img src="{{ '/assets/img/posts/2026-07-12-how-to-host-a-lanparty-2026/switch-bandwidth-diagram.svg' | relative_url }}"
@@ -152,19 +152,19 @@ While using multiple small cheaper switches might be tempting, the connections b
 
 ## What about WiFi?
 
-Do whatever you can to avoid WiFi. While WiFi is convenient, it has lead to more headache over the years than it is worth. The trouble with WiFi is scalability. While your home network might perform just fine with you and your spouse (+ kids?) when you cram 16 players in one room, it can bog down. The fundamental problem is that WiFi works using ["time division multiplexing"](https://en.wikipedia.org/wiki/Time-division_multiplexing) which is a big scary word for "everyone takes their turn." Basically, on each WiFi channel, only one device can talk at once. For most uses this is still an acceptable tradeoff, but for low-latency gaming the performance cost can be severe. The other problem with WiFi is compatability. For reasons that are mysterious to me, I have seen lots of issues in games over the years where WiFi users couldn't connect to eachother, or WiFi users can connect to eachother but not ethernet users, or Wifi users can only connect to *some* subset of the other users. It's a debugging nightmare, and not what you want to be dealing with on the day of your party. Unfortunately, lots of laptops these days don't come with Ethernet jacks. For that reason, I keep a handful of USB-C and USB-A ethernet dongles on hand. These things are dirtcheap online, and they make lots of networking issues go away. Totally worth it.
+Do whatever you can to avoid WiFi. While WiFi is convenient, it has led to more headache over the years than it is worth. The trouble with WiFi is scalability. While your home network might perform just fine with you and your spouse (+ kids?) when you cram 16 players in one room, it can bog down. The fundamental problem is that WiFi works using ["time division multiplexing"](https://en.wikipedia.org/wiki/Time-division_multiplexing) which is a big scary word for "everyone takes their turn." Basically, on each WiFi channel, only one device can talk at once. For most uses this is still an acceptable tradeoff, but for low-latency gaming the performance cost can be severe. The other problem with WiFi is compatibility. For reasons that are mysterious to me, I have seen lots of issues in games over the years where WiFi users couldn't connect to each other, or WiFi users can connect to each other but not ethernet users, or Wifi users can only connect to *some* subset of the other users. It's a debugging nightmare, and not what you want to be dealing with on the day of your party. Unfortunately, lots of laptops these days don't come with Ethernet jacks. For that reason, I keep a handful of USB-C and USB-A ethernet dongles on hand. These things are dirt cheap online, and they make lots of networking issues go away. Totally worth it.
 
 ## Is Gigabit enough?
 
 For now, yes. The majority of machines in circulation right now only have Gigabit ethernet ports. While more and more enthusiast class machines are coming out with 2.5Gbps ports, I think that the cost to upgrade your switches to 2.5Gbps doesn't pencil out for most people. The only exceptions are if you are planning on having lots of modern machines at the party, or if you plan on doing lots of file sharing. More on that later. For my LAN parties, I did upgrade to 2.5Gbps [with this switch](https://www.amazon.com/TRENDnet-Unmanaged-TEG-S3160-Switching-Protection/dp/B0DZ4W9623?th=1), but I still don't think that it's worth it for most people. 
 
-Additionally, it's also worth mentioning that 10Gbps hardware is not even close to being ready for mainstream consumers. I have read some horror stories of the compatability issues that others have had trying to get 10 Gig to work, not to mention that 10Gig hardware is extraodinarily expensive. Don't bother with 10Gig, atleast not for now.
+Additionally, it's also worth mentioning that 10Gbps hardware is not even close to being ready for mainstream consumers. I have read some horror stories of the compatibility issues that others have had trying to get 10 Gig to work, not to mention that 10Gig hardware is extraordinarily expensive. Don't bother with 10Gig, at least not for now.
 
 ## What ethernet cables do you use?
 
-Since we are targetting 1Gbps I reccomend sticking with Cat5e. This is cheaper than Cat6, or Cat7, which is overkill for our needs. You can buy premade cables in bulk online for reasonable prices. This is also something that your players should bring themselves, but in my experience people always forget these so it's good to have some on hand.
+Since we are targeting 1Gbps I recommend sticking with Cat5e. This is cheaper than Cat6, or Cat7, which is overkill for our needs. You can buy premade cables in bulk online for reasonable prices. This is also something that your players should bring themselves, but in my experience people always forget these so it's good to have some on hand.
 
-If you are willing to try something new, I reccomend making your own cables. Pre-made ethernet cables cost a lot more, and making the cables yourself allows you to make custom length cables exactly fitting your needs. For example, if the party is going to be held in the basement, and your Internet modem is on the 2nd floor, it can be useful to cut your own 100 foot long ethernet cable yourself. If you want to do this, buy a bulk reel of cable [like this one, ](https://www.amazon.com/VIVO-Ethernet-Waterproof-Outdoor-CABLE-V011/dp/B00GYGNCPO) a crimping tool [like this one, ](https://www.amazon.com/Cable-Matters-Ethernet-Pass-Through-Connectors/dp/B0CH3TDJ4B) RJ-45 connectors [like these](https://www.amazon.com/W-NECTOUN-100-PACK-Connectors-Network-Stranded/dp/B092J2WBLS), and a cable testing tool [like this one](https://www.amazon.com/TESMEN-TLP-123A-Ethernet-Continuity-Maintenance/dp/B0GN84H22V). There are numerous guides online on how to make an Ethernet cable, so I won't bore you with the details here.
+If you are willing to try something new, I recommend making your own cables. Pre-made ethernet cables cost a lot more, and making the cables yourself allows you to make custom length cables exactly fitting your needs. For example, if the party is going to be held in the basement, and your Internet modem is on the 2nd floor, it can be useful to cut your own 100 foot long ethernet cable yourself. If you want to do this, buy a bulk reel of cable [like this one, ](https://www.amazon.com/VIVO-Ethernet-Waterproof-Outdoor-CABLE-V011/dp/B00GYGNCPO) a crimping tool [like this one, ](https://www.amazon.com/Cable-Matters-Ethernet-Pass-Through-Connectors/dp/B0CH3TDJ4B) RJ-45 connectors [like these](https://www.amazon.com/W-NECTOUN-100-PACK-Connectors-Network-Stranded/dp/B092J2WBLS), and a cable testing tool [like this one](https://www.amazon.com/TESMEN-TLP-123A-Ethernet-Continuity-Maintenance/dp/B0GN84H22V). There are numerous guides online on how to make an Ethernet cable, so I won't bore you with the details here.
 
 ## Do I really need Internet access?
 
@@ -187,7 +187,7 @@ This is some very confusing language, but ["Fast Ethernet"](https://en.wikipedia
 
 One of the worst things that can happen to your LAN party is popping a circuit breaker. I remember tripping a breaker at an event once, and in the aftermath the whole party lost momentum and everyone just went home. This is a real vibe killer and you want to avoid it.
 
-The rule of thumb I use, which is very conservative admittedly is "no more than 4 desktops on one circuit". Since laptops use far less power, I go up to 6 on one circuit. Do your best to get the laptops and desktops to intermingle to spread out the load.
+The rule of thumb I use, which is very conservative admittedly, is "no more than 4 desktops on one circuit". Since laptops use far less power, I go up to 6 on one circuit. Do your best to get the laptops and desktops to intermingle to spread out the load.
 
 Now the annoying part is you have to figure out which power outlets in your home map to which circuit. This is a manual process, but you'll only have to do it once. This process is best done with a partner. Your partner will stand by the circuit breaker, and flip the breakers one by one. You will then run around the house trying to figure out which outlets are now dead. You can do this by plugging a lamp in, or by using a dedicated outlet tester [like this one.](https://www.homedepot.com/pep/Klein-Tools-Receptacle-Tester-RT110/206517828) This process is made much easier if you have walkie-talkies, or just stay on speaker phone with whoever is helping you out. Before starting, you should unplug or turn off any sensitive electronics. Once you determine which circuits go to which outlets, use a small piece of painter's tape to mark it. If you want to avoid this process next time, after the event, when pulling down these tape markers, take note of them. You can use this information to draw a low fidelity map of your house, and which breakers map to what. During this process also take note of where your major appliances are connected (A/C, Water Heater, Furnace, Stove, etc). Most of these heavy appliances will be on their own dedicated circuit, which should be labeled already in your breaker panel. If however they do share a circuit with any outlets, you will need to avoid those outlets.
 
@@ -200,7 +200,7 @@ Now the annoying part is you have to figure out which power outlets in your home
          alt="An open electrical breaker panel with a handwritten circuit directory listing which breaker feeds each room"
          width="1200" height="1600" loading="lazy" />
   </div>
-  <figcaption class="meta">When you make your diagram, shown below, you can hang it in an evelope inside your breaker panel. This diagram has been hanging in my childhood home for a decade now. I will admit that I don't know if this is code compliant. (July 2026)</figcaption>
+  <figcaption class="meta">When you make your diagram, shown below, you can hang it in an envelope inside your breaker panel. This diagram has been hanging in my childhood home for a decade now. I will admit that I don't know if this is code compliant. (July 2026)</figcaption>
 </figure>
 <figure>
   <img src="{{ '/assets/img/posts/2026-07-12-how-to-host-a-lanparty-2026/breaker-map.jpg' | relative_url }}"
@@ -211,13 +211,26 @@ Now the annoying part is you have to figure out which power outlets in your home
 
 # Day of setup
 
-I reccomend having your play space almost entirely setup before your first guests arrive. You may be able to enlist one or two guests to arrive early and help with setup, which I have had success with in the past. As a rough checklist, I would plan to have all of this done by start time:
+I recommend having your play space almost entirely set up before your first guests arrive. You may be able to enlist one or two guests to arrive early and help with setup, which I have had success with in the past. As a rough checklist, I would plan to have all of this done by start time:
 
 0. The night before, turn the A/C *wayyyyy* down in your play space. I set my A/C to 62F (17C). The idea is to not just cool down the air in the room, but also the contents of the room. This should help your room stay comfortable for longer the next day during play. Once play starts, return the temperature setting to normal. 
-1. Setup tables and chairs in roughly the final layout.
+1. Set up tables and chairs in roughly the final layout.
 2. Map out which outlets correspond to which breakers.
 3. Run extension cables from the outlets you identified in the previous step, and tape down the wires using masking tape to prevent tripping.
 4. Run an Ethernet cable from your Cable/Fiber modem to the play area, and connect it to your Ethernet switch.
-5. Setup your own PC, and smoke test your power and networking.
+5. Set up your own PC, and smoke test your power and networking.
+6. Tape down any wire, extension cord, or power strip that might move or be a tripping hazard. Go crazy with it.
 
 You can of course do more than this, but this is just the basics. One time I went so far as to prerun custom length Ethernet cables to each player's seat. I have also heard of organizers allocating particular outlets to each player. The sky is the limit here. The point of pre setup is to save time in the chaos once your guests show up, so you can play more games.
+
+<figure>
+  <img src="{{ '/assets/img/posts/2026-07-12-how-to-host-a-lanparty-2026/day-of-setup.jpg' | relative_url }}"
+       alt="A few people setting up PCs, monitors, and cabling on folding tables in a room before a LAN party begins"
+       width="1600" height="1200"
+       loading="lazy" />
+  <figcaption class="meta">Part of the way through setup, with a couple helpers. (March 2024)</figcaption>
+</figure>
+
+# What Games Should We Play?
+
+Unironically, this is the hardest part of planning a LAN party. While I can't say for certain that I have the right answers for your group, I'll lay out a couple of rough guidelines.
