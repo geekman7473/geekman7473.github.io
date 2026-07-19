@@ -220,12 +220,14 @@ Now the annoying part is you have to figure out which power outlets in your home
 I recommend having your play space almost entirely set up before your first guests arrive. You may be able to enlist one or two guests to arrive early and help with setup, which I have had success with in the past. As a rough checklist, I would plan to have all of this done by start time:
 
 0. The night before, turn the A/C *wayyyyy* down in your play space. I set my A/C to 62F (17C). The idea is to not just cool down the air in the room, but also the contents of the room. This should help your room stay comfortable for longer the next day during play. Once play starts, return the temperature setting to normal. 
-1. Set up tables and chairs in roughly the final layout.
+1. Set up tables and chairs in roughly the final layout. Ensure that every player will have a walking path to the food, and the bathroom. If you have time, sit down in every chair atleast once to make sure that player will have enough space.
 2. Map out which outlets correspond to which breakers.
 3. Run extension cables from the outlets you identified in the previous step, and tape down the wires using masking tape to prevent tripping.
 4. Run an Ethernet cable from your Cable/Fiber modem to the play area, and connect it to your Ethernet switch.
 5. Set up your own PC, and smoke test your power and networking.
 6. Tape down any wire, extension cord, or power strip that might move or be a tripping hazard. Go crazy with it.
+7. Designate a dumping spot for shoes, jackets, backpacks, or anything else your guests are bringing with them that they won't need at their seat. A coat closet, or spare room works nicely here.
+8. If you have pets, it may be a good idea to stow them away while your guests are coming and going, which might frighten them. You can think about letting them out once everyone is settled in.
 
 You can of course do more than this, but this is just the basics. One time I went so far as to prerun custom length Ethernet cables to each player's seat. I have also heard of organizers allocating particular outlets to each player. The sky is the limit here. The point of pre setup is to save time in the chaos once your guests show up, so you can play more games.
 
@@ -241,13 +243,34 @@ You can of course do more than this, but this is just the basics. One time I wen
 
 Unironically, this is the hardest part of planning a LAN party. While I can't say for certain that I have the right answers for your group, I'll lay out a couple of rough guidelines.
 
-# TODO:
+# Food
+
+- If getting pizza, just do delivery, otherwise it breaks the flow.
+## No hard alcohol
+
+I'm no teetotaller
+
+## Snacks
+
+# How to have fun
 - Get your wife to be social host for you, if you can
+- Team work makes the dream work
+- Don't be a one man IT department
+
+
+# Misc
+
+
+# TODO:
 - Cans and bottles, not solo cups
 - Designated food break times, as for social mingling
 - Stuff that you should buy a couple off to have on hand (mice, mouse pad, batteries, ethernet cables, display cables, power cords, xbox controllers)
 - Trash and recycle should be out and proud
 - Get people to help you cleanup at the end, most of the time they will be glad to help if given good direction
-- No hard alcohol
 - Beware of hardwood floors
 - Avoid using appliances that heat up the room
+- Low residue handfood
+- Put pets away. Cats are not compatible with LAN parties.
+- Take lots of pictures and videos, and ask for photos from your guests. Send photos out to your guests afterwards to build rapport.
+- Give some direction about what food people should bring so you don't end up with 50 bags of chips, and 100 cans of beer.
+- Whole section on money and the ramifications of taking money.
