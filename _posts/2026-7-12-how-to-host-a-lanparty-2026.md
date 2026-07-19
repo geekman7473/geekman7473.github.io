@@ -30,7 +30,7 @@ The art of the LAN party has certainly been in decline for the last 20 years or 
 
 ## Where
 
-This is hopefully the easy part: anywhere with space for a couple tables and chairs. Though I have been fortunate to live in several houses with large central spaces, I have also been to LANs in cramped basements, and once in my college dorm. Large cavernous event halls, like you may see on social media, are not required to have fun at a LAN. If you don't have enough space and still want to host, ask around; someone might be willing to host, as long as you do all the work.
+This is hopefully the easy part: anywhere with space for a couple tables and chairs. Though I have been fortunate to live in several houses with large central spaces, I have also been to LANs in cramped basements, and once in my college dorm. Large cavernous event halls, like you may see on social media, are not required to have fun at a LAN. If you don't have enough space and still want to host, ask around; someone might be willing to let you use their space, as long as you do all the work. Believe it or not, I have done this exact thing more than once!
 
 <figure>
   <img src="{{ '/assets/img/posts/2026-07-12-how-to-host-a-lanparty-2026/ceiling-gamer.jpg' | relative_url }}"
@@ -56,6 +56,10 @@ Personally, I have only been to LANs attended by personal friends and acquaintan
 This one depends a lot on how old you and your guests are. When I was in high school our LANs were almost **always** 24 hour events. One trick that I recommend to any teenagers wanting to throw a LAN is to wait for a school halfday that lands on a Friday. This way you can start your party early in the afternoon, finish Saturday morning, and everyone will have all day Sunday to recover before school.
 
 Now that I'm in my late 20s, by about hour 10 my back hurts too much to want to keep going. We generally start around noon, and play until 11pm or so. Read the room, and see what your players want to do.
+
+For scheduling, I normally use [Partiful](https://partiful.com/). It's an easy way to get a group together, invite players, and find a date that works for everyone. Most importantly, it allows you to send mass text messages to your group, so you can easily inform everyone of schedule changes, as well as send text message reminders leading up to the event. I am not sponsored by them or anything; I just think their product works well for my needs. Their product is free, but they make their money by attempting to upsell you on catering services and DJs, etc., which you can just ignore.
+
+One last note about human psychology: in my experience, if you schedule the LAN too far in advance, people will actually forget about it, and double-book themselves. Most people do not naturally reason about their social calendar beyond about 1 month, so that's the amount of lead time I would recommend for most groups. Now there are exceptions to this rule, especially for groups with older players who may need to plan around their children's calendars, but in my experience 30 days has been the sweet spot.
 
 # How
 
@@ -97,7 +101,7 @@ In this layout these two players on the "overflow" table felt like they had been
 
 This layout works better in rooms of certain shapes, but you end up creating a bunch of islands of socialization. You basically need a seating chart, like at a wedding reception, to figure out who will vibe well with who. It can work, but I don't like it as much.
 
-For the actual seating, I recommend folding chairs if you are in a larger group. Proper desk chairs are much more comfortable, but they take up a lot more space. They are also cumbersome to move around. Folding chairs are relatively inexpensive. At time of writing, this padded chair is available for ~$23/each at Costco (https://sameday.costco.com/store/costco/products/55609644-maxchief-metal-highback-padded-folding-chair-1-each). If you are on a budget, check Goodwill, or other thrift stores in your area. We have found folding chairs at these stores for $4/each before.
+For the actual seating, I recommend folding chairs if you are in a larger group. Proper desk chairs are much more comfortable, but they take up a lot more space. They are also cumbersome to move around. Folding chairs are relatively inexpensive. At time of writing, this padded chair is available for [~$23/each at Costco](https://sameday.costco.com/store/costco/products/55609644-maxchief-metal-highback-padded-folding-chair-1-each). If you are on a budget, check Goodwill, or other thrift stores in your area. We have found folding chairs at these stores for $4/each before.
 
 I find that at a standard 6 foot folding table, you can comfortably seat four players like so:
 
@@ -118,7 +122,7 @@ Another advantage of folding tables, which you can see in these renderings above
 
 # Networking
 
-This sounds like it should be complicated, but I assure you that it is not. If you are the LAN party type, then you have probably seen videos of extravagant networking setups from the likes of Linus Tech Tips, including multiple servers, expensive fiber optics, caching services, etc. You do not need any of this. All you need is an **unmanaged gigabit ethernet switch** with enough ports for all of your players. This equipment is very cheap these days. I recommend this model from TRENDNet: [TEG-S17D](https://www.amazon.com/TRENDnet-TEG-S17D-Switching-Enclosure-Protection/dp/B09WGYKFSQ?th=1). At time of writing this costs $58. I cannot stress enough how important it is to buy a **"switch"** and not a **"hub"**. Hubs are cheaper, but also much slower. The best way to think of it is that a hub acts as if all of your players are sharing the speed of one ethernet cable, but a switch allows everyone to run at full speed on their own cable. Also, I highly recommend buying an unmanaged switch. Managed switches act more like routers in a way, since they will have a management portal (a website or an app), where you can change settings. If you are a beginner to all of this, you will not need the features of a managed switch, and could shoot yourself in the foot. At a LAN party I hosted in high school I used some managed switches I bought at a yard sale without understanding what I was doing, and a couple hours in the network completely collapsed. Learn from my mistake, save yourself a couple bucks, and just buy an unmanaged switch.
+This sounds like it should be complicated, but I assure you that it is not. If you are the LAN party type, then you have probably seen videos of extravagant networking setups from the likes of Linus Tech Tips, including multiple servers, expensive fiber optics, caching services, etc. You do not need any of this. All you need is an **unmanaged gigabit ethernet switch** with enough ports for all of your players. This equipment is very cheap these days. I recommend this model from TRENDNet: [TEG-S17D](https://www.amazon.com/TRENDnet-TEG-S17D-Switching-Enclosure-Protection/dp/B09WGYKFSQ?th=1). At time of writing this costs $58. I cannot stress enough how important it is to buy a **"switch"** and not a **"hub"**. Hubs are cheaper, but also much slower. The best way to think of it is that a hub acts as if all of your players are sharing the speed of one ethernet cable, but a switch allows everyone to run at full speed on their own cable. Also, I highly recommend buying an unmanaged switch. Managed switches act more like routers in a way, since they will have a management portal (a website or an app), where you can change settings. If you are a beginner to all of this, you will not need the features of a managed switch, and might shoot yourself in the foot. At a LAN party I hosted in high school I used some managed switches I bought at a yard sale without understanding what I was doing, and a couple hours in the network completely collapsed. Learn from my mistake, save yourself a couple bucks, and just buy an unmanaged switch.
 
 In terms of setup, this is super easy. Plug the switch into power. Then plug an ethernet cable into each user's computer. Then plug one ethernet cable into your existing internet router / modem. Really nothing to it.
 
@@ -144,11 +148,13 @@ While using multiple small, cheaper switches might be tempting, the connections 
 
 <figure>
   <img src="{{ '/assets/img/posts/2026-07-12-how-to-host-a-lanparty-2026/switch-bandwidth-diagram.svg' | relative_url }}"
-       alt="Two bandwidth diagrams, assuming every link is 1 Gbps. On top, PCs A, B, C and D all share one switch, and the transfers A to B and C to D each get the full 1 Gbps. On the bottom, PC A and PC C on switch 1 talk to PC B and PC D on switch 2, but both transfers share the single 1 Gbps cable between the switches, so each gets only about 0.5 Gbps."
+       alt="Two bandwidth diagrams, assuming every link is 1 Gbps. On top, PCs A, B, C and D all share one switch, and the flows A to C and B to D each get the full 1 Gbps. On the bottom, A and B are on switch 1 while C and D are on switch 2, so the flows A to C and B to D both cross the single 1 Gbps cable between the switches and each gets only 0.5 Gbps."
        width="660" height="362"
        loading="lazy" />
-  <figcaption class="meta">Two users on one switch get the full pipe; split them across two switches and every cross-switch transfer fights over the one cable linking them</figcaption>
+  <figcaption class="meta">Users on the same switch get full speed. Traffic between your two switches is bottlenecked at the connection points.</figcaption>
 </figure>
+
+This is a simple diagram illustrating the problem with four machines and two switches, but the degree of the problem gets much
 
 ## What about WiFi?
 
@@ -156,13 +162,13 @@ Do whatever you can to avoid WiFi. While WiFi is convenient, it has led to more 
 
 ## Is Gigabit enough?
 
-For now, yes. The majority of machines in circulation right now only have Gigabit ethernet ports. While more and more enthusiast class machines are coming out with 2.5Gbps ports, I think that the cost to upgrade your switches to 2.5Gbps doesn't pencil out for most people. The only exceptions are if you are planning on having lots of modern machines at the party, or if you plan on doing lots of file sharing. More on that later. For my LAN parties, I did upgrade to 2.5Gbps [with this switch](https://www.amazon.com/TRENDnet-Unmanaged-TEG-S3160-Switching-Protection/dp/B0DZ4W9623?th=1), but I still don't think that it's worth it for most people. 
+For now, yes. The majority of machines in circulation right now only have Gigabit ethernet ports. While more and more enthusiast class machines are coming out with 2.5 Gbps ports, I think that the cost to upgrade your switches to 2.5 Gbps doesn't pencil out for most people. The only exceptions are if you are planning on having lots of modern machines at the party, or if you plan on doing lots of file sharing. More on that later. For my LAN parties, I did upgrade to 2.5 Gbps [with this switch](https://www.amazon.com/TRENDnet-Unmanaged-TEG-S3160-Switching-Protection/dp/B0DZ4W9623?th=1), but I still don't think that it's worth it for most people. 
 
-Additionally, it's also worth mentioning that 10Gbps hardware is not even close to being ready for mainstream consumers. I have read some horror stories of the compatibility issues that others have had trying to get 10 Gig to work, not to mention that 10Gig hardware is extraordinarily expensive. Don't bother with 10Gig, at least not for now.
+Additionally, it's also worth mentioning that 10 Gbps hardware is not even close to being ready for mainstream consumers. I have read some horror stories of the compatibility issues that others have had trying to get 10 Gig to work, not to mention that 10 Gig hardware is extraordinarily expensive. Don't bother with 10 Gig, at least not for now.
 
 ## What ethernet cables do you use?
 
-Since we are targeting 1Gbps I recommend sticking with Cat5e. This is cheaper than Cat6, or Cat7, which is overkill for our needs. You can buy premade cables in bulk online for reasonable prices. This is also something that your players should bring themselves, but in my experience people always forget these so it's good to have some on hand.
+Since we are targeting 1 Gbps I recommend sticking with Cat5e. This is cheaper than Cat6, or Cat7, which is overkill for our needs. You can buy premade cables in bulk online for reasonable prices. This is also something that your players should bring themselves, but in my experience people always forget these so it's good to have some on hand.
 
 If you are willing to try something new, I recommend making your own cables. Pre-made ethernet cables cost a lot more, and making the cables yourself allows you to make custom length cables exactly fitting your needs. For example, if the party is going to be held in the basement, and your Internet modem is on the 2nd floor, it can be useful to cut your own 100 foot long ethernet cable yourself. If you want to do this, buy a bulk reel of cable [like this one, ](https://www.amazon.com/VIVO-Ethernet-Waterproof-Outdoor-CABLE-V011/dp/B00GYGNCPO) a crimping tool [like this one, ](https://www.amazon.com/Cable-Matters-Ethernet-Pass-Through-Connectors/dp/B0CH3TDJ4B) RJ-45 connectors [like these](https://www.amazon.com/W-NECTOUN-100-PACK-Connectors-Network-Stranded/dp/B092J2WBLS), and a cable testing tool [like this one](https://www.amazon.com/TESMEN-TLP-123A-Ethernet-Continuity-Maintenance/dp/B0GN84H22V). There are numerous guides online on how to make an Ethernet cable, so I won't bore you with the details here.
 
@@ -234,3 +240,14 @@ You can of course do more than this, but this is just the basics. One time I wen
 # What Games Should We Play?
 
 Unironically, this is the hardest part of planning a LAN party. While I can't say for certain that I have the right answers for your group, I'll lay out a couple of rough guidelines.
+
+# TODO:
+- Get your wife to be social host for you, if you can
+- Cans and bottles, not solo cups
+- Designated food break times, as for social mingling
+- Stuff that you should buy a couple off to have on hand (mice, mouse pad, batteries, ethernet cables, display cables, power cords, xbox controllers)
+- Trash and recycle should be out and proud
+- Get people to help you cleanup at the end, most of the time they will be glad to help if given good direction
+- No hard alcohol
+- Beware of hardwood floors
+- Avoid using appliances that heat up the room
