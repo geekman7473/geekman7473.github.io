@@ -274,3 +274,4 @@ I'm no teetotaller
 - Take lots of pictures and videos, and ask for photos from your guests. Send photos out to your guests afterwards to build rapport.
 - Give some direction about what food people should bring so you don't end up with 50 bags of chips, and 100 cans of beer.
 - Whole section on money and the ramifications of taking money.
+- Add new photos that liv sent me
