@@ -57,7 +57,7 @@ This one depends a lot on how old you and your guests are. When I was in high sc
 
 Now that I'm in my late 20s, by about hour 10 my back hurts too much to want to keep going. We generally start around noon, and play until 11pm or so. Read the room, and see what your players want to do.
 
-For scheduling, I normally use [Partiful](https://partiful.com/). It's an easy way to get a group together, invite players, and find a date that works for everyone. Most importantly, it allows you to send mass text messages to your group, so you can easily inform everyone of schedule changes, as well as send text message reminders leading up to the event. I am not sponsored by them or anything; I just think their product works well for my needs. Their product is free, but they make their money by attempting to upsell you on catering services and DJs, etc., which you can just ignore.
+For scheduling, I normally use [Partiful](https://partiful.com/). It's an easy way to get a group together, invite players, and find a date that works for everyone. Most importantly, it allows you to send mass text messages to your group, so you can easily inform everyone of schedule changes, as well as send text message reminders leading up to the event. I am not sponsored by them or anything; I just think their product works well for my needs. Partiful is free but they make their money by attempting to upsell you on catering services and DJs, etc., which you can just ignore.
 
 One last note about human psychology: in my experience, if you schedule the LAN too far in advance, people will actually forget about it, and double-book themselves. Most people do not naturally reason about their social calendar beyond about 1 month, so that's the amount of lead time I would recommend for most groups. Now there are exceptions to this rule, especially for groups with older players who may need to plan around their children's calendars, but in my experience 30 days has been the sweet spot.
 
@@ -154,7 +154,7 @@ While using multiple small, cheaper switches might be tempting, the connections 
   <figcaption class="meta">Users on the same switch get full speed. Traffic between your two switches is bottlenecked at the connection points.</figcaption>
 </figure>
 
-This is a simple diagram illustrating the problem with four machines and two switches, but the degree of the problem gets grows as you add more switches and more machines.
+This is a simple diagram illustrating the problem with four machines and two switches, but the degree of the problem grows as you add more switches and machines.
 
 ## What about WiFi?
 
@@ -164,7 +164,7 @@ Do whatever you can to avoid WiFi. While WiFi is convenient, it has led to more 
 
 For now, yes. The majority of machines in circulation right now only have Gigabit ethernet ports. While more and more enthusiast class machines are coming out with 2.5 Gbps ports, I think that the cost to upgrade your switches to 2.5 Gbps doesn't pencil out for most people. The only exceptions are if you are planning on having lots of modern machines at the party, or if you plan on doing lots of file sharing. More on that later. For my LAN parties, I did upgrade to 2.5 Gbps [with this switch](https://www.amazon.com/TRENDnet-Unmanaged-TEG-S3160-Switching-Protection/dp/B0DZ4W9623?th=1), but I still don't think that it's worth it for most people. 
 
-Additionally, it's also worth mentioning that 10 Gbps hardware is not even close to being ready for mainstream consumers. I have read some horror stories of the compatibility issues that others have had trying to get 10 Gig to work, not to mention that 10 Gig hardware is extraordinarily expensive. Don't bother with 10 Gig, at least not for now.
+Additionally, note that 10 Gbps hardware is not ready yet for mainstream consumers. I have read some horror stories of the compatibility issues that others have had trying to get 10 Gig to work, not to mention that 10 Gig hardware is extraordinarily expensive. Don't bother with 10 Gig, at least not for now.
 
 ## What ethernet cables do you use?
 
@@ -193,9 +193,9 @@ This is some very confusing language, but ["Fast Ethernet"](https://en.wikipedia
 
 One of the worst things that can happen to your LAN party is popping a circuit breaker. I remember tripping a breaker at an event once, and in the aftermath the whole party lost momentum and everyone just went home. This is a real vibe killer and you want to avoid it.
 
-The rule of thumb I use, which is very conservative admittedly, is "no more than 4 desktops on one circuit". Since laptops use far less power, I go up to 6 on one circuit. Do your best to get the laptops and desktops to intermingle to spread out the load.
+The rule of thumb I use is "no more than 4 desktops on one circuit". Since laptops use far less power, I go up to 6 on one circuit. Do your best to get the laptops and desktops to intermingle to spread out the load. If you want to be precise about it, a 15 Amp circuit found in most American households can run a maximum of 1,800 Watts. If some players are bringing power hungry rigs, it can be useful to consider that in your planning.
 
-Now the annoying part is you have to figure out which power outlets in your home map to which circuit. This is a manual process, but you'll only have to do it once. This process is best done with a partner. Your partner will stand by the circuit breaker, and flip the breakers one by one. You will then run around the house trying to figure out which outlets are now dead. You can do this by plugging a lamp in, or by using a dedicated outlet tester [like this one.](https://www.homedepot.com/pep/Klein-Tools-Receptacle-Tester-RT110/206517828) This process is made much easier if you have walkie-talkies, or just stay on speaker phone with whoever is helping you out. Before starting, you should unplug or turn off any sensitive electronics. Once you determine which circuits go to which outlets, use a small piece of painter's tape to mark it. If you want to avoid this process next time, after the event, when pulling down these tape markers, take note of them. You can use this information to draw a low fidelity map of your house, and which breakers map to what. During this process also take note of where your major appliances are connected (A/C, Water Heater, Furnace, Stove, etc). Most of these heavy appliances will be on their own dedicated circuit, which should be labeled already in your breaker panel. If however they do share a circuit with any outlets, you will need to avoid those outlets.
+The annoying part is you have to figure out which power outlets in your home map to which circuit. This is a manual process, but you'll only have to do it once. This is best done with a partner. They will stand by the circuit breaker, and flip the breakers one by one. You will then run around the house trying to figure out which outlets are now dead. You can do this by plugging a lamp in, or by using a dedicated outlet tester [like this one.](https://www.homedepot.com/pep/Klein-Tools-Receptacle-Tester-RT110/206517828) This process is made much easier if you have walkie-talkies, or just stay on speaker phone with whoever is helping you out. Before starting, you should unplug or turn off any sensitive electronics. Once you determine which circuits go to which outlets, use a small piece of painter's tape to mark it. If you want to avoid this process next time, after the event, when pulling down these tape markers, take note of them. You can use this information to draw a low fidelity map of your house, and which breakers map to what. During this process also take note of where your major appliances are connected (A/C, Water Heater, Furnace, Stove, etc). Most of these heavy appliances will be on their own dedicated circuit, which should be labeled already in your breaker panel. If however they do share a circuit with any outlets, you will need to avoid those outlets.
 
 <figure>
   <div class="power-gallery">
@@ -220,14 +220,14 @@ Now the annoying part is you have to figure out which power outlets in your home
 I recommend having your play space almost entirely set up before your first guests arrive. You may be able to enlist one or two guests to arrive early and help with setup, which I have had success with in the past. As a rough checklist, I would plan to have all of this done by start time:
 
 0. The night before, turn the A/C *wayyyyy* down in your play space. I set my A/C to 62F (17C). The idea is to not just cool down the air in the room, but also the contents of the room. This should help your room stay comfortable for longer the next day during play. Once play starts, return the temperature setting to normal. 
-1. Set up tables and chairs in roughly the final layout. Ensure that every player will have a walking path to the food, and the bathroom. If you have time, sit down in every chair atleast once to make sure that player will have enough space.
+1. Set up tables and chairs in roughly the final layout. Ensure that every player will have a walking path to the food, and the bathroom. If you have time, sit down in every chair at least once to make sure that player will have enough space.
 2. Map out which outlets correspond to which breakers.
 3. Run extension cables from the outlets you identified in the previous step, and tape down the wires using masking tape to prevent tripping.
 4. Run an Ethernet cable from your Cable/Fiber modem to the play area, and connect it to your Ethernet switch.
 5. Set up your own PC, and smoke test your power and networking.
 6. Tape down any wire, extension cord, or power strip that might move or be a tripping hazard. Go crazy with it.
 7. Designate a dumping spot for shoes, jackets, backpacks, or anything else your guests are bringing with them that they won't need at their seat. A coat closet, or spare room works nicely here.
-8. If you have pets, it may be a good idea to stow them away while your guests are coming and going, which might frighten them. You can think about letting them out once everyone is settled in.
+8. If you have pets, it may be a good idea to stow them away while your guests are coming and going, which could frighten them. You can think about letting them out once everyone is settled in.
 
 You can of course do more than this, but this is just the basics. One time I went so far as to prerun custom length Ethernet cables to each player's seat. I have also heard of organizers allocating particular outlets to each player. The sky is the limit here. The point of pre setup is to save time in the chaos once your guests show up, so you can play more games.
 
