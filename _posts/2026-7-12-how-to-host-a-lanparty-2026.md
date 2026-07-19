@@ -154,7 +154,7 @@ While using multiple small, cheaper switches might be tempting, the connections 
   <figcaption class="meta">Users on the same switch get full speed. Traffic between your two switches is bottlenecked at the connection points.</figcaption>
 </figure>
 
-This is a simple diagram illustrating the problem with four machines and two switches, but the degree of the problem gets much
+This is a simple diagram illustrating the problem with four machines and two switches, but the degree of the problem gets grows as you add more switches and more machines.
 
 ## What about WiFi?
 
