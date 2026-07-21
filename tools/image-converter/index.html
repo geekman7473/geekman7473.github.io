@@ -15,6 +15,10 @@
     {% include social-meta.html title="Image Converter" description="Free in-browser image converter powered by ImageMagick WebAssembly. Convert between JPEG, PNG, WebP, GIF, BMP, TIFF, and ICO with adjustable quality. EXIF preserved, nothing uploaded." %}
     <link rel="stylesheet" href="/styles.css" />
     <script defer src="/script.js"></script>
+    <style>
+      #ic-quality:disabled { cursor: not-allowed; }
+      .ic-dim { opacity: 0.45; }
+    </style>
     {% include analytics.html %}
   </head>
   <body id="top">
@@ -61,7 +65,7 @@
             <option value="TIFF">TIFF (.tiff)</option>
             <option value="ICO">ICO (.ico)</option>
           </select>
-          <label for="ic-quality">quality:</label>
+          <label id="ic-quality-label" for="ic-quality">quality:</label>
           <input
             id="ic-quality"
             type="range"
@@ -71,6 +75,21 @@
           />
           <span class="meta" id="ic-quality-value">85</span>
         </div>
+        <div class="field-row">
+          <label for="ic-scale">scale:</label>
+          <input
+            id="ic-scale"
+            type="range"
+            min="10"
+            max="100"
+            value="100"
+            step="1"
+          />
+          <span class="meta" id="ic-scale-value">100%</span>
+        </div>
+        <p class="meta" id="ic-resolution">
+          Resolution: choose an image to see dimensions.
+        </p>
         <div class="field-row">
           <button id="ic-convert" class="btn95" type="button" disabled>
             Convert
@@ -142,6 +161,10 @@
       const format = document.getElementById('ic-format');
       const quality = document.getElementById('ic-quality');
       const qualityValue = document.getElementById('ic-quality-value');
+      const qualityLabel = document.getElementById('ic-quality-label');
+      const scale = document.getElementById('ic-scale');
+      const scaleValue = document.getElementById('ic-scale-value');
+      const resolution = document.getElementById('ic-resolution');
       const convertBtn = document.getElementById('ic-convert');
       const progress = document.getElementById('ic-progress');
       const status = document.getElementById('ic-status');
@@ -163,6 +186,10 @@
         GIF: 'image/gif', BMP: 'image/bmp', TIFF: 'image/tiff',
         ICO: 'image/x-icon'
       };
+      // Formats whose lossy compression is actually governed by the quality
+      // setting. For the others (PNG, GIF, BMP, TIFF, ICO) the slider has no
+      // meaningful effect, so it gets disabled.
+      const QUALITY_FORMATS = new Set(['JPEG', 'WEBP']);
 
       let ImageMagick = null;
       let input = null; // { baseName, bytes, size, url }
@@ -182,6 +209,67 @@
         convertBtn.disabled = !(ImageMagick && input);
       }
 
+      // Grey out the quality slider for formats it doesn't affect.
+      function updateQualityEnabled() {
+        const on = QUALITY_FORMATS.has(format.value);
+        quality.disabled = !on;
+        qualityLabel.classList.toggle('ic-dim', !on);
+        qualityValue.classList.toggle('ic-dim', !on);
+        qualityValue.textContent = on ? quality.value : 'n/a';
+      }
+
+      // Live readout of the current input resolution and, when scaled down,
+      // the resulting resolution.
+      function updateResolution() {
+        if (!input) {
+          resolution.textContent = 'Resolution: choose an image to see dimensions.';
+          return;
+        }
+        if (!input.width) {
+          resolution.textContent = 'Resolution: reading dimensions…';
+          return;
+        }
+        const pct = parseInt(scale.value, 10);
+        scaleValue.textContent = pct + '%';
+        const tw = Math.max(1, Math.round(input.width * pct / 100));
+        const th = Math.max(1, Math.round(input.height * pct / 100));
+        if (pct === 100) {
+          resolution.textContent =
+            'Resolution: ' + input.width + ' × ' + input.height +
+            ' px (unchanged)';
+        } else {
+          resolution.textContent =
+            'Resolution: ' + input.width + ' × ' + input.height +
+            ' px → ' + tw + ' × ' + th + ' px';
+        }
+      }
+
+      // Read the input's pixel dimensions. Prefers ImageMagick (works for every
+      // format); falls back to a browser <img> probe before the engine loads.
+      function readInputDimensions() {
+        if (!input) return;
+        if (ImageMagick) {
+          try {
+            ImageMagick.read(input.bytes, (image) => {
+              input.width = image.width;
+              input.height = image.height;
+            });
+            updateResolution();
+            return;
+          } catch {
+            /* fall through to the <img> probe */
+          }
+        }
+        const probe = new Image();
+        probe.onload = () => {
+          input.width = probe.naturalWidth;
+          input.height = probe.naturalHeight;
+          updateResolution();
+        };
+        probe.onerror = () => updateResolution();
+        probe.src = input.url;
+      }
+
       function showPreview(img, emptyMsg, url) {
         img.src = url;
         img.hidden = false;
@@ -199,11 +287,13 @@
         const bytes = new Uint8Array(await blob.arrayBuffer());
         const baseName = name.replace(/\.[^.]+$/, '') || 'image';
         if (input) URL.revokeObjectURL(input.url);
-        input = { baseName, bytes, size: blob.size, url: URL.createObjectURL(blob) };
+        input = { baseName, bytes, size: blob.size, url: URL.createObjectURL(blob), width: 0, height: 0 };
         inputInfo.textContent =
           name + ' · ' + formatBytes(blob.size);
         showPreview(previewIn, previewInEmpty, input.url);
         updateConvertButton();
+        updateResolution();
+        readInputDimensions();
         setStatus(ImageMagick ? 'Ready to convert.' : status.textContent);
       }
 
@@ -227,8 +317,21 @@
         // wasm call blocks the main thread.
         setTimeout(() => {
           try {
+            let outW = 0, outH = 0;
             ImageMagick.read(input.bytes, (image) => {
-              image.quality = q;
+              input.width = image.width;
+              input.height = image.height;
+              const pct = parseInt(scale.value, 10);
+              if (pct < 100) {
+                const tw = Math.max(1, Math.round(image.width * pct / 100));
+                const th = Math.max(1, Math.round(image.height * pct / 100));
+                image.resize(tw, th);
+              }
+              if (QUALITY_FORMATS.has(fmt)) {
+                image.quality = q;
+              }
+              outW = image.width;
+              outH = image.height;
               image.write(fmt, (data) => {
                 const blob = new Blob([data], { type: MIME[fmt] });
                 const name = input.baseName + '.' + EXT[fmt];
@@ -236,8 +339,10 @@
               });
             });
             outputInfo.textContent =
-              output.name + ' · ' + formatBytes(output.blob.size) +
-              ' (input was ' + formatBytes(input.size) + ')';
+              output.name + ' · ' + outW + ' × ' + outH + ' px · ' +
+              formatBytes(output.blob.size) + ' (input was ' +
+              input.width + ' × ' + input.height + ' px, ' +
+              formatBytes(input.size) + ')';
             downloadBtn.disabled = false;
             showPreview(previewOut, previewOutEmpty, output.url);
             setStatus('Done.');
@@ -328,6 +433,10 @@
       quality.addEventListener('input', () => {
         qualityValue.textContent = quality.value;
       });
+      scale.addEventListener('input', updateResolution);
+      format.addEventListener('change', updateQualityEnabled);
+      updateQualityEnabled();
+      updateResolution();
       convertBtn.addEventListener('click', convert);
       downloadBtn.addEventListener('click', () => {
         if (!output) return;
@@ -345,6 +454,9 @@
         ImageMagick = magick.ImageMagick;
         setStatus(input ? 'Ready to convert.' : 'Engine ready. Pick an image.');
         updateConvertButton();
+        // Now that the engine is up, re-read dimensions accurately (covers
+        // formats the browser can't probe, e.g. TIFF).
+        if (input) readInputDimensions();
       } catch (err) {
         setStatus('Could not load the ImageMagick engine: ' + (err.message || err));
       }
