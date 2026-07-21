@@ -1,12 +1,12 @@
 ---
 title: "Why I built LANBucket"
 date: 2026-05-16
-summary: ""
+summary: "Why I built LANBucket: fast, zero-configuration file sharing tuned for LAN parties, built on distributed BitTorrent transfers."
 ---
 
 ## *TL;DR:*
 
-Sharing large files is a major pain point for hosting LAN parties. Existing solutions require configuration ahead of time, or are too slow. LANBucket uses distributed transfers to provide high performance, low friction, file sharing specifically tuned for LAN parties.
+Sharing large files is a major pain point for hosting LAN parties. Existing solutions require configuration ahead of time, or are too slow. LANBucket uses distributed transfers to provide high performance, low friction, [file sharing specifically tuned for LAN parties](https://lanbucket.com).
 
 <figure>
   <img src="{{ '/assets/img/posts/2026-05-16-why-i-built-lanbucket/2012-12-early.jpg' | relative_url }}"

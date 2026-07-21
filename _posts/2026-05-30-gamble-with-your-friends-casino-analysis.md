@@ -1,7 +1,7 @@
 ---
 title: "Reverse engineering every casino game in Gamble With Your Friends"
 date: 2026-05-30
-summary: ""
+summary: "I decompiled Gamble With Your Friends to work out the true odds and house edge of every casino minigame, ranked by return to player."
 math: true
 ---
 

@@ -1,24 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://geekman7473.github.io/</loc>
+    <loc>https://justinbecker.dev/</loc>
   </url>
   <url>
-    <loc>https://geekman7473.github.io/resume.html</loc>
+    <loc>https://justinbecker.dev/resume/</loc>
   </url>
   <url>
-    <loc>https://geekman7473.github.io/projects/disassembly/</loc>
+    <loc>https://justinbecker.dev/projects/disassembly/</loc>
   </url>
   <url>
-    <loc>https://geekman7473.github.io/tools/</loc>
+    <loc>https://justinbecker.dev/tools/</loc>
   </url>
   <url>
-    <loc>https://geekman7473.github.io/qr/</loc>
+    <loc>https://justinbecker.dev/tools/qr/</loc>
   </url>
   <url>
-    <loc>https://geekman7473.github.io/tools/qr-scanner/</loc>
+    <loc>https://justinbecker.dev/tools/qr-scanner/</loc>
   </url>
   <url>
-    <loc>https://geekman7473.github.io/tools/image-converter/</loc>
+    <loc>https://justinbecker.dev/tools/image-converter/</loc>
+  </url>
+  <url>
+    <loc>https://justinbecker.dev/tools/compass/</loc>
+  </url>
+  <url>
+    <loc>https://justinbecker.dev/tools/location/</loc>
+  </url>
+  <url>
+    <loc>https://justinbecker.dev/tools/ruler/</loc>
   </url>
 </urlset>

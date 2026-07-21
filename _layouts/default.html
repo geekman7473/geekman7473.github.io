@@ -6,6 +6,7 @@
     <title>{{ page.title }} &middot; Justin Becker</title>
     {% if page.description %}<meta name="description" content="{{ page.description }}" />{% endif %}
     <meta name="theme-color" content="#c0c0c0" />
+    {% include social-meta.html %}
     <link rel="stylesheet" href="{{ '/styles.css' | relative_url }}" />
     <script defer src="{{ '/script.js' | relative_url }}"></script>
     {% include analytics.html %}

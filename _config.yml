@@ -1,9 +1,14 @@
 # Site
 title: Justin Becker
 description: >-
-  Personal site of Justin Becker - Software Engineer II at Microsoft.
-url: "https://geekman7473.github.io"
+  Personal site of Justin Becker, Senior Software Engineer at Nvidia and author of LANBucket.
+url: "https://justinbecker.dev"
 author: Justin Becker
+
+# Default image used for link previews (Open Graph / Twitter cards) when a
+# page doesn't set its own `image:`. Root-relative path.
+og_image: /assets/img/justin-lincoln.webp
+og_image_alt: "Justin Becker"
 
 # Build
 markdown: kramdown
