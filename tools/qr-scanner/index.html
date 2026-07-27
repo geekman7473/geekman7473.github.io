@@ -108,6 +108,7 @@
         var ctx = buffer.getContext('2d', { willReadFrequently: true });
         var stream = null;
         var rafId = null;
+        var camStep = 0;
 
         function setStatus(msg) {
           status.textContent = msg;
@@ -120,26 +121,103 @@
           setStatus('Decoded ' + text.length + ' characters.');
         }
 
-        function decodeCanvas() {
+        // jsQR thresholds the image in 8x8 pixel blocks, so it wants roughly
+        // one block per QR module. A 1000px picture of a 33-module code puts
+        // ~29px in every module, far outside that window, and whole blocks
+        // land inside a single mark with no contrast to threshold against.
+        // Rather than trust the source resolution, retry down a sweep of
+        // sizes until the modules land near jsQR's block size.
+        var SIZE_STEPS = [1400, 1000, 700, 500, 350, 250, 180, 130];
+
+        // Novelty codes often draw modules as dots that only fill part of
+        // their cell, leaving a light gap around every mark. Eroding (each
+        // pixel takes the darkest value near it) grows the dots back out to
+        // fill their cells. The radius is in output pixels, so it only lines
+        // up at the sizes where a module lands around 8-12px.
+        var ERODE_SIZES = [350, 400, 250];
+        var ERODE_RADII = [1, 2, 3];
+
+        function decodePlan(maxDim) {
+          var full = Math.min(maxDim, SIZE_STEPS[0]);
+          var plan = [{ size: full, erode: 0 }];
+          SIZE_STEPS.forEach(function (size) {
+            if (size < full) plan.push({ size: size, erode: 0 });
+          });
+          ERODE_RADII.forEach(function (radius) {
+            ERODE_SIZES.forEach(function (size) {
+              if (size <= full) plan.push({ size: size, erode: radius });
+            });
+          });
+          return plan;
+        }
+
+        // Grayscale erosion over a (2r+1) square, run as a horizontal pass
+        // then a vertical one.
+        function erodeDark(image, radius) {
+          var w = image.width;
+          var h = image.height;
+          var d = image.data;
+          var n = w * h;
+          var src = new Uint8Array(n);
+          var mid = new Uint8Array(n);
+          var i, x, y, k, min, v;
+          for (i = 0; i < n; i++) {
+            src[i] =
+              (d[i * 4] * 77 + d[i * 4 + 1] * 150 + d[i * 4 + 2] * 29) >> 8;
+          }
+          for (y = 0; y < h; y++) {
+            for (x = 0; x < w; x++) {
+              min = 255;
+              for (k = -radius; k <= radius; k++) {
+                if (x + k < 0 || x + k >= w) continue;
+                v = src[y * w + x + k];
+                if (v < min) min = v;
+              }
+              mid[y * w + x] = min;
+            }
+          }
+          for (y = 0; y < h; y++) {
+            for (x = 0; x < w; x++) {
+              min = 255;
+              for (k = -radius; k <= radius; k++) {
+                if (y + k < 0 || y + k >= h) continue;
+                v = mid[(y + k) * w + x];
+                if (v < min) min = v;
+              }
+              i = (y * w + x) * 4;
+              d[i] = d[i + 1] = d[i + 2] = min;
+            }
+          }
+        }
+
+        // Returns the decoded text, or null if this step found nothing.
+        function runStep(source, width, height, step) {
+          var scale = Math.min(1, step.size / Math.max(width, height));
+          buffer.width = Math.round(width * scale);
+          buffer.height = Math.round(height * scale);
+          ctx.imageSmoothingQuality = 'high';
+          // Without a backdrop a transparent PNG reads as solid black.
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(0, 0, buffer.width, buffer.height);
+          ctx.drawImage(source, 0, 0, buffer.width, buffer.height);
           var image = ctx.getImageData(0, 0, buffer.width, buffer.height);
-          return jsQR(image.data, image.width, image.height, {
+          if (step.erode) erodeDark(image, step.erode);
+          var code = jsQR(image.data, image.width, image.height, {
             inversionAttempts: 'attemptBoth'
           });
+          return code && code.data ? code.data : null;
         }
 
         function decodeSource(source, width, height, label) {
-          // Downscale huge images; jsQR gets slow and no more accurate
-          // past ~1000px.
-          var scale = Math.min(1, 1000 / Math.max(width, height));
-          buffer.width = Math.round(width * scale);
-          buffer.height = Math.round(height * scale);
-          ctx.drawImage(source, 0, 0, buffer.width, buffer.height);
-          var code = decodeCanvas();
-          if (code && code.data) {
-            showResult(code.data);
-          } else {
-            setStatus('No QR code found in that ' + label + '.');
+          var plan = decodePlan(Math.max(width, height));
+          for (var i = 0; i < plan.length; i++) {
+            var text = runStep(source, width, height, plan[i]);
+            if (text) {
+              showResult(text);
+              return;
+            }
           }
+          setStatus('No QR code found in that ' + label + '.');
         }
 
         var previewUrl = null;
@@ -192,17 +270,24 @@
 
         function tick() {
           if (video.readyState >= video.HAVE_ENOUGH_DATA) {
-            buffer.width = video.videoWidth;
-            buffer.height = video.videoHeight;
-            ctx.drawImage(video, 0, 0);
-            var code = decodeCanvas();
-            if (code && code.data) {
-              // Freeze the frame that decoded into the preview pane.
+            var w = video.videoWidth;
+            var h = video.videoHeight;
+            var plan = decodePlan(Math.max(w, h));
+            // Only one step per frame: running the whole plan would drop the
+            // preview to a slideshow, and the camera hands us another frame
+            // to try a few milliseconds later anyway.
+            var text = runStep(video, w, h, plan[camStep++ % plan.length]);
+            if (text) {
+              // Freeze the frame that decoded into the preview pane, at full
+              // size rather than at whatever size the winning step used.
+              buffer.width = w;
+              buffer.height = h;
+              ctx.drawImage(video, 0, 0);
               buffer.toBlob(function (blob) {
                 if (blob) showPreview(URL.createObjectURL(blob));
               });
               stopCamera();
-              showResult(code.data);
+              showResult(text);
               return;
             }
           }
@@ -224,6 +309,7 @@
             .getUserMedia({ video: { facingMode: 'environment' } })
             .then(function (s) {
               hidePreview();
+              camStep = 0;
               stream = s;
               video.srcObject = s;
               video.hidden = false;
