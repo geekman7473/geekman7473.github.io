@@ -239,99 +239,111 @@ You can of course do more than this, but this is just the basics. One time I wen
   <figcaption class="meta">Part of the way through setup, with a couple helpers. (March 2024)</figcaption>
 </figure>
 
-# What Games Should We Play?
+# What games should we play?
 
 Unironically, this is the hardest part of planning a LAN party. While I can't say for certain that I have the right answers for your group, I'll lay out a couple of rough guidelines.
 
-- Avoid competitive games. If you play E-Sports titles, you might find a large skill gap between your best and worst players. For example, one time we played Starcraft II. There was one guy at the party who had played for thousands of hours, and even in a 4v1 he stomped us. It was hard to make that fun for anyone. E-Sports games can be fun, but only if the skill levels are roughly on the same playing field.
-- Choose casual games. You want games that are easy to jump in and out of with short match times. This contradicts my previous point, but Rocket League is a great LAN party game. Even though the skill gap can be enormous, matches are very short so you can quickly rebalance things to be more fun.
-- Avoid modern AAA games. This one is more situational, but it has always applied to the groups I have played with. You may not know ahead of time exactly what hardware everyone is bringing, so if you try to play the new Call of Duty, or Battlefield, you may run into issues with low spec machines. If you do want to play something AAA, aim for games atleast 10 years old so that everyone's hardware can run it.
-- Try for a mix of genres. I like to have a shooter, a strategy game, a racing/sports games, and a novelty game.
+- Avoid competitive games. If you play e-sports titles, you might find a large skill gap between your best and worst players. For example, one time we played StarCraft II. There was one guy at the party who had played for thousands of hours, and even in a 4v1 he stomped us. It was hard to make that fun for anyone. E-sports games can be fun, but only if the skill levels are roughly on the same playing field.
+- Choose casual games. You want games that are easy to jump in and out of, with short match times. This contradicts my previous point, but Rocket League is a great LAN party game. Even though the skill gap can be enormous, matches are very short, so you can quickly rebalance things to be more fun.
+- Avoid modern AAA games. This one is more situational, but it has always applied to the groups I have played with. You may not know ahead of time exactly what hardware everyone is bringing, so if you try to play the new Call of Duty or Battlefield, you may run into issues with low-spec machines. If you do want to play something AAA, aim for games at least 10 years old so that everyone's hardware can run it.
+- Try for a mix of genres. I like to have a shooter, a strategy game, and a racing or sports game.
 - Add in some novelty games. Alongside the typical shooters and strategy games, throw in something silly. We have had good fun playing Golf With Your Friends, Worms, and Teeworlds over the years. Just try to mix it up.
-- To level the skill gap, try playing games that none of your players have tried before. Weird indie games are a great choice for this. If everyone is struggling with the controls at the same time, it adds a certain comradiere as you all learn the game together.
-- Avoid playing long, involved games, unless everyone at the LAN is into it. For example, Civilization is a great multiplayer game, but each match takes hours, and the game is not friendly to beginners. Another great example is Factorio. Only play games like this if your whole group is already into this specific game.
-- Games with high player counts can be challenging. For example Battlefield supports 64 players which will be hard if you have only 16 players at your house. If you put only 16 players on a map designed for 64, it will feel empty and boring. One option in these games is to play co-op versus bots, but that is game-to-game dependent since in many games the bots are too stupid to be fun to play against. Do your research ahead of time.
-- Don't be afraid to throw in some console gaming. Mario Kart, and Super Smash Bros are both good additions.
+- To level the skill gap, try playing games that none of your players have tried before. Weird indie games are a great choice for this. If everyone is struggling with the controls at the same time, it adds a certain camaraderie as you all learn the game together.
+- Avoid playing long, involved games unless everyone at the LAN is into it. For example, Civilization is a great multiplayer game, but each match takes hours, and the game is not friendly to beginners. Another good example is Factorio. Only play games like this if your whole group is already into that specific game.
+- Games with high player counts can be challenging. For example, Battlefield supports up to 64 players, which will be hard if you have only 16 players at your house. If you put 16 players on a map designed for 64, it will feel empty and boring. One option in these games is to play co-op versus bots, but that is game-to-game dependent, since in many games the bots are too stupid to be fun to play against. Do your research ahead of time.
+- Don't be afraid to throw in some console gaming. Mario Kart and Super Smash Bros. are both good additions.
 
 ## Do the games have to support LAN directly?
 
-No. These days fewer and fewer games support "true" LAN multiplayer, but that doesn't really matter. As long as your internet connection is reliable you shouldn't have any problems all playing online together.
+No. These days fewer and fewer games support "true" LAN multiplayer, but that doesn't really matter. As long as your internet connection is reliable, you shouldn't have any problems all playing online together.
 
 ## How do I convince everyone to play all of the same games?
 
-In short, you can't. I do my best to encourage all of my players to join in on the group activity, but sometimes there's an odd man out. Do your best to apply gentle pressure to get everyone onboard, but it's not catastrophic if 1 or 2 players sit a game out. With that said, it is key that you prevent the party from splintering. Do your best to keep a critical mass of players together. If you form two groups, it can be hard to get momentum back together and people may head home early.
+In short, you can't. I do my best to encourage all of my players to join in on the group activity, but sometimes there's an odd man out. Do your best to apply gentle pressure to get everyone on board, but it's not catastrophic if one or two players sit a game out. With that said, it is key that you prevent the party from splintering. Do your best to keep a critical mass of players together. If you form two groups, it can be hard to get momentum back, and people may head home early.
 
-Also, if you have an odd man out who decides to skip a game or two, don't worry about it. However, if a player spends the whole time playing by themselves you may need to intervene. Either the player feels awkward and does not want to ask for help about how to join the party, or is anti-social and doesn't want to play with the group. If it's the former, a bit of handholding can rescure the situation. If it's the later, you should consider not inviting this player in the future. LAN parties at this size survive on vibes, and even a couple of refusers can alter the social flow of the event.
+However, if a player spends the whole time playing by themselves, you may need to intervene. Either they feel awkward and don't want to ask how to join in, or they're antisocial and don't want to play with the group. If it's the former, a bit of handholding can rescue the situation. If it's the latter, you should consider not inviting that player in the future. LAN parties at this size survive on vibes, and even a couple of refusers can alter the social flow of the event.
 
 ## Where should we get the games?
 
-If possible, you want to play free or DRM free games. That way it is easy for all of your players to obtain a copy of the game. Read the section below on "File Sharing" for more detail on how to get the game downloaded on everyone's computer. In my experience, it can be hard to convince players to purchase games for the event. As I have gotten older it has become easier, now that all of my friends have jobs, but if you are a teenager you will have trouble convincing people to spend a dime. A couple tricks that have worked for me:
-- Get DRM free games on GoG or itch.io and distribute them locally.
+If possible, you want to play free or DRM-free games. That way it is easy for all of your players to obtain a copy of the game. Read the section below on "File Sharing" for more detail on how to get the game downloaded on everyone's computer. In my experience, it can be hard to convince players to purchase games for the event. As I have gotten older it has become easier, now that all of my friends have jobs, but if you are a teenager you will have trouble convincing people to spend a dime. A couple of tricks that have worked for me:
+
+- Get DRM-free games on GOG or itch.io and distribute them locally.
 - Play free-to-play games that anyone can download, either on Steam or elsewhere online.
 - Schedule your party for the weekend of a Steam sale, so that there are plenty of games available for cheap.
 - Play older games that allow everyone to play with one CD key.
 
 ## How do I convince everyone to download the games?
 
-In my experience, it is nearly impossible to convince your guests to download or install the games ahead of time. Even if you send out a game list ahead of time, you should be prepared for almost all of your guests to arrive without the games downloaded. For this reason, I reccomend sticking to games with smaller install sizes and simple installation processes, since your guests are likely going to be doing all of this day of. For more detail on how to get the game files to everyone, skip ahead to "File Sharing".
+In my experience, it is nearly impossible to convince your guests to download or install the games ahead of time. Even if you send out a game list in advance, you should be prepared for almost all of your guests to arrive without the games downloaded. For this reason, I recommend sticking to games with smaller install sizes and simple installation processes, since your guests are likely going to be doing all of this on the day of. For more detail on how to get the game files to everyone, skip ahead to "File Sharing".
 
 ## Don't tease us man, what games have you actually played?
 
 Here's a list, in no particular order:
 
-- Rocket Leauge
-- Counter Strike Source
+- Rocket League
+- Counter-Strike: Source
 - CS2
 - TF2
 - Left 4 Dead
-- Civilization 4, 5, & 6
+- Civilization IV, V, & VI
 - Artemis Cosmos (sequel to Artemis Bridge Simulator)
 - Mean Greens: Plastic Warfare
-- Worm's Armageddon
-- Swat 4
+- Worms Armageddon
+- SWAT 4
 - Rome: Total War
-- Golf with Your Friends
+- Golf With Your Friends
 - Golf Gang
 - Super Battle Golf
-- Teeworld
+- Teeworlds
 - DEFCON
-- ReVolt RC (Racing Game)
-- Command and Conquer: Red Alert 2
-- Starcraft II
+- Re-Volt (RC racing game)
+- Command & Conquer: Red Alert 2
+- StarCraft II
 - Age of Empires II
-- STAR WARS Jedi Knight - Jedi Academy
+- Star Wars Jedi Knight: Jedi Academy
 - ElDewrito (Halo 3 multiplayer)
 - Garry's Mod
 - Trackmania
 - Pummel Party
-- Modern Warfare 2
+- Call of Duty: Modern Warfare 2
 - Call of Duty: World at War
-- Armagettron
-- Aces of Spades (Classic)
-- Quake 3
+- Armagetron Advanced
+- Ace of Spades (Classic)
+- Quake III Arena
 
 There are also a number of community maintained lists, if you want inspiration:
-https://www.pcgamingwiki.com/wiki/List_of_games_with_LAN_multiplayer
-https://www.reddit.com/r/lanparty/comments/17pvxpm/what_are_the_most_enjoyable_lan_games/
-https://lanpartywiki.net/index.php/List_of_Recommended_Games
-https://docs.google.com/spreadsheets/d/1oyktKRbYRDLAkKXKdWl7DXzTmv4PkwY2gbu0WN23res/edit
-https://zuggamasta.de/knowledge/lan/
-https://giantbomb.com/user-lists/uid/6740/top-lan-party-games
+
+- [PCGamingWiki: List of games with LAN multiplayer](https://www.pcgamingwiki.com/wiki/List_of_games_with_LAN_multiplayer)
+- [r/lanparty: What are the most enjoyable LAN games?](https://www.reddit.com/r/lanparty/comments/17pvxpm/what_are_the_most_enjoyable_lan_games/)
+- [LAN Party Wiki: List of Recommended Games](https://lanpartywiki.net/index.php/List_of_Recommended_Games)
+- [LAN games spreadsheet](https://docs.google.com/spreadsheets/d/1oyktKRbYRDLAkKXKdWl7DXzTmv4PkwY2gbu0WN23res/edit)
+- [zuggamasta's LAN knowledge base](https://zuggamasta.de/knowledge/lan/)
+- [Giant Bomb: Top LAN party games](https://giantbomb.com/user-lists/uid/6740/top-lan-party-games)
 
 # Food and beverage
 
-I reccomend you keep this simple. Get pizza delivered. Assume roughly 2.5 slices of a large pizza per player. You should also buy plenty of other junk food: potato chips, cookies, pretzels, etc. If you are a Costco member, I reccomend doing a run before the event to stock up. Another hack you can do, depending on the quality of delivery pizza in your area, is buy Costco pizzas for the party. They are cheap as hell, and just as good as Dominos or the other chains. If you live in part of the country that has good pizza, just go to your local joint.
+I recommend you keep this simple. Get pizza delivered. Assume roughly 2.5 slices of a large pizza per player. You should also buy plenty of other junk food: potato chips, cookies, pretzels, etc. If you are a Costco member, I recommend doing a run before the event to stock up. Another hack you can do, depending on the quality of delivery pizza in your area, is buy Costco pizzas for the party. They are cheap as hell, and just as good as Domino's or the other chains. If you live in a part of the country that has good pizza, just go to your local joint.
 
-(Insert a meme about the US north east here. Preferably something smug about how the northeast is superior)
-
+<figure>
+  <img src="{{ '/assets/img/posts/2026-07-12-how-to-host-a-lanparty-2026/smug-new-england.png' | relative_url }}"
+       alt="A hand-drawn outline of New England wearing a smug grinning troll face, captioned 'it appears my superiority has led to some controversy'"
+       width="646" height="771"
+       loading="lazy" />
+</figure>
 
 ## No hard alcohol
 
-I'm no teetotaller, but in my opinion liquor is not the right fit for a LAN. You want your players slightly buzzed, but not wasted. If they get too drunk they will stop wanting to play, and just mill around aimlessly. Beer, Selzers, etc are good but try to keep your players right around their Balmer's peak:
+I'm no teetotaler, but in my opinion liquor is not the right fit for a LAN. You want your players slightly buzzed, but not wasted. If they get too drunk they will stop wanting to play, and just mill around aimlessly. Beer, seltzers, and the like are good, but try to keep your players right around their Ballmer peak:
 
-(Insert XKCD here)
+<figure>
+  <img src="{{ '/assets/img/posts/2026-07-12-how-to-host-a-lanparty-2026/xkcd-ballmer-peak.png' | relative_url }}"
+       alt="xkcd comic 323: a graph of programming skill against blood alcohol concentration, with a sharp spike between 0.129% and 0.138%"
+       width="652" height="592"
+       loading="lazy" />
+  <figcaption class="meta">The narrow window you are aiming for. (<a href="https://xkcd.com/323/">xkcd #323</a> &copy; Randall Munroe)</figcaption>
+</figure>
 
-With that said, energy drinks and Mountain Dew are a LAN party staple, and an absolute must have. Also, if you are under 21, don't drink that's illegal etc etc.
+With that said, energy drinks and Mountain Dew are a LAN party staple, and an absolute must-have. Also, if you are under 21, don't drink. It's illegal, etc., etc.
 
 
 # How to have fun
