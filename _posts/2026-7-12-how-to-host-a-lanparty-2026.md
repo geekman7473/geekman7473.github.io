@@ -6,7 +6,7 @@ summary: ""
 
 # *TL;DR*
 
-Buy a cheap Gigabit switch and connect *all* of your players via ethernet. If possible, your players should be on Windows only. Crank the A/C the day before the event. Play older casual games, and avoid e-sports titles/modern AAA games. Bring lots of snacks, and plan your power needs ahead of time. Use Challonge for tournament brackets. For file sharing, consider using LANBucket.
+Buy a cheap [Gigabit switch](https://www.amazon.com/TRENDnet-TEG-S17D-Switching-Enclosure-Protection/dp/B09WGYKFSQ?th=1) and connect *all* of your players via Ethernet. If possible, your players should be on Windows only. Crank the A/C the day before the event. Play older casual games, and avoid e-sports titles/modern AAA games. Bring lots of snacks, and plan your power needs ahead of time. Use Challonge for tournament brackets. For file sharing, consider using [LANBucket](https://lanbucket.com).
 
 # Intro
 
@@ -21,7 +21,7 @@ As a host your responsibility is to do your best to ensure everyone has a good t
 
 # AI Disclaimer
 
-LLM tools were used for minor grammar corrections, as well as to generate the visualizations used throughout this post. Otherwise, this is all human written.
+LLM tools were used for minor corrections, as well as to generate the visualizations used throughout this post. Otherwise, this is all human written.
 
 # Who, When, Where, Why
 
@@ -111,6 +111,7 @@ I find that at a standard 6 foot folding table, you can comfortably seat four pl
   <figcaption class="meta">Four players at a standard 6-foot folding table</figcaption>
 </figure>
 <script type="module" src="{{ '/assets/js/posts/lan-table-scene.js' | relative_url }}"></script>
+<script defer src="{{ '/assets/js/glossary.js' | relative_url }}"></script>
 
 Or at an 8 foot folding table, you can seat six players, but only if most of the players are on laptops:
 
@@ -121,9 +122,17 @@ Or at an 8 foot folding table, you can seat six players, but only if most of the
 
 Another advantage of folding tables, which you can see in these renderings above, is that you can route cables between the folding tables by leaving a gap between two adjacent tables. If you were using a larger wooden table you would need to drill holes in the middle of the table to get the same effect.
 
+<figure>
+  <img src="{{ '/assets/img/posts/2026-07-12-how-to-host-a-lanparty-2026/cables-table-gap.jpg' | relative_url }}"
+       alt="Ethernet cables running through the gap between two folding tables"
+       width="1200" height="1600"
+       loading="lazy" />
+  <figcaption class="meta">Cables routed through the gap between tables (March 2025)</figcaption>
+</figure>
+
 # Networking
 
-This sounds like it should be complicated, but I assure you that it is not. If you are the LAN party type, then you have probably seen videos of extravagant networking setups from the likes of Linus Tech Tips, including multiple servers, expensive fiber optics, caching services, etc. You do not need any of this. All you need is an **unmanaged gigabit ethernet switch** with enough ports for all of your players. This equipment is very cheap these days. I recommend this model from TRENDNet: [TEG-S17D](https://www.amazon.com/TRENDnet-TEG-S17D-Switching-Enclosure-Protection/dp/B09WGYKFSQ?th=1). At time of writing this costs $58. I cannot stress enough how important it is to buy a **"switch"** and not a **"hub"**. Hubs are cheaper, but also much slower. The best way to think of it is that a hub acts as if all of your players are sharing the speed of one ethernet cable, but a switch allows everyone to run at full speed on their own cable. Also, I highly recommend buying an unmanaged switch. Managed switches act more like routers in a way, since they will have a management portal (a website or an app), where you can change settings. If you are a beginner to all of this, you will not need the features of a managed switch, and might shoot yourself in the foot. At a LAN party I hosted in high school I used some managed switches I bought at a yard sale without understanding what I was doing, and a couple hours in the network completely collapsed. Learn from my mistake, save yourself a couple bucks, and just buy an unmanaged switch.
+This sounds like it should be complicated, but I assure you that it is not. If you are the LAN party type, then you have probably seen videos of extravagant networking setups from the likes of Linus Tech Tips, including multiple servers, expensive fiber optics, caching services, etc. You do not need any of this. All you need is an **unmanaged gigabit Ethernet switch** with enough ports for all of your players. This equipment is very cheap these days. I recommend this model from TRENDNet: [TEG-S17D](https://www.amazon.com/TRENDnet-TEG-S17D-Switching-Enclosure-Protection/dp/B09WGYKFSQ?th=1). At time of writing this costs $58. I cannot stress enough how important it is to buy a **"switch"** and not a **"hub"**. Hubs are cheaper, but also much slower. The best way to think of it is that a hub acts as if all of your players are sharing the speed of one ethernet cable, but a switch allows everyone to run at full speed on their own cable. Also, I highly recommend buying an unmanaged switch. Managed switches act more like routers in a way, since they will have a management portal (a website or an app), where you can change settings. If you are a beginner to all of this, you will not need the features of a managed switch, and might shoot yourself in the foot. At a LAN party I hosted in high school I used some managed switches I bought at a yard sale without understanding what I was doing, and a couple hours in the network completely collapsed. Learn from my mistake, save yourself a couple bucks, and just buy an unmanaged switch.
 
 In terms of setup, this is super easy. Plug the switch into power. Then plug an ethernet cable into each user's computer. Then plug one ethernet cable into your existing internet router / modem. Really nothing to it.
 
@@ -220,6 +229,14 @@ The annoying part is you have to figure out which power outlets in your home map
 
 I recommend having your play space almost entirely set up before your first guests arrive. You may be able to enlist one or two guests to arrive early and help with setup, which I have had success with in the past. If you can, also designate someone tech-savvy among your guests to help with troubleshooting on the day, so you are not running around fixing problems while everyone else is playing. As a rough checklist, I would plan to have all of this done by start time:
 
+<figure>
+  <img src="{{ '/assets/img/posts/2026-07-12-how-to-host-a-lanparty-2026/day-of-setup-prep.jpg' | relative_url }}"
+       alt="LAN party space being set up with tables and chairs before guests arrive"
+       width="1600" height="1200"
+       loading="lazy" />
+  <figcaption class="meta">Getting everything ready before guests arrive (March 2024)</figcaption>
+</figure>
+
 0. The night before, turn the A/C *wayyyyy* down in your play space. I set my A/C to 62F (17C). The idea is to not just cool down the air in the room, but also the contents of the room. This should help your room stay comfortable for longer the next day during play. Once play starts, return the temperature setting to normal. On the day of, also avoid running anything that dumps heat into the house: the oven, the clothes dryer, space heaters, etc. Every BTU those appliances put out is heat your A/C has to fight against.
 1. Set up tables and chairs in roughly the final layout. Ensure that every player will have a walking path to the food, and the bathroom. If you have time, sit down in every chair at least once to make sure that player will have enough space.
 2. Map out which outlets correspond to which breakers.
@@ -258,11 +275,25 @@ Unironically, this is the hardest part of planning a LAN party. While I can't sa
 - Games with high player counts can be challenging. For example, Battlefield supports up to 64 players, which will be hard if you have only 16 players at your house. If you put 16 players on a map designed for 64, it will feel empty and boring. One option in these games is to play co-op versus bots, but that is game-to-game dependent, since in many games the bots are too stupid to be fun to play against. Do your research ahead of time.
 - Don't be afraid to throw in some console gaming. Mario Kart and Super Smash Bros. are both good additions.
 
-(Add the picture of the smash bros tourney on the projector here from the bellevue house)
+<figure>
+  <img src="{{ '/assets/img/posts/2026-07-12-how-to-host-a-lanparty-2026/smash-bros-tourney.jpg' | relative_url }}"
+       alt="Super Smash Bros. tournament bracket displayed on a projector at a LAN party"
+       width="1600" height="1200"
+       loading="lazy" />
+  <figcaption class="meta">Smash Bros. tourney on the poolside projector (March 2024)</figcaption>
+</figure>
 
 ## Do the games have to support LAN directly?
 
 No. These days fewer and fewer games support "true" LAN multiplayer, but that doesn't really matter. As long as your internet connection is reliable, you shouldn't have any problems all playing online together.
+
+<figure>
+  <img src="{{ '/assets/img/posts/2026-07-12-how-to-host-a-lanparty-2026/lan-gaming.jpg' | relative_url }}"
+       alt="Players gaming at a LAN party"
+       width="1600" height="1200"
+       loading="lazy" />
+  <figcaption class="meta">Everyone in the zone (March 2024)</figcaption>
+</figure>
 
 ## How do I convince everyone to play all of the same games?
 
@@ -272,12 +303,20 @@ However, if a player spends the whole time playing by themselves, you may need t
 
 ## Where should we get the games?
 
-If possible, you want to play free or DRM-free games. That way it is easy for all of your players to obtain a copy of the game. Read the section below on "File Sharing" for more detail on how to get the game downloaded on everyone's computer. In my experience, it can be hard to convince players to purchase games for the event. As I have gotten older it has become easier, now that all of my friends have jobs, but if you are a teenager you will have trouble convincing people to spend a dime. A couple of tricks that have worked for me:
+If possible, you want to play free or [DRM](https://en.wikipedia.org/wiki/Digital_rights_management "Digital Rights Management, basically software built into games that attempts to prevent piracy")-free games. That way it is easy for all of your players to obtain a copy of the game. Read the section below on "File Sharing" for more detail on how to get the game downloaded on everyone's computer. In my experience, it can be hard to convince players to purchase games for the event. As I have gotten older it has become easier, now that all of my friends have jobs, but if you are a teenager you will have trouble convincing people to spend a dime. A couple of tricks that have worked for me:
 
 - Get DRM-free games on GOG or itch.io and distribute them locally.
 - Play free-to-play games that anyone can download, either on Steam or elsewhere online.
 - Schedule your party for the weekend of a Steam sale, so that there are plenty of games available for cheap.
 - Play older games that allow everyone to play with one CD key.
+
+<figure>
+  <img src="{{ '/assets/img/posts/2026-07-12-how-to-host-a-lanparty-2026/game-files.jpg' | relative_url }}"
+       alt="LAN party in progress with multiple players at their PCs"
+       width="1600" height="1200"
+       loading="lazy" />
+  <figcaption class="meta">March 2024</figcaption>
+</figure>
 
 ## How do I convince everyone to download the games?
 
@@ -329,7 +368,15 @@ There are also a number of community maintained lists, if you want inspiration:
 
 ## How should everyone download the games?
 
-This is also a tricky one. I think a natural idea is to assign your players "homework" to install all of the games you want to play ahead of time. In my experience, this does not work very well. You will be lucky if your players show up at all, much less do a checklist before they head out. I have experimented with packaging all of the games together so that my players only need to download one big file, but even this they refused to do. What I reccomend is planning on almost all of your players attempting to download the games on the day of. To that end, prepare the game files so that can easily share them with all the players quickly. Read "File Sharing" below for more detail.
+This is also a tricky one. You may be attempted to assign "homework" to your guests to install all of the games you want to play ahead of time. In my experience, this does not work very well. You will be lucky if your players show up at all, much less do a checklist before they head out. I have experimented with packaging all of the games together so that my players only need to download one big file, but even this they refused to do. What I reccomend is planning on almost all of your players attempting to download the games on the day of. To that end, prepare the game files so that can easily share them with all the players quickly. Read "File Sharing" below for more detail.
+
+<figure>
+  <img src="{{ '/assets/img/posts/2026-07-12-how-to-host-a-lanparty-2026/downloading-games.jpg' | relative_url }}"
+       alt="Players gameing at a LAN party"
+       width="1600" height="1200"
+       loading="lazy" />
+  <figcaption class="meta">March 2025</figcaption>
+</figure>
 
 ## What about Linux gaming?
 
@@ -339,7 +386,7 @@ If you and your group and Linux absolutists, feel free to throw a Linux LAN part
 
 # File Sharing
 
-In the olden times, one of the beauties of a LAN was swapping files across the highspeed network. Remember that back then a 10mbps ethernet connection was more than 100 times faster than the 56k modem back at home. These days sharing files is not as much of a draw, but it can still be a useful tool for a successful LAN.
+In the olden times, one of the beauties of a LAN was swapping files across the highspeed network. Remember that back then a 10mbps Ethernet connection was more than 100 times faster than the 56k modem back at home. These days sharing files is not as much of a draw, but it can still be a useful tool for a successful LAN.
 
 ## 🏴‍☠️☠️⛵?
 
@@ -349,11 +396,39 @@ I don't personally condone piracy (and it's worth reiterating that the opinions 
 
 There are a number of ways you can do this, and many of them are bad. I wrote an article about this a couple months ago, so I don't want to reiterate too much of it here: [Why I built LANBucket](https://justinbecker.dev/blog/2026/05/16/why-i-built-lanbucket/).
 
-(Add the screenshot of the LANBucket UI from the MSFT store description here)
+<figure>
+  <img src="{{ '/assets/img/posts/2026-07-12-how-to-host-a-lanparty-2026/lanbucket-screenshot.png' | relative_url }}"
+       alt="Screenshot of the LANBucket UI"
+       width="800"
+       loading="lazy" />
+</figure>
 
-TL;DR: to quickly, and easily, get the files to everyone, use LANBucket. Full disclosure, I wrote LANBucket so I am biased, but I do think it's the best way to get the games to everyone. The basic idea is everyone installs LANBucket on their computer, and then the software automatically finds all of the other users. To share a file, just click and drag it in. LANBucket uses a bittorrent based protocol so transfers are distributed many-to-many, meaning the transfer will be fast even if everyone is downloading the files at the same time.
+To expand slightly, the most obvious solutions all have major flaws. 
+- Using flashdrives is inconvient.
+- Network file shares have compatability problems with modern versions of Windows.
+- File sharing apps like LocalSend or AirDrop are only 1-to-many which means file sharing is slower.
+- Other peer to peer apps like D-Lan and DC++ are complex and may scare off your less technical users. Also these tools suffer network performance problems when all of your guests are downloading at once.
 
-At time of writing LANBucket does not support Linux, so if that is important for you, you should consider D-LAN instead. It's the closest thing to LANBucket that I know of. Linux support is scheduled to be done by the end of 2026.
+To quickly, and easily, get the files to everyone, use LANBucket. Full disclosure, I wrote LANBucket so I am biased, but I do think it's the best way to get the games to everyone. The basic idea is everyone installs LANBucket on their computer, and then the software automatically finds all of the other users. To share a file, just click and drag it in. LANBucket uses a BitTorrent based protocol so transfers are distributed many-to-many, meaning the transfer will be fast even if everyone is downloading the files at the same time.
+
+At time of writing LANBucket does not support Linux, so if that is important for you, you should consider D-LAN instead. It's the closest thing to LANBucket that I know of. If everything goes right, I should have Linux support ready in LANBucket by the end of 2026, so check back in then :)
+
+## Some notes about Steam
+
+Steam is by far the most popular game marketplace on PC, and it has two undervalued features that are killer for LAN parties.
+
+The first is [Local Transfers](https://help.steampowered.com/en/faqs/view/46BD-6BA8-B012-CE43). This feature, when enabled allows players to download Steam games from other players on the local network instead of from the cloud. This is great for the case where most of your players have the game already, and you've just gotta get it to one or two stragglers. If you want to us this, make sure to turn on this setting on all the machines:
+
+<figure>
+  <img src="{{ '/assets/img/posts/2026-07-12-how-to-host-a-lanparty-2026/steam-local-transfers.jpg' | relative_url }}"
+       alt="Steam Settings Downloads panel with 'Allow transfers from this device to: Anyone' highlighted"
+       width="1600" height="1363"
+       loading="lazy" />
+</figure>
+
+Another useful feature is [Game Backups](https://help.steampowered.com/en/faqs/view/4593-5CB7-DC3C-64F0). By having one player backup the game on their computer, you can then share the backup file using other file sharing software to all of your guests, and then your guests can all "restore" the backup on their computer. It is useful in a pinch when you want to share a Steam game using software like LANBucket.
+
+One last note: most Steam games don't actually need to be installed via Steam to work correctly, they just need Steam running, and for the user to own the game on Steam. That means you can just copy the game folder onto the other player's computer directly, without using the Steam client. This is helpful when used alongside software like LANBucket (or D-LAN etc). I have tried this for a bunch of Steam games, and it has worked for many of them, but your mileage may vary.
 
 # Food and beverage
 
@@ -368,7 +443,7 @@ I recommend you keep this simple. Get pizza delivered. Assume roughly 2.5 slices
 
 If you are splitting costs with your guests, collect money via Venmo before placing the order, not after. Chasing people down for reimbursement after an event is awkward. If you and your guests are employed, it may be less awkward if you don't ask for money at all. If you don't ask for money for pizza, then you can ask your guests to bring snacks without guilt, just try to give some guidance on what to bring so you don't end up with 20 bags of potato chips.
 
-Also worth mentioning that deliberate food break a couple times during the day also works well since it gets everyone away from their screens and talking.
+Also worth mentioning that deliberate food break a couple times during the day also works well since it gets everyone away from their screens and talking. Try to time this for a natural break when everyone is wanting to switch games anyway.
 
 ## No hard alcohol
 
@@ -382,15 +457,21 @@ I'm no teetotaler, but in my opinion liquor is not the right fit for a LAN. You 
   <figcaption class="meta">The narrow window you are aiming for. (<a href="https://xkcd.com/323/">xkcd #323</a> &copy; Randall Munroe)</figcaption>
 </figure>
 
-With that said, energy drinks and Mountain Dew are a LAN party staple, and an absolute must-have. Also, if you are under 21, don't drink. It's illegal, etc., etc. Favor cans and bottles over solo cups since a tipped drink next to a keyboard is a bad time. Same logic applies to snacks: go low-residue. Cheetos are out.
+With that said, energy drinks and Mountain Dew are a LAN party staple, and an absolute must-have. Also, if you are under 21, don't drink. It's illegal, etc., etc. Favor cans and bottles over solo cups since a tipped drink, which will happen btw, can really ruin your day when mixed with all the electronics. For the same reason, avoid snacks that leave residue on your fingers, Cheetos for example, unless you want to be cleaning everyone's gamer gunk off of everything.
+
+<figure>
+  <img src="{{ '/assets/img/posts/2026-07-12-how-to-host-a-lanparty-2026/gamer-gear-guy.png' | relative_url }}"
+       alt="Gamer Gear Guy meme"
+       width="400"
+       loading="lazy" />
+</figure>
 
 # Conclusion
 
-I hope
+I hope this was a useful guide. I love LAN parties, and I want more people out there to get to experience them. Gaming IRL has a vibe that you can't match playing on Discord.
 
-Take lots of pictures throughout the day and send them to the group after. In my experience people love this and it builds excitement for the next one.
+One last note: make sure to take lots of photos and videos, and encourage your group to do the same. You'll want to cherish these memories, trust me.
 
+# todo
+Typo in Linux Gaming section -> Recommend
 
-# TODO:
-- Whole section on money and the ramifications of taking money.
-- Add new photos that liv sent me
