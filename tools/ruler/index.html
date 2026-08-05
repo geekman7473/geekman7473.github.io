@@ -1,0 +1,550 @@
+---
+# Empty front matter so Jekyll processes this file's Liquid tags.
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ruler &middot; Justin Becker</title>
+    <meta
+      name="description"
+      content="Free fullscreen on-screen ruler. Inches on one side, centimeters and millimeters on the other. Calibrate once with a credit card for true-to-life size on any screen."
+    />
+    <meta name="theme-color" content="#c0c0c0" />
+    {% include social-meta.html title="Ruler" description="Free fullscreen on-screen ruler. Inches on one side, centimeters and millimeters on the other. Calibrate once with a credit card for true-to-life size on any screen." %}
+    <link rel="stylesheet" href="/styles.css" />
+    {% include analytics.html %}
+    <style>
+      /* Fullscreen page: undo the site's reading-column layout. */
+      html, body {
+        margin: 0;
+        padding: 0;
+        max-width: none;
+        background: #fff;
+        overflow: hidden;
+      }
+      #ruler-canvas {
+        position: fixed;
+        inset: 0;
+        display: block;
+        touch-action: none;
+      }
+      .ruler-panel {
+        position: fixed;
+        top: 64px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 260px;
+        max-width: calc(100vw - 170px);
+        z-index: 10;
+      }
+      .ruler-panel[hidden] { display: none; }
+      .ruler-panel .titlebar { margin-top: 0; }
+      .ruler-show {
+        position: fixed;
+        top: 64px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 10;
+      }
+      .ruler-show[hidden] { display: none; }
+      .cal-slider { width: 100%; }
+      #card-outline {
+        position: fixed;
+        left: 50%;
+        bottom: 24px;
+        transform: translateX(-50%);
+        border: 2px solid #cc0000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+        color: #cc0000;
+        font-family: "Courier New", Courier, monospace;
+        font-size: 12px;
+        text-align: center;
+        z-index: 5;
+        pointer-events: none;
+      }
+      #card-outline[hidden] { display: none; }
+    </style>
+  </head>
+  <body>
+    <canvas id="ruler-canvas"></canvas>
+
+    <!-- Normal mode: small options window -->
+    <div class="ruler-panel" id="ruler-panel" hidden>
+      <div class="titlebar">Ruler</div>
+      <section class="panel">
+        <div class="field-row">
+          [ <a href="/tools/">all tools</a> ]
+          <button id="ruler-hide" class="btn95" type="button">Hide</button>
+        </div>
+        <div class="field-row">
+          <span>dpi: <span id="ppi-view">96</span></span>
+          <button id="ruler-recal" class="btn95" type="button">
+            Recalibrate...
+          </button>
+        </div>
+        <p class="meta" id="multimon-warn" hidden>
+          Multiple displays detected: calibration is saved per screen,
+          so recalibrate if you move this window to another display.
+        </p>
+      </section>
+    </div>
+    <button id="ruler-show" class="btn95 ruler-show" type="button" hidden>
+      Show ruler options
+    </button>
+
+    <!-- Calibration mode -->
+    <div class="ruler-panel" id="cal-panel" hidden>
+      <div class="titlebar">Calibrate screen DPI</div>
+      <section class="panel">
+        <p class="meta">
+          Hold a credit card (or any standard wallet card) flat against
+          the screen over the red outline. Adjust the DPI until the
+          outline matches the card exactly, then save.
+        </p>
+        <p class="meta" id="multimon-warn-cal" hidden>
+          Note: you have multiple displays. This calibration only fits
+          the screen the window is on right now.
+        </p>
+        <div class="field-row">
+          <input
+            id="cal-slider"
+            class="cal-slider"
+            type="range"
+            min="60"
+            max="250"
+            step="0.5"
+            value="96"
+            aria-label="Screen DPI"
+          />
+        </div>
+        <div class="field-row">
+          <label for="cal-num">dpi:</label>
+          <input
+            id="cal-num"
+            class="input95"
+            type="number"
+            min="60"
+            max="250"
+            step="0.5"
+            value="96"
+            size="7"
+          />
+          <span>px/in</span>
+        </div>
+        <div class="field-row">
+          <button id="cal-save" class="btn95" type="button">
+            Save calibration
+          </button>
+          <button id="cal-cancel" class="btn95" type="button">Cancel</button>
+        </div>
+      </section>
+    </div>
+
+    <div id="card-outline" hidden>
+      <span>credit<br />card</span>
+    </div>
+
+    <script>
+      window.addEventListener('DOMContentLoaded', function () {
+        var canvas = document.getElementById('ruler-canvas');
+        var ctx = canvas.getContext('2d');
+        var panel = document.getElementById('ruler-panel');
+        var hideBtn = document.getElementById('ruler-hide');
+        var showBtn = document.getElementById('ruler-show');
+        var recalBtn = document.getElementById('ruler-recal');
+        var ppiView = document.getElementById('ppi-view');
+        var calPanel = document.getElementById('cal-panel');
+        var calSlider = document.getElementById('cal-slider');
+        var calNum = document.getElementById('cal-num');
+        var calSave = document.getElementById('cal-save');
+        var calCancel = document.getElementById('cal-cancel');
+        var card = document.getElementById('card-outline');
+
+        var FONT = '13px "Courier New", Courier, monospace';
+        var PPI_MIN = 60;
+        var PPI_MAX = 250;
+        // ISO/IEC 7810 ID-1: every credit card is 85.60 x 53.98 mm with
+        // 3.18 mm corner radius.
+        var CARD_W_MM = 85.6;
+        var CARD_H_MM = 53.98;
+        var CARD_R_MM = 3.18;
+
+        // CSS assumes 96px per inch; typical phones are really ~140-165
+        // CSS px per physical inch, so seed touch devices closer to that.
+        var isCoarse =
+          window.matchMedia && matchMedia('(pointer: coarse)').matches;
+        var ppi = isCoarse ? 155 : 96;
+        var savedPpi = null;
+        var calibrating = false;
+        var firstRun = false;
+
+        function clampPpi(v) {
+          v = parseFloat(v);
+          if (isNaN(v)) return null;
+          return Math.min(PPI_MAX, Math.max(PPI_MIN, v));
+        }
+
+        /* --- IndexedDB persistence ------------------------------------ */
+        var DB_NAME = 'ruler';
+        var STORE = 'settings';
+
+        // Calibration is per physical screen: key it by the screen's
+        // dimensions and pixel ratio so each monitor remembers its own.
+        function screenSignature() {
+          // Sort the dimensions so rotating a phone (which swaps
+          // screen.width/height in some browsers) keeps the same key.
+          var a = screen.width;
+          var b = screen.height;
+          return (
+            Math.min(a, b) + 'x' + Math.max(a, b) +
+            '@' + (window.devicePixelRatio || 1)
+          );
+        }
+
+        function calKey() {
+          return 'calibration:' + screenSignature();
+        }
+
+        function idbOpen() {
+          return new Promise(function (resolve, reject) {
+            if (!window.indexedDB) {
+              reject(new Error('IndexedDB unavailable'));
+              return;
+            }
+            var req = indexedDB.open(DB_NAME, 1);
+            req.onupgradeneeded = function () {
+              req.result.createObjectStore(STORE);
+            };
+            req.onsuccess = function () { resolve(req.result); };
+            req.onerror = function () { reject(req.error); };
+          });
+        }
+
+        function idbGet(key) {
+          return idbOpen().then(function (db) {
+            return new Promise(function (resolve, reject) {
+              var rq = db
+                .transaction(STORE, 'readonly')
+                .objectStore(STORE)
+                .get(key);
+              rq.onsuccess = function () { resolve(rq.result); };
+              rq.onerror = function () { reject(rq.error); };
+            });
+          });
+        }
+
+        function idbPut(key, value) {
+          return idbOpen().then(function (db) {
+            return new Promise(function (resolve, reject) {
+              var tx = db.transaction(STORE, 'readwrite');
+              tx.objectStore(STORE).put(value, key);
+              tx.oncomplete = function () { resolve(); };
+              tx.onerror = function () { reject(tx.error); };
+            });
+          });
+        }
+
+        function loadCalibration() {
+          var key = calKey();
+          return idbGet(key)
+            .then(function (rec) {
+              return rec && clampPpi(rec.ppi);
+            })
+            .catch(function () {
+              // Private browsing or IDB blocked: fall back to localStorage.
+              try {
+                return clampPpi(localStorage.getItem('ruler-' + key));
+              } catch (e) {
+                return null;
+              }
+            });
+        }
+
+        function saveCalibration(value) {
+          var key = calKey();
+          return idbPut(key, { ppi: value, savedAt: Date.now() }).catch(
+            function () {
+              try {
+                localStorage.setItem('ruler-' + key, String(value));
+              } catch (e) { /* in-memory only */ }
+            }
+          );
+        }
+
+        /* --- Ruler drawing -------------------------------------------- */
+        // Tick length for the k-th sixteenth of an inch.
+        function inchTickLen(k) {
+          if (k % 16 === 0) return 44;
+          if (k % 8 === 0) return 34;
+          if (k % 4 === 0) return 26;
+          if (k % 2 === 0) return 18;
+          return 11;
+        }
+
+        // Tick length for the m-th millimeter.
+        function mmTickLen(m) {
+          if (m % 10 === 0) return 30;
+          if (m % 5 === 0) return 20;
+          return 12;
+        }
+
+        function draw() {
+          var dpr = window.devicePixelRatio || 1;
+          var w = window.innerWidth;
+          var h = window.innerHeight;
+          canvas.width = Math.round(w * dpr);
+          canvas.height = Math.round(h * dpr);
+          canvas.style.width = w + 'px';
+          canvas.style.height = h + 'px';
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+          ctx.clearRect(0, 0, w, h);
+
+          var ppmm = ppi / 25.4;
+          var portrait = h >= w;
+          var length = portrait ? h : w;
+
+          ctx.strokeStyle = '#000';
+          ctx.fillStyle = '#000';
+          ctx.lineWidth = 1;
+          ctx.font = FONT;
+
+          var k, m, pos, len, label;
+
+          if (portrait) {
+            // Inches down the left edge, metric down the right edge.
+            ctx.strokeRect(0.5, -2, w - 1, h + 4);
+
+            ctx.textBaseline = 'middle';
+            ctx.textAlign = 'left';
+            for (k = 0; k * ppi / 16 <= length; k++) {
+              pos = Math.round(k * ppi / 16) + 0.5;
+              len = inchTickLen(k);
+              ctx.beginPath();
+              ctx.moveTo(0, pos);
+              ctx.lineTo(len, pos);
+              ctx.stroke();
+              if (k > 0 && k % 16 === 0) {
+                label = k === 16 ? '1 in' : String(k / 16);
+                ctx.fillText(label, len + 5, pos);
+              }
+            }
+
+            ctx.textAlign = 'right';
+            for (m = 0; m * ppmm <= length; m++) {
+              pos = Math.round(m * ppmm) + 0.5;
+              len = mmTickLen(m);
+              ctx.beginPath();
+              ctx.moveTo(w, pos);
+              ctx.lineTo(w - len, pos);
+              ctx.stroke();
+              if (m > 0 && m % 10 === 0) {
+                label = m === 10 ? '1 cm' : String(m / 10);
+                ctx.fillText(label, w - len - 5, pos);
+              }
+            }
+          } else {
+            // Inches along the top edge, metric along the bottom edge.
+            ctx.strokeRect(-2, 0.5, w + 4, h - 1);
+
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'top';
+            for (k = 0; k * ppi / 16 <= length; k++) {
+              pos = Math.round(k * ppi / 16) + 0.5;
+              len = inchTickLen(k);
+              ctx.beginPath();
+              ctx.moveTo(pos, 0);
+              ctx.lineTo(pos, len);
+              ctx.stroke();
+              if (k > 0 && k % 16 === 0) {
+                label = k === 16 ? '1 in' : String(k / 16);
+                ctx.fillText(label, pos, len + 5);
+              }
+            }
+
+            ctx.textBaseline = 'bottom';
+            for (m = 0; m * ppmm <= length; m++) {
+              pos = Math.round(m * ppmm) + 0.5;
+              len = mmTickLen(m);
+              ctx.beginPath();
+              ctx.moveTo(pos, h);
+              ctx.lineTo(pos, h - len);
+              ctx.stroke();
+              if (m > 0 && m % 10 === 0) {
+                label = m === 10 ? '1 cm' : String(m / 10);
+                ctx.fillText(label, pos, h - len - 5);
+              }
+            }
+          }
+        }
+
+        /* --- Card outline (calibration target) ------------------------ */
+        function sizeCard() {
+          var ppmm = ppi / 25.4;
+          // A card's long edge (85.6mm) is wider than most phone screens,
+          // so stand the card upright in portrait.
+          var portrait = window.innerHeight >= window.innerWidth;
+          card.style.width = (portrait ? CARD_H_MM : CARD_W_MM) * ppmm + 'px';
+          card.style.height = (portrait ? CARD_W_MM : CARD_H_MM) * ppmm + 'px';
+          card.style.borderRadius = CARD_R_MM * ppmm + 'px';
+        }
+
+        /* --- Mode switching -------------------------------------------- */
+        function setPpi(v, source) {
+          var clamped = clampPpi(v);
+          if (clamped === null) return;
+          ppi = clamped;
+          if (source !== calSlider) calSlider.value = ppi;
+          if (source !== calNum) calNum.value = ppi;
+          ppiView.textContent = ppi % 1 === 0 ? String(ppi) : ppi.toFixed(1);
+          sizeCard();
+          draw();
+        }
+
+        function enterCalibration(isFirstRun) {
+          calibrating = true;
+          firstRun = isFirstRun;
+          panel.hidden = true;
+          showBtn.hidden = true;
+          calPanel.hidden = false;
+          card.hidden = false;
+          calCancel.textContent = isFirstRun ? 'Not now' : 'Cancel';
+          setPpi(ppi);
+        }
+
+        function exitCalibration() {
+          calibrating = false;
+          calPanel.hidden = true;
+          card.hidden = true;
+          panel.hidden = false;
+          showBtn.hidden = true;
+        }
+
+        calSlider.addEventListener('input', function () {
+          setPpi(calSlider.value, calSlider);
+        });
+        calNum.addEventListener('input', function () {
+          setPpi(calNum.value, calNum);
+        });
+
+        calSave.addEventListener('click', function () {
+          savedPpi = ppi;
+          saveCalibration(ppi);
+          exitCalibration();
+        });
+
+        calCancel.addEventListener('click', function () {
+          // First run: keep the guess for this session, ask again next
+          // visit. Later runs: revert to the saved value.
+          if (!firstRun && savedPpi !== null) setPpi(savedPpi);
+          exitCalibration();
+        });
+
+        recalBtn.addEventListener('click', function () {
+          enterCalibration(false);
+        });
+
+        hideBtn.addEventListener('click', function () {
+          panel.hidden = true;
+          showBtn.hidden = false;
+        });
+        showBtn.addEventListener('click', function () {
+          panel.hidden = false;
+          showBtn.hidden = true;
+        });
+
+        /* --- Multi-monitor handling ------------------------------------ */
+        var multiWarn = document.getElementById('multimon-warn');
+        var multiWarnCal = document.getElementById('multimon-warn-cal');
+        var lastSignature = screenSignature();
+
+        function updateMultiWarning() {
+          // screen.isExtended: Window Management API, Chromium only.
+          var multi = window.screen && screen.isExtended === true;
+          multiWarn.hidden = !multi;
+          multiWarnCal.hidden = !multi;
+        }
+
+        // When the window lands on a different screen, load that
+        // screen's calibration, or start calibrating if it has none.
+        function checkScreenChange() {
+          var sig = screenSignature();
+          if (sig === lastSignature) return;
+          lastSignature = sig;
+          updateMultiWarning();
+          loadCalibration().then(function (stored) {
+            if (stored) {
+              savedPpi = stored;
+              if (calibrating) exitCalibration();
+              setPpi(stored);
+            } else if (!calibrating) {
+              savedPpi = null;
+              enterCalibration(true);
+            }
+          });
+        }
+
+        // Moving between displays usually changes devicePixelRatio;
+        // matchMedia is the reliable way to hear about it.
+        function watchPixelRatio() {
+          var mq = matchMedia(
+            '(resolution: ' + (window.devicePixelRatio || 1) + 'dppx)'
+          );
+          var onChange = function () {
+            mq.removeEventListener('change', onChange);
+            checkScreenChange();
+            watchPixelRatio();
+          };
+          mq.addEventListener('change', onChange);
+        }
+
+        window.addEventListener('resize', function () {
+          checkScreenChange();
+          sizeCard();
+          draw();
+        });
+        window.addEventListener('orientationchange', function () {
+          sizeCard();
+          draw();
+        });
+
+        /* --- Boot -------------------------------------------------------- */
+        // If IndexedDB never answers (it can hang in some browsers), the
+        // page must still boot; fall back to first-run calibration.
+        function withTimeout(promise, ms) {
+          return new Promise(function (resolve) {
+            var settled = false;
+            var timer = setTimeout(function () {
+              if (!settled) { settled = true; resolve(undefined); }
+            }, ms);
+            promise.then(
+              function (v) {
+                if (!settled) { settled = true; clearTimeout(timer); resolve(v); }
+              },
+              function () {
+                if (!settled) { settled = true; clearTimeout(timer); resolve(undefined); }
+              }
+            );
+          });
+        }
+
+        setPpi(ppi);
+        updateMultiWarning();
+        if (window.matchMedia) watchPixelRatio();
+        withTimeout(loadCalibration(), 1500).then(function (stored) {
+          if (stored) {
+            savedPpi = stored;
+            setPpi(stored);
+            panel.hidden = false;
+          } else {
+            enterCalibration(true);
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
