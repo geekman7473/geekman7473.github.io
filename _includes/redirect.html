@@ -1,0 +1,26 @@
+{%- comment -%}
+  Client-side redirect page (for GitHub Pages, which has no server-side
+  redirects). Pass the destination as `to`, e.g.:
+
+      {% include redirect.html to="/tools/qr/" %}
+
+  Preserves any query string / hash, is excluded from search indexing, and
+  points its canonical at the destination.
+{%- endcomment -%}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="refresh" content="0; url={{ include.to }}" />
+    <link rel="canonical" href="{{ include.to | absolute_url }}" />
+    <meta name="robots" content="noindex" />
+    <title>Redirecting</title>
+    <script>
+      // Forward, preserving any query string / hash.
+      location.replace('{{ include.to }}' + location.search + location.hash);
+    </script>
+  </head>
+  <body>
+    <p>This page has moved to <a href="{{ include.to }}">{{ include.to }}</a>.</p>
+  </body>
+</html>

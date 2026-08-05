@@ -1,0 +1,167 @@
+---
+# Empty front matter so Jekyll processes this file's Liquid tags.
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Location &middot; Justin Becker</title>
+    <meta
+      name="description"
+      content="Free in-browser location tool. Shows your current latitude and longitude as copyable plain text, with a map preview so you can confirm the position before sharing it."
+    />
+    <meta name="theme-color" content="#c0c0c0" />
+    {% include social-meta.html title="My Location" description="Free in-browser location tool. Shows your current latitude and longitude as copyable plain text, with a map preview so you can confirm the position before sharing it." %}
+    <link rel="stylesheet" href="/styles.css" />
+    <script defer src="/script.js"></script>
+    {% include analytics.html %}
+  </head>
+  <body id="top">
+    <div class="banner">
+      <h1>My Location</h1>
+    </div>
+
+    <div class="toolbar">
+      [
+      <a href="/">home</a> <span class="sep">|</span>
+      <a href="/tools/">all tools</a>
+      ]
+    </div>
+
+    <main>
+      <div class="titlebar">Position</div>
+      <section class="panel">
+        <div class="field-row">
+          <button id="loc-get" class="btn95" type="button">
+            Get my location
+          </button>
+        </div>
+        <p class="meta qr-status" id="loc-status">
+          Your position is read by your browser and shown here; it is
+          only sent anywhere if you copy it, or to Google when the map
+          preview loads.
+        </p>
+        <div class="field-row">
+          <label for="loc-text">lat, long:</label>
+          <input
+            id="loc-text"
+            class="input95 qr-result"
+            type="text"
+            readonly
+            placeholder="coordinates will appear here..."
+          />
+        </div>
+        <div class="field-row">
+          <button id="loc-copy" class="btn95" type="button" disabled>
+            Copy coordinates
+          </button>
+          <span class="meta" id="loc-copied"></span>
+        </div>
+        <p class="meta" id="loc-detail"></p>
+      </section>
+
+      <div class="titlebar">Map preview</div>
+      <section class="panel">
+        <p class="meta" id="map-hint">
+          Once you have a fix, the map loads here so you can sanity-check
+          the position before sending it to anyone.
+        </p>
+        <iframe
+          id="loc-map"
+          class="loc-map"
+          title="Map of your current position"
+          loading="lazy"
+          referrerpolicy="no-referrer"
+          hidden
+        ></iframe>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>
+        &copy; <span id="year"></span> Justin Becker &middot;
+        map preview by Google Maps &middot; <a href="#top">top</a>
+      </p>
+    </footer>
+
+    <script>
+      window.addEventListener('DOMContentLoaded', function () {
+        var getBtn = document.getElementById('loc-get');
+        var status = document.getElementById('loc-status');
+        var text = document.getElementById('loc-text');
+        var copyBtn = document.getElementById('loc-copy');
+        var copied = document.getElementById('loc-copied');
+        var detail = document.getElementById('loc-detail');
+        var map = document.getElementById('loc-map');
+        var mapHint = document.getElementById('map-hint');
+
+        function showFix(pos) {
+          var lat = pos.coords.latitude.toFixed(6);
+          var lng = pos.coords.longitude.toFixed(6);
+          text.value = lat + ', ' + lng;
+          copyBtn.disabled = false;
+          copied.textContent = '';
+
+          var parts = ['accuracy ±' + Math.round(pos.coords.accuracy) + ' m'];
+          if (pos.coords.altitude !== null) {
+            parts.push('altitude ' + Math.round(pos.coords.altitude) + ' m');
+          }
+          parts.push('fixed at ' + new Date(pos.timestamp).toLocaleTimeString());
+          detail.textContent = parts.join(' · ');
+
+          map.src =
+            'https://maps.google.com/maps?q=' + lat + ',' + lng +
+            '&z=16&output=embed';
+          map.hidden = false;
+          mapHint.textContent =
+            'Check that the marker is where you actually are. Low ' +
+            'accuracy (wifi or IP-based fixes) can be off by a lot.';
+
+          getBtn.disabled = false;
+          getBtn.textContent = 'Refresh location';
+          status.textContent = 'Got a fix.';
+        }
+
+        function showError(err) {
+          getBtn.disabled = false;
+          if (err.code === err.PERMISSION_DENIED) {
+            status.textContent =
+              'Permission denied. Allow location access for this site ' +
+              'in your browser settings and try again.';
+          } else if (err.code === err.POSITION_UNAVAILABLE) {
+            status.textContent = 'Position unavailable: ' + err.message;
+          } else {
+            status.textContent = 'Timed out getting a fix. Try again.';
+          }
+        }
+
+        getBtn.addEventListener('click', function () {
+          if (!navigator.geolocation) {
+            status.textContent =
+              'Geolocation not available in this browser (needs HTTPS).';
+            return;
+          }
+          getBtn.disabled = true;
+          status.textContent = 'Getting a fix...';
+          navigator.geolocation.getCurrentPosition(showFix, showError, {
+            enableHighAccuracy: true,
+            timeout: 20000,
+            maximumAge: 0
+          });
+        });
+
+        copyBtn.addEventListener('click', function () {
+          var done = function () { copied.textContent = 'copied!'; };
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text.value).then(done);
+          } else {
+            text.select();
+            document.execCommand('copy');
+            done();
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,32 @@
+{%- comment -%}
+  Open Graph + Twitter Card tags so links to this site unfurl into a rich
+  preview (title, description, image) in Discord, Slack, iMessage, etc.
+
+  Resolves each value in this order:
+    1. an explicit include parameter  (e.g. {% include social-meta.html title="Tools" %})
+    2. the page's front matter        (page.title / page.description / page.summary / page.image)
+    3. a site-wide default            (site.title / site.description / site.og_image)
+
+  Pages with a `date` (blog posts) are tagged as og:type "article"; everything
+  else is "website". Absolute URLs are built from site.url, so keep that set to
+  the canonical domain.
+{%- endcomment -%}
+{%- assign sm_title = include.title | default: page.title | default: site.title -%}
+{%- assign sm_desc = include.description | default: page.description -%}
+{%- if sm_desc == nil or sm_desc == '' -%}{%- assign sm_desc = page.summary -%}{%- endif -%}
+{%- if sm_desc == nil or sm_desc == '' -%}{%- assign sm_desc = site.description -%}{%- endif -%}
+{%- assign sm_image = include.image | default: page.image | default: site.og_image -%}
+{%- assign sm_image_alt = include.image_alt | default: page.image_alt | default: site.og_image_alt | default: sm_title -%}
+{%- if page.date -%}{%- assign sm_type = 'article' -%}{%- else -%}{%- assign sm_type = include.type | default: 'website' -%}{%- endif -%}
+<meta property="og:site_name" content="{{ site.title | escape }}" />
+<meta property="og:type" content="{{ sm_type }}" />
+<meta property="og:title" content="{{ sm_title | strip_html | escape }}" />
+<meta property="og:description" content="{{ sm_desc | strip_html | normalize_whitespace | escape }}" />
+<meta property="og:url" content="{{ page.url | absolute_url }}" />
+<meta property="og:image" content="{{ sm_image | absolute_url }}" />
+<meta property="og:image:alt" content="{{ sm_image_alt | strip_html | escape }}" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="{{ sm_title | strip_html | escape }}" />
+<meta name="twitter:description" content="{{ sm_desc | strip_html | normalize_whitespace | escape }}" />
+<meta name="twitter:image" content="{{ sm_image | absolute_url }}" />
+<link rel="canonical" href="{{ page.url | absolute_url }}" />
