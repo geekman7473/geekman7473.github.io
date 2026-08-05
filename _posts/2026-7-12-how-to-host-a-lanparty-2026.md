@@ -102,7 +102,7 @@ In this layout these two players on the "overflow" table felt like they had been
 
 This layout works better in rooms of certain shapes, but you end up creating a bunch of islands of socialization. You basically need a seating chart, like at a wedding reception, to figure out who will vibe well with who. It can work, but I don't like it as much.
 
-For the actual seating, I recommend folding chairs if you are in a larger group. Proper desk chairs are much more comfortable, but they take up a lot more space. They are also cumbersome to move around. Folding chairs are relatively inexpensive. At time of writing, this padded chair is available for [~$23/each at Costco](https://sameday.costco.com/store/costco/products/55609644-maxchief-metal-highback-padded-folding-chair-1-each). If you are on a budget, check Goodwill, or other thrift stores in your area. We have found folding chairs at these stores for $4/each before. One thing to watch out for: if your play space has hardwood floor of the weekend. Stick some felt pads on the chair feet before the event.
+For the actual seating, I recommend folding chairs if you are in a larger group. Proper desk chairs are much more comfortable, but they take up a lot more space. They are also cumbersome to move around. Folding chairs are relatively inexpensive. At time of writing, this padded chair is available for [~$23/each at Costco](https://sameday.costco.com/store/costco/products/55609644-maxchief-metal-highback-padded-folding-chair-1-each). If you are on a budget, check Goodwill, or other thrift stores in your area. We have found folding chairs at these stores for $4/each before. One thing to watch out for: if your play space has hardwood floors, folding chairs will slide around and scratch them up. Stick some felt pads on the chair feet before the event.
 
 I find that at a standard 6 foot folding table, you can comfortably seat four players like so:
 
@@ -368,11 +368,11 @@ There are also a number of community maintained lists, if you want inspiration:
 
 ## How should everyone download the games?
 
-This is also a tricky one. You may be attempted to assign "homework" to your guests to install all of the games you want to play ahead of time. In my experience, this does not work very well. You will be lucky if your players show up at all, much less do a checklist before they head out. I have experimented with packaging all of the games together so that my players only need to download one big file, but even this they refused to do. What I reccomend is planning on almost all of your players attempting to download the games on the day of. To that end, prepare the game files so that can easily share them with all the players quickly. Read "File Sharing" below for more detail.
+This is also a tricky one. You may be tempted to assign "homework" to your guests to install all of the games you want to play ahead of time. In my experience, this does not work very well. You will be lucky if your players show up at all, much less do a checklist before they head out. I have experimented with packaging all of the games together so that my players only need to download one big file, but even this they refused to do. What I recommend is planning on almost all of your players attempting to download the games on the day of. To that end, prepare the game files so that you can easily share them with all the players quickly. Read "File Sharing" below for more detail.
 
 <figure>
   <img src="{{ '/assets/img/posts/2026-07-12-how-to-host-a-lanparty-2026/downloading-games.jpg' | relative_url }}"
-       alt="Players gameing at a LAN party"
+       alt="Players gaming at a LAN party"
        width="1600" height="1200"
        loading="lazy" />
   <figcaption class="meta">March 2025</figcaption>
@@ -380,9 +380,9 @@ This is also a tricky one. You may be attempted to assign "homework" to your gue
 
 ## What about Linux gaming?
 
-While Linux gaming has improved substantially over the last couple years, do what you can to encourage your players to only bring Windows PCs to the event. In my experience, Linux players have tons of technical problems that you don't want to deal with. At a LAN last year one of my players showed up with a Linux laptop and spent the whole time just trying to get his USB-C to Ethernet dongle working. Since I am suggesting that you bring all of the games to play, you should also be testing the games on Windows machines. Attempting to test that these games will work on all of the various distros, window managers, and combinations of the two is insane. The one exception to this rule, is if you are a hosting a LAN for a single game, then it's reasonable to spend some time fixing bugs. At my LANs we like to play a mix of games, so wasting time on tech setup will be multiplied by the number of games you play.
+While Linux gaming has improved substantially over the last couple years, do what you can to encourage your players to only bring Windows PCs to the event. In my experience, Linux players have tons of technical problems that you don't want to deal with. At a LAN last year one of my players showed up with a Linux laptop and spent the whole time just trying to get his USB-C to Ethernet dongle working. Since I am suggesting that you bring all of the games to play, you should also be testing the games on Windows machines. Attempting to test that these games will work on all of the various distros, window managers, and combinations of the two is insane. The one exception to this rule, is if you are hosting a LAN for a single game, then it's reasonable to spend some time fixing bugs. At my LANs we like to play a mix of games, so wasting time on tech setup will be multiplied by the number of games you play.
 
-If you and your group and Linux absolutists, feel free to throw a Linux LAN party! But if you actually want to play games during the LAN, I reccomend Windows.
+If you and your group are Linux absolutists, feel free to throw a Linux LAN party! But if you actually want to play games during the LAN, I recommend Windows.
 
 # File Sharing
 
@@ -404,20 +404,21 @@ There are a number of ways you can do this, and many of them are bad. I wrote an
 </figure>
 
 To expand slightly, the most obvious solutions all have major flaws. 
-- Using flashdrives is inconvient.
-- Network file shares have compatability problems with modern versions of Windows.
-- File sharing apps like LocalSend or AirDrop are only 1-to-many which means file sharing is slower.
+- Using flash drives is inconvenient.
+- Network file shares have compatibility problems with modern versions of Windows.
+- Web servers like Caddy bottleneck on the speed of the server hosting the files, and required configuration ahead of time.
+- File sharing apps like LocalSend or AirDrop are also 1-to-many which means file sharing is slower.
 - Other peer to peer apps like D-Lan and DC++ are complex and may scare off your less technical users. Also these tools suffer network performance problems when all of your guests are downloading at once.
 
-To quickly, and easily, get the files to everyone, use LANBucket. Full disclosure, I wrote LANBucket so I am biased, but I do think it's the best way to get the games to everyone. The basic idea is everyone installs LANBucket on their computer, and then the software automatically finds all of the other users. To share a file, just click and drag it in. LANBucket uses a BitTorrent based protocol so transfers are distributed many-to-many, meaning the transfer will be fast even if everyone is downloading the files at the same time.
+To quickly, and easily, get the files to everyone, I use LANBucket. Full disclosure, I wrote LANBucket so I am biased, but I do think it's the best way to get the games to everyone. The basic idea is everyone installs LANBucket on their computer, and then the software automatically finds all of the other users. To share a file, just click and drag it in. LANBucket uses a BitTorrent based protocol so transfers are distributed many-to-many, meaning the transfer will be fast even if everyone is downloading the files at the same time.
 
-At time of writing LANBucket does not support Linux, so if that is important for you, you should consider D-LAN instead. It's the closest thing to LANBucket that I know of. If everything goes right, I should have Linux support ready in LANBucket by the end of 2026, so check back in then :)
+At time of writing LANBucket does not support Linux, so if that is important for you, you should consider D-LAN instead. It's the closest thing to LANBucket that I know of, and was a major inspiration for the LANBucket project. If everything goes right, I should have Linux support ready in LANBucket by the end of 2026, so check back in then :)
 
 ## Some notes about Steam
 
 Steam is by far the most popular game marketplace on PC, and it has two undervalued features that are killer for LAN parties.
 
-The first is [Local Transfers](https://help.steampowered.com/en/faqs/view/46BD-6BA8-B012-CE43). This feature, when enabled allows players to download Steam games from other players on the local network instead of from the cloud. This is great for the case where most of your players have the game already, and you've just gotta get it to one or two stragglers. If you want to us this, make sure to turn on this setting on all the machines:
+The first is [Local Transfers](https://help.steampowered.com/en/faqs/view/46BD-6BA8-B012-CE43). This feature, when enabled allows players to download Steam games from other players on the local network instead of from the cloud. This is great for the case where most of your players have the game already, and you've just gotta get it to one or two stragglers. If you want to use this, make sure to turn on this setting on all the machines:
 
 <figure>
   <img src="{{ '/assets/img/posts/2026-07-12-how-to-host-a-lanparty-2026/steam-local-transfers.jpg' | relative_url }}"
@@ -443,7 +444,7 @@ I recommend you keep this simple. Get pizza delivered. Assume roughly 2.5 slices
 
 If you are splitting costs with your guests, collect money via Venmo before placing the order, not after. Chasing people down for reimbursement after an event is awkward. If you and your guests are employed, it may be less awkward if you don't ask for money at all. If you don't ask for money for pizza, then you can ask your guests to bring snacks without guilt, just try to give some guidance on what to bring so you don't end up with 20 bags of potato chips.
 
-Also worth mentioning that deliberate food break a couple times during the day also works well since it gets everyone away from their screens and talking. Try to time this for a natural break when everyone is wanting to switch games anyway.
+Also worth mentioning that calling deliberate food breaks a couple times during the day also works well since it gets everyone away from their screens and talking. Try to time this for a natural break when everyone is wanting to switch games anyway.
 
 ## No hard alcohol
 
@@ -471,7 +472,4 @@ With that said, energy drinks and Mountain Dew are a LAN party staple, and an ab
 I hope this was a useful guide. I love LAN parties, and I want more people out there to get to experience them. Gaming IRL has a vibe that you can't match playing on Discord.
 
 One last note: make sure to take lots of photos and videos, and encourage your group to do the same. You'll want to cherish these memories, trust me.
-
-# todo
-Typo in Linux Gaming section -> Recommend
 
