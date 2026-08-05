@@ -12,9 +12,9 @@ Buy a cheap Gigabit switch and connect *all* of your players via ethernet. If po
 
 I have been throwing LAN parties, or attending them for over 15 years now. During that time, I have built up some tribal knowledge of what it takes to throw a successful LAN party. This guide assumes a couple of things:
 
-- Your party is somewhere between 5 and 24 guests. Anything smaller is really just "casually hanging with the fellas" and anything larger gets into serious event planning territory.
+- Your party is somewhere between 5 and 32 guests. Anything smaller is really just "casually hanging with the fellas" and anything larger gets into serious event planning territory.
 - You are predominantly looking to play on PC. While I do like to mix in some console games occasionally, if you are looking for a guide on how to host an Xbox 360 LAN for example, you will need to look elsewhere.
-- You are going to be hosting in a house or apartment, and *not* a rented event space. I have no experience with that, I have only ever hosted LANs at someone's house, in a basement, garage, etc.
+- You are going to be hosting in a house or apartment, and *not* a rented event space. I have no experience with that. I have only ever hosted LANs at someone's house, in a basement, garage, etc.
 - You are only going to be inviting friends, or friends of friends, and not members of the public. I have never been to a public LAN, and the advice I have might not apply if you are playing with strangers.
 
 As a host your responsibility is to do your best to ensure everyone has a good time. What you don't want to be doing is running back and forth trying to fix problems on the day of. With a little bit of planning, you can eliminate many of the common pitfalls that home LAN parties face.
@@ -26,6 +26,7 @@ LLM tools were used for minor grammar corrections, as well as to generate the vi
 # Who, When, Where, Why
 
 ## Why a LAN party?
+
 The art of the LAN party has certainly been in decline for the last 20 years or so. Home internet connections have gotten much faster, so the original purpose of the LAN, low-latency multiplayer, is no longer relevant. Additionally, it is something of an ordeal to lug your PC setup across town, to do something you could have done from your couch. What I will counter with is that absolutely nothing will compare to the energy of playing in the same room, and these days it is no secret that in person connection is harder and harder to come by.
 
 ## Where
@@ -253,6 +254,8 @@ Unironically, this is the hardest part of planning a LAN party. While I can't sa
 - Games with high player counts can be challenging. For example, Battlefield supports up to 64 players, which will be hard if you have only 16 players at your house. If you put 16 players on a map designed for 64, it will feel empty and boring. One option in these games is to play co-op versus bots, but that is game-to-game dependent, since in many games the bots are too stupid to be fun to play against. Do your research ahead of time.
 - Don't be afraid to throw in some console gaming. Mario Kart and Super Smash Bros. are both good additions.
 
+(Add the picture of the smash bros tourney on the projector here from the bellevue house)
+
 ## Do the games have to support LAN directly?
 
 No. These days fewer and fewer games support "true" LAN multiplayer, but that doesn't really matter. As long as your internet connection is reliable, you shouldn't have any problems all playing online together.
@@ -320,6 +323,34 @@ There are also a number of community maintained lists, if you want inspiration:
 - [zuggamasta's LAN knowledge base](https://zuggamasta.de/knowledge/lan/)
 - [Giant Bomb: Top LAN party games](https://giantbomb.com/user-lists/uid/6740/top-lan-party-games)
 
+## How should everyone download the games?
+
+This is also a tricky one. I think a natural idea is to assign your players "homework" to install all of the games you want to play ahead of time. In my experience, this does not work very well. You will be lucky if your players show up at all, much less do a checklist before they head out. I have experimented with packaging all of the games together so that my players only need to download one big file, but even this they refused to do. What I reccomend is planning on almost all of your players attempting to download the games on the day of. To that end, prepare the game files so that can easily share them with all the players quickly. Read "File Sharing" below for more detail.
+
+## What about Linux gaming?
+
+While Linux gaming has improved substantially over the last couple years, do what you can to encourage your players to only bring Windows PCs to the event. In my experience, Linux players have tons of technical problems that you don't want to deal with. At a LAN last year one of my players showed up with a Linux laptop and spent the whole time just trying to get his USB-C to Ethernet dongle working. Since I am suggesting that you bring all of the games to play, you should also be testing the games on Windows machines. Attempting to test that these games will work on all of the various distros, window managers, and combinations of the two is insane. The one exception to this rule, is if you are a hosting a LAN for a single game, then it's reasonable to spend some time fixing bugs. At my LANs we like to play a mix of games, so wasting time on tech setup will be multiplied by the number of games you play.
+
+If you and your group and Linux absolutists, feel free to throw a Linux LAN party! But if you actually want to play games during the LAN, I reccomend Windows.
+
+# File Sharing
+
+In the olden times, one of the beauties of a LAN was swapping files across the highspeed network. Remember that back then a 10mbps ethernet connection was more than 100 times faster than the 56k modem back at home. These days sharing files is not as much of a draw, but it can still be a useful tool for a successful LAN.
+
+## 🏴‍☠️☠️⛵?
+
+I don't personally condone piracy (and it's worth reiterating that the opinions on this blog are my own and not endorsed by my employer) however playing games that have been made "DRM free" so to speak, is common at LAN parties. Just proceed with caution if you go down this path. It is possible to do this safely, and playing these "DRM free" games can make running your party much easier since you won't have to deal with accounts, launchers, installers, etc.
+
+## How can I get the files to everyone?
+
+There are a number of ways you can do this, and many of them are bad. I wrote an article about this a couple months ago, so I don't want to reiterate too much of it here: [Why I built LANBucket](https://justinbecker.dev/blog/2026/05/16/why-i-built-lanbucket/).
+
+(Add the screenshot of the LANBucket UI from the MSFT store description here)
+
+TL;DR: to quickly, and easily, get the files to everyone, use LANBucket. Full disclosure, I wrote LANBucket so I am biased, but I do think it's the best way to get the games to everyone. The basic idea is everyone installs LANBucket on their computer, and then the software automatically finds all of the other users. To share a file, just click and drag it in. LANBucket uses a bittorrent based protocol so transfers are distributed many-to-many, meaning the transfer will be fast even if everyone is downloading the files at the same time.
+
+At time of writing LANBucket does not support Linux, so if that is important for you, you should consider D-LAN instead. It's the closest thing to LANBucket that I know of. Linux support is scheduled to be done by the end of 2026.
+
 # Food and beverage
 
 I recommend you keep this simple. Get pizza delivered. Assume roughly 2.5 slices of a large pizza per player. You should also buy plenty of other junk food: potato chips, cookies, pretzels, etc. If you are a Costco member, I recommend doing a run before the event to stock up. Another hack you can do, depending on the quality of delivery pizza in your area, is buy Costco pizzas for the party. They are cheap as hell, and just as good as Domino's or the other chains. If you live in a part of the country that has good pizza, just go to your local joint.
@@ -344,7 +375,6 @@ I'm no teetotaler, but in my opinion liquor is not the right fit for a LAN. You 
 </figure>
 
 With that said, energy drinks and Mountain Dew are a LAN party staple, and an absolute must-have. Also, if you are under 21, don't drink. It's illegal, etc., etc.
-
 
 # How to have fun
 - Get your wife to be social host for you, if you can
