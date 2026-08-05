@@ -393,7 +393,7 @@ In the olden times, one of the beauties of a LAN was swapping files across the h
 
 ## <span style="font-size: 2em;">🏴‍☠️☠️⛵?</span>
 
-I don't personally condone piracy (and it's worth reiterating that the opinions on this blog are my own and not endorsed by my employer) however playing games that have been made "DRM free" so to speak, is common at LAN parties. Just proceed with caution if you go down this path. It is possible to do this safely, and playing these "DRM free" games can make running your party much easier since you won't have to deal with accounts, launchers, installers, etc.
+I don't personally condone piracy (and it's worth reiterating that the opinions on this blog are my own and not endorsed by my employer) however playing games that have been modified to be "DRM free" so to speak, is common at LAN parties. Just proceed with caution if you go down this path. It is possible to do this safely, and playing these "DRM free" games can make running your party much easier since you won't have to deal with accounts, launchers, installers, etc.
 
 ## How can I get the files to everyone?
 
