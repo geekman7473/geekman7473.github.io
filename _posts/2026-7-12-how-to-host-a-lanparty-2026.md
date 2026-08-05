@@ -1,6 +1,6 @@
 ---
 title: "How to throw a LAN party in 2026"
-date: 2026-07-12
+date: 2026-08-05
 summary: ""
 description: "A practical guide to hosting a home LAN party in 2026. Covers networking, power, seating, game selection, file sharing, and food for groups of 5 to 32 players."
 image: /assets/img/posts/2026-07-12-how-to-host-a-lanparty-2026/day-of-setup.jpg

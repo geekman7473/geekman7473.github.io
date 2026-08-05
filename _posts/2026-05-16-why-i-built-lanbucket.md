@@ -2,7 +2,7 @@
 title: "Why I built LANBucket"
 date: 2026-05-16
 summary: ""
-description: "Getting game files to everyone at a LAN party is painful. Existing tools are too slow, too fiddly, or both. LANBucket is my attempt to make this better."
+description: "Getting game files to everyone at a LAN party is painful. Existing tools are too slow, too fiddly, or both. LANBucket is my attempt to make this better, using distributed file transfers."
 image: /assets/img/posts/2026-05-16-why-i-built-lanbucket/2012-12-early.jpg
 ---
 
