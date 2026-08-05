@@ -1,8 +1,13 @@
 // Automatically links the first occurrence of each glossary term within each
-// section (delineated by headings) to Wikipedia, with a hover tooltip.
+// section (delineated by headings) with a hover tooltip.
 // Terms and their definitions live here only — no inline markup needed in posts.
 (function () {
   const GLOSSARY = [
+    {
+      pattern: /\bLANBucket\b/,
+      url: 'https://lanbucket.com',
+      title: 'A free app for fast, zero-config file sharing on a local network, made specifically for LAN parties.',
+    },
     {
       pattern: /\bEthernet\b/i,
       url: 'https://en.wikipedia.org/wiki/Ethernet',
@@ -26,16 +31,14 @@
     {
       pattern: /\bBitTorrent\b/i,
       url: 'https://en.wikipedia.org/wiki/BitTorrent',
-      title: 'A peer-to-peer file transfer protocol. Instead of one machine sending to everyone, all downloaders share pieces with each other — the more people downloading, the faster it goes.',
+      title: 'A peer-to-peer file transfer protocol. Instead of one machine sending to everyone, all downloaders share pieces with each other so the more people downloading, the faster it goes.',
     },
   ];
 
   const SKIP_TAGS = new Set(['A', 'SCRIPT', 'STYLE', 'CODE', 'PRE', 'FIGCAPTION', 'FIGURE']);
 
-  // Walk the subtree of el, collecting text nodes grouped by section.
-  // A new section starts each time a heading element is encountered.
   function collectTextNodes(el) {
-    const result = []; // [{node, section}]
+    const result = [];
     let section = 0;
 
     (function walk(node) {
@@ -55,7 +58,6 @@
     return result;
   }
 
-  // For a single text node, find all unlinked term matches and replace with <a> elements.
   function applyMatches(textNode, matches) {
     const text = textNode.textContent;
     matches.sort((a, b) => a.start - b.start);
@@ -78,7 +80,6 @@
   function run(root) {
     const allNodes = collectTextNodes(root);
 
-    // Group text nodes by section index
     const sections = new Map();
     for (const item of allNodes) {
       if (!sections.has(item.section)) sections.set(item.section, []);

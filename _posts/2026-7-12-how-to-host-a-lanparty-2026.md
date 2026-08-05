@@ -129,7 +129,7 @@ Another advantage of folding tables, which you can see in these renderings above
        alt="Ethernet cables running through the gap between two folding tables"
        width="1200" height="1600"
        loading="lazy" />
-  <figcaption class="meta">Cables routed through the gap between tables (March 2025)</figcaption>
+  <figcaption class="meta">Cables routed down the middle of a long line of folding tables (March 2025)</figcaption>
 </figure>
 
 # Networking
@@ -188,7 +188,7 @@ If you are willing to try something new, I recommend making your own cables. Pre
 
 No, but it's much more convenient. While true LAN games exist, many modern games rely on cloud services, even to play private matches. Steam social services, and Discord are also nice to have, and only work online. There are other weird things you will notice if machines don't have Internet access. Some apps, like for controlling fancy gaming mice and keyboards, need to connect online at startup. Even if your Internet connection is slow, especially if you are splitting it 16 ways, it's still nice to have.
 
-## Don't buy anything labeled "Fast Ethernet"
+## Beware "Fast Ethernet"
 
 This is some very confusing language, but ["Fast Ethernet"](https://en.wikipedia.org/wiki/Fast_Ethernet) is the marketing name for 100 Mbps Ethernet. That is 1/10th the speed of Gigabit. Don't buy anything labeled "Fast Ethernet."
 
@@ -247,7 +247,7 @@ I recommend having your play space almost entirely set up before your first gues
 5. Set up your own PC, and smoke test your power and networking.
 6. Tape down any wire, extension cord, or power strip that might move or be a tripping hazard. Go crazy with it.
 7. Designate a dumping spot for shoes, jackets, backpacks, or anything else your guests are bringing with them that they won't need at their seat. A coat closet, or spare room works nicely here.
-8. Put pets away. Cats in particular are not compatible with LAN parties: they walk on keyboards, knock over drinks, and will find the one cable that matters most and chew it. Dogs can work if they're calm and used to strangers, but even then stow them during arrival while people are coming in and out.
+8. If you have pets, it may be a good idea to stow them away while your guests are coming and going, which could frighten them. You can think about letting them out once everyone is settled in, depending on the temperment of the animal.
 
 You can of course do more than this, but this is just the basics. One time I went so far as to prerun custom length Ethernet cables to each player's seat. I have also heard of organizers allocating particular outlets to each player. The sky is the limit here. The point of pre setup is to save time in the chaos once your guests show up, so you can play more games. 
 
@@ -273,8 +273,8 @@ Unironically, this is the hardest part of planning a LAN party. While I can't sa
 - Try for a mix of genres. I like to have a shooter, a strategy game, and a racing or sports game.
 - Add in some novelty games. Alongside the typical shooters and strategy games, throw in something silly. We have had good fun playing Golf With Your Friends, Worms, and Teeworlds over the years. Just try to mix it up.
 - To level the skill gap, try playing games that none of your players have tried before. Weird indie games are a great choice for this. If everyone is struggling with the controls at the same time, it adds a certain camaraderie as you all learn the game together.
-- Avoid playing long, involved games unless everyone at the LAN is into it. For example, Civilization is a great multiplayer game, but each match takes hours, and the game is not friendly to beginners. Another good example is Factorio. Only play games like this if your whole group is already into that specific game.
-- Games with high player counts can be challenging. For example, Battlefield supports up to 64 players, which will be hard if you have only 16 players at your house. If you put 16 players on a map designed for 64, it will feel empty and boring. One option in these games is to play co-op versus bots, but that is game-to-game dependent, since in many games the bots are too stupid to be fun to play against. Do your research ahead of time.
+- Avoid playing long, involved games unless everyone at the LAN is into it. For example, Civilization is a great multiplayer game, but each match takes hours, and the game is not friendly to beginners. Another good example is Factorio. Only play games like this if your whole group is already familiar with it.
+- Games with high player counts can be challenging. For example, Battlefield supports up to 64 players, but if you put 16 players on a map designed for 64, it will feel empty and boring. One option in these games is to play co-op versus bots, but that is game-to-game dependent, since in many games the bots are too stupid to be fun to play against. Do your research ahead of time.
 - Don't be afraid to throw in some console gaming. Mario Kart and Super Smash Bros. are both good additions.
 
 <figure>
@@ -317,7 +317,7 @@ If possible, you want to play free or [DRM](https://en.wikipedia.org/wiki/Digita
        alt="LAN party in progress with multiple players at their PCs"
        width="1600" height="1200"
        loading="lazy" />
-  <figcaption class="meta">March 2024</figcaption>
+  <figcaption class="meta">Playing OpenRA with the lads (March 2024)</figcaption>
 </figure>
 
 ## How do I convince everyone to download the games?
@@ -346,6 +346,7 @@ Here's a list, in no particular order:
 - DEFCON
 - Re-Volt (RC racing game)
 - Command & Conquer: Red Alert 2
+- OpenRA (Modernized Command & Conquer)
 - StarCraft II
 - Age of Empires II
 - Star Wars Jedi Knight: Jedi Academy
@@ -388,7 +389,7 @@ If you and your group are Linux absolutists, feel free to throw a Linux LAN part
 
 # File Sharing
 
-In the olden times, one of the beauties of a LAN was swapping files across the highspeed network. Remember that back then a 10mbps Ethernet connection was more than 100 times faster than the 56k modem back at home. These days sharing files is not as much of a draw, but it can still be a useful tool for a successful LAN.
+In the olden times, one of the beauties of a LAN was swapping files across the highspeed network. Remember that back then a 10mbps Ethernet connection was more than 100x faster than the 56k modem you had back at home. These days sharing files is not as much of a draw, but it can still be a useful tool for a successful LAN.
 
 ## 🏴‍☠️☠️⛵?
 
@@ -398,13 +399,6 @@ I don't personally condone piracy (and it's worth reiterating that the opinions 
 
 There are a number of ways you can do this, and many of them are bad. I wrote an article about this a couple months ago, so I don't want to reiterate too much of it here: [Why I built LANBucket](https://justinbecker.dev/blog/2026/05/16/why-i-built-lanbucket/).
 
-<figure>
-  <img src="{{ '/assets/img/posts/2026-07-12-how-to-host-a-lanparty-2026/lanbucket-screenshot.png' | relative_url }}"
-       alt="Screenshot of the LANBucket UI"
-       width="800"
-       loading="lazy" />
-</figure>
-
 To expand slightly, the most obvious solutions all have major flaws. 
 - Using flash drives is inconvenient.
 - Network file shares have compatibility problems with modern versions of Windows.
@@ -413,6 +407,13 @@ To expand slightly, the most obvious solutions all have major flaws.
 - Other peer to peer apps like D-Lan and DC++ are complex and may scare off your less technical users. Also these tools suffer network performance problems when all of your guests are downloading at once.
 
 To quickly, and easily, get the files to everyone, I use LANBucket. Full disclosure, I wrote LANBucket so I am biased, but I do think it's the best way to get the games to everyone. The basic idea is everyone installs LANBucket on their computer, and then the software automatically finds all of the other users. To share a file, just click and drag it in. LANBucket uses a BitTorrent based protocol so transfers are distributed many-to-many, meaning the transfer will be fast even if everyone is downloading the files at the same time.
+
+<figure>
+  <img src="{{ '/assets/img/posts/2026-07-12-how-to-host-a-lanparty-2026/lanbucket-screenshot.png' | relative_url }}"
+       alt="Screenshot of the LANBucket UI"
+       width="800"
+       loading="lazy" />
+</figure>
 
 At time of writing LANBucket does not support Linux, so if that is important for you, you should consider D-LAN instead. It's the closest thing to LANBucket that I know of, and was a major inspiration for the LANBucket project. If everything goes right, I should have Linux support ready in LANBucket by the end of 2026, so check back in then :)
 
@@ -474,4 +475,3 @@ With that said, energy drinks and Mountain Dew are a LAN party staple, and an ab
 I hope this was a useful guide. I love LAN parties, and I want more people out there to get to experience them. Gaming IRL has a vibe that you can't match playing on Discord.
 
 One last note: make sure to take lots of photos and videos, and encourage your group to do the same. You'll want to cherish these memories, trust me.
-
