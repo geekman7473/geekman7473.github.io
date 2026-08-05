@@ -102,7 +102,7 @@ In this layout these two players on the "overflow" table felt like they had been
 
 This layout works better in rooms of certain shapes, but you end up creating a bunch of islands of socialization. You basically need a seating chart, like at a wedding reception, to figure out who will vibe well with who. It can work, but I don't like it as much.
 
-For the actual seating, I recommend folding chairs if you are in a larger group. Proper desk chairs are much more comfortable, but they take up a lot more space. They are also cumbersome to move around. Folding chairs are relatively inexpensive. At time of writing, this padded chair is available for [~$23/each at Costco](https://sameday.costco.com/store/costco/products/55609644-maxchief-metal-highback-padded-folding-chair-1-each). If you are on a budget, check Goodwill, or other thrift stores in your area. We have found folding chairs at these stores for $4/each before.
+For the actual seating, I recommend folding chairs if you are in a larger group. Proper desk chairs are much more comfortable, but they take up a lot more space. They are also cumbersome to move around. Folding chairs are relatively inexpensive. At time of writing, this padded chair is available for [~$23/each at Costco](https://sameday.costco.com/store/costco/products/55609644-maxchief-metal-highback-padded-folding-chair-1-each). If you are on a budget, check Goodwill, or other thrift stores in your area. We have found folding chairs at these stores for $4/each before. One thing to watch out for: if your play space has hardwood floor of the weekend. Stick some felt pads on the chair feet before the event.
 
 I find that at a standard 6 foot folding table, you can comfortably seat four players like so:
 
@@ -218,9 +218,9 @@ The annoying part is you have to figure out which power outlets in your home map
 
 # Day of setup
 
-I recommend having your play space almost entirely set up before your first guests arrive. You may be able to enlist one or two guests to arrive early and help with setup, which I have had success with in the past. As a rough checklist, I would plan to have all of this done by start time:
+I recommend having your play space almost entirely set up before your first guests arrive. You may be able to enlist one or two guests to arrive early and help with setup, which I have had success with in the past. If you can, also designate someone tech-savvy among your guests to help with troubleshooting on the day, so you are not running around fixing problems while everyone else is playing. As a rough checklist, I would plan to have all of this done by start time:
 
-0. The night before, turn the A/C *wayyyyy* down in your play space. I set my A/C to 62F (17C). The idea is to not just cool down the air in the room, but also the contents of the room. This should help your room stay comfortable for longer the next day during play. Once play starts, return the temperature setting to normal. 
+0. The night before, turn the A/C *wayyyyy* down in your play space. I set my A/C to 62F (17C). The idea is to not just cool down the air in the room, but also the contents of the room. This should help your room stay comfortable for longer the next day during play. Once play starts, return the temperature setting to normal. On the day of, also avoid running anything that dumps heat into the house: the oven, the clothes dryer, space heaters, etc. Every BTU those appliances put out is heat your A/C has to fight against.
 1. Set up tables and chairs in roughly the final layout. Ensure that every player will have a walking path to the food, and the bathroom. If you have time, sit down in every chair at least once to make sure that player will have enough space.
 2. Map out which outlets correspond to which breakers.
 3. Run extension cables from the outlets you identified in the previous step, and tape down the wires using masking tape to prevent tripping.
@@ -228,9 +228,13 @@ I recommend having your play space almost entirely set up before your first gues
 5. Set up your own PC, and smoke test your power and networking.
 6. Tape down any wire, extension cord, or power strip that might move or be a tripping hazard. Go crazy with it.
 7. Designate a dumping spot for shoes, jackets, backpacks, or anything else your guests are bringing with them that they won't need at their seat. A coat closet, or spare room works nicely here.
-8. If you have pets, it may be a good idea to stow them away while your guests are coming and going, which could frighten them. You can think about letting them out once everyone is settled in.
+8. Put pets away. Cats in particular are not compatible with LAN parties: they walk on keyboards, knock over drinks, and will find the one cable that matters most and chew it. Dogs can work if they're calm and used to strangers, but even then stow them during arrival while people are coming in and out.
 
-You can of course do more than this, but this is just the basics. One time I went so far as to prerun custom length Ethernet cables to each player's seat. I have also heard of organizers allocating particular outlets to each player. The sky is the limit here. The point of pre setup is to save time in the chaos once your guests show up, so you can play more games.
+You can of course do more than this, but this is just the basics. One time I went so far as to prerun custom length Ethernet cables to each player's seat. I have also heard of organizers allocating particular outlets to each player. The sky is the limit here. The point of pre setup is to save time in the chaos once your guests show up, so you can play more games. 
+
+It also helps to keep spare gear on hand. Stuff like mice, keyboards, mousepads, AA batteries, ethernet cables, display cables, xbox controllers. People forget things like this and you'll be a hero for saving your guests. 
+
+At the end of the night, ask for cleanup help and give specific direction. Most people are glad to pitch in if they know what to do.
 
 <figure>
   <img src="{{ '/assets/img/posts/2026-07-12-how-to-host-a-lanparty-2026/day-of-setup.jpg' | relative_url }}"
@@ -362,6 +366,10 @@ I recommend you keep this simple. Get pizza delivered. Assume roughly 2.5 slices
        loading="lazy" />
 </figure>
 
+If you are splitting costs with your guests, collect money via Venmo before placing the order, not after. Chasing people down for reimbursement after an event is awkward. If you and your guests are employed, it may be less awkward if you don't ask for money at all. If you don't ask for money for pizza, then you can ask your guests to bring snacks without guilt, just try to give some guidance on what to bring so you don't end up with 20 bags of potato chips.
+
+Also worth mentioning that deliberate food break a couple times during the day also works well since it gets everyone away from their screens and talking.
+
 ## No hard alcohol
 
 I'm no teetotaler, but in my opinion liquor is not the right fit for a LAN. You want your players slightly buzzed, but not wasted. If they get too drunk they will stop wanting to play, and just mill around aimlessly. Beer, seltzers, and the like are good, but try to keep your players right around their Ballmer peak:
@@ -374,28 +382,15 @@ I'm no teetotaler, but in my opinion liquor is not the right fit for a LAN. You 
   <figcaption class="meta">The narrow window you are aiming for. (<a href="https://xkcd.com/323/">xkcd #323</a> &copy; Randall Munroe)</figcaption>
 </figure>
 
-With that said, energy drinks and Mountain Dew are a LAN party staple, and an absolute must-have. Also, if you are under 21, don't drink. It's illegal, etc., etc.
+With that said, energy drinks and Mountain Dew are a LAN party staple, and an absolute must-have. Also, if you are under 21, don't drink. It's illegal, etc., etc. Favor cans and bottles over solo cups since a tipped drink next to a keyboard is a bad time. Same logic applies to snacks: go low-residue. Cheetos are out.
 
-# How to have fun
-- Get your wife to be social host for you, if you can
-- Team work makes the dream work
-- Don't be a one man IT department
+# Conclusion
 
+I hope
 
-# Misc
+Take lots of pictures throughout the day and send them to the group after. In my experience people love this and it builds excitement for the next one.
 
 
 # TODO:
-- Cans and bottles, not solo cups
-- Designated food break times, as for social mingling
-- Stuff that you should buy a couple off to have on hand (mice, mouse pad, batteries, ethernet cables, display cables, power cords, xbox controllers)
-- Trash and recycle should be out and proud
-- Get people to help you cleanup at the end, most of the time they will be glad to help if given good direction
-- Beware of hardwood floors
-- Avoid using appliances that heat up the room
-- Low residue handfood
-- Put pets away. Cats are not compatible with LAN parties.
-- Take lots of pictures and videos, and ask for photos from your guests. Send photos out to your guests afterwards to build rapport.
-- Give some direction about what food people should bring so you don't end up with 50 bags of chips, and 100 cans of beer.
 - Whole section on money and the ramifications of taking money.
 - Add new photos that liv sent me
