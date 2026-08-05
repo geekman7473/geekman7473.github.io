@@ -200,6 +200,11 @@ This is some very confusing language, but ["Fast Ethernet"](https://en.wikipedia
   <figcaption class="meta">An example of what you need to avoid.</figcaption>
 </figure>
 
+## My internet has a data cap, what should I do?
+
+Depending on the size of your party, and how big your cap is, you might not need to worry much about it. Actually playing games does not use much bandwitdh, but downloading them does. There are other things to keep in mind like Windows update running in the background, or players who may have auto updates enabled on Steam. If your data cap is low, and you have lots of players, it may be worth it to look into something called [LAN Cache](https://lancache.net/) which will cache game updates locally on your LAN, preventing users on your network from downloading from the cloud. I personally have not used this because I don't have a data cap on my plan, but it is worth looking into if you do.
+
+Alternatively, if your group chooses not to play Steam games (see the section on games below) you can just share the game files on your LAN elsewise (see the section on file sharing below).
 
 # Power
 
@@ -393,7 +398,7 @@ In the olden times, one of the beauties of a LAN was swapping files across the h
 
 ## <span style="font-size: 2em;">🏴‍☠️☠️⛵?</span>
 
-I don't personally condone piracy (and it's worth reiterating that the opinions on this blog are my own and not endorsed by my employer) however playing games that have been modified to be "DRM free" so to speak, is common at LAN parties. Just proceed with caution if you go down this path. It is possible to do this safely, and playing these "DRM free" games can make running your party much easier since you won't have to deal with accounts, launchers, installers, etc.
+I don't personally condone piracy (and it's worth reiterating that the opinions on this blog are my own and not endorsed by my employer) however playing games that have been modified to be "DRM free" so to speak, is common at LAN parties. Just proceed with caution if you go down this path. It is possible to do this safely, and playing these "DRM free" games can make running your party much easier since you won't have to deal with accounts, launchers, installers, etc. If you do some searching online you can find plenty of games for this use case, and that's all I will say about that. Mum's the word and all that.
 
 ## How can I get the files to everyone?
 
@@ -475,3 +480,7 @@ With that said, energy drinks and Mountain Dew are a LAN party staple, and an ab
 I hope this was a useful guide. I love LAN parties, and I want more people out there to get to experience them. Gaming IRL has a vibe that you can't match playing on Discord.
 
 One last note: make sure to take lots of photos and videos, and encourage your group to do the same. You'll want to cherish these memories, trust me.
+
+# Thanks
+
+- Thanks to [u/plfg6423](https://www.reddit.com/r/lanparty/comments/1vgjbsb/comment/p1xmxmu/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button) for reminding me about the issue of data caps
