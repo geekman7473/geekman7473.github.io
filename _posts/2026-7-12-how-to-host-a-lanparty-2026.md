@@ -391,7 +391,7 @@ If you and your group are Linux absolutists, feel free to throw a Linux LAN part
 
 In the olden times, one of the beauties of a LAN was swapping files across the highspeed network. Remember that back then a 10mbps Ethernet connection was more than 100x faster than the 56k modem you had back at home. These days sharing files is not as much of a draw, but it can still be a useful tool for a successful LAN.
 
-## 🏴‍☠️☠️⛵?
+## <span style="font-size: 2em;">🏴‍☠️☠️⛵?</span>
 
 I don't personally condone piracy (and it's worth reiterating that the opinions on this blog are my own and not endorsed by my employer) however playing games that have been made "DRM free" so to speak, is common at LAN parties. Just proceed with caution if you go down this path. It is possible to do this safely, and playing these "DRM free" games can make running your party much easier since you won't have to deal with accounts, launchers, installers, etc.
 
