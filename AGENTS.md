@@ -36,6 +36,8 @@ All images added to blog posts must:
 
 The script [scripts/prepare-post-image.ps1](scripts/prepare-post-image.ps1) does all of (2) and (3) in one pass. Use it instead of running ImageMagick / exiftool ad hoc. It requires ImageMagick (`magick`) and exiftool to be installed and on PATH.
 
+**Only watermark and claim copyright on photos we are sure are Justin's.** The `justinbecker.dev` watermark and the `Justin Becker` copyright metadata in (3) assert ownership, so they must only be applied to Justin's own images. For a third-party photo, do not run the standard pipeline: still resize/compress it, but skip the watermark (`-NoWatermark`) and embed the actual creator's credit instead of Justin's. If it is unclear who owns a photo, ask before adding any watermark or copyright metadata.
+
 ## Dependencies
 
 The image pipeline depends on:

@@ -5,6 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{ page.title }} &middot; Justin Becker</title>
     {% if page.description %}<meta name="description" content="{{ page.description }}" />{% endif %}
+    <link rel="canonical" href="{{ page.url | absolute_url }}" />
+    <meta property="og:title" content="{{ page.title | escape }}" />
+    <meta property="og:type" content="{% if page.date %}article{% else %}website{% endif %}" />
+    <meta property="og:url" content="{{ page.url | absolute_url }}" />
+    <meta property="og:site_name" content="{{ site.title | escape }}" />
+    {% if page.description %}<meta property="og:description" content="{{ page.description | escape }}" />{% endif %}
+    {% if page.image %}<meta property="og:image" content="{{ page.image | absolute_url }}" />{% endif %}
+    <meta name="twitter:card" content="{% if page.image %}summary_large_image{% else %}summary{% endif %}" />
+    <meta name="twitter:title" content="{{ page.title | escape }}" />
+    {% if page.description %}<meta name="twitter:description" content="{{ page.description | escape }}" />{% endif %}
+    {% if page.image %}<meta name="twitter:image" content="{{ page.image | absolute_url }}" />{% endif %}
     <meta name="theme-color" content="#c0c0c0" />
     {% include social-meta.html %}
     <link rel="stylesheet" href="{{ '/styles.css' | relative_url }}" />

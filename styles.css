@@ -393,6 +393,27 @@ a.tool-card:active { border-style: inset; }
 }
 .compare95 img[hidden] { display: none; }
 
+/* --- Multi-image gallery row ----------------------------------------- */
+.power-gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  align-items: start;
+}
+@media (max-width: 640px) {
+  .power-gallery { grid-template-columns: 1fr; }
+}
+
+/* --- Half-width centered figure -------------------------------------- */
+.figure-half {
+  max-width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+@media (max-width: 640px) {
+  .figure-half { max-width: 100%; }
+}
+
 /* --- Fullscreen lightbox ---------------------------------------------- */
 .lightbox95 {
   position: fixed;

@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 362" fill="none" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" font-family="Courier New, Courier, monospace">
+  <defs>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1f6feb" stroke="none"/>
+    </marker>
+    <marker id="arrow-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#e8590c" stroke="none"/>
+    </marker>
+  </defs>
+
+  <!-- ===== TOP: four users on the same switch ===== -->
+  <text x="30" y="26" font-size="14" fill="#000" stroke="none">Same switch</text>
+
+  <!-- the single switch -->
+  <rect x="285" y="66" width="90" height="48" rx="6"/>
+  <line x1="285" y1="82" x2="375" y2="82" stroke="#1f6feb" stroke-width="2" stroke-dasharray="1 9"/>
+  <line x1="285" y1="98" x2="375" y2="98" stroke="#e8590c" stroke-width="2" stroke-dasharray="1 9"/>
+  <text x="330" y="95" text-anchor="middle" font-size="12" font-weight="bold" fill="#000" stroke="none">Switch</text>
+
+  <!-- PCs (A/B left, C/D right) -->
+  <rect x="44" y="44" width="64" height="34" rx="4"/>
+  <text x="76" y="66" text-anchor="middle" font-size="13" font-weight="bold" fill="#000" stroke="none">A</text>
+  <rect x="44" y="118" width="64" height="34" rx="4"/>
+  <text x="76" y="140" text-anchor="middle" font-size="13" font-weight="bold" fill="#000" stroke="none">B</text>
+  <rect x="552" y="44" width="64" height="34" rx="4"/>
+  <text x="584" y="66" text-anchor="middle" font-size="13" font-weight="bold" fill="#000" stroke="none">C</text>
+  <rect x="552" y="118" width="64" height="34" rx="4"/>
+  <text x="584" y="140" text-anchor="middle" font-size="13" font-weight="bold" fill="#000" stroke="none">D</text>
+
+  <!-- traffic flows A->C and B->D: each cable stops at the switch and resumes on the far side -->
+  <line x1="108" y1="61" x2="285" y2="82" stroke="#1f6feb" stroke-width="2.5" marker-end="url(#arrow-blue)"/>
+  <line x1="375" y1="82" x2="552" y2="61" stroke="#1f6feb" stroke-width="2.5" marker-end="url(#arrow-blue)"/>
+  <line x1="108" y1="135" x2="285" y2="98" stroke="#e8590c" stroke-width="2.5" marker-end="url(#arrow-orange)"/>
+  <line x1="375" y1="98" x2="552" y2="135" stroke="#e8590c" stroke-width="2.5" marker-end="url(#arrow-orange)"/>
+  <text x="196" y="60" text-anchor="middle" font-size="10" fill="#555" stroke="none">1 Gbps</text>
+  <text x="196" y="134" text-anchor="middle" font-size="10" fill="#555" stroke="none">1 Gbps</text>
+  <text x="464" y="60" text-anchor="middle" font-size="10" fill="#555" stroke="none">1 Gbps</text>
+  <text x="464" y="134" text-anchor="middle" font-size="10" fill="#555" stroke="none">1 Gbps</text>
+
+  <text x="330" y="162" text-anchor="middle" font-size="13" fill="#008000" stroke="none">A&#8594;C and B&#8594;D each get the full 1 Gbps</text>
+
+  <!-- divider between the two scenarios -->
+  <line x1="24" y1="180" x2="636" y2="180" stroke="#c0c0c0" stroke-width="1" stroke-dasharray="4 4"/>
+
+  <!-- ===== BOTTOM: users split across two switches ===== -->
+  <text x="30" y="208" font-size="14" fill="#000" stroke="none">Two switches</text>
+
+  <rect x="175" y="252" width="90" height="44" rx="6"/>
+  <line x1="175" y1="263" x2="265" y2="274" stroke="#1f6feb" stroke-width="2" stroke-dasharray="1 9"/>
+  <line x1="175" y1="285" x2="265" y2="274" stroke="#e8590c" stroke-width="2" stroke-dasharray="1 9"/>
+  <text x="220" y="279" text-anchor="middle" font-size="11" font-weight="bold" fill="#000" stroke="none">Switch 1</text>
+
+  <rect x="395" y="252" width="90" height="44" rx="6"/>
+  <line x1="395" y1="274" x2="485" y2="263" stroke="#1f6feb" stroke-width="2" stroke-dasharray="1 9"/>
+  <line x1="395" y1="274" x2="485" y2="285" stroke="#e8590c" stroke-width="2" stroke-dasharray="1 9"/>
+  <text x="440" y="279" text-anchor="middle" font-size="11" font-weight="bold" fill="#000" stroke="none">Switch 2</text>
+
+  <!-- PCs: A/B on switch 1, C/D on switch 2 -->
+  <rect x="44" y="230" width="64" height="34" rx="4"/>
+  <text x="76" y="252" text-anchor="middle" font-size="13" font-weight="bold" fill="#000" stroke="none">A</text>
+  <rect x="44" y="304" width="64" height="34" rx="4"/>
+  <text x="76" y="326" text-anchor="middle" font-size="13" font-weight="bold" fill="#000" stroke="none">B</text>
+  <rect x="552" y="230" width="64" height="34" rx="4"/>
+  <text x="584" y="252" text-anchor="middle" font-size="13" font-weight="bold" fill="#000" stroke="none">C</text>
+  <rect x="552" y="304" width="64" height="34" rx="4"/>
+  <text x="584" y="326" text-anchor="middle" font-size="13" font-weight="bold" fill="#000" stroke="none">D</text>
+
+  <!-- shared uplink between the switches: one black cable -->
+  <line x1="265" y1="274" x2="395" y2="274" stroke="#000" stroke-width="3"/>
+
+  <!-- traffic flows A->C and B->D: each stops at its switch; only one cable links the switches -->
+  <line x1="108" y1="247" x2="175" y2="263" stroke="#1f6feb" stroke-width="2.5" marker-end="url(#arrow-blue)"/>
+  <line x1="485" y1="263" x2="552" y2="247" stroke="#1f6feb" stroke-width="2.5" marker-end="url(#arrow-blue)"/>
+  <line x1="108" y1="321" x2="175" y2="285" stroke="#e8590c" stroke-width="2.5" marker-end="url(#arrow-orange)"/>
+  <line x1="485" y1="285" x2="552" y2="321" stroke="#e8590c" stroke-width="2.5" marker-end="url(#arrow-orange)"/>
+
+  <text x="330" y="238" text-anchor="middle" font-size="11" fill="#cc0000" stroke="none">both flows share one cable</text>
+  <text x="150" y="240" text-anchor="middle" font-size="10" fill="#555" stroke="none">1 Gbps</text>
+  <text x="150" y="325" text-anchor="middle" font-size="10" fill="#555" stroke="none">1 Gbps</text>
+  <text x="510" y="240" text-anchor="middle" font-size="10" fill="#555" stroke="none">1 Gbps</text>
+  <text x="510" y="325" text-anchor="middle" font-size="10" fill="#555" stroke="none">1 Gbps</text>
+
+  <text x="330" y="356" text-anchor="middle" font-size="13" fill="#cc0000" stroke="none">A&#8594;C and B&#8594;D share the one cable: 0.5 Gbps each</text>
+</svg>
