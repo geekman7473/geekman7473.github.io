@@ -18,6 +18,20 @@ layout: default
   <p class="meta"><a href="{{ '/blog/' | relative_url }}">&larr; all posts</a></p>
 </section>
 <script src="{{ '/assets/js/post-toc.js' | relative_url }}" defer></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": {{ page.title | jsonify }},
+  "datePublished": "{{ page.date | date_to_xmlschema }}",
+  "dateModified": "{{ page.date | date_to_xmlschema }}",
+  "author": { "@type": "Person", "name": "Justin Becker", "url": "{{ site.url }}" },
+  "publisher": { "@type": "Person", "name": "Justin Becker", "url": "{{ site.url }}" },
+  "url": "{{ page.url | absolute_url }}"{% if page.description %},
+  "description": {{ page.description | jsonify }}{% endif %}{% if page.image %},
+  "image": "{{ page.image | absolute_url }}"{% endif %}
+}
+</script>
 
 {% include comments.html %}
 
