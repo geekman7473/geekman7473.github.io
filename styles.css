@@ -281,7 +281,8 @@ textarea.input95 { resize: vertical; }
   gap: 12px;
 }
 a.tool-card {
-  display: block;
+  display: flex;
+  flex-direction: column;
   background: #c0c0c0;
   border: 2px outset #c0c0c0;
   padding: 3px;
@@ -309,6 +310,7 @@ a.tool-card:active { border-style: inset; }
   background: #fff;
   padding: 8px 10px 9px;
   min-height: 84px;
+  flex: 1;
 }
 .tool-card__body p { margin: 0 0 6px; }
 .tool-card__body p:last-child { margin-bottom: 0; }

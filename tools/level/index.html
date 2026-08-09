@@ -95,6 +95,19 @@
           Needs a phone or tablet with orientation sensors. Tap start.
         </p>
 
+        <div id="level-error" hidden style="
+          border: 2px inset #c0c0c0;
+          background: #fff0f0;
+          padding: 10px 12px;
+          font-family: 'Courier New', Courier, monospace;
+          font-size: 13px;
+          margin: 8px 0 4px;
+        ">
+          <strong>No sensor data received.</strong><br>
+          This device does not appear to have orientation sensors.
+          Bubble levels require a phone or tablet with an accelerometer.
+        </div>
+
         <!-- ── FLAT MODE (device lying flat on a surface) ────────────────── -->
         <div id="mode-flat" hidden>
           <p class="level-mode-label">Flat &mdash; device on a surface</p>
@@ -195,28 +208,11 @@
           </svg>
           <div class="level-readout" id="fb-readout">0.0&deg;</div>
 
-          <!-- Axis 3: Z — Rotation (alpha) -->
-          <div class="level-axis-label">Z axis &mdash; rotation (compass)</div>
-          <svg class="level-tube" viewBox="-175 -38 350 76"
-               role="img" aria-label="Rotation">
-            <rect x="-170" y="-32" width="340" height="64" rx="32" ry="32"
-                  fill="#c0c0c0" stroke="#808080" stroke-width="2"/>
-            <rect x="-162" y="-24" width="324" height="48" rx="24" ry="24"
-                  fill="#d8e4ee" stroke="#b0b8c4" stroke-width="1"/>
-            <line x1="-60" y1="-20" x2="-60" y2="20" stroke="#b0b8c4" stroke-width="1.5"/>
-            <line x1="60"  y1="-20" x2="60"  y2="20" stroke="#b0b8c4" stroke-width="1.5"/>
-            <line x1="0" y1="-26" x2="0" y2="26" stroke="#cc0000" stroke-width="2"/>
-            <circle id="rot-bubble" r="22"
-                    fill="rgba(30,90,220,0.45)" stroke="#0030aa" stroke-width="2.5"
-                    cx="0" cy="0"/>
-          </svg>
-          <div class="level-readout" id="rot-readout">0&deg;</div>
         </div>
 
         <p class="meta" style="margin-top:12px;">
           Mode switches automatically based on device orientation.
           Red line = center (level). Tick marks at &plusmn;15&deg;.
-          The Z axis bubble shows compass bearing (0&deg; = north); it needs a magnetometer.
           Nothing leaves your browser.
         </p>
       </section>
@@ -233,6 +229,7 @@
     window.addEventListener('DOMContentLoaded', function () {
       var startBtn  = document.getElementById('level-start');
       var statusEl  = document.getElementById('level-status');
+      var errorEl   = document.getElementById('level-error');
 
       var modeFlat    = document.getElementById('mode-flat');
       var modeHoriz   = document.getElementById('mode-horizontal');
@@ -245,18 +242,16 @@
       var horizBubble  = document.getElementById('horiz-bubble');
       var horizReadout = document.getElementById('horiz-readout');
 
-      var lrBubble   = document.getElementById('lr-bubble');
-      var lrReadout  = document.getElementById('lr-readout');
-      var fbBubble   = document.getElementById('fb-bubble');
-      var fbReadout  = document.getElementById('fb-readout');
-      var rotBubble  = document.getElementById('rot-bubble');
-      var rotReadout = document.getElementById('rot-readout');
+      var lrBubble  = document.getElementById('lr-bubble');
+      var lrReadout = document.getElementById('lr-readout');
+      var fbBubble  = document.getElementById('fb-bubble');
+      var fbReadout = document.getElementById('fb-readout');
 
       var running    = false;
       var gotReading = false;
 
       // Smoothed sensor values (low-pass filter)
-      var sBeta = null, sGamma = null, sAlpha = null;
+      var sBeta = null, sGamma = null;
       var SMOOTH = 0.25;
 
       // px per degree for linear tube bubbles; at ±34° bubble hits the wall
@@ -308,8 +303,7 @@
         bubbleEl.setAttribute('cx', px.toFixed(1));
       }
 
-      function update(rawAlpha, rawBeta, rawGamma) {
-        sAlpha = smoothAngle(sAlpha, rawAlpha, SMOOTH);
+      function update(rawBeta, rawGamma) {
         sBeta  = smoothAngle(sBeta,  rawBeta,  SMOOTH);
         sGamma = smoothAngle(sGamma, rawGamma, SMOOTH);
 
@@ -363,30 +357,19 @@
           setBubbleFill(fbBubble, Math.abs(pitch));
           setReadout(fbReadout, pitch);
 
-          // Rotation: alpha (compass bearing 0-360)
-          // Map to -180..180 for the bubble, but show raw bearing in readout
-          if (sAlpha !== null) {
-            var rot = ((sAlpha % 360) + 360) % 360;
-            if (rot > 180) rot -= 360;
-            moveTube(rotBubble, rot);
-            setBubbleFill(rotBubble, Math.abs(rot));
-            var bearing = ((sAlpha % 360) + 360) % 360;
-            rotReadout.textContent = bearing.toFixed(0) + '°';
-            rotReadout.className = 'level-readout';
-          }
         }
       }
 
       function onOrientation(e) {
-        var alpha = e.alpha  !== null ? e.alpha  : 0;
-        var beta  = e.beta   !== null ? e.beta   : 0;
-        var gamma = e.gamma  !== null ? e.gamma  : 0;
+        var beta  = e.beta  !== null ? e.beta  : 0;
+        var gamma = e.gamma !== null ? e.gamma : 0;
 
         if (!gotReading) {
           gotReading = true;
+          errorEl.hidden = true;
           statusEl.textContent = 'Level running.';
         }
-        update(alpha, beta, gamma);
+        update(beta, gamma);
       }
 
       function listen() {
@@ -396,9 +379,11 @@
         statusEl.textContent = 'Waiting for sensor data…';
         setTimeout(function () {
           if (running && !gotReading) {
-            statusEl.textContent =
-              'No orientation data. This device may not have sensors ' +
-              '(most desktops and laptops do not).';
+            statusEl.textContent = '';
+            errorEl.hidden = false;
+            startBtn.textContent = 'Start level';
+            startBtn.disabled = true;
+            running = false;
           }
         }, 3000);
       }
@@ -407,8 +392,10 @@
         window.removeEventListener('deviceorientation', onOrientation);
         running = false;
         gotReading = false;
-        sBeta = sGamma = sAlpha = null;
+        sBeta = sGamma = null;
         startBtn.textContent = 'Start level';
+        startBtn.disabled = false;
+        errorEl.hidden = true;
         statusEl.textContent = 'Level stopped.';
         modeFlat.hidden = modeHoriz.hidden = modeUpright.hidden = true;
       }
