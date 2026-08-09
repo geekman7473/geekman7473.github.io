@@ -307,13 +307,24 @@
         sBeta  = smoothAngle(sBeta,  rawBeta,  SMOOTH);
         sGamma = smoothAngle(sGamma, rawGamma, SMOOTH);
 
-        var absBeta  = Math.abs(sBeta);
-        var absGamma = Math.abs(sGamma);
+        var d2r  = Math.PI / 180;
+        var r2d  = 180 / Math.PI;
+        var bRad = sBeta  * d2r;
+        var gRad = sGamma * d2r;
 
-        // Mode: landscape if strongly tilted sideways; flat if nearly horizontal;
-        // otherwise upright (portrait).
-        var isLandscape = absGamma > 55;
-        var isFlat      = !isLandscape && absBeta < 25;
+        // Gravity vector in the device frame (normalized to 1).
+        // gxB = left/right, gyB = along long axis, gzB = through screen.
+        // Derived from the W3C ZXY Euler decomposition: these are exact and
+        // avoid the gimbal-lock distortion that makes raw gamma jump to ±90°
+        // when the phone is held upright (beta ≈ 90°).
+        var gxB =  Math.sin(gRad) * Math.cos(bRad);
+        var gyB = -Math.sin(bRad);
+        var gzB = -Math.cos(gRad) * Math.cos(bRad);
+
+        // Mode detection using gravity components instead of raw Euler angles,
+        // so a phone tilted slightly while upright never falsely reads as landscape.
+        var isLandscape = Math.abs(gxB) > 0.60;
+        var isFlat      = !isLandscape && Math.abs(gzB) > 0.60;
         var isUpright   = !isLandscape && !isFlat;
 
         modeFlat.hidden    = !isFlat;
@@ -321,8 +332,6 @@
         modeUpright.hidden = !isUpright;
 
         if (isFlat) {
-          // gamma = left/right tilt (positive = right side lower → bubble floats left)
-          // beta  = front/back tilt (positive = top rises → bubble floats toward top)
           var fx = clamp(-sGamma * CIRCLE_SCALE, -CIRCLE_MAX, CIRCLE_MAX);
           var fy = clamp(-sBeta  * CIRCLE_SCALE, -CIRCLE_MAX, CIRCLE_MAX);
           flatBubble.setAttribute('cx', fx.toFixed(1));
@@ -338,25 +347,26 @@
         }
 
         if (isLandscape) {
-          // In landscape, beta gives the front-to-back tilt of the long edge.
-          // Positive beta = front of landscape view tilts up.
           moveTube(horizBubble, -sBeta);
           setBubbleFill(horizBubble, Math.abs(sBeta));
           setReadout(horizReadout, sBeta);
         }
 
         if (isUpright) {
-          // Left/right: gamma (0 = straight, positive = leaning right)
-          moveTube(lrBubble, -sGamma);
-          setBubbleFill(lrBubble, Math.abs(sGamma));
-          setReadout(lrReadout, sGamma);
+          // Compute true tilt angles directly from the gravity vector.
+          // atan2(gxB, sin(β)) gives left/right deviation from vertical
+          // regardless of how large gamma is — no gimbal-lock amplification.
+          var upward = -gyB; // = sin(β)
+          var lr = Math.atan2(gxB, upward) * r2d;
+          var fb = Math.atan2(gzB, upward) * r2d;
 
-          // Forward/back: deviation from perfectly upright (beta = 90)
-          var pitch = sBeta - 90;
-          moveTube(fbBubble, -pitch);
-          setBubbleFill(fbBubble, Math.abs(pitch));
-          setReadout(fbReadout, pitch);
+          moveTube(lrBubble, -lr);
+          setBubbleFill(lrBubble, Math.abs(lr));
+          setReadout(lrReadout, lr);
 
+          moveTube(fbBubble, -fb);
+          setBubbleFill(fbBubble, Math.abs(fb));
+          setReadout(fbReadout, fb);
         }
       }
 
