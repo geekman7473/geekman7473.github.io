@@ -303,6 +303,13 @@
         bubbleEl.setAttribute('cx', px.toFixed(1));
       }
 
+      function screenAngle() {
+        if (screen.orientation && screen.orientation.angle != null) {
+          return screen.orientation.angle;
+        }
+        return typeof window.orientation === 'number' ? window.orientation : 0;
+      }
+
       function update(rawBeta, rawGamma) {
         sBeta  = smoothAngle(sBeta,  rawBeta,  SMOOTH);
         sGamma = smoothAngle(sGamma, rawGamma, SMOOTH);
@@ -332,18 +339,53 @@
         modeUpright.hidden = !isUpright;
 
         if (isFlat) {
-          var fx = clamp(-sGamma * CIRCLE_SCALE, -CIRCLE_MAX, CIRCLE_MAX);
-          var fy = clamp(-sBeta  * CIRCLE_SCALE, -CIRCLE_MAX, CIRCLE_MAX);
-          flatBubble.setAttribute('cx', fx.toFixed(1));
-          flatBubble.setAttribute('cy', fy.toFixed(1));
+          // Remap beta/gamma to screen X/Y based on the current screen rotation
+          // so the bubble always tracks the physically high side regardless of
+          // how the user has their phone oriented while laying it flat.
+          //
+          // Device axes: gamma = left/right roll, beta = front/back pitch.
+          // The screen.orientation.angle tells us how the OS has rotated the
+          // content relative to the physical device.
+          //
+          //  ori=0   (portrait):    SVG -X=device-left, SVG -Y=device-top
+          //  ori=90  (land, CCW):   SVG -X=device-top,  SVG -Y=device-right
+          //  ori=180 (portrait UD): SVG -X=device-right, SVG -Y=device-bottom
+          //  ori=270 (land, CW):    SVG -X=device-bottom, SVG -Y=device-left
+          var ori = screenAngle();
+          var fx, fy, xAngle, yAngle;
+
+          if (ori === 90) {
+            fx = -sBeta  * CIRCLE_SCALE;
+            fy = -sGamma * CIRCLE_SCALE;
+            xAngle = sBeta;
+            yAngle = sGamma;
+          } else if (ori === 180) {
+            fx =  sGamma * CIRCLE_SCALE;
+            fy =  sBeta  * CIRCLE_SCALE;
+            xAngle = sGamma;
+            yAngle = sBeta;
+          } else if (ori === 270 || ori === -90) {
+            fx =  sBeta  * CIRCLE_SCALE;
+            fy =  sGamma * CIRCLE_SCALE;
+            xAngle = sBeta;
+            yAngle = sGamma;
+          } else {
+            fx = -sGamma * CIRCLE_SCALE;
+            fy = -sBeta  * CIRCLE_SCALE;
+            xAngle = sGamma;
+            yAngle = sBeta;
+          }
+
+          flatBubble.setAttribute('cx', clamp(fx, -CIRCLE_MAX, CIRCLE_MAX).toFixed(1));
+          flatBubble.setAttribute('cy', clamp(fy, -CIRCLE_MAX, CIRCLE_MAX).toFixed(1));
 
           var totalTilt = Math.sqrt(sGamma * sGamma + sBeta * sBeta);
           setBubbleFill(flatBubble, totalTilt);
 
-          flatXReadout.textContent = sGamma.toFixed(1) + '°';
-          flatXReadout.className = 'level-readout ' + degClass(Math.abs(sGamma));
-          flatYReadout.textContent = sBeta.toFixed(1) + '°';
-          flatYReadout.className = 'level-readout ' + degClass(Math.abs(sBeta));
+          flatXReadout.textContent = xAngle.toFixed(1) + '°';
+          flatXReadout.className = 'level-readout ' + degClass(Math.abs(xAngle));
+          flatYReadout.textContent = yAngle.toFixed(1) + '°';
+          flatYReadout.className = 'level-readout ' + degClass(Math.abs(yAngle));
         }
 
         if (isLandscape) {
