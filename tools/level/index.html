@@ -1,0 +1,442 @@
+---
+# Empty front matter so Jekyll processes this file's Liquid tags.
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bubble Level &middot; Justin Becker</title>
+    <meta
+      name="description"
+      content="Free in-browser bubble level for your phone. Uses device orientation sensors to show real-time tilt angles for all three axes. Nothing leaves your browser."
+    />
+    <meta name="theme-color" content="#c0c0c0" />
+    {% include social-meta.html title="Bubble Level" description="Free in-browser bubble level for your phone. Uses device orientation sensors to show real-time tilt angles for all three axes. Nothing leaves your browser." %}
+    <link rel="stylesheet" href="/styles.css" />
+    <script defer src="/script.js"></script>
+    {% include analytics.html %}
+    <style>
+      .level-face {
+        display: block;
+        width: 100%;
+        max-width: 280px;
+        margin: 8px auto 4px;
+      }
+      .level-tube {
+        display: block;
+        width: 100%;
+        max-width: 380px;
+        margin: 3px auto;
+      }
+      .level-axis-label {
+        font-family: "Courier New", Courier, monospace;
+        font-size: 12px;
+        color: #555;
+        margin: 10px 0 2px;
+      }
+      .level-readout {
+        text-align: center;
+        font-family: "Courier New", Courier, monospace;
+        font-size: 20px;
+        font-weight: bold;
+        margin: 2px 0 4px;
+        letter-spacing: 1px;
+        transition: color 0.2s;
+      }
+      .level-readout.is-level { color: #007000; }
+      .level-readout.is-close { color: #a05000; }
+      .level-readout.is-off   { color: #cc0000; }
+      .level-mode-label {
+        text-align: center;
+        font-family: "Courier New", Courier, monospace;
+        font-size: 12px;
+        color: #808080;
+        margin: 6px 0 6px;
+        border-bottom: 1px solid #c0c0c0;
+        padding-bottom: 6px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      .flat-readouts {
+        display: flex;
+        justify-content: center;
+        gap: 32px;
+        margin: 4px 0 2px;
+      }
+      .flat-readouts > div { text-align: center; }
+      .flat-readouts .axis-name {
+        font-family: "Courier New", Courier, monospace;
+        font-size: 11px;
+        color: #555;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body id="top">
+    <div class="banner">
+      <h1>Bubble Level</h1>
+    </div>
+
+    <div class="toolbar">
+      [
+      <a href="/">home</a> <span class="sep">|</span>
+      <a href="/tools/">all tools</a>
+      ]
+    </div>
+
+    <main>
+      <div class="titlebar">Bubble Level</div>
+      <section class="panel">
+        <div class="field-row">
+          <button id="level-start" class="btn95" type="button">Start level</button>
+        </div>
+        <p class="meta qr-status" id="level-status">
+          Needs a phone or tablet with orientation sensors. Tap start.
+        </p>
+
+        <!-- ── FLAT MODE (device lying flat on a surface) ────────────────── -->
+        <div id="mode-flat" hidden>
+          <p class="level-mode-label">Flat &mdash; device on a surface</p>
+
+          <svg id="flat-svg" class="level-face" viewBox="-110 -110 220 220"
+               role="img" aria-label="2D bubble level">
+            <!-- Outer bezel -->
+            <circle r="106" fill="#c0c0c0" stroke="#808080" stroke-width="2"/>
+            <!-- Fluid area -->
+            <circle r="98" fill="#d8e4ee" stroke="#000" stroke-width="1.5"/>
+            <!-- Grid crosshairs -->
+            <line x1="-95" y1="0" x2="95" y2="0" stroke="#b0b8c4" stroke-width="1"/>
+            <line x1="0" y1="-95" x2="0" y2="95" stroke="#b0b8c4" stroke-width="1"/>
+            <!-- Outer level ring at ~25° -->
+            <circle r="75" fill="none" stroke="#b0b8c4" stroke-width="1" stroke-dasharray="4,4"/>
+            <!-- Inner target ring at ~8° -->
+            <circle r="24" fill="none" stroke="#cc0000" stroke-width="1.5" stroke-dasharray="4,3"/>
+            <!-- Center dot -->
+            <circle r="4" fill="#cc0000"/>
+            <!-- Bubble (cx/cy set by JS) -->
+            <circle id="flat-bubble" r="20"
+                    fill="rgba(30,90,220,0.45)" stroke="#0030aa" stroke-width="2.5"
+                    cx="0" cy="0"/>
+          </svg>
+
+          <div class="flat-readouts">
+            <div>
+              <p class="axis-name">X (left/right)</p>
+              <div class="level-readout" id="flat-x-readout">0.0&deg;</div>
+            </div>
+            <div>
+              <p class="axis-name">Y (fwd/back)</p>
+              <div class="level-readout" id="flat-y-readout">0.0&deg;</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── HORIZONTAL MODE (device in landscape orientation) ──────────── -->
+        <div id="mode-horizontal" hidden>
+          <p class="level-mode-label">Landscape &mdash; level along the long edge</p>
+
+          <svg id="horiz-svg" class="level-tube" viewBox="-175 -38 350 76"
+               role="img" aria-label="Horizontal bubble level">
+            <!-- Outer tube -->
+            <rect x="-170" y="-32" width="340" height="64" rx="32" ry="32"
+                  fill="#c0c0c0" stroke="#808080" stroke-width="2"/>
+            <!-- Fluid area -->
+            <rect x="-162" y="-24" width="324" height="48" rx="24" ry="24"
+                  fill="#d8e4ee" stroke="#b0b8c4" stroke-width="1"/>
+            <!-- Tick marks at ±15° (60px at scale 4) -->
+            <line x1="-60" y1="-20" x2="-60" y2="20" stroke="#b0b8c4" stroke-width="1.5"/>
+            <line x1="60"  y1="-20" x2="60"  y2="20" stroke="#b0b8c4" stroke-width="1.5"/>
+            <!-- Center mark -->
+            <line x1="0" y1="-26" x2="0" y2="26" stroke="#cc0000" stroke-width="2"/>
+            <!-- Bubble -->
+            <circle id="horiz-bubble" r="22"
+                    fill="rgba(30,90,220,0.45)" stroke="#0030aa" stroke-width="2.5"
+                    cx="0" cy="0"/>
+          </svg>
+          <div class="level-readout" id="horiz-readout">0.0&deg;</div>
+        </div>
+
+        <!-- ── UPRIGHT MODE (device in portrait orientation, held vertically) ─ -->
+        <div id="mode-upright" hidden>
+          <p class="level-mode-label">Portrait &mdash; hold device upright</p>
+
+          <!-- Axis 1: X — Left / Right (gamma) -->
+          <div class="level-axis-label">X axis &mdash; left / right</div>
+          <svg class="level-tube" viewBox="-175 -38 350 76"
+               role="img" aria-label="Left-right tilt">
+            <rect x="-170" y="-32" width="340" height="64" rx="32" ry="32"
+                  fill="#c0c0c0" stroke="#808080" stroke-width="2"/>
+            <rect x="-162" y="-24" width="324" height="48" rx="24" ry="24"
+                  fill="#d8e4ee" stroke="#b0b8c4" stroke-width="1"/>
+            <line x1="-60" y1="-20" x2="-60" y2="20" stroke="#b0b8c4" stroke-width="1.5"/>
+            <line x1="60"  y1="-20" x2="60"  y2="20" stroke="#b0b8c4" stroke-width="1.5"/>
+            <line x1="0" y1="-26" x2="0" y2="26" stroke="#cc0000" stroke-width="2"/>
+            <circle id="lr-bubble" r="22"
+                    fill="rgba(30,90,220,0.45)" stroke="#0030aa" stroke-width="2.5"
+                    cx="0" cy="0"/>
+          </svg>
+          <div class="level-readout" id="lr-readout">0.0&deg;</div>
+
+          <!-- Axis 2: Y — Forward / Back (beta - 90) -->
+          <div class="level-axis-label">Y axis &mdash; forward / back</div>
+          <svg class="level-tube" viewBox="-175 -38 350 76"
+               role="img" aria-label="Forward-back tilt">
+            <rect x="-170" y="-32" width="340" height="64" rx="32" ry="32"
+                  fill="#c0c0c0" stroke="#808080" stroke-width="2"/>
+            <rect x="-162" y="-24" width="324" height="48" rx="24" ry="24"
+                  fill="#d8e4ee" stroke="#b0b8c4" stroke-width="1"/>
+            <line x1="-60" y1="-20" x2="-60" y2="20" stroke="#b0b8c4" stroke-width="1.5"/>
+            <line x1="60"  y1="-20" x2="60"  y2="20" stroke="#b0b8c4" stroke-width="1.5"/>
+            <line x1="0" y1="-26" x2="0" y2="26" stroke="#cc0000" stroke-width="2"/>
+            <circle id="fb-bubble" r="22"
+                    fill="rgba(30,90,220,0.45)" stroke="#0030aa" stroke-width="2.5"
+                    cx="0" cy="0"/>
+          </svg>
+          <div class="level-readout" id="fb-readout">0.0&deg;</div>
+
+          <!-- Axis 3: Z — Rotation (alpha) -->
+          <div class="level-axis-label">Z axis &mdash; rotation (compass)</div>
+          <svg class="level-tube" viewBox="-175 -38 350 76"
+               role="img" aria-label="Rotation">
+            <rect x="-170" y="-32" width="340" height="64" rx="32" ry="32"
+                  fill="#c0c0c0" stroke="#808080" stroke-width="2"/>
+            <rect x="-162" y="-24" width="324" height="48" rx="24" ry="24"
+                  fill="#d8e4ee" stroke="#b0b8c4" stroke-width="1"/>
+            <line x1="-60" y1="-20" x2="-60" y2="20" stroke="#b0b8c4" stroke-width="1.5"/>
+            <line x1="60"  y1="-20" x2="60"  y2="20" stroke="#b0b8c4" stroke-width="1.5"/>
+            <line x1="0" y1="-26" x2="0" y2="26" stroke="#cc0000" stroke-width="2"/>
+            <circle id="rot-bubble" r="22"
+                    fill="rgba(30,90,220,0.45)" stroke="#0030aa" stroke-width="2.5"
+                    cx="0" cy="0"/>
+          </svg>
+          <div class="level-readout" id="rot-readout">0&deg;</div>
+        </div>
+
+        <p class="meta" style="margin-top:12px;">
+          Mode switches automatically based on device orientation.
+          Red line = center (level). Tick marks at &plusmn;15&deg;.
+          The Z axis bubble shows compass bearing (0&deg; = north); it needs a magnetometer.
+          Nothing leaves your browser.
+        </p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>
+        &copy; <span id="year"></span> Justin Becker &middot;
+        <a href="#top">top</a>
+      </p>
+    </footer>
+
+    <script>
+    window.addEventListener('DOMContentLoaded', function () {
+      var startBtn  = document.getElementById('level-start');
+      var statusEl  = document.getElementById('level-status');
+
+      var modeFlat    = document.getElementById('mode-flat');
+      var modeHoriz   = document.getElementById('mode-horizontal');
+      var modeUpright = document.getElementById('mode-upright');
+
+      var flatBubble   = document.getElementById('flat-bubble');
+      var flatXReadout = document.getElementById('flat-x-readout');
+      var flatYReadout = document.getElementById('flat-y-readout');
+
+      var horizBubble  = document.getElementById('horiz-bubble');
+      var horizReadout = document.getElementById('horiz-readout');
+
+      var lrBubble   = document.getElementById('lr-bubble');
+      var lrReadout  = document.getElementById('lr-readout');
+      var fbBubble   = document.getElementById('fb-bubble');
+      var fbReadout  = document.getElementById('fb-readout');
+      var rotBubble  = document.getElementById('rot-bubble');
+      var rotReadout = document.getElementById('rot-readout');
+
+      var running    = false;
+      var gotReading = false;
+
+      // Smoothed sensor values (low-pass filter)
+      var sBeta = null, sGamma = null, sAlpha = null;
+      var SMOOTH = 0.25;
+
+      // px per degree for linear tube bubbles; at ±34° bubble hits the wall
+      // (fluid inner half-width ≈ 162 - 22 bubble radius = 140px)
+      var TUBE_SCALE   = 4.0;
+      var TUBE_MAX     = 138;
+
+      // px per degree for the 2D flat circle; at ±26° bubble hits the wall
+      // (inner radius 98 - bubble radius 20 = 78px)
+      var CIRCLE_SCALE = 3.0;
+      var CIRCLE_MAX   = 78;
+
+      function clamp(v, lo, hi) { return v < lo ? lo : v > hi ? hi : v; }
+
+      function smoothAngle(prev, next, k) {
+        if (prev === null) return next;
+        var d = next - prev;
+        if (d >  180) d -= 360;
+        if (d < -180) d += 360;
+        return prev + d * k;
+      }
+
+      function degClass(abs) {
+        if (abs < 2)  return 'is-level';
+        if (abs < 8)  return 'is-close';
+        return 'is-off';
+      }
+
+      function setBubbleFill(el, absDeg) {
+        if (absDeg < 2) {
+          el.setAttribute('fill',   'rgba(0,160,30,0.55)');
+          el.setAttribute('stroke', '#004d00');
+        } else if (absDeg < 8) {
+          el.setAttribute('fill',   'rgba(200,130,0,0.55)');
+          el.setAttribute('stroke', '#7a4f00');
+        } else {
+          el.setAttribute('fill',   'rgba(30,90,220,0.45)');
+          el.setAttribute('stroke', '#0030aa');
+        }
+      }
+
+      function setReadout(el, deg) {
+        el.textContent = deg.toFixed(1) + '°';
+        el.className = 'level-readout ' + degClass(Math.abs(deg));
+      }
+
+      function moveTube(bubbleEl, deg) {
+        var px = clamp(deg * TUBE_SCALE, -TUBE_MAX, TUBE_MAX);
+        bubbleEl.setAttribute('cx', px.toFixed(1));
+      }
+
+      function update(rawAlpha, rawBeta, rawGamma) {
+        sAlpha = smoothAngle(sAlpha, rawAlpha, SMOOTH);
+        sBeta  = smoothAngle(sBeta,  rawBeta,  SMOOTH);
+        sGamma = smoothAngle(sGamma, rawGamma, SMOOTH);
+
+        var absBeta  = Math.abs(sBeta);
+        var absGamma = Math.abs(sGamma);
+
+        // Mode: landscape if strongly tilted sideways; flat if nearly horizontal;
+        // otherwise upright (portrait).
+        var isLandscape = absGamma > 55;
+        var isFlat      = !isLandscape && absBeta < 25;
+        var isUpright   = !isLandscape && !isFlat;
+
+        modeFlat.hidden    = !isFlat;
+        modeHoriz.hidden   = !isLandscape;
+        modeUpright.hidden = !isUpright;
+
+        if (isFlat) {
+          // gamma = left/right tilt (positive = right side lower → bubble floats left)
+          // beta  = front/back tilt (positive = top rises → bubble floats toward top)
+          var fx = clamp(-sGamma * CIRCLE_SCALE, -CIRCLE_MAX, CIRCLE_MAX);
+          var fy = clamp(-sBeta  * CIRCLE_SCALE, -CIRCLE_MAX, CIRCLE_MAX);
+          flatBubble.setAttribute('cx', fx.toFixed(1));
+          flatBubble.setAttribute('cy', fy.toFixed(1));
+
+          var totalTilt = Math.sqrt(sGamma * sGamma + sBeta * sBeta);
+          setBubbleFill(flatBubble, totalTilt);
+
+          flatXReadout.textContent = sGamma.toFixed(1) + '°';
+          flatXReadout.className = 'level-readout ' + degClass(Math.abs(sGamma));
+          flatYReadout.textContent = sBeta.toFixed(1) + '°';
+          flatYReadout.className = 'level-readout ' + degClass(Math.abs(sBeta));
+        }
+
+        if (isLandscape) {
+          // In landscape, beta gives the front-to-back tilt of the long edge.
+          // Positive beta = front of landscape view tilts up.
+          moveTube(horizBubble, -sBeta);
+          setBubbleFill(horizBubble, Math.abs(sBeta));
+          setReadout(horizReadout, sBeta);
+        }
+
+        if (isUpright) {
+          // Left/right: gamma (0 = straight, positive = leaning right)
+          moveTube(lrBubble, -sGamma);
+          setBubbleFill(lrBubble, Math.abs(sGamma));
+          setReadout(lrReadout, sGamma);
+
+          // Forward/back: deviation from perfectly upright (beta = 90)
+          var pitch = sBeta - 90;
+          moveTube(fbBubble, -pitch);
+          setBubbleFill(fbBubble, Math.abs(pitch));
+          setReadout(fbReadout, pitch);
+
+          // Rotation: alpha (compass bearing 0-360)
+          // Map to -180..180 for the bubble, but show raw bearing in readout
+          if (sAlpha !== null) {
+            var rot = ((sAlpha % 360) + 360) % 360;
+            if (rot > 180) rot -= 360;
+            moveTube(rotBubble, rot);
+            setBubbleFill(rotBubble, Math.abs(rot));
+            var bearing = ((sAlpha % 360) + 360) % 360;
+            rotReadout.textContent = bearing.toFixed(0) + '°';
+            rotReadout.className = 'level-readout';
+          }
+        }
+      }
+
+      function onOrientation(e) {
+        var alpha = e.alpha  !== null ? e.alpha  : 0;
+        var beta  = e.beta   !== null ? e.beta   : 0;
+        var gamma = e.gamma  !== null ? e.gamma  : 0;
+
+        if (!gotReading) {
+          gotReading = true;
+          statusEl.textContent = 'Level running.';
+        }
+        update(alpha, beta, gamma);
+      }
+
+      function listen() {
+        window.addEventListener('deviceorientation', onOrientation);
+        running = true;
+        startBtn.textContent = 'Stop level';
+        statusEl.textContent = 'Waiting for sensor data…';
+        setTimeout(function () {
+          if (running && !gotReading) {
+            statusEl.textContent =
+              'No orientation data. This device may not have sensors ' +
+              '(most desktops and laptops do not).';
+          }
+        }, 3000);
+      }
+
+      function stop() {
+        window.removeEventListener('deviceorientation', onOrientation);
+        running = false;
+        gotReading = false;
+        sBeta = sGamma = sAlpha = null;
+        startBtn.textContent = 'Start level';
+        statusEl.textContent = 'Level stopped.';
+        modeFlat.hidden = modeHoriz.hidden = modeUpright.hidden = true;
+      }
+
+      startBtn.addEventListener('click', function () {
+        if (running) { stop(); return; }
+
+        if (typeof DeviceOrientationEvent === 'undefined') {
+          statusEl.textContent =
+            'Orientation sensors not available in this browser.';
+          return;
+        }
+
+        // iOS 13+ requires an explicit permission prompt triggered by a user gesture
+        if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+          DeviceOrientationEvent.requestPermission()
+            .then(function (state) {
+              if (state === 'granted') listen();
+              else statusEl.textContent = 'Permission denied.';
+            })
+            .catch(function (err) {
+              statusEl.textContent = 'Permission error: ' + err.message;
+            });
+        } else {
+          listen();
+        }
+      });
+    });
+    </script>
+  </body>
+</html>
