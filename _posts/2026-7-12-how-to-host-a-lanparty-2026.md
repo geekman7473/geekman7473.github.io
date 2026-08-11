@@ -76,7 +76,7 @@ I have tried a number of configurations, but the setup I found the most fun was 
 
 <figure>
   <img src="{{ '/assets/img/posts/2026-05-16-why-i-built-lanbucket/2026-03-recent.jpg' | relative_url }}"
-       alt="A LAN party arranged ona  number of folding tables in a line"
+       alt="A LAN party arranged on a number of folding tables in a line"
        width="1600" height="1200"
        loading="lazy" />
   <figcaption class="meta">Here you can see the arrangement of the folding tables (March 2026)</figcaption>
@@ -89,7 +89,7 @@ This setup promotes a more social group dynamic where everyone feels included in
        alt="A LAN party split across two tables"
        width="1600" height="1200"
        loading="lazy" />
-  <figcaption class="meta">The outerlying islands of the LAN empire (March 2025)</figcaption>
+  <figcaption class="meta">The outlying islands of the LAN empire (March 2025)</figcaption>
 </figure>
 
 In this layout these two players on the "overflow" table felt like they had been exiled from the festivities. I try to avoid this problem when possible. Admittedly, my living space is unusual, and most houses won't have a space big enough for all of your players to be set up linearly like this. An alternative layout is to have a handful of rows spaced out by a couple feet like this:
@@ -170,7 +170,7 @@ This is a simple diagram illustrating the problem with four machines and two swi
 
 ## What about WiFi?
 
-Do whatever you can to avoid WiFi. While WiFi is convenient, it has led to more headache over the years than it is worth. The trouble with WiFi is scalability. While your home network might perform just fine with you and your spouse (+ kids?) when you cram 16 players in one room, it can bog down. The fundamental problem is that WiFi works using ["time division multiplexing"](https://en.wikipedia.org/wiki/Time-division_multiplexing) which is a big scary word for "everyone takes their turn." Basically, on each WiFi channel, only one device can talk at once. For most uses this is still an acceptable tradeoff, but for low-latency gaming the performance cost can be severe. The other problem with WiFi is compatibility. For reasons that are mysterious to me, I have seen lots of issues in games over the years where WiFi users couldn't connect to each other, or WiFi users can connect to each other but not ethernet users, or Wifi users can only connect to *some* subset of the other users. It's a debugging nightmare, and not what you want to be dealing with on the day of your party. Unfortunately, lots of laptops these days don't come with Ethernet jacks. For that reason, I keep a handful of USB-C and USB-A ethernet dongles on hand. These things are dirt cheap online, and they make lots of networking issues go away. Totally worth it.
+Do whatever you can to avoid WiFi. While WiFi is convenient, it has led to more headache over the years than it is worth. The trouble with WiFi is scalability. While your home network might perform just fine with you and your spouse (+ kids?) when you cram 16 players in one room, it can bog down. The fundamental problem is that WiFi works using ["time division multiplexing"](https://en.wikipedia.org/wiki/Time-division_multiplexing) which is a big scary word for "everyone takes their turn." Basically, on each WiFi channel, only one device can talk at once. For most uses this is still an acceptable tradeoff, but for low-latency gaming the performance cost can be severe. The other problem with WiFi is compatibility. For reasons that are mysterious to me, I have seen lots of issues in games over the years where WiFi users couldn't connect to each other, or WiFi users can connect to each other but not ethernet users, or WiFi users can only connect to *some* subset of the other users. It's a debugging nightmare, and not what you want to be dealing with on the day of your party. Unfortunately, lots of laptops these days don't come with Ethernet jacks. For that reason, I keep a handful of USB-C and USB-A ethernet dongles on hand. These things are dirt cheap online, and they make lots of networking issues go away. Totally worth it.
 
 ## Is Gigabit enough?
 
@@ -182,7 +182,7 @@ Additionally, note that 10 Gbps hardware is not ready yet for mainstream consume
 
 Since we are targeting 1 Gbps I recommend sticking with Cat5e. This is cheaper than Cat6, or Cat7, which is overkill for our needs. You can buy premade cables in bulk online for reasonable prices. This is also something that your players should bring themselves, but in my experience people always forget these so it's good to have some on hand.
 
-If you are willing to try something new, I recommend making your own cables. Pre-made ethernet cables cost a lot more, and making the cables yourself allows you to make custom length cables exactly fitting your needs. For example, if the party is going to be held in the basement, and your Internet modem is on the 2nd floor, it can be useful to cut your own 100 foot long ethernet cable yourself. If you want to do this, buy a bulk reel of cable [like this one, ](https://www.amazon.com/VIVO-Ethernet-Waterproof-Outdoor-CABLE-V011/dp/B00GYGNCPO) a crimping tool [like this one, ](https://www.amazon.com/Cable-Matters-Ethernet-Pass-Through-Connectors/dp/B0CH3TDJ4B) RJ-45 connectors [like these](https://www.amazon.com/W-NECTOUN-100-PACK-Connectors-Network-Stranded/dp/B092J2WBLS), and a cable testing tool [like this one](https://www.amazon.com/TESMEN-TLP-123A-Ethernet-Continuity-Maintenance/dp/B0GN84H22V). There are numerous guides online on how to make an Ethernet cable, so I won't bore you with the details here.
+If you are willing to try something new, I recommend making your own cables. Pre-made ethernet cables cost a lot more, and making the cables yourself allows you to make custom length cables exactly fitting your needs. For example, if the party is going to be held in the basement, and your router is on the 2nd floor, it can be useful to cut your own 100 foot long ethernet cable yourself. If you want to do this, buy a bulk reel of cable [like this one, ](https://www.amazon.com/VIVO-Ethernet-Waterproof-Outdoor-CABLE-V011/dp/B00GYGNCPO) a crimping tool [like this one, ](https://www.amazon.com/Cable-Matters-Ethernet-Pass-Through-Connectors/dp/B0CH3TDJ4B) RJ-45 connectors [like these](https://www.amazon.com/W-NECTOUN-100-PACK-Connectors-Network-Stranded/dp/B092J2WBLS), and a cable testing tool [like this one](https://www.amazon.com/TESMEN-TLP-123A-Ethernet-Continuity-Maintenance/dp/B0GN84H22V). There are numerous guides online on how to make an Ethernet cable, so I won't bore you with the details here.
 
 ## Do I really need Internet access?
 
@@ -202,9 +202,24 @@ This is some very confusing language, but ["Fast Ethernet"](https://en.wikipedia
 
 ## My internet has a data cap, what should I do?
 
-Depending on the size of your party, and how big your cap is, you might not need to worry much about it. Actually playing games does not use much bandwitdh, but downloading them does. There are other things to keep in mind like Windows update running in the background, or players who may have auto updates enabled on Steam. If your data cap is low, and you have lots of players, it may be worth it to look into something called [LAN Cache](https://lancache.net/) which will cache game updates locally on your LAN, preventing users on your network from downloading from the cloud. I personally have not used this because I don't have a data cap on my plan, but it is worth looking into if you do.
+Depending on the size of your party, and how big your cap is, you might not need to worry much about it. Actually playing games does not use much bandwidth, but downloading them does. There are other things to keep in mind like Windows update running in the background, or players who may have auto updates enabled on Steam. If your data cap is low, and you have lots of players, it may be worth it to look into something called [LAN Cache](https://lancache.net/) which will cache game updates locally on your LAN, preventing users on your network from downloading from the cloud. I personally have not used this because I don't have a data cap on my plan, but it is worth looking into if you do.
 
-Alternatively, if your group chooses not to play Steam games (see the section on games below) you can just share the game files on your LAN elsewise (see the section on file sharing below).
+Alternatively, if your group chooses not to play Steam games (see the section on games below) you can just share the game files on your LAN otherwise (see the section on file sharing below).
+
+## Some of my players can't connect to each other in game, what should I do?
+
+This is a common symptom, and unfortunately it can be caused by a variety of unrelated issues. Here are some things to try:
+
+- Make sure that both players are connected to Ethernet. You may need to manually disable WiFi on the PC to ensure it uses Ethernet. There are too many issues with WiFi to list here, but just know that Ethernet is more reliable for this type of thing.
+- On both PCs set the Windows network profile to "Private" and turn on Network Device Discovery. You can find this in the network settings. When these settings are disabled, the Windows firewall can block connections.
+- Make sure that both PCs allowed the app through their firewalls. When the app was first launched you would have seen a popup like this: 
+(TODO: insert screenshot here)
+
+both machines will have had to accept  it. If they denied it by accident, you can fix it in the Windows Firewall settings.
+
+- Disable any VPNs or 3rd party firewalls you may have active. This includes services like Tailscale. Older games often have trouble when these things are installed.
+- Try to connect directly via IP address. This is a fallback that many games support but not all. In some games this will be available in the multiplayer menu directly. In some games you will need to open the "developer console" (ie. most Valve games). In some other games this is only possible with a launch argument when starting the game. Google how this works for the specific game you are playing.
+- Make sure that both players are actually on the same network. Get the IP address for both machines (ipconfig command on Windows) and try to ping one machine from the other. If this does not work, then your network is probably misconfigured somehow.
 
 # Power
 
@@ -252,9 +267,9 @@ I recommend having your play space almost entirely set up before your first gues
 5. Set up your own PC, and smoke test your power and networking.
 6. Tape down any wire, extension cord, or power strip that might move or be a tripping hazard. Go crazy with it.
 7. Designate a dumping spot for shoes, jackets, backpacks, or anything else your guests are bringing with them that they won't need at their seat. A coat closet, or spare room works nicely here.
-8. If you have pets, it may be a good idea to stow them away while your guests are coming and going, which could frighten them. You can think about letting them out once everyone is settled in, depending on the temperment of the animal.
+8. If you have pets, it may be a good idea to stow them away while your guests are coming and going, which could frighten them. You can think about letting them out once everyone is settled in, depending on the temperament of the animal.
 
-You can of course do more than this, but this is just the basics. One time I went so far as to prerun custom length Ethernet cables to each player's seat. I have also heard of organizers allocating particular outlets to each player. The sky is the limit here. The point of pre setup is to save time in the chaos once your guests show up, so you can play more games. 
+You can of course do more than this, but this is just the basics. One time I went so far as to pre-run custom length Ethernet cables to each player's seat. I have also heard of organizers allocating particular outlets to each player. The sky is the limit here. The point of pre setup is to save time in the chaos once your guests show up, so you can play more games. 
 
 It also helps to keep spare gear on hand. Stuff like mice, keyboards, mousepads, AA batteries, ethernet cables, display cables, xbox controllers. People forget things like this and you'll be a hero for saving your guests. 
 
@@ -394,7 +409,7 @@ If you and your group are Linux absolutists, feel free to throw a Linux LAN part
 
 # File Sharing
 
-In the olden times, one of the beauties of a LAN was swapping files across the highspeed network. Remember that back then a 10mbps Ethernet connection was more than 100x faster than the 56k modem you had back at home. These days sharing files is not as much of a draw, but it can still be a useful tool for a successful LAN.
+In the olden times, one of the beauties of a LAN was swapping files across the high-speed network. Remember that back then a 10mbps Ethernet connection was more than 100x faster than the 56k modem you had back at home. These days sharing files is not as much of a draw, but it can still be a useful tool for a successful LAN.
 
 ## <span style="font-size: 2em;">🏴‍☠️☠️⛵?</span>
 
