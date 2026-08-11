@@ -44,7 +44,7 @@ This is hopefully the easy part: anywhere with space for a couple tables and cha
 </figure>
 
 ## Who
-Personally, I have only been to LANs attended by personal friends and acquaintances. While there are some surviving public LAN parties, I would not recommend inviting strangers into a personal home. I also recommend keeping the invite list strictly to those "gaming." If you invite people who are going to come just to "hangout" they will take up valuable floor space, and distract your gamers from why you actually invited them. With that said, I still encourage you to get people who are slightly outside of their comfort zone, and not exactly the hardcore gamer stereotype. If you play more casual, lowkey, games you will cast a wider net in terms of who might want to come to your party.
+Personally, I have only been to LANs attended by personal friends and acquaintances. While there are some surviving public LAN parties, I would not recommend inviting strangers into a personal home. I also recommend keeping the invite list strictly to those "gaming." If you invite people who are going to come just to "hangout" they will take up valuable floor space, and distract your gamers from why you actually invited them. With that said, I still encourage you to get people who are slightly outside of their comfort zone, and not exactly the hardcore gamer stereotype. If you play more casual, lowkey games you will cast a wider net in terms of who might want to come to your party.
 
 <figure>
   <img src="{{ '/assets/img/posts/2026-07-12-how-to-host-a-lanparty-2026/sp-gamer-stereotype.jpg' | relative_url }}"
@@ -134,7 +134,7 @@ Another advantage of folding tables, which you can see in these renderings above
 
 # Networking
 
-This sounds like it should be complicated, but I assure you that it is not. If you are the LAN party type, then you have probably seen videos of extravagant networking setups from the likes of Linus Tech Tips, including multiple servers, expensive fiber optics, caching services, etc. You do not need any of this. All you need is an **unmanaged gigabit Ethernet switch** with enough ports for all of your players. This equipment is very cheap these days. I recommend this model from TRENDNet: [TEG-S17D](https://www.amazon.com/TRENDnet-TEG-S17D-Switching-Enclosure-Protection/dp/B09WGYKFSQ?th=1). At time of writing this costs $58. I cannot stress enough how important it is to buy a **"switch"** and not a **"hub"**. Hubs are cheaper, but also much slower. The best way to think of it is that a hub acts as if all of your players are sharing the speed of one ethernet cable, but a switch allows everyone to run at full speed on their own cable. Also, I highly recommend buying an unmanaged switch. Managed switches act more like routers in a way, since they will have a management portal (a website or an app), where you can change settings. If you are a beginner to all of this, you will not need the features of a managed switch, and might shoot yourself in the foot. At a LAN party I hosted in high school I used some managed switches I bought at a yard sale without understanding what I was doing, and a couple hours in the network completely collapsed. Learn from my mistake, save yourself a couple bucks, and just buy an unmanaged switch.
+This sounds like it should be complicated, but I assure you that it is not. If you are the LAN party type, then you have probably seen videos of extravagant networking setups from the likes of Linus Tech Tips, including multiple servers, expensive fiber optics, caching services, etc. You do not need any of this. All you need is an **unmanaged gigabit Ethernet switch** with enough ports for all of your players. This equipment is very cheap these days. I recommend this model from TRENDnet: [TEG-S17D](https://www.amazon.com/TRENDnet-TEG-S17D-Switching-Enclosure-Protection/dp/B09WGYKFSQ?th=1). At time of writing this costs $58. I cannot stress enough how important it is to buy a **"switch"** and not a **"hub"**. Hubs are cheaper, but also much slower. The best way to think of it is that a hub acts as if all of your players are sharing the speed of one ethernet cable, but a switch allows everyone to run at full speed on their own cable. Also, I highly recommend buying an unmanaged switch. Managed switches act more like routers in a way, since they will have a management portal (a website or an app), where you can change settings. If you are a beginner to all of this, you will not need the features of a managed switch, and might shoot yourself in the foot. At a LAN party I hosted in high school I used some managed switches I bought at a yard sale without understanding what I was doing, and a couple hours in the network completely collapsed. Learn from my mistake, save yourself a couple bucks, and just buy an unmanaged switch.
 
 In terms of setup, this is super easy. Plug the switch into power. Then plug an ethernet cable into each user's computer. Then plug one ethernet cable into your existing internet router / modem. Really nothing to it.
 
@@ -170,7 +170,7 @@ This is a simple diagram illustrating the problem with four machines and two swi
 
 ## What about WiFi?
 
-Do whatever you can to avoid WiFi. While WiFi is convenient, it has led to more headache over the years than it is worth. The trouble with WiFi is scalability. While your home network might perform just fine with you and your spouse (+ kids?) when you cram 16 players in one room, it can bog down. The fundamental problem is that WiFi works using ["time division multiplexing"](https://en.wikipedia.org/wiki/Time-division_multiplexing) which is a big scary word for "everyone takes their turn." Basically, on each WiFi channel, only one device can talk at once. For most uses this is still an acceptable tradeoff, but for low-latency gaming the performance cost can be severe. The other problem with WiFi is compatibility. For reasons that are mysterious to me, I have seen lots of issues in games over the years where WiFi users couldn't connect to each other, or WiFi users can connect to each other but not ethernet users, or WiFi users can only connect to *some* subset of the other users. It's a debugging nightmare, and not what you want to be dealing with on the day of your party. Unfortunately, lots of laptops these days don't come with Ethernet jacks. For that reason, I keep a handful of USB-C and USB-A ethernet dongles on hand. These things are dirt cheap online, and they make lots of networking issues go away. Totally worth it.
+Do whatever you can to avoid WiFi. While WiFi is convenient, it has led to more headache over the years than it is worth. The trouble with WiFi is scalability. While your home network might perform just fine with you and your spouse (+ kids?) when you cram 16 players in one room, it can bog down. The fundamental problem is that WiFi works using ["time division multiplexing"](https://en.wikipedia.org/wiki/Time-division_multiplexing) which is a big scary word for "everyone takes their turn." Basically, on each WiFi channel, only one device can talk at once. For most uses this is still an acceptable tradeoff, but for low-latency gaming the performance cost can be severe. The other problem with WiFi is compatibility. For reasons that are mysterious to me, I have seen lots of issues in games over the years where WiFi users couldn't connect to each other, or WiFi users could connect to each other but not Ethernet users, or WiFi users could only connect to *some* subset of the other users. It's a debugging nightmare, and not what you want to be dealing with on the day of your party. Unfortunately, lots of laptops these days don't come with Ethernet jacks. For that reason, I keep a handful of USB-C and USB-A ethernet dongles on hand. These things are dirt cheap online, and they make lots of networking issues go away. Totally worth it.
 
 ## Is Gigabit enough?
 
@@ -212,13 +212,20 @@ This is a common symptom, and unfortunately it can be caused by a variety of unr
 
 - Make sure that both players are connected to Ethernet. You may need to manually disable WiFi on the PC to ensure it uses Ethernet. There are too many issues with WiFi to list here, but just know that Ethernet is more reliable for this type of thing.
 - On both PCs set the Windows network profile to "Private" and turn on Network Device Discovery. You can find this in the network settings. When these settings are disabled, the Windows firewall can block connections.
-- Make sure that both PCs allowed the app through their firewalls. When the app was first launched you would have seen a popup like this: 
-(TODO: insert screenshot here)
+- Make sure that both PCs allowed the app through their firewalls. When the app was first launched you would have seen a popup like this:
 
-both machines will have had to accept  it. If they denied it by accident, you can fix it in the Windows Firewall settings.
+<figure>
+  <img src="{{ '/assets/img/posts/2026-07-12-how-to-host-a-lanparty-2026/firewall-popup.png' | relative_url }}"
+       alt="Windows Security Alert popup asking whether to allow an app to communicate on private and public networks"
+       width="485" height="339"
+       loading="lazy" />
+  <figcaption class="meta">It should look something like this</figcaption>
+</figure>
+
+Both machines will have had to accept it. If they denied it by accident, you can fix it in the Windows Firewall settings.
 
 - Disable any VPNs or 3rd party firewalls you may have active. This includes services like Tailscale. Older games often have trouble when these things are installed.
-- Try to connect directly via IP address. This is a fallback that many games support but not all. In some games this will be available in the multiplayer menu directly. In some games you will need to open the "developer console" (ie. most Valve games). In some other games this is only possible with a launch argument when starting the game. Google how this works for the specific game you are playing.
+- Try to connect directly via IP address. This is a fallback that many games support but not all. In some games this will be available in the multiplayer menu directly. In some games you will need to open the "developer console" (i.e. most Valve games). In some other games this is only possible with a launch argument when starting the game. Google how this works for the specific game you are playing.
 - Make sure that both players are actually on the same network. Get the IP address for both machines (ipconfig command on Windows) and try to ping one machine from the other. If this does not work, then your network is probably misconfigured somehow.
 
 # Power
@@ -409,7 +416,7 @@ If you and your group are Linux absolutists, feel free to throw a Linux LAN part
 
 # File Sharing
 
-In the olden times, one of the beauties of a LAN was swapping files across the high-speed network. Remember that back then a 10mbps Ethernet connection was more than 100x faster than the 56k modem you had back at home. These days sharing files is not as much of a draw, but it can still be a useful tool for a successful LAN.
+In the olden times, one of the beauties of a LAN was swapping files across the high-speed network. Remember that back then a 10 Mbps Ethernet connection was more than 100x faster than the 56k modem you had back at home. These days sharing files is not as much of a draw, but it can still be a useful tool for a successful LAN.
 
 ## <span style="font-size: 2em;">🏴‍☠️☠️⛵?</span>
 
@@ -441,7 +448,7 @@ At time of writing LANBucket does not support Linux, so if that is important for
 
 Steam is by far the most popular game marketplace on PC, and it has two undervalued features that are killer for LAN parties.
 
-The first is [Local Transfers](https://help.steampowered.com/en/faqs/view/46BD-6BA8-B012-CE43). This feature, when enabled allows players to download Steam games from other players on the local network instead of from the cloud. This is great for the case where most of your players have the game already, and you've just gotta get it to one or two stragglers. If you want to use this, make sure to turn on this setting on all the machines:
+The first is [Local Transfers](https://help.steampowered.com/en/faqs/view/46BD-6BA8-B012-CE43). This feature, when enabled, allows players to download Steam games from other players on the local network instead of from the cloud. This is great for the case where most of your players have the game already, and you've just gotta get it to one or two stragglers. If you want to use this, make sure to turn on this setting on all the machines:
 
 <figure>
   <img src="{{ '/assets/img/posts/2026-07-12-how-to-host-a-lanparty-2026/steam-local-transfers.jpg' | relative_url }}"
