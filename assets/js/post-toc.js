@@ -1,7 +1,8 @@
-// Builds a sticky left-margin Table of Contents for blog posts.
-// Walks .post h1/h2/h3 (with ids), wires scrollspy highlighting via
-// IntersectionObserver, and stays out of the way on narrow viewports
-// (CSS hides the aside under 1200px).
+// Builds a Table of Contents for blog posts. On wide viewports it sits
+// as a sticky aside in the left margin; under 1240px CSS docks it as a
+// collapsible bar fixed to the top of the screen, with the title acting
+// as the expand/collapse toggle. Walks .post h1/h2/h3 (with ids) and
+// wires scrollspy highlighting via IntersectionObserver.
 (function () {
   var aside = document.getElementById('post-toc');
   if (!aside) return;
@@ -53,6 +54,23 @@
 
   nav.appendChild(ul);
   aside.hidden = false;
+
+  // Expand/collapse for the top-bar mode. Harmless on desktop, where the
+  // nav is always visible regardless of the is-open class.
+  var title = aside.querySelector('.post-toc__title');
+  function setOpen(open) {
+    aside.classList.toggle('is-open', open);
+    if (title) title.setAttribute('aria-expanded', String(open));
+  }
+  if (title) {
+    title.addEventListener('click', function () {
+      setOpen(!aside.classList.contains('is-open'));
+    });
+  }
+  // Collapse after the reader picks a section.
+  nav.addEventListener('click', function (e) {
+    if (e.target.closest('a')) setOpen(false);
+  });
 
   // Scrollspy: highlight the heading nearest the top of the viewport.
   var linkById = {};

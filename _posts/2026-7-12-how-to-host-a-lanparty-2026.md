@@ -66,7 +66,7 @@ One last note about human psychology: in my experience, if you schedule the LAN 
 
 # How
 
-The rest of this article describes the "How" of running a successful LAN party. Use the navigation bar on the left to skip ahead to sections that interest you most.
+The rest of this article describes the "How" of running a successful LAN party. Use the navigation bar  (or above on mobile) to skip ahead to sections that interest you most.
 
 # Seating
 

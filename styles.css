@@ -555,6 +555,12 @@ pre code, pre.highlight code {
   z-index: 5;
 }
 .post-toc__title {
+  display: block;
+  box-sizing: border-box;
+  width: calc(100% + 16px);
+  border: 0;
+  font: inherit;
+  text-align: left;
   background: #000080;
   color: #fff;
   font-weight: bold;
@@ -562,6 +568,7 @@ pre code, pre.highlight code {
   margin: -6px -8px 6px;
   letter-spacing: 0;
 }
+.post-toc__caret { display: none; }
 .post-toc__list,
 .post-toc__sublist {
   list-style: none;
@@ -591,10 +598,42 @@ pre code, pre.highlight code {
   font-weight: bold;
 }
 
-/* Hide the sidebar when the viewport can't comfortably fit it next to
-   the 680px reading column. Also hide on print. */
+/* When the viewport can't comfortably fit the sidebar next to the 680px
+   reading column, dock the TOC as a collapsible bar fixed to the top of
+   the screen instead. The title becomes the expand/collapse toggle. */
 @media (max-width: 1240px) {
-  .post-toc { display: none; }
+  .post-toc {
+    top: 0;
+    left: 0;
+    right: 0;
+    width: auto;
+    max-height: none;
+    overflow: visible;
+    padding: 0;
+    border-width: 0 0 2px 0;
+  }
+  .post-toc__title {
+    width: 100%;
+    margin: 0;
+    padding: 6px 10px;
+    cursor: pointer;
+  }
+  .post-toc__caret {
+    display: inline-block;
+    margin-left: 8px;
+  }
+  .post-toc.is-open .post-toc__caret { transform: rotate(180deg); }
+  .post-toc__nav {
+    display: none;
+    padding: 6px 8px 8px;
+    max-height: 60vh;
+    overflow-y: auto;
+  }
+  .post-toc.is-open .post-toc__nav { display: block; }
+  /* Keep the fixed bar from covering the page title... */
+  body:has(.post-toc:not([hidden])) { padding-top: 34px; }
+  /* ...and keep anchor jumps from landing underneath it. */
+  .post h1, .post h2, .post h3 { scroll-margin-top: 42px; }
 }
 @media print {
   .post-toc { display: none; }
