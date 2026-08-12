@@ -170,7 +170,7 @@ This is a simple diagram illustrating the problem with four machines and two swi
 
 ## What about WiFi?
 
-Do whatever you can to avoid WiFi. While WiFi is convenient, it has led to more headache over the years than it is worth. The trouble with WiFi is scalability. While your home network might perform just fine with you and your spouse (+ kids?) when you cram 16 players in one room, it can bog down. The fundamental problem is that WiFi works using ["time division multiplexing"](https://en.wikipedia.org/wiki/Time-division_multiplexing) which is a big scary word for "everyone takes their turn." Basically, on each WiFi channel, only one device can talk at once. For most uses this is still an acceptable tradeoff, but for low-latency gaming the performance cost can be severe. The other problem with WiFi is compatibility. For reasons that are mysterious to me, I have seen lots of issues in games over the years where WiFi users couldn't connect to each other, or WiFi users could connect to each other but not Ethernet users, or WiFi users could only connect to *some* subset of the other users. It's a debugging nightmare, and not what you want to be dealing with on the day of your party. Unfortunately, lots of laptops these days don't come with Ethernet jacks. For that reason, I keep a handful of USB-C and USB-A ethernet dongles on hand. These things are dirt cheap online, and they make lots of networking issues go away. Totally worth it.
+Do whatever you can to avoid WiFi. While WiFi is convenient, it has led to more headache over the years than it is worth. The trouble with WiFi is scalability. While your home network might perform just fine with you and your spouse (+ kids?) when you cram 16 players in one room, it can bog down. The fundamental problem is that WiFi uses something called ["time division multiplexing"](https://en.wikipedia.org/wiki/Time-division_multiplexing) which is a big scary word for "everyone takes their turn." [Basically, on each WiFi channel, only one device can talk at once.]("This is massive simplification, but it's a good enough mental model for a networking beginner.") For most uses this is still an acceptable tradeoff, but for low-latency gaming the performance cost can be severe. The other problem with WiFi is compatibility. For reasons that are mysterious to me, I have seen lots of issues in games over the years where WiFi users couldn't connect to each other, or WiFi users could connect to each other but not Ethernet users, or WiFi users could only connect to *some* subset of the other users. It's a debugging nightmare, and not what you want to be dealing with on the day of your party. Unfortunately, lots of laptops these days don't come with Ethernet jacks. For that reason, I keep a handful of USB-C and USB-A ethernet dongles on hand. These things are dirt cheap online, and they make lots of networking issues go away. Totally worth it.
 
 ## Is Gigabit enough?
 
@@ -290,11 +290,21 @@ At the end of the night, ask for cleanup help and give specific direction. Most 
   <figcaption class="meta">Part of the way through setup, with a couple helpers. (March 2024)</figcaption>
 </figure>
 
+## What should guests bring?
+
+1. Their PC or Laptop. Laptops are preferable: they take up less space, are more portable, and use less power.
+2. If the user is on a desktop, they will need to bring a monitor. No ultrawides. Space is at a premium at a LAN so you should only one normal sized monitor per player.
+3. All of the cables they might need. Power, ethernet, display, etc.
+4. Headphones. Do **not** allow your guests to use speakers out loud at the event. That would be a complete disaster. You won't need voice chat either for that matter, for a group of this size you should be able to just shout to the whole party at once.
+5. Snacks and drinks to share. Beer, soda, chips, cookies, energy drinks, etc.
+6. This is optional, but some players may like to have a controller of some sort at their battlestation. This is also relevant if you are planning on playing console games.
+7. Anything you don't have enough of already. If for example you need a couple more folding chairs, ask around to see if anyone can bring some. Very important: you must make sure to **assign the task of bringing these items to a specific person explicitly.** If you ask the whole group, [people have a bad habit of just assuming that someone else will take care of it.](https://en.wikipedia.org/wiki/Diffusion_of_responsibility)
+
 # What games should we play?
 
 Unironically, this is the hardest part of planning a LAN party. While I can't say for certain that I have the right answers for your group, I'll lay out a couple of rough guidelines.
 
-- Avoid competitive games. If you play e-sports titles, you might find a large skill gap between your best and worst players. For example, one time we played StarCraft II. There was one guy at the party who had played for thousands of hours, and even in a 4v1 he stomped us. It was hard to make that fun for anyone. E-sports games can be fun, but only if the skill levels are roughly on the same playing field.
+- Avoid competitive games. If you play e-sports titles, you might find a large skill gap between your best and worst players. For example, one time we played StarCraft II. There was one guy at the party who had played for thousands of hours, and even in a 4v1 he stomped us. It was hard to make that fun for anyone. e-sports games can be fun, but only if the skill levels are roughly on the same playing field.
 - Choose casual games. You want games that are easy to jump in and out of, with short match times. This contradicts my previous point, but Rocket League is a great LAN party game. Even though the skill gap can be enormous, matches are very short, so you can quickly rebalance things to be more fun.
 - Avoid modern AAA games. This one is more situational, but it has always applied to the groups I have played with. You may not know ahead of time exactly what hardware everyone is bringing, so if you try to play the new Call of Duty or Battlefield, you may run into issues with low-spec machines. If you do want to play something AAA, aim for games at least 10 years old so that everyone's hardware can run it.
 - Try for a mix of genres. I like to have a shooter, a strategy game, and a racing or sports game.
@@ -405,7 +415,7 @@ This is also a tricky one. You may be tempted to assign "homework" to your guest
        alt="Players gaming at a LAN party"
        width="1600" height="1200"
        loading="lazy" />
-  <figcaption class="meta">March 2025</figcaption>
+  <figcaption class="meta">Golf With Your Friends is a good choice for a "silly and chaotic" LAN game (March 2025)</figcaption>
 </figure>
 
 ## What about Linux gaming?
@@ -413,6 +423,14 @@ This is also a tricky one. You may be tempted to assign "homework" to your guest
 While Linux gaming has improved substantially over the last couple years, do what you can to encourage your players to only bring Windows PCs to the event. In my experience, Linux players have tons of technical problems that you don't want to deal with. At a LAN last year one of my players showed up with a Linux laptop and spent the whole time just trying to get his USB-C to Ethernet dongle working. Since I am suggesting that you bring all of the games to play, you should also be testing the games on Windows machines. Attempting to test that these games will work on all of the various distros, window managers, and combinations of the two is insane. The one exception to this rule, is if you are hosting a LAN for a single game, then it's reasonable to spend some time fixing bugs. At my LANs we like to play a mix of games, so wasting time on tech setup will be multiplied by the number of games you play.
 
 If you and your group are Linux absolutists, feel free to throw a Linux LAN party! But if you actually want to play games during the LAN, I recommend Windows.
+
+## What about tournament play?
+
+Tournament style play can be a lot of fun, and I have fond memories of this in years past. If you want to do a tournament, I reccomend either using a physical whiteboard for tracking the bracket, or just using [Challonge](https://challonge.com/). I have no relationship with Challonge. I have used them for years and have always had a good experience. In either case, make sure that the bracket is displayed prominently somewhere, perhaps on a spare TV or monitor, so that all of your guests can easily eyeball the tourney state.
+
+As far as structure, I reccomend keeping it relatively simple so that all of your players can understand what is going on. Double elimination is also preferable so that more of your players stay in it for longer. One danger of tournament play is that losing players may become disengaged. To that end, prefer tourney play with short round games. Smash Bros or Rocket League are good examples here.
+
+When you get to the last couple matches of the tournament, try to build hype around the match to keep the energy up. Get your attendees talking smack about who they think will win. A bit of rowdiness here goes a long way.
 
 # File Sharing
 
@@ -431,7 +449,7 @@ To expand slightly, the most obvious solutions all have major flaws.
 - Network file shares have compatibility problems with modern versions of Windows.
 - Web servers like Caddy bottleneck on the speed of the server hosting the files, and required configuration ahead of time.
 - File sharing apps like LocalSend or AirDrop are also 1-to-many which means file sharing is slower.
-- Other peer to peer apps like D-Lan and DC++ are complex and may scare off your less technical users. Also these tools suffer network performance problems when all of your guests are downloading at once.
+- Other peer to peer apps like D-LAN and DC++ are complex and may scare off your less technical users. Also these tools suffer network performance problems when all of your guests are downloading at once.
 
 To quickly, and easily, get the files to everyone, I use LANBucket. Full disclosure, I wrote LANBucket so I am biased, but I do think it's the best way to get the games to everyone. The basic idea is everyone installs LANBucket on their computer, and then the software automatically finds all of the other users. To share a file, just click and drag it in. LANBucket uses a BitTorrent based protocol so transfers are distributed many-to-many, meaning the transfer will be fast even if everyone is downloading the files at the same time.
 
