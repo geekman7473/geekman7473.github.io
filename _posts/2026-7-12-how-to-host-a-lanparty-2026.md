@@ -519,7 +519,7 @@ With that said, energy drinks and Mountain Dew are a LAN party staple, and an ab
 
 I hope this was a useful guide. I love LAN parties, and I want more people out there to get to experience them. Gaming IRL has a vibe that you can't match playing on Discord.
 
-One last note: make sure to take lots of photos and videos, and encourage your group to do the same. You'll want to cherish these memories, trust me.
+One last note: make sure to take lots of photos and videos, and encourage your group to do the same. Afterwards, create a shared Google Photos album and send the link to all of your guests so they can contribute their shots. You'll want to cherish these memories, trust me.
 
 # Thanks
 
