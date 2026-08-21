@@ -137,17 +137,51 @@
         var ERODE_SIZES = [350, 400, 250];
         var ERODE_RADII = [1, 2, 3];
 
+        // A photo of a QR code on a screen carries moire: the display's pixel
+        // lattice beating against the camera sensor. Held straight, the module
+        // grid, the moire fringes and jsQR's threshold blocks all line up, and
+        // the interference reads as a consistent lie no amount of resizing
+        // fixes. Redrawing at an angle resamples the picture and knocks those
+        // grids out of phase. It is dither, not geometry - jsQR reads rotated
+        // codes fine, it is the resampling that shakes the noise loose. On the
+        // photo this was built for, 0 degrees fails at every size while 5, 20
+        // and 30 all decode.
+        var ANGLE_STEP = 5;
+        var ANGLE_MAX = 50;
+
+        // The rotated tier runs a narrower size ladder than straight-on. Cost
+        // goes with pixel count, so 1400 alone is as expensive as everything
+        // below it put together, and across the whole rotation sweep no hit
+        // ever landed there - they came in at 500, 700 and 1000. Paying for
+        // 1400 at all ten rotated angles roughly trebles the time a "no QR
+        // code found" takes and buys nothing: on the test photo, trimming it
+        // took the miss case from 9.4s to 3.0s.
+        var ANGLE_SIZES = [1000, 700, 500, 350, 250];
+
         function decodePlan(maxDim) {
           var full = Math.min(maxDim, SIZE_STEPS[0]);
-          var plan = [{ size: full, erode: 0 }];
+          var sizes = [full];
           SIZE_STEPS.forEach(function (size) {
-            if (size < full) plan.push({ size: size, erode: 0 });
+            if (size < full) sizes.push(size);
+          });
+          var plan = [];
+          // Straight on first, so an ordinary code still decodes on step one.
+          sizes.forEach(function (size) {
+            plan.push({ size: size, erode: 0, angle: 0 });
           });
           ERODE_RADII.forEach(function (radius) {
             ERODE_SIZES.forEach(function (size) {
-              if (size <= full) plan.push({ size: size, erode: radius });
+              if (size <= full) plan.push({ size: size, erode: radius, angle: 0 });
             });
           });
+          // Rotation and erosion answer different defects - sampling phase
+          // versus dots that underfill their cell - so they do not need to be
+          // crossed with each other. Every rotated hit came in at erode 0.
+          for (var angle = ANGLE_STEP; angle <= ANGLE_MAX; angle += ANGLE_STEP) {
+            ANGLE_SIZES.forEach(function (size) {
+              if (size <= full) plan.push({ size: size, erode: 0, angle: angle });
+            });
+          }
           return plan;
         }
 
@@ -190,17 +224,36 @@
           }
         }
 
-        // Returns the decoded text, or null if this step found nothing.
-        function runStep(source, width, height, step) {
+        // Scale and rotation stay independent: step.size always means the
+        // long edge the source is scaled to, so a module keeps the same pixel
+        // count at every angle and the canvas grows to fit whatever the
+        // rotated corners need. Sizing to the rotated box instead would shrink
+        // modules by a fifth at 50 degrees and quietly drift the size ladder.
+        function drawStep(source, width, height, step) {
           var scale = Math.min(1, step.size / Math.max(width, height));
-          buffer.width = Math.round(width * scale);
-          buffer.height = Math.round(height * scale);
+          var w = width * scale;
+          var h = height * scale;
+          var rad = (step.angle || 0) * Math.PI / 180;
+          var cos = Math.abs(Math.cos(rad));
+          var sin = Math.abs(Math.sin(rad));
+          buffer.width = Math.round(w * cos + h * sin);
+          buffer.height = Math.round(w * sin + h * cos);
+          ctx.setTransform(1, 0, 0, 1, 0, 0);
           ctx.imageSmoothingQuality = 'high';
-          // Without a backdrop a transparent PNG reads as solid black.
+          // Without a backdrop a transparent PNG reads as solid black, and the
+          // corners a rotation leaves bare would too.
           ctx.fillStyle = '#ffffff';
           ctx.fillRect(0, 0, buffer.width, buffer.height);
-          ctx.drawImage(source, 0, 0, buffer.width, buffer.height);
-          var image = ctx.getImageData(0, 0, buffer.width, buffer.height);
+          ctx.translate(buffer.width / 2, buffer.height / 2);
+          if (rad) ctx.rotate(rad);
+          ctx.drawImage(source, -w / 2, -h / 2, w, h);
+          ctx.setTransform(1, 0, 0, 1, 0, 0);
+          return ctx.getImageData(0, 0, buffer.width, buffer.height);
+        }
+
+        // Returns the decoded text, or null if this step found nothing.
+        function runStep(source, width, height, step) {
+          var image = drawStep(source, width, height, step);
           if (step.erode) erodeDark(image, step.erode);
           var code = jsQR(image.data, image.width, image.height, {
             inversionAttempts: 'attemptBoth'
@@ -208,13 +261,34 @@
           return code && code.data ? code.data : null;
         }
 
-        function decodeSource(source, width, height, label) {
+        function yieldToPage() {
+          return new Promise(function (resolve) { setTimeout(resolve, 0); });
+        }
+
+        // The rotation tier pushes a full sweep to 67 jsQR passes, a few
+        // seconds on a phone photo, so hand the page back often enough that
+        // the status line actually paints instead of the tab going white.
+        async function decodeSource(source, width, height, label) {
           var plan = decodePlan(Math.max(width, height));
+          // Clear the last decode up front, so a scan that finds nothing does
+          // not leave the previous code sitting in the box with Copy live.
+          result.value = '';
+          copyBtn.disabled = true;
+          copied.textContent = '';
+          setStatus('Scanning...');
           for (var i = 0; i < plan.length; i++) {
             var text = runStep(source, width, height, plan[i]);
             if (text) {
               showResult(text);
               return;
+            }
+            if (i % 8 === 7) {
+              setStatus(
+                'Scanning... ' +
+                  Math.round(((i + 1) / plan.length) * 100) +
+                  '%'
+              );
+              await yieldToPage();
             }
           }
           setStatus('No QR code found in that ' + label + '.');
