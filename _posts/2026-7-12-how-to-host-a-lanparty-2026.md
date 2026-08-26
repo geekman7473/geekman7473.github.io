@@ -170,7 +170,7 @@ This is a simple diagram illustrating the problem with four machines and two swi
 
 ## What about WiFi?
 
-Do whatever you can to avoid WiFi. While WiFi is convenient, it has led to more headache over the years than it is worth. The trouble with WiFi is scalability. While your home network might perform just fine with you and your spouse (+ kids?) when you cram 16 players in one room, it can bog down. The fundamental problem is that WiFi uses something called ["time division multiplexing"](https://en.wikipedia.org/wiki/Time-division_multiplexing) which is a big scary word for "everyone takes their turn." [Basically, on each WiFi channel, only one device can talk at once.]("This is massive simplification, but it's a good enough mental model for a networking beginner.") For most uses this is still an acceptable tradeoff, but for low-latency gaming the performance cost can be severe. The other problem with WiFi is compatibility. For reasons that are mysterious to me, I have seen lots of issues in games over the years where WiFi users couldn't connect to each other, or WiFi users could connect to each other but not Ethernet users, or WiFi users could only connect to *some* subset of the other users. It's a debugging nightmare, and not what you want to be dealing with on the day of your party. Unfortunately, lots of laptops these days don't come with Ethernet jacks. For that reason, I keep a handful of USB-C and USB-A ethernet dongles on hand. These things are dirt cheap online, and they make lots of networking issues go away. Totally worth it.
+Do whatever you can to avoid WiFi. While WiFi is convenient, it has led to more headache over the years than it is worth. The trouble with WiFi is scalability. While your home network might perform just fine with you and your spouse (+ kids?) when you cram 16 players in one room, it can bog down. The fundamental problem is that WiFi uses something called ["time division multiplexing"](https://en.wikipedia.org/wiki/Time-division_multiplexing) which is a big scary word for "everyone takes their turn." <span title="This is massive simplification, but it's a good enough mental model for a networking beginner.">Basically, on each WiFi channel, only one device can talk at once.</span> For most uses this is still an acceptable tradeoff, but for low-latency gaming the performance cost can be severe. The other problem with WiFi is compatibility. For reasons that are mysterious to me, I have seen lots of issues in games over the years where WiFi users couldn't connect to each other, or WiFi users could connect to each other but not Ethernet users, or WiFi users could only connect to *some* subset of the other users. It's a debugging nightmare, and not what you want to be dealing with on the day of your party. Unfortunately, lots of laptops these days don't come with Ethernet jacks. For that reason, I keep a handful of USB-C and USB-A ethernet dongles on hand. These things are dirt cheap online, and they make lots of networking issues go away. Totally worth it.
 
 ## Is Gigabit enough?
 
@@ -278,7 +278,7 @@ I recommend having your play space almost entirely set up before your first gues
 
 You can of course do more than this, but this is just the basics. One time I went so far as to pre-run custom length Ethernet cables to each player's seat. I have also heard of organizers allocating particular outlets to each player. The sky is the limit here. The point of pre setup is to save time in the chaos once your guests show up, so you can play more games. 
 
-It also helps to keep spare gear on hand. Stuff like mice, keyboards, mousepads, AA batteries, ethernet cables, display cables, xbox controllers. People forget things like this and you'll be a hero for saving your guests. 
+It also helps to keep spare gear on hand. Stuff like mice, keyboards, mousepads, AA batteries, ethernet cables, display cables, xbox controllers. People forget things like this and you'll be a hero day of.
 
 At the end of the night, ask for cleanup help and give specific direction. Most people are glad to pitch in if they know what to do.
 
@@ -293,7 +293,7 @@ At the end of the night, ask for cleanup help and give specific direction. Most 
 ## What should guests bring?
 
 1. Their PC or Laptop. Laptops are preferable: they take up less space, are more portable, and use less power.
-2. If the user is on a desktop, they will need to bring a monitor. No ultrawides. Space is at a premium at a LAN so you should only one normal sized monitor per player.
+2. If the user is on a desktop, they will need to bring a monitor. No ultrawides. Space is at a premium at a LAN so you should only allow one normal sized monitor per player.
 3. All of the cables they might need. Power, ethernet, display, etc.
 4. Headphones. Do **not** allow your guests to use speakers out loud at the event. That would be a complete disaster. You won't need voice chat either for that matter, for a group of this size you should be able to just shout to the whole party at once.
 5. Snacks and drinks to share. Beer, soda, chips, cookies, energy drinks, etc.
