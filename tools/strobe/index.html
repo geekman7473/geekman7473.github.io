@@ -58,16 +58,6 @@
         -webkit-tap-highlight-color: transparent;
       }
       .strobe-box.is-on { background: #fff; }
-
-      .strobe-stats {
-        font-family: "Courier New", Courier, monospace;
-        font-size: 12px;
-        color: #555;
-        margin: 8px 0 0;
-        line-height: 1.6;
-        text-align: center;
-      }
-      .strobe-stats b { color: #000; }
     </style>
   </head>
   <body id="top">
@@ -143,12 +133,6 @@
       var box      = document.getElementById('strobe-box');
       var statusEl = document.getElementById('strobe-status');
 
-      var statsEl  = document.getElementById('strobe-stats');
-      var stCycles = document.getElementById('st-cycles');
-      var stOn     = document.getElementById('st-on');
-      var stOff    = document.getElementById('st-off');
-      var stHz     = document.getElementById('st-hz');
-
       var onMs  = DEFAULT_ON;
       var offMs = DEFAULT_OFF;
 
@@ -158,24 +142,13 @@
       var isOn     = false;
       var wakeLock = null;
 
-      // Measurement of actual edge times, taken from the frame timestamps
-      // that the toggles were painted on.
-      var lastEdgeTs = 0;
-      var onSum = 0, onCount = 0;
-      var offSum = 0, offCount = 0;
       var cycles = 0;
-
-      // Frame interval estimate for the "refresh" readout.
-      var lastFrameTs = 0;
-      var frameDtEma  = 0;
 
       function clampInt(v, lo, hi, fallback) {
         v = parseInt(v, 10);
         if (isNaN(v)) return fallback;
         return v < lo ? lo : v > hi ? hi : v;
       }
-
-      function fmtMs(v) { return v.toFixed(1) + ' ms'; }
 
       function updatePeriod() {
         var period = onMs + offMs;
@@ -203,22 +176,6 @@
         if (running) restartSchedule();
       }
 
-      function resetStats() {
-        lastEdgeTs = 0;
-        onSum = onCount = offSum = offCount = 0;
-        cycles = 0;
-        stCycles.textContent = '0';
-        stOn.textContent  = '-';
-        stOff.textContent = '-';
-      }
-
-      function renderStats() {
-        stCycles.textContent = cycles;
-        if (onCount)  stOn.textContent  = fmtMs(onSum  / onCount)  + ' (target ' + onMs  + ')';
-        if (offCount) stOff.textContent = fmtMs(offSum / offCount) + ' (target ' + offMs + ')';
-        if (frameDtEma > 0) stHz.textContent = (1000 / frameDtEma).toFixed(0) + ' Hz';
-      }
-
       function paint(on) {
         if (on === isOn) return false;
         isOn = on;
@@ -233,41 +190,21 @@
       function frame(ts) {
         if (!running) return;
 
-        if (lastFrameTs) {
-          var dt = ts - lastFrameTs;
-          if (dt > 0 && dt < 250) {
-            frameDtEma = frameDtEma ? frameDtEma * 0.9 + dt * 0.1 : dt;
-          }
-        }
-        lastFrameTs = ts;
-
         var period     = onMs + offMs;
         var phase      = (ts - t0) % period;
         var shouldBeOn = phase < onMs;
 
-        if (paint(shouldBeOn)) {
-          if (lastEdgeTs) {
-            var seg = ts - lastEdgeTs;
-            if (shouldBeOn) {
-              // Just turned on, so the segment that ended was an "off".
-              offSum += seg; offCount++;
-              cycles++;
-            } else {
-              onSum += seg; onCount++;
-            }
-          }
-          lastEdgeTs = ts;
-          renderStats();
-        }
+        // Count a cycle each time the box turns on.
+        if (paint(shouldBeOn) && shouldBeOn) cycles++;
 
         rafId = requestAnimationFrame(frame);
       }
 
       function restartSchedule() {
         cancelAnimationFrame(rafId);
-        resetStats();
+        cycles = 0;
         // Start the schedule on the next frame boundary so cycle 1 begins
-        // with a full "on" segment that is measured like all the others.
+        // with a full "on" segment.
         rafId = requestAnimationFrame(function (ts) {
           t0 = ts;
           isOn = false;
@@ -291,8 +228,6 @@
         running = true;
         startBtn.textContent = 'Stop';
         statusEl.textContent = 'Running. Click the box, press Stop, Space, or Esc to stop.';
-        statsEl.hidden = false;
-        lastFrameTs = 0;
         requestWakeLock();
         restartSchedule();
       }
