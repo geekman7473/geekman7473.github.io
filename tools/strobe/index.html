@@ -1,0 +1,355 @@
+---
+# Empty front matter so Jekyll processes this file's Liquid tags.
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Strobe &middot; Justin Becker</title>
+    <meta
+      name="description"
+      content="Strobe. Useful for visualizing small periods of time."
+    />
+    <meta name="theme-color" content="#c0c0c0" />
+    {% include social-meta.html title="Strobe" description="Strobe. Useful for visualizing small periods of time." %}
+    <link rel="stylesheet" href="/styles.css" />
+    <script defer src="/script.js"></script>
+    {% include analytics.html %}
+    <style>
+      .strobe-controls {
+        display: grid;
+        grid-template-columns: auto 1fr auto auto;
+        gap: 8px 10px;
+        align-items: center;
+        font-family: "Courier New", Courier, monospace;
+        font-size: 13px;
+        margin: 0 0 10px;
+      }
+      .strobe-controls input[type="range"] {
+        width: 100%;
+        min-width: 120px;
+        margin: 0;
+      }
+      .strobe-controls input[type="number"] {
+        width: 6em;
+        text-align: right;
+      }
+      .strobe-controls .unit { color: #555; }
+      @media (max-width: 480px) {
+        .strobe-controls { grid-template-columns: auto 1fr; }
+        .strobe-controls input[type="range"] { grid-column: 1 / -1; }
+        .strobe-controls .unit { text-align: left; }
+      }
+
+      /* Same box as the QR scanner's camera preview (.qr-video), but square. */
+      .strobe-box {
+        display: block;
+        width: 100%;
+        max-width: 240px;
+        aspect-ratio: 1 / 1;
+        margin: 8px auto;
+        border: 2px inset #c0c0c0;
+        background: #000;
+        box-sizing: border-box;
+        cursor: pointer;
+        user-select: none;
+        -webkit-user-select: none;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .strobe-box.is-on { background: #fff; }
+
+      .strobe-stats {
+        font-family: "Courier New", Courier, monospace;
+        font-size: 12px;
+        color: #555;
+        margin: 8px 0 0;
+        line-height: 1.6;
+        text-align: center;
+      }
+      .strobe-stats b { color: #000; }
+    </style>
+  </head>
+  <body id="top">
+    <div class="banner">
+      <h1>Strobe</h1>
+    </div>
+
+    <div class="toolbar">
+      [
+      <a href="/">home</a> <span class="sep">|</span>
+      <a href="/tools/">all tools</a>
+      ]
+    </div>
+
+    <main>
+      <div class="titlebar">Settings</div>
+      <section class="panel">
+        <div class="strobe-controls">
+          <label for="strobe-on">on:</label>
+          <input id="strobe-on" type="range" min="10" max="2000" step="10" value="200" />
+          <input id="strobe-on-num" class="input95" type="number" min="1" max="60000" step="1" value="200" aria-label="On duration in milliseconds" />
+          <span class="unit">ms</span>
+
+          <label for="strobe-off">off:</label>
+          <input id="strobe-off" type="range" min="10" max="5000" step="10" value="1000" />
+          <input id="strobe-off-num" class="input95" type="number" min="1" max="60000" step="1" value="1000" aria-label="Off duration in milliseconds" />
+          <span class="unit">ms</span>
+        </div>
+
+        <div class="field-row">
+          <button id="strobe-start" class="btn95" type="button">Start</button>
+          <button id="strobe-reset" class="btn95" type="button">Reset to 200 / 1000</button>
+          <span class="meta" id="strobe-period"></span>
+        </div>
+        <p class="meta">
+          Space starts and stops. Esc stops. Short off times produce a strobe
+          effect that may affect people with photosensitive epilepsy.
+        </p>
+      </section>
+
+      <div class="titlebar">Strobe</div>
+      <section class="panel">
+        <div id="strobe-box" class="strobe-box" role="img"
+             aria-label="Strobe box. Click or tap to start and stop."
+             title="Click or tap to start / stop"></div>
+
+        <p class="meta qr-status" id="strobe-status">
+          Click the box or press Start to begin.
+        </p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>
+        &copy; <span id="year"></span> Justin Becker &middot;
+        <a href="#top">top</a>
+      </p>
+    </footer>
+
+    <script>
+    window.addEventListener('DOMContentLoaded', function () {
+      var DEFAULT_ON  = 200;
+      var DEFAULT_OFF = 1000;
+
+      var onRange  = document.getElementById('strobe-on');
+      var onNum    = document.getElementById('strobe-on-num');
+      var offRange = document.getElementById('strobe-off');
+      var offNum   = document.getElementById('strobe-off-num');
+
+      var startBtn = document.getElementById('strobe-start');
+      var resetBtn = document.getElementById('strobe-reset');
+      var periodEl = document.getElementById('strobe-period');
+      var box      = document.getElementById('strobe-box');
+      var statusEl = document.getElementById('strobe-status');
+
+      var statsEl  = document.getElementById('strobe-stats');
+      var stCycles = document.getElementById('st-cycles');
+      var stOn     = document.getElementById('st-on');
+      var stOff    = document.getElementById('st-off');
+      var stHz     = document.getElementById('st-hz');
+
+      var onMs  = DEFAULT_ON;
+      var offMs = DEFAULT_OFF;
+
+      var running  = false;
+      var rafId    = 0;
+      var t0       = 0;      // schedule origin, on the rAF frame clock
+      var isOn     = false;
+      var wakeLock = null;
+
+      // Measurement of actual edge times, taken from the frame timestamps
+      // that the toggles were painted on.
+      var lastEdgeTs = 0;
+      var onSum = 0, onCount = 0;
+      var offSum = 0, offCount = 0;
+      var cycles = 0;
+
+      // Frame interval estimate for the "refresh" readout.
+      var lastFrameTs = 0;
+      var frameDtEma  = 0;
+
+      function clampInt(v, lo, hi, fallback) {
+        v = parseInt(v, 10);
+        if (isNaN(v)) return fallback;
+        return v < lo ? lo : v > hi ? hi : v;
+      }
+
+      function fmtMs(v) { return v.toFixed(1) + ' ms'; }
+
+      function updatePeriod() {
+        var period = onMs + offMs;
+        periodEl.textContent =
+          'period ' + period + ' ms (' + (1000 / period).toFixed(2) + ' Hz)';
+      }
+
+      function setDurations(newOn, newOff, fromUrl) {
+        onMs  = clampInt(newOn,  1, 60000, DEFAULT_ON);
+        offMs = clampInt(newOff, 1, 60000, DEFAULT_OFF);
+        onNum.value    = onMs;
+        offNum.value   = offMs;
+        onRange.value  = onMs;
+        offRange.value = offMs;
+        updatePeriod();
+        if (!fromUrl) {
+          var params = new URLSearchParams();
+          if (onMs  !== DEFAULT_ON)  params.set('on',  onMs);
+          if (offMs !== DEFAULT_OFF) params.set('off', offMs);
+          var qs = params.toString();
+          history.replaceState(null, '', location.pathname + (qs ? '?' + qs : ''));
+        }
+        // Changing durations mid-run restarts the schedule so the new
+        // values take effect cleanly from a fresh origin.
+        if (running) restartSchedule();
+      }
+
+      function resetStats() {
+        lastEdgeTs = 0;
+        onSum = onCount = offSum = offCount = 0;
+        cycles = 0;
+        stCycles.textContent = '0';
+        stOn.textContent  = '-';
+        stOff.textContent = '-';
+      }
+
+      function renderStats() {
+        stCycles.textContent = cycles;
+        if (onCount)  stOn.textContent  = fmtMs(onSum  / onCount)  + ' (target ' + onMs  + ')';
+        if (offCount) stOff.textContent = fmtMs(offSum / offCount) + ' (target ' + offMs + ')';
+        if (frameDtEma > 0) stHz.textContent = (1000 / frameDtEma).toFixed(0) + ' Hz';
+      }
+
+      function paint(on) {
+        if (on === isOn) return false;
+        isOn = on;
+        box.classList.toggle('is-on', on);
+        return true;
+      }
+
+      // Drift-free scheduler. Phase is derived from elapsed time since t0, so
+      // an edge that is painted late does not push later edges out. The rAF
+      // timestamp is the time of the frame being prepared, so a style change
+      // made in this callback is shown on that frame.
+      function frame(ts) {
+        if (!running) return;
+
+        if (lastFrameTs) {
+          var dt = ts - lastFrameTs;
+          if (dt > 0 && dt < 250) {
+            frameDtEma = frameDtEma ? frameDtEma * 0.9 + dt * 0.1 : dt;
+          }
+        }
+        lastFrameTs = ts;
+
+        var period     = onMs + offMs;
+        var phase      = (ts - t0) % period;
+        var shouldBeOn = phase < onMs;
+
+        if (paint(shouldBeOn)) {
+          if (lastEdgeTs) {
+            var seg = ts - lastEdgeTs;
+            if (shouldBeOn) {
+              // Just turned on, so the segment that ended was an "off".
+              offSum += seg; offCount++;
+              cycles++;
+            } else {
+              onSum += seg; onCount++;
+            }
+          }
+          lastEdgeTs = ts;
+          renderStats();
+        }
+
+        rafId = requestAnimationFrame(frame);
+      }
+
+      function restartSchedule() {
+        cancelAnimationFrame(rafId);
+        resetStats();
+        // Start the schedule on the next frame boundary so cycle 1 begins
+        // with a full "on" segment that is measured like all the others.
+        rafId = requestAnimationFrame(function (ts) {
+          t0 = ts;
+          isOn = false;
+          box.classList.remove('is-on');
+          frame(ts);
+        });
+      }
+
+      function requestWakeLock() {
+        if (!('wakeLock' in navigator)) return;
+        navigator.wakeLock.request('screen')
+          .then(function (lock) { wakeLock = lock; })
+          .catch(function () { /* not critical */ });
+      }
+      function releaseWakeLock() {
+        if (wakeLock) { wakeLock.release().catch(function () {}); wakeLock = null; }
+      }
+
+      function start() {
+        if (running) return;
+        running = true;
+        startBtn.textContent = 'Stop';
+        statusEl.textContent = 'Running. Click the box, press Stop, Space, or Esc to stop.';
+        statsEl.hidden = false;
+        lastFrameTs = 0;
+        requestWakeLock();
+        restartSchedule();
+      }
+
+      function stop() {
+        if (!running) return;
+        running = false;
+        cancelAnimationFrame(rafId);
+        paint(false);
+        startBtn.textContent = 'Start';
+        statusEl.textContent = 'Stopped after ' + cycles + (cycles === 1 ? ' cycle.' : ' cycles.');
+        releaseWakeLock();
+      }
+
+      function toggle() { if (running) stop(); else start(); }
+
+      // --- Input wiring ------------------------------------------------------
+      onRange.addEventListener('input',  function () { setDurations(onRange.value,  offMs); });
+      offRange.addEventListener('input', function () { setDurations(onMs, offRange.value); });
+      onNum.addEventListener('change',   function () { setDurations(onNum.value,  offMs); });
+      offNum.addEventListener('change',  function () { setDurations(onMs, offNum.value); });
+
+      resetBtn.addEventListener('click', function () {
+        setDurations(DEFAULT_ON, DEFAULT_OFF);
+      });
+
+      startBtn.addEventListener('click', toggle);
+      box.addEventListener('click', toggle);
+
+      document.addEventListener('keydown', function (e) {
+        var tag = (e.target.tagName || '').toLowerCase();
+        var typing = tag === 'input' || tag === 'textarea';
+        if (e.key === 'Escape') {
+          stop();
+        } else if (e.key === ' ' && !typing) {
+          e.preventDefault();
+          toggle();
+        }
+      });
+
+      // Stop if the tab goes to the background; rAF is throttled or paused
+      // there, so the schedule would be meaningless anyway.
+      document.addEventListener('visibilitychange', function () {
+        if (document.hidden && running) {
+          stop();
+          statusEl.textContent = 'Stopped because the tab went to the background.';
+        }
+      });
+
+      // --- Init from URL (?on=200&off=1000) ----------------------------------
+      var params = new URLSearchParams(location.search);
+      setDurations(
+        params.has('on')  ? params.get('on')  : DEFAULT_ON,
+        params.has('off') ? params.get('off') : DEFAULT_OFF,
+        true
+      );
+    });
+    </script>
+  </body>
+</html>
