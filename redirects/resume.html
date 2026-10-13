@@ -1,0 +1,18 @@
+---
+# Keeps old /resume.html links working now that the resume lives at /resume/.
+permalink: /resume.html
+---
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Redirecting to resume</title>
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href="{{ '/resume/' | absolute_url }}" />
+    <meta http-equiv="refresh" content="0; url=/resume/" />
+    <script>location.replace("/resume/");</script>
+  </head>
+  <body>
+    <p>The resume has moved to <a href="/resume/">justinbecker.dev/resume</a>.</p>
+  </body>
+</html>
